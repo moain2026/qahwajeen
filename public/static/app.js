@@ -1,5 +1,5 @@
 /*!
- * القهوة الملكية — front-end behaviour
+ * قهوجيين — front-end behaviour
  * Vanilla, zero dependencies. Progressive enhancement only:
  * every page works fully with JS disabled.
  */
@@ -59,6 +59,7 @@
     };
 
     btn.addEventListener('click', function () { set(!open); });
+    var x = $('#sheetX'); if (x) x.addEventListener('click', function () { set(false); btn.focus(); });
     bd.addEventListener('click', function () { set(false); });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && open) { set(false); btn.focus(); }
@@ -67,10 +68,10 @@
       a.addEventListener('click', function () { set(false); });
     });
     var y0 = null;
-    sh.addEventListener('touchstart', function (e) { y0 = e.touches[0].clientY; }, { passive: true });
+    sh.addEventListener('touchstart', function (e) { y0 = e.touches[0].clientX; }, { passive: true });
     sh.addEventListener('touchmove', function (e) {
       if (y0 === null) return;
-      if (e.touches[0].clientY - y0 > 70) { set(false); y0 = null; }
+      if (e.touches[0].clientX - y0 > 70) { set(false); y0 = null; }
     }, { passive: true });
     sh.addEventListener('touchend', function () { y0 = null; }, { passive: true });
   })();
@@ -276,7 +277,7 @@
       if (val('note')) lines.push('• ملاحظات: ' + val('note'));
       lines.push('', 'أرجو تزويدي بعرض سعر مفصّل. شكراً لكم.');
 
-      var base = form.getAttribute('data-wa') || 'https://wa.me/966500000000';
+      var base = form.getAttribute('data-wa') || 'https://wa.me/966504968113';
       var sep = base.indexOf('?') === -1 ? '?' : '&';
       var href = base + sep + 'text=' + encodeURIComponent(lines.join('\n'));
 
@@ -425,4 +426,88 @@
     }, { threshold: 0.05 });
     io.observe(c);
   })();
+
+  /* ─── 12. Footer city mesh: open by default on desktop ─── */
+  (function mesh() {
+    var d = $('.ftr-mesh');
+    if (d && window.matchMedia('(min-width:1024px)').matches) d.open = true;
+  })();
+})();
+
+/* bottom bar: hidden while the first screen (with its own buttons) is visible */
+(function () {
+  var bar = document.querySelector('.bnav'), hero = document.querySelector('.hx .hx-cta');
+  if (!bar || !hero || !('IntersectionObserver' in window)) return;
+  new IntersectionObserver(function (e) { bar.classList.toggle('hide', e[0].isIntersecting); }, { threshold: 0.2 }).observe(hero);
+})();
+
+/* ═══ one-page interactions ═══════════════════════════════════ */
+(function () {
+  var REDUCE = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  /* menu tabs (roving, keyboard-accessible) */
+  var tabs = $$('.tab');
+  function show(t) {
+    tabs.forEach(function (x) {
+      var on = x === t;
+      x.setAttribute('aria-selected', on ? 'true' : 'false');
+      x.tabIndex = on ? 0 : -1;
+      var p = document.getElementById(x.getAttribute('aria-controls'));
+      if (p) p.hidden = !on;
+    });
+    t.scrollIntoView({ block: 'nearest', inline: 'center', behavior: REDUCE ? 'auto' : 'smooth' });
+  }
+  tabs.forEach(function (t, i) {
+    t.tabIndex = i === 0 ? 0 : -1;
+    t.addEventListener('click', function () { show(t); });
+    t.addEventListener('keydown', function (e) {
+      var k = e.key, j = tabs.indexOf(t);
+      if (k === 'ArrowLeft' || k === 'ArrowRight') {
+        e.preventDefault();
+        var n = tabs[(j + (k === 'ArrowLeft' ? 1 : -1) + tabs.length) % tabs.length]; /* RTL */
+        n.focus(); show(n);
+      }
+    });
+  });
+
+  /* gallery: inline "show more" */
+  var more = $('#galMore'), gal = $('#galx');
+  if (more && gal) {
+    if (!$$('.galx-it.more', gal).length) more.parentNode.hidden = true;
+    more.addEventListener('click', function () {
+      var open = gal.classList.toggle('open');
+      more.setAttribute('aria-expanded', open ? 'true' : 'false');
+      more.firstChild.nodeValue = open ? 'عرض أقل ' : 'عرض المزيد من الصور ';
+      if (!open) gal.scrollIntoView({ behavior: REDUCE ? 'auto' : 'smooth' });
+    });
+  }
+
+  /* lightbox */
+  var lb = $('#lbx');
+  if (lb && lb.showModal) {
+    var im = $('img', lb);
+    $$('.galx-it').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var src = b.querySelector('img');
+        im.src = src.currentSrc || src.src; im.alt = src.alt;
+        lb.showModal();
+      });
+    });
+    $('.lbx-x', lb).addEventListener('click', function () { lb.close(); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) lb.close(); });
+  }
+
+  /* hero parallax + scroll progress (transform only, rAF-throttled) */
+  var bg = $('.hx-bg'), prog = document.createElement('i'), tick = false;
+  prog.className = 'sprog'; document.body.appendChild(prog);
+  function frame() {
+    var y = window.scrollY, h = document.documentElement.scrollHeight - innerHeight;
+    prog.style.transform = 'scaleX(' + (h > 0 ? y / h : 0) + ')';
+    if (bg && !REDUCE && y < innerHeight * 1.2) bg.style.transform = 'translate3d(0,' + (y * 0.28) + 'px,0) scale(' + (1 + y / 5000) + ')';
+    tick = false;
+  }
+  addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(frame); } }, { passive: true });
+  frame();
 })();

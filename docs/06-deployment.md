@@ -2,8 +2,8 @@
 
 # 06 — النشر
 
-> الحالة الحالية: **الموقع لم يُنشر بعد** لا على Cloudflare ولا على
-> Vercel. تم التحقّق من نجاح البناء للهدفين معًا، والتشغيل محليًا يعمل.
+> الحالة الحالية: **جاهز للنشر على Vercel** (الدومين qahwajeen.com مسجَّل في Spaceship).
+> البناء ناجح للهدفين (Vercel وCloudflare)، والتشغيل محليًا يعمل.
 
 ---
 
@@ -108,7 +108,34 @@ npx vercel deploy --prebuilt --prod
 npm run deploy:vercel
 ```
 
-المخرَج: `.vercel/output/functions/__hono.func/index.js` (188 كيلوبايت).
+المخرَج: `.vercel/output/functions/__hono.func/index.js` (≈181 كيلوبايت، Node 22).
+
+### الطريقة الأسهل — ربط GitHub (بدون أي إعدادات يدوية)
+1. vercel.com → **Add New → Project** → اختر المستودع `royal-coffee-docs`.
+2. لا تغيّر شيئًا: `vercel.json` يحدّد `installCommand: npm ci`
+   و`buildCommand: npm run build:vercel` و`framework: null`.
+3. **Deploy**. كل دفع إلى `main` ينشر تلقائيًا.
+
+### ربط الدومين qahwajeen.com (المسجَّل في Spaceship)
+في Vercel: **Settings → Domains** → أضف `qahwajeen.com` و`www.qahwajeen.com`.
+في Spaceship: **Domain → Advanced DNS** → احذف سجلات A/CNAME الافتراضية (Parking) ثم أضف:
+
+| النوع | Host | القيمة | TTL |
+|---|---|---|---|
+| A | `@` | `76.76.21.21` | 30 دقيقة |
+| CNAME | `www` | `cname.vercel-dns.com` | 30 دقيقة |
+
+شهادة SSL تصدر تلقائيًا خلال دقائق بعد انتشار DNS.
+
+### سلوك المضيف (src/index.tsx)
+- `www.qahwajeen.com/*` → **301** إلى `https://qahwajeen.com/*` (أصل واحد مفهرس).
+- أي مضيف `*.vercel.app` أو `*.pages.dev` يُرسل `X-Robots-Tag: noindex, nofollow`
+  حتى لا تنافس روابط المعاينة الدومين الأصلي في Google.
+
+### بعد أول نشر
+1. Google Search Console → أضف `qahwajeen.com` (Domain property، تحقّق بسجل TXT في Spaceship).
+2. أرسل `https://qahwajeen.com/sitemap.xml`.
+3. Google Business Profile: اربط الموقع والرقم 0504968113.
 
 ### `vercel.json` — الترويسات
 ```json
@@ -138,6 +165,40 @@ npm run deploy:vercel
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
 ```
+
+---
+
+## 4-ب. النشر مباشرة على Spaceship (Hyperlift)
+
+الدومين مسجَّل في Spaceship، وSpaceship تقدّم **Hyperlift** لتشغيل
+الحاويات (Docker) من GitHub مباشرة، مع SSL وربط الدومين تلقائيًا.
+
+| الملف | الدور |
+|---|---|
+| `Dockerfile` | بناء على مرحلتين: `npm ci` + `build:node` ← صورة تشغيل فيها `server.mjs` + `public/` فقط |
+| `src/server.node.ts` | مدخل Node: ملفات `/static/*` بكاش سنة، ضغط gzip، `/healthz`، يقرأ `PORT` (افتراضي 8080) |
+| `.dockerignore` | يستبعد node_modules والوثائق وQA |
+
+### الخطوات
+1. Spaceship → **Hyperlift Manager** → اربط GitHub → المستودع `royal-coffee-docs`، الفرع `main`.
+2. Dockerfile path: `Dockerfile` (في الجذر). فعّل **Automatic builds**.
+3. **Build** — النشر يبدأ تلقائيًا بعد نجاح البناء (يظهر رابط `*.hyperlift.io`).
+4. **Connections** → أضف `qahwajeen.com` و`www.qahwajeen.com` (الدومين في نفس الحساب، فالربط والـSSL تلقائيان).
+5. لا تحتاج متغيّرات بيئة؛ المنفذ يُقرأ من `PORT` تلقائيًا.
+
+### محليًا
+```bash
+npm run build:node && PORT=8080 npm start   # http://localhost:8080
+```
+
+### Hyperlift أم Vercel؟
+| | Hyperlift | Vercel |
+|---|---|---|
+| مكان الدومين | نفس الحساب، بدون DNS يدوي | يحتاج سجلَي A/CNAME |
+| التكلفة | من ≈3.6$/شهر (حسب التشغيل) | مجاني (Hobby) |
+| الشبكة | خادم واحد | شبكة Edge عالمية |
+
+الكود واحد للثلاثة (Cloudflare / Vercel / Node) — لا تغيّر `src/index.tsx` لأجل منصّة.
 
 ---
 
@@ -173,7 +234,7 @@ npm run deploy:vercel
 ```
 
 ### 🔴 قبل النشر العام
-1. **بدّل بيانات `BRAND`** — نشر رقم `966500000000` يضرّ بالثقة والسيو.
+1. **بدّل بيانات `BRAND`** — نشر رقم `966504968113` يضرّ بالثقة والسيو.
 2. **حدّث `SITE`** في `src/ld.ts` إلى النطاق الفعلي — كل الروابط
    القانونية (`canonical`) و`og:url` والبيانات المنظّمة تُبنى منه.
 3. **أعد توليد رمز QR** في `/social`.

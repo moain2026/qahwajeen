@@ -14,10 +14,10 @@
 القيم الحالية في `src/data.ts` **مؤقّتة بالكامل**:
 
 ```ts
-phoneRaw:     '966500000000'
+phoneRaw:     '966504968113'
 phoneDisplay: '+966 50 000 0000'
 phoneLocal:   '0500000000'
-whatsapp:     'https://wa.me/966500000000'
+whatsapp:     'https://wa.me/966504968113'
 email:        'hello@example.com'
 mapsUrl:      'https://maps.google.com/?q=Jeddah'
 ```
@@ -60,19 +60,21 @@ mapsUrl:      'https://maps.google.com/?q=Jeddah'
 
 ## القسم الثاني — عمل تقني متبقٍّ
 
-### 1. 🔴 Lighthouse / Core Web Vitals — لم تُشغَّل نهائيًا
+### 1. 🟡 Lighthouse / Core Web Vitals — قيس محليًا (2026-10-15)
 
-**ما قيسناه:** أحجام الحِمل، تكلفة الحركة، الفائض الأفقي، طول العناوين.
-**ما لم نقسه:** LCP · INP · CLS · TBT الفعلية.
+نتائج محاكاة الجوال (Slow 4G + CPU ×4) على الخادم المحلي:
 
-```bash
-npx lighthouse http://localhost:3000 \
-  --preset=desktop --output=json --output-path=qa/lighthouse-desktop.json
-npx lighthouse http://localhost:3000 \
-  --form-factor=mobile --throttling.cpuSlowdownMultiplier=4 \
-  --output=json --output-path=qa/lighthouse-mobile.json
-```
-ثم كرِّرها على النطاق المنشور (النتائج المحلية متفائلة دائمًا).
+| الصفحة | الأداء | الوصولية | أفضل الممارسات | SEO | LCP | CLS |
+|---|---|---|---|---|---|---|
+| `/` | 73 | 100 | 100 | 100 | 5.0s | 0 |
+| `/qahwajiin-jeddah` | 80 | 100 | 100 | 100 | 4.0s | 0.003 |
+| `/locations/riyadh` | 83 | 100 | 100 | 100 | 3.7s | 0.003 |
+| `/prices` | 85 | 100 | 100 | 100 | 3.4s | 0.003 |
+
+TBT = 0ms في كل الصفحات. **المتبقي:** LCP على الجوال المحاكى أعلى من 2.5s —
+سببه الأكبر خطوط Google (طلب خارجي متسلسل). الحل التالي: استضافة ملفات
+Amiri/Tajawal ذاتيًا تحت `/static/fonts` مع `preload`. ثم أعد القياس على
+النطاق المنشور (عبر CDN الأرقام عادةً أفضل بكثير من المحلي).
 
 ### 2. النشر نفسه
 

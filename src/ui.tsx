@@ -10,7 +10,7 @@ import type { Child } from 'hono/jsx'
 import { Icon, raw } from './icons'
 import { BRAND, PILLARS, STATS, STEPS, type Service } from './data'
 import { CITIES } from './cities'
-import { IMG, IMG_W } from './imgmap'
+import { IMG, varW } from './imgmap'
 
 const B = '/static/img'
 
@@ -43,7 +43,7 @@ export const Img = ({
     <img
       class={cls}
       src={`${B}/${n}-${best}.webp`}
-      srcset={av.map((s) => `${B}/${n}-${s}.webp ${IMG_W[s]}w`).join(', ')}
+      srcset={av.map((s) => `${B}/${n}-${s}.webp ${varW(n, s)}w`).join(', ')}
       sizes={sizes}
       alt={alt}
       width={w}
@@ -76,7 +76,7 @@ export const HeroPic = ({
   const w = IMG[wide]
   const t = IMG[tall]
   const set = (n: string, av: string[]) =>
-    av.map((s) => `${B}/${n}-${s}.webp ${IMG_W[s]}w`).join(', ')
+    av.map((s) => `${B}/${n}-${s}.webp ${varW(n, s)}w`).join(', ')
   return (
     <picture>
       {/* phones & small tablets: portrait crop */}
@@ -111,7 +111,7 @@ export const imgSrc = (n: string) => {
 export const imgSet = (n: string) => {
   const rec = IMG[n]
   const av = rec ? rec[0] : ['sm', 'md']
-  return av.map((s) => `${B}/${n}-${s}.webp ${IMG_W[s]}w`).join(', ')
+  return av.map((s) => `${B}/${n}-${s}.webp ${varW(n, s)}w`).join(', ')
 }
 
 /* ── Ornamental rule (diamond divider) ─────────────────────── */
@@ -174,33 +174,40 @@ export const PageHead = ({
   crumbs?: { href?: string; label: string }[]
   children?: Child
 }) => (
-  <section class="hero hero-pg">
+  <section class="hero hero-pg hero-lux">
     <div class="hero-bg">
       <Img n={img} alt="" sizes="100vw" eager />
     </div>
+    <div class="hero-veil" aria-hidden="true"></div>
     <div class="hero-in">
       {crumbs && <Crumbs items={crumbs} />}
-      <Eyebrow>{kicker}</Eyebrow>
-      <h1>{title}</h1>
-      <Rule />
-      <p class="lead">{desc}</p>
+      <div class="glass">
+        <p class="glass-kick">{kicker}</p>
+        <h1 class="glass-h1">{title}</h1>
+        <p class="glass-lead">{desc}</p>
+      </div>
       {children}
     </div>
   </section>
 )
 
 /* ── Sticky conversion bar shown under page heroes ─────────── */
-export const QuickBar = ({ label = 'احجز ضيافتك' }: { label?: string }) => (
-  <div class="qbar rv">
-    <a class="qbar-tel" href={`tel:${BRAND.phoneLocal}`}>
-      <span dangerouslySetInnerHTML={{ __html: raw('phone') }} />
-      <em>{BRAND.phoneDisplay}</em>
-    </a>
-    <a class="btn btn-gold" href={BRAND.whatsapp} rel="noopener" target="_blank">
-      <span dangerouslySetInnerHTML={{ __html: raw('chat') }} />
-      {label}
-    </a>
-  </div>
+export const QuickBar = ({ label = 'واتساب' }: { label?: string }) => (
+  <>
+    <div class="hero-cta">
+      <a class="btn btn-gold btn-lg" href={`tel:${BRAND.phoneLocal}`}>
+        <span dangerouslySetInnerHTML={{ __html: raw('phone') }} />
+        اتصل الآن
+      </a>
+      <a class="btn btn-line btn-lg" href={BRAND.whatsapp} rel="noopener" target="_blank" aria-label={label}>
+        <span dangerouslySetInnerHTML={{ __html: raw('chat') }} />
+        واتساب
+      </a>
+    </div>
+    <p class="hero-num ltr">
+      <a href={`tel:${BRAND.phoneLocal}`}>{BRAND.phoneDisplay}</a>
+    </p>
+  </>
 )
 
 /* ── Service card ──────────────────────────────────────────── */
@@ -248,7 +255,7 @@ export const Pillars = () => (
           {String(i + 1).padStart(2, '0')}
         </div>
         <div>
-          <h4>{p.t}</h4>
+          <h3 class="h4">{p.t}</h3>
           <p>{p.d}</p>
         </div>
       </div>
@@ -265,7 +272,7 @@ export const Steps = () => (
           <Icon n={s.icon} />
           <b class="num">{String(i + 1)}</b>
         </div>
-        <h4>{s.t}</h4>
+        <h3 class="h4">{s.t}</h3>
         <p>{s.d}</p>
       </li>
     ))}

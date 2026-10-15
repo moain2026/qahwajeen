@@ -1,0 +1,11 @@
+node_modules
+dist
+dist-node
+.vercel
+.wrangler
+.git
+qa
+research
+v2
+docs
+*.log

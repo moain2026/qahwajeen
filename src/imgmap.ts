@@ -1,6 +1,33 @@
 // AUTO-GENERATED from public/static/img — do not edit by hand.
 // [availableSizes, intrinsicW, intrinsicH] of the largest variant.
 export const IMG: Record<string, [string[], number, number]> = {
+  "ev-booth-1": [["sm", "md"], 768, 1360],
+  "hero-real-tall": [["sm", "md"], 900, 675],
+  "hero-real": [["sm", "md"], 900, 675],
+  "ev-booth-2": [["sm", "md"], 768, 1360],
+  "ev-booth-3": [["sm", "md"], 768, 1360],
+  "ev-booth-4": [["sm", "md"], 768, 1360],
+  "ev-booth-5": [["sm", "md"], 768, 1360],
+  "ev-booth-6": [["sm", "md"], 768, 1360],
+  "ev-booth-7": [["sm", "md"], 768, 1360],
+  "ev-vip-1": [["sm", "md"], 768, 1360],
+  "ev-booth-8": [["sm", "md"], 768, 1360],
+  "ev-booth-9": [["sm", "md"], 768, 1360],
+  "ev-vip-2": [["sm", "md"], 768, 1360],
+  "ev-women-1": [["sm", "md"], 768, 1360],
+  "ev-women-2": [["sm", "md"], 768, 1360],
+  "ev-women-3": [["sm", "md"], 768, 1360],
+  "ev-serve-1": [["sm"], 450, 800],
+  "ev-table-1": [["sm", "md"], 900, 897],
+  "ev-team-1": [["sm", "md"], 900, 675],
+  "ev-tent-1": [["sm", "md"], 900, 675],
+  "pf-spread-1": [["sm"], 480, 640],
+  "pf-spread-2": [["sm"], 480, 640],
+  "pf-spread-3": [["sm"], 480, 640],
+  "tea-green": [["sm"], 480, 640],
+  "tea-red": [["sm"], 480, 640],
+  "tea-hibiscus": [["sm"], 480, 640],
+  "ev-sawas-1": [["sm"], 480, 720],
   "artist": [["sm"], 480, 474],
   "artist-2": [["sm", "md"], 900, 1200],
   "artist-3": [["sm", "md"], 900, 1200],
@@ -107,4 +134,12 @@ export const IMG: Record<string, [string[], number, number]> = {
   "wedding": [["sm", "md"], 900, 1200],
 }
 export const IMG_W: Record<string, number> = { sm: 480, md: 900, lg: 1600 }
+/** real pixel width of a variant: the slot width, capped at the source's own width
+ *  (largest variant width is recorded in IMG — never advertise more than exists) */
+export const varW = (n: string, s: string) => {
+  const r = IMG[n]
+  if (!r) return IMG_W[s]
+  const largest = r[0][r[0].length - 1]
+  return s === largest ? r[1] : IMG_W[s]
+}
 export const hasImg = (n: string) => n in IMG

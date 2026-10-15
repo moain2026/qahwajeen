@@ -16,10 +16,10 @@ export const BRAND = {
   latin: 'ROYAL COFFEE',
   tagline: 'ضيافة عربية بمعايير ملكية',
   since: '٢٠١٤',
-  phoneRaw:     '966500000000',      // ⚠️ مؤقت
+  phoneRaw:     '966504968113',      // ⚠️ مؤقت
   phoneDisplay: '+966 50 000 0000',  // ⚠️ مؤقت
   phoneLocal:   '0500000000',        // ⚠️ مؤقت
-  whatsapp:     'https://wa.me/966500000000', // ⚠️ مؤقت
+  whatsapp:     'https://wa.me/966504968113', // ⚠️ مؤقت
   email:        'hello@example.com', // ⚠️ مؤقت
   mapsUrl:      'https://maps.google.com/?q=Jeddah',
 } as const

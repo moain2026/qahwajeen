@@ -3,19 +3,35 @@
  * All contact details are PLACEHOLDERS — swap them in one place.
  */
 
-/* ── Brand & contact (PLACEHOLDERS) ───────────────────────── */
+/* ── Brand & contact ──────────────────────────────────────── */
 export const BRAND = {
-  name: 'القهوة الملكية',
-  latin: 'ROYAL COFFEE',
+  name: 'قهوجيين',
+  latin: 'QAHWAJEEN',
   tagline: 'ضيافة عربية بمعايير ملكية',
   since: '٢٠١٤',
-  // ── Placeholder contact — replace with real values later ──
-  phoneRaw: '966500000000',
-  phoneDisplay: '+966 50 000 0000',
-  phoneLocal: '0500000000',
-  whatsapp: 'https://wa.me/966500000000',
+  // ── Live contact (STC) — one number for call + WhatsApp ──
+  phoneRaw: '966504968113',
+  phoneDisplay: '050 496 8113',
+  phoneLocal: '0504968113',
+  whatsapp: 'https://wa.me/966504968113',
+  // ── Kept for later — hidden while SHOW.email is false ──
   email: 'hello@example.com',
   mapsUrl: 'https://maps.google.com/?q=Jeddah',
+} as const
+
+/**
+ * Visibility switches. Everything stays in the code; flip a flag to
+ * bring it back. While a flag is false the item is removed from the
+ * HTML, the sitemap and the structured data (no dead/fake signals).
+ */
+export const SHOW = {
+  /** social accounts: footer icons, /social page, sameAs */
+  social: false,
+  /** email address in footer, contact page and JSON-LD */
+  email: false,
+  /** sample testimonials — keep hidden until real client reviews arrive
+   *  (Google treats invented reviews as spam; never emit them as schema) */
+  reviews: false,
 } as const
 
 /* ── Social platforms (for footer + the QR landing page) ──── */
@@ -36,10 +52,10 @@ export const SOCIAL: Social[] = [
   { n: 'snapchat', label: 'سناب شات', handle: '@royalcoffee', href: 'https://snapchat.com/', hue: '#FFFC00', kind: 'social', note: 'كواليس المناسبات' },
   { n: 'tiktok', label: 'تيك توك', handle: '@royalcoffee', href: 'https://tiktok.com/', hue: '#25F4EE', kind: 'social', note: 'مقاطع الضيافة' },
   { n: 'x', label: 'إكس · تويتر', handle: '@royalcoffee', href: 'https://x.com/', hue: '#e8e8e8', kind: 'social', note: 'العروض والمواسم' },
-  { n: 'facebook', label: 'فيسبوك', handle: 'Royal Coffee', href: 'https://facebook.com/', hue: '#1877F2', kind: 'social', note: 'صفحتنا الرسمية' },
-  { n: 'youtube', label: 'يوتيوب', handle: 'Royal Coffee', href: 'https://youtube.com/', hue: '#FF0000', kind: 'social', note: 'جولات في مناسباتنا' },
+  { n: 'facebook', label: 'فيسبوك', handle: 'Qahwajeen', href: 'https://facebook.com/', hue: '#1877F2', kind: 'social', note: 'صفحتنا الرسمية' },
+  { n: 'youtube', label: 'يوتيوب', handle: 'Qahwajeen', href: 'https://youtube.com/', hue: '#FF0000', kind: 'social', note: 'جولات في مناسباتنا' },
   { n: 'threads', label: 'ثريدز', handle: '@royalcoffee', href: 'https://threads.net/', hue: '#c9c9c9', kind: 'social', note: 'يوميات الفريق' },
-  { n: 'linkedin', label: 'لينكدإن', handle: 'Royal Coffee', href: 'https://linkedin.com/', hue: '#0A66C2', kind: 'social', note: 'الضيافة المؤسسية' },
+  { n: 'linkedin', label: 'لينكدإن', handle: 'Qahwajeen', href: 'https://linkedin.com/', hue: '#0A66C2', kind: 'social', note: 'الضيافة المؤسسية' },
   { n: 'telegram', label: 'تيليجرام', handle: '@royalcoffee', href: 'https://telegram.org/', hue: '#26A5E4', kind: 'social', note: 'قناة العروض' },
   { n: 'pinterest', label: 'بينترست', handle: 'royalcoffee', href: 'https://pinterest.com/', hue: '#E60023', kind: 'social', note: 'أفكار تنسيق' },
   { n: 'send', label: 'البريد الإلكتروني', handle: BRAND.email, href: `mailto:${BRAND.email}`, hue: '#c5a059', kind: 'contact', note: 'للعروض المؤسسية' },
@@ -54,7 +70,6 @@ export const NAV = [
   { href: '/gallery', label: 'أعمالنا', icon: 'images', hint: 'صور حقيقية من مناسباتنا' },
   { href: '/occasions', label: 'المناسبات', icon: 'sparkle', hint: 'أعراس وعزاء ومؤتمرات' },
   { href: '/locations', label: 'المدن', icon: 'pin', hint: '١٠ مدن بفرقٍ محلية' },
-  { href: '/prices', label: 'الأسعار', icon: 'award', hint: 'حزم واضحة بلا بنود مخفية' },
   { href: '/faq', label: 'أسئلة متكررة', icon: 'help', hint: 'أجوبة مباشرة قبل الحجز' },
   { href: '/about', label: 'من نحن', icon: 'crown', hint: `منذ ٢٠١٤ في السعودية` },
 ] as const
@@ -65,7 +80,6 @@ export const NAV_MAIN = [
   { href: '/menu', label: 'التقديمات' },
   { href: '/gallery', label: 'أعمالنا' },
   { href: '/locations', label: 'المدن' },
-  { href: '/prices', label: 'الأسعار' },
   { href: '/about', label: 'من نحن' },
 ] as const
 
@@ -92,8 +106,8 @@ export const SERVICES: Service[] = [
     short: 'قهوجيين ومباشرين بزيٍّ موحّد وحضور منظّم',
     desc:
       'فريق من القهوجيين والمباشرين المدرَّبين على أصول الضيافة السعودية، بزيٍّ موحّد أنيق وحضورٍ منظّم لا يُخطئ الموعد. نتولّى استقبال الضيوف عند الباب، صبّ القهوة العربية والشاي بالدلال النحاسية، وتقديم التمور والحلى على الصواني — بانسيابيةٍ تامة ودون أي تدخّلٍ منك. المباشر يدير مسار الخدمة ويوزّع الفريق حتى لا ينتظر ضيفٌ فنجاله.',
-    img: 'wedding',
-    gal: ['wedding', 'souqiya', 'eq-cup', 'eq-dallah-2', 'eq-teaset', 'tent'],
+    img: 'ev-team-1',
+    gal: ['ev-team-1', 'ev-booth-2', 'ev-booth-5', 'ev-vip-1', 'ev-booth-9', 'ev-table-1'],
     icon: 'servers',
     badge: 'الأكثر طلباً',
     points: ['زي موحّد مكويّ وفاخر', 'مباشر لتنظيم الصفوف', 'صبّ مستمر دون انتظار', 'إشراف ميداني كامل'],
@@ -111,8 +125,8 @@ export const SERVICES: Service[] = [
     short: 'طاقم نسائي كامل بخصوصية تامة',
     desc:
       'طاقم نسائي مستقل بالكامل من القهوجيات والصبابات المدرَّبات، يخدم الأعراس والملكات وحفلات التخرّج والمناسبات النسائية. حضورٌ هادئ وراقٍ، تنسيق أنيق لطاولة الاستقبال بالسوقية الذهبية والزهور، وتقديم القهوة والشاي والعصائر الطازجة — مع التزامٍ صريح بالخصوصية ودون أي حضورٍ ذكوري داخل مكان المناسبة.',
-    img: 'souqiya-5',
-    gal: ['souqiya-5', 'souqiya', 'eq-stand', 'sw-station', 'cd-juice', 'fr-strawberry'],
+    img: 'ev-women-3',
+    gal: ['ev-women-3', 'ev-women-2', 'ev-women-1', 'ev-serve-1', 'souqiya-5', 'sw-station'],
     icon: 'sparkle',
     badge: 'خصوصية تامة',
     points: ['طاقم نسائي بالكامل', 'تنسيق طاولة الاستقبال', 'عصائر ومشروبات باردة', 'التزام موثّق بالخصوصية'],
@@ -168,8 +182,8 @@ export const SERVICES: Service[] = [
     short: 'مقبلات، ساندويتشات، معجنات وبوفيه متكامل',
     desc:
       'بوفيه بارد وساخن يُنسَّق على الموقع: مقبلات مصغّرة، ساندويتشات مُقطَّعة، معجنات وفطائر، فواكه منسّقة، وأكلات شعبية سعودية على الطريقة الأصيلة. طاقم تقديمٍ وتنسيقِ طاولات يرتّب الارتفاعات والألوان بحيث تبدو الطاولة صورةً قبل أن تكون طعاماً.',
-    img: 'buffet',
-    gal: ['buffet', 'buffet-2', 'sn-canapes', 'sd-turkey', 'ps-samosa', 'fr-mango'],
+    img: 'pf-spread-1',
+    gal: ['pf-spread-1', 'pf-spread-2', 'pf-spread-3', 'ev-tent-1', 'buffet', 'sn-canapes'],
     icon: 'tray',
     badge: 'بوفيه متكامل',
     points: ['مقبلات وكانابيه', 'ساندويتشات ومعجنات', 'فواكه منسّقة', 'طاقم تقديم وتنسيق'],
@@ -206,8 +220,8 @@ export const SERVICES: Service[] = [
     short: 'سواس ذهبية وسوقية احتفالية للمناسبات الكبرى',
     desc:
       'أرقى ما نملك: السواس النحاسية المذهّبة والسوقية الاحتفالية التي تُستخدم في الاستقبالات الملكية والمناسبات الكبرى. قطعٌ يدوية منقوشة بارتفاعاتٍ لافتة، تُنسَّق مع الزهور الطبيعية والإضاءة الدافئة لتصنع نقطة الجذب البصري الأولى في مدخل مناسبتك.',
-    img: 'sawas-3',
-    gal: ['sawas-3', 'sawas-4', 'souqiya', 'souqiya-5', 'sawas', 'souqiya-3'],
+    img: 'ev-vip-2',
+    gal: ['ev-vip-2', 'ev-vip-1', 'ev-sawas-1', 'sawas-3', 'souqiya', 'sawas-4'],
     icon: 'crown',
     badge: 'الأفخم عندنا',
     points: ['سواس نحاسية مذهّبة', 'سوقية احتفالية منقوشة', 'تنسيق زهور وإضاءة', 'مدخل يصنع الانطباع الأول'],
@@ -225,8 +239,8 @@ export const SERVICES: Service[] = [
     short: 'خيام شعبية، كوش تصوير فوري، حنّاية وتوزيعات',
     desc:
       'كل ما يحوّل المناسبة من ضيافةٍ إلى تجربة: خيام ومجالس شعبية بالسدو والمخدّات، كوش تصوير فوري (Photo Booth) مع طباعة لحظية وسجادة حمراء، حنّاية محترفة للمناسبات النسائية، وتوزيعات مُغلَّفة بأسماء الضيوف. تُطلَب مع الضيافة أو منفصلة.',
-    img: 'tent',
-    gal: ['tent', 'tent-2', 'booth-2', 'artist', 'gift-dates', 'gift-sweets'],
+    img: 'ev-tent-1',
+    gal: ['ev-tent-1', 'tent', 'tent-2', 'booth-2', 'gift-dates', 'gift-sweets'],
     icon: 'tent',
     badge: 'تجربة كاملة',
     points: ['خيام ومجالس شعبية', 'كوش تصوير فوري', 'حنّاية محترفة', 'توزيعات مُغلَّفة'],
@@ -259,7 +273,7 @@ export const OCCASIONS: Occasion[] = [
     h1: 'ضيافة الأعراس والملكات',
     d: 'ضيافة كاملة لليلة العمر',
     icon: 'crown',
-    img: 'souqiya',
+    img: 'ev-vip-2',
     desc:
       'ليلة العمر لا تُدار بالحسّ، تُدار بجدول. نصل قبل الموعد بساعتين، نركّب السوقية الذهبية في المدخل، نوزّع القهوجيين على المسارات، ونضبط توقيت الحلى مع دخول العروسين. طاقم رجالي ونسائي مستقل، ومباشرٌ واحد يمسك الخطّ من الاستقبال حتى الوداع.',
     needs: ['سوقية ذهبية في المدخل', 'طاقم نسائي مستقل', 'محطة حلى وتمور', 'توزيعات بأسماء الضيوف'],
@@ -283,7 +297,7 @@ export const OCCASIONS: Occasion[] = [
     h1: 'الضيافة المؤسسية للمؤتمرات والمعارض',
     d: 'ضيافة مؤسسية بزي موحّد وفاتورة نظامية',
     icon: 'users',
-    img: 'buffet',
+    img: 'ev-booth-4',
     desc:
       'الضيافة المؤسسية تُقاس بالانضباط: عرض سعر مكتوب، فاتورة ضريبية نظامية، فريق بزيٍّ موحّد يحمل بطاقة تعريف، ومسار خدمة مرسوم على مخطّط القاعة قبل يوم الحدث. نغطّي فترات الاستراحة (Coffee Break) بتوقيتٍ مضبوط على الأجندة، لا على التقدير.',
     needs: ['فاتورة ضريبية نظامية', 'بطاقات تعريف للفريق', 'كوفي بريك مضبوط بالتوقيت', 'بوفيه مقبلات مصغّرة'],
@@ -319,7 +333,7 @@ export const OCCASIONS: Occasion[] = [
     h1: 'ضيافة المخيمات والاستراحات البرّية',
     d: 'ضيافة برّية بروح أصيلة',
     icon: 'tent',
-    img: 'tent-2',
+    img: 'ev-tent-1',
     desc:
       'في البرّ تكون الضيافة أصدق. نصل بمعدّاتنا كاملة إلى المخيم أو الاستراحة: قعدة شعبية بالسدو، دلال على النار، قهوة تُحمَّص في الموقع، تمور ومكسّرات، وبراد ماء بارد — بلا اعتمادٍ على كهرباء الموقع.',
     needs: ['قعدة شعبية بالسدو', 'دلال على النار', 'تحميص في الموقع', 'اكتفاء ذاتي بلا كهرباء'],
@@ -360,8 +374,10 @@ export const MENU: MenuCat[] = [
       { n: 'قهوة عربية بالهيل', d: 'محمّصة على النار مع الزعفران والهيل', img: 'eq-dallah-2' },
       { n: 'قهوة سعودية فاتحة', d: 'التحميص الأشقر الأصيل بالزعفران', img: 'eq-dallah' },
       { n: 'قهوة سادة للعزاء', d: 'بلا سكر ولا إضافات — للمجالس الرسمية', img: 'eq-teaset' },
-      { n: 'شاي أحمر بالنعناع', d: 'مغليٌّ على الطريقة الحجازية', img: 'eq-cup' },
-      { n: 'شاي أخضر بالحبق', d: 'خفيف ومنعش بعد الأكل', img: 'eq-cup-2' },
+      { n: 'شاي أحمر بالنعناع', d: 'مغليٌّ على الطريقة الحجازية', img: 'tea-red' },
+      { n: 'شاي أخضر بالخلطة المدينية', d: 'خفيف ومنعش بعد الأكل', img: 'tea-green' },
+      { n: 'كركديه دافئ', d: 'مشروب أحمر حامض يُقدَّم ساخناً', img: 'tea-hibiscus' },
+      { n: 'زنجبيل وقرفة', d: 'مشروبات دافئة للمجالس الطويلة والشتاء', img: 'eq-cup-2' },
       { n: 'شاي كرك', d: 'حليب وهيل وزنجبيل مركّز', img: 'cd-latte' },
       { n: 'قهوة تركية', d: 'مطحونة ناعمة تُغلى على الرمل', img: 'eq-tray' },
       { n: 'قهوة مختصة (V60)', d: 'حبوب مختصة تُحضَّر بالتقطير أمام الضيف', img: 'eq-tray-2' },
@@ -382,6 +398,7 @@ export const MENU: MenuCat[] = [
       { n: 'تمر هندي', d: 'مركّز ومبرّد على الطريقة القديمة', img: 'cd-tamarind' },
       { n: 'سوس بارد', d: 'عرق سوس مرغي على الطريقة الشعبية', img: 'cd-sous' },
       { n: 'آيس لاتيه', d: 'إسبريسو وحليب بارد وثلج', img: 'cd-latte' },
+      { n: 'عصير رمان وأناناس', d: 'يُعصَر طازجاً في الموقع', img: 'fr-pomegranate' },
       { n: 'ماء زمزم مبرّد', d: 'أكواب مغلّفة فردياً', img: 'eq-tray' },
     ],
   },
@@ -493,11 +510,29 @@ export const MENU: MenuCat[] = [
       { n: 'مقبلات معجنات', d: 'قطع صغيرة تُؤكل بيد واحدة', img: 'ps-appetizers' },
     ],
   },
+  {
+    slug: 'popular',
+    cat: 'الأكلات الشعبية',
+    icon: 'tray',
+    hero: 'pf-spread-1',
+    blurb: 'سفرة شعبية سعودية تُطبخ على الأصول وتُقدَّم في قدورٍ حافظة للحرارة — للعزائم والولائم والعقائق ومناسبات الأهل في جدة.',
+    items: [
+      { n: 'جريش أبيض وأحمر', d: 'بالسمن البلدي والبصل المحمّر', img: 'pf-spread-2' },
+      { n: 'بنت الصحن', d: 'رقائق هشّة بالسمن والعسل والحبّة السوداء', img: 'pf-spread-3' },
+      { n: 'عريكة', d: 'بالتمر والسمن والعسل — طبق جنوبي أصيل', img: 'pf-spread-1' },
+      { n: 'خبز الخمير والعسل', d: 'يُقطَّع ويُقدَّم مع العسل والقهوة', img: 'pf-spread-1' },
+      { n: 'عصيد ومرقوق', d: 'أطباق دافئة للشتاء والعزائم', img: 'pf-spread-2' },
+      { n: 'مطازيز ومراصيع', d: 'من سفرة الأهل على الطريقة النجدية', img: 'pf-spread-3' },
+      { n: 'فتّة تمر ومرسة', d: 'تمر مهروس بالسمن والخبز', img: 'pf-spread-1' },
+      { n: 'حنيني ومعمول', d: 'حلى شعبي يُقدَّم مع القهوة', img: 'pf-spread-3' },
+      { n: 'مكسّرات محمّصة', d: 'تُقدَّم في سلال بجانب القهوة', img: 'pf-spread-3' },
+    ],
+  },
 ]
 
 /* ── Stats ────────────────────────────────────────────────── */
 export const STATS = [
-  { v: '+٦٥٠٠', l: 'مناسبة أُنجزت' },
+  { v: 'جدة', l: 'مقرّنا وأولويتنا' },
   { v: '+٦٠', l: 'صنف ضيافة' },
   { v: '١٠', l: 'مدن نخدمها' },
   { v: '٢٤/٧', l: 'استقبال الحجوزات' },
@@ -569,6 +604,15 @@ export const FAQ = [
 export type Shot = { img: string; cap: string; tall?: boolean; cat: string }
 
 export const GALLERY: Shot[] = [
+  { img: 'ev-team-1', cap: 'فريق القهوجيين في مناسبة بجدة', cat: 'فريق' },
+  { img: 'ev-vip-2', cap: 'ركن ضيافة ملكي لكبار الضيوف', tall: true, cat: 'ملكية' },
+  { img: 'ev-booth-2', cap: 'ركن قهوة وشاي متكامل', tall: true, cat: 'عدّة' },
+  { img: 'ev-women-2', cap: 'ضيافة نسائية بالقهوجيات', tall: true, cat: 'فريق' },
+  { img: 'ev-table-1', cap: 'طاولة ضيافة منسّقة', cat: 'تقديمات' },
+  { img: 'ev-tent-1', cap: 'جلسة خيمة للمخيمات', cat: 'إضافات' },
+  { img: 'pf-spread-1', cap: 'سفرة أكلات شعبية', tall: true, cat: 'تقديمات' },
+  { img: 'ev-booth-5', cap: 'ركن ضيافة في فعالية شركة', tall: true, cat: 'عدّة' },
+  { img: 'ev-vip-1', cap: 'استقبال كبار الشخصيات', tall: true, cat: 'ملكية' },
   { img: 'sawas-3', cap: 'سواس نحاسية مذهّبة', tall: true, cat: 'ملكية' },
   { img: 'souqiya', cap: 'سوقية المدخل بالزهور', cat: 'ملكية' },
   { img: 'eq-dallah-2', cap: 'دلّة القهوة الذهبية', cat: 'عدّة' },
@@ -603,4 +647,31 @@ export const REVIEWS = [
   { n: 'م. سارة', c: 'الرياض', t: 'الطاقم النسائي كان محترماً جداً والتنسيق كان أفخم مما توقعت. الصور طلعت رهيبة.', r: 5 },
   { n: 'شركة تقنية', c: 'الخبر', t: 'غطّوا مؤتمرنا ثلاثة أيام بتوقيت مضبوط على الأجندة، والفاتورة كانت نظامية بلا تعقيد.', r: 5 },
   { n: 'أبو فيصل', c: 'مكة المكرمة', t: 'مجلس عزاء والدي — حضور هادئ ومحترم وتزويد مستمر بلا أي إحراج. الله يجزاهم خير.', r: 5 },
+] as const
+
+/* ── Our team (real photos) — "choose your crew's look" rail ─ */
+export const STAFF = [
+  { img: 'ev-team-1', t: 'زيّ موحّد كلاسيكي', d: 'قهوجيين وصبابين' },
+  { img: 'ev-vip-2', t: 'زيّ ملكي مطرّز', d: 'الأعراس وكبار الضيوف' },
+  { img: 'ev-booth-6', t: 'زيّ الفعاليات', d: 'المعارض والشركات' },
+  { img: 'ev-sawas-1', t: 'سوّاس تراثي', d: 'استقبال بطابع شعبي' },
+  { img: 'ev-women-1', t: 'قهوجيات بزيّ تراثي', d: 'المناسبات النسائية' },
+  { img: 'ev-women-2', t: 'مباشرات بزيّ رسمي', d: 'تنظيم وخصوصية تامة' },
+] as const
+
+/* ── The three roles — one line each ──────────────────────── */
+export const ROLES = [
+  { img: 'ev-booth-2', t: 'القهوجي', d: 'يحضّر القهوة على الأصول ويتابع الدلال وحرارتها طوال المناسبة.' },
+  { img: 'ev-vip-1', t: 'الصبّاب', d: 'يصبّ من اليمين بدءاً بكبير الضيوف، ويعيد الصبّ في وقته.' },
+  { img: 'ev-serve-1', t: 'المباشر', d: 'ينظّم حركة التقديم ويوزّع الطاقم من أول ضيف إلى آخره.' },
+] as const
+
+/* ── Why us — one line each ───────────────────────────────── */
+export const WHY = [
+  'جدة أولاً — فرق في شمال ووسط وجنوب المدينة',
+  'حضور قبل الموعد وتجهيز كامل',
+  'طاقم بزيٍّ موحّد ومظهر رسمي',
+  'قهوة عربية تُحضَّر في الموقع',
+  'عدّة ودلال مصقولة ومعقّمة',
+  'عرض سعر مكتوب قبل التأكيد',
 ] as const
