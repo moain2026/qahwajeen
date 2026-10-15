@@ -3,10 +3,11 @@
  * Every image goes through <Img> (see ui.tsx) so the -sm/-md/-lg
  * convention lives in exactly one place.
  */
-import { Layout } from './layout'
+import { Layout, SITE } from './layout'
 import { Icon, raw } from './icons'
 import {
   BRAND,
+  SHOW,
   SOCIAL,
   SERVICES,
   OCCASIONS,
@@ -54,10 +55,11 @@ import {
   CtaBand,
   Faq,
 } from './ui'
+import { MiniSite, ContactBlock, PriceCards, Actions, Ico, wa, SvcGrid, CoverLinks, Rail } from './blocks'
+import { JEDDAH_PAGES, type JeddahPage } from './jeddah'
 
 /* ── tiny local helpers ───────────────────────────────────── */
 const svc = (slug: string) => SERVICES.find((s) => s.slug === slug)!
-const wa = (msg: string) => `${BRAND.whatsapp}?text=${encodeURIComponent(msg)}`
 
 /**
  * Builds a <title> that always fits Google's ~70-character SERP budget.
@@ -75,30 +77,6 @@ const fitTitle = (base: string, ...suffixes: string[]) => {
   return base
 }
 
-const Ico = ({ n }: { n: string }) => <span dangerouslySetInnerHTML={{ __html: raw(n) }} />
-
-/** Dual conversion buttons — the site's primary action, repeated by design. */
-const Actions = ({ msg, tone = 'gold' }: { msg: string; tone?: 'gold' | 'line' }) => (
-  <div class="btn-row">
-    <a class={`btn btn-${tone} btn-lg`} href={wa(msg)} rel="noopener" target="_blank">
-      <Ico n="chat" />
-      حجز عبر واتساب
-    </a>
-    <a class="btn btn-line btn-lg" href={`tel:${BRAND.phoneLocal}`}>
-      <Ico n="phone" />
-      اتصال مباشر
-    </a>
-  </div>
-)
-
-const Stars = ({ r }: { r: number }) => (
-  <div class="stars" aria-label={`${r} من ٥`}>
-    {Array.from({ length: r }).map(() => (
-      <Ico n="star" />
-    ))}
-  </div>
-)
-
 /** Trust line under CTAs — removes the last hesitation before tapping. */
 const Trust = () => (
   <p class="fine">
@@ -113,251 +91,73 @@ const Trust = () => (
 export const Home = () => (
   <Layout
     path="/"
-    hero="hero-royal"
-    jsonld={graph(orgLd(), siteLd(), faqLd(FAQ.slice(0, 6)), reviewsLd())}
-    title="قهوجيين وصبابين وضيافة مناسبات في السعودية"
-    desc="ضيافة عربية بمعايير ملكية — قهوجيين وصبابين وقهوجيات، عدّة نحاسية مصقولة، تمور وحلى وبوفيه، في جدة والرياض ومكة و١٠ مدن. عرض سعر مكتوب خلال ساعات."
+    hero="hero-real"
+    jsonld={graph(orgLd(), siteLd(), faqLd(FAQ))}
+    title="قهوجيين وصبابين جدة — ضيافة مناسبات فاخرة"
+    desc="قهوجيين وصبابين وقهوجيات في جدة و١٠ مدن: طاقم بزي موحّد، قهوة عربية تُحضَّر في الموقع، تمور وحلى وعدّة نحاسية. اتصال وواتساب 0504968113."
   >
     {/* ─── HERO ───
         Cinematic, not static: two stills cross-fade under a slow Ken-Burns
         drift, a gold sheen sweeps the headline once, and the whole block
         cascades in line by line. All of it is CSS — zero JS, zero layout
         shift, and every motion is disabled under prefers-reduced-motion. */}
-    <section class="hero hero-home hero-cine">
+    <section class="hero hero-home hero-lux hero-art">
       <div class="hero-bg">
-        <HeroPic
-          wide="hero-royal"
-          tall="hero-royal-tall"
-          alt="دلّة نحاسية وفناجيل بيضاء وتمور سكري على طاولة رخام في مجلس فخم — ضيافة القهوة الملكية"
-          eager
-        />
-      </div>
-      {/* second still: decorative only, so it stays out of the a11y tree */}
-      <div class="hero-bg hero-bg-2" aria-hidden="true">
-        <HeroPic wide="hero-majlis" tall="hero-majlis-tall" alt="" />
+        <HeroPic wide="hero-real" tall="hero-real-tall" alt="فريق قهوجيين وصبابين بزي موحّد في مناسبة بجدة" eager />
       </div>
       <div class="hero-veil" aria-hidden="true"></div>
-      <div class="hero-shine" aria-hidden="true"></div>
-      <div class="hero-in hero-cascade">
-        <Eyebrow>{BRAND.tagline}</Eyebrow>
-        <h1 class="hero-ttl">
-          ضيافةٌ تُروى عنها
-          <br />
-          <span class="gold shimmer">بعد انتهاء المناسبة</span>
-        </h1>
-        <Rule />
-        <p class="lead">
-          قهوجيين وصبابين وقهوجيات بزيٍّ موحّد، قهوة عربية تُحضَّر على النار في موقع مناسبتك، عدّة نحاسية
-          مصقولة، وتقديماتٌ تُصوَّر قبل أن تُذاق. من ٢٠١٤ في جدة، والآن في ١٠ مدن.
-        </p>
-        <Actions msg="السلام عليكم، أرغب في حجز ضيافة لمناسبة." />
-        <Trust />
-        <div class="hero-strip" aria-hidden="true">
-          {STATS.map((s) => (
-            <div>
-              <b class="num">{s.v}</b>
-              <span>{s.l}</span>
-            </div>
-          ))}
+      <div class="hero-in">
+        <div class="glass">
+          <p class="glass-kick">JEDDAH · SAUDI ARABIA</p>
+          <p class="glass-name">قهوجيين</p>
+          <i class="glass-bar" aria-hidden="true"></i>
+          <p class="glass-latin">QAHWAJEEN</p>
+          <p class="glass-sub">LUXURY HOSPITALITY</p>
+          <h1 class="glass-h1">قهوجيين وصبابين جدة</h1>
+          <p class="glass-lead">طاقم بزيٍّ رسمي، ودلال ذهبية، وضيافة تليق بمكانة ضيوفك.</p>
+          <ul class="glass-dots">
+            <li>الأعراس</li>
+            <li>الشركات</li>
+            <li>المجالس</li>
+          </ul>
         </div>
-      </div>
-      <a class="hero-down" href="#services" aria-label="تابع للأسفل">
-        <Ico n="chevron" />
-      </a>
-    </section>
-
-    {/* ─── SERVICES ─── */}
-    <section class="sec" id="services">
-      <div class="wrap">
-        <SecHead
-          kicker="خدماتنا"
-          title="ثمانية أقسام تُغطّي مناسبتك كاملة"
-          desc="اختر قسماً واحداً أو دعنا نتولّى الضيافة من الاستقبال حتى الرفع — بعرضٍ واحد ومباشرٍ واحد."
-        />
-        <div class="grid g-md2 g-lg3">
-          {SERVICES.map((s, i) => (
-            <ServiceCard s={s} eager={i < 3} />
-          ))}
-        </div>
-        <div class="mid-cta rv">
-          <a class="btn btn-line" href="/services">
-            كل الخدمات بالتفصيل
-            <Ico n="arrow" />
+        <div class="hero-cta">
+          <a class="btn btn-gold btn-lg" href={`tel:${BRAND.phoneLocal}`}>
+            <Ico n="phone" />
+            اتصل الآن
+          </a>
+          <a class="btn btn-line btn-lg" href={wa('السلام عليكم، أرغب في حجز ضيافة لمناسبة في جدة.')} rel="noopener" target="_blank">
+            <Ico n="chat" />
+            واتساب
           </a>
         </div>
       </div>
     </section>
 
-    {/* ─── WORKS GLIMPSE ─── */}
-    <section class="sec sec-alt" id="works">
+    {/* ─── OCCASIONS (swipe) ─── */}
+    <section class="sec sec-mini" id="services">
       <div class="wrap">
-        <SecHead
-          kicker="نبذة من أعمالنا"
-          title="لمحة من مناسباتٍ نفذّناها"
-          desc="صورٌ حقيقية من ضيافاتنا — لا صور مكتبية ولا نماذج جاهزة."
-        />
-        <WorksStrip shots={GALLERY.slice(0, 9)} cols={3} />
-        <div class="mid-cta rv">
-          <a class="btn btn-gold" href="/gallery">
-            <Ico n="images" />
-            معرض الأعمال كاملاً
-          </a>
-        </div>
-      </div>
-    </section>
-
-    {/* ─── WHY US ─── */}
-    <section class="sec">
-      <div class="wrap">
-        <SecHead kicker="لماذا نحن" title="ستة التزامات مكتوبة" desc="ليست وعوداً تسويقية — بل بنودٌ نُحاسَب عليها." />
-        <Pillars />
-      </div>
-    </section>
-
-    {/* ─── OCCASIONS ─── */}
-    <section class="sec sec-alt">
-      <div class="wrap">
-        <SecHead kicker="المناسبات" title="لكل مناسبةٍ جدولها الخاص" desc="العرس ليس كالعزاء، والمؤتمر ليس كالمخيّم." />
-        <div class="grid g-md2 g-lg3">
+        <SecHead kicker="لمن نخدم" title="لكل مناسبةٍ طاقمها وزيّها وترتيبها" />
+        <Rail label="المناسبات" cls="rail-occ">
           {OCCASIONS.map((o) => (
-            <a class="card occ rv" href={`/occasions/${o.slug}`}>
-              <div class="occ-media">
-                <Img n={o.img} alt={o.title} />
-              </div>
-              <div class="occ-body">
-                <span class="occ-ico">
-                  <Icon n={o.icon} />
-                </span>
-                <h3>{o.title}</h3>
-                <p>{o.d}</p>
-                <span class="lnk">
-                  التفاصيل
-                  <Ico n="arrow" />
-                </span>
-              </div>
+            <a class="rcard" role="listitem" href={`/occasions/${o.slug}`}>
+              <Img n={o.img} alt={o.title} sizes="(min-width:1024px) 280px, 60vw" />
+              <span class="rcard-cap">
+                <b>{o.title}</b>
+                <small>{o.d}</small>
+              </span>
             </a>
           ))}
-        </div>
+        </Rail>
       </div>
     </section>
 
-    {/* ─── STEPS ─── */}
-    <section class="sec">
-      <div class="wrap">
-        <SecHead kicker="كيف نعمل" title="أربع خطوات من الاتصال حتى الرفع" />
-        <Steps />
-      </div>
-    </section>
-
-    {/* ─── PRICING TEASER ─── */}
-    <section class="sec sec-alt">
-      <div class="wrap">
-        <SecHead
-          kicker="الحزم"
-          title="ثلاث حزم — والتخصيص متاح دائماً"
-          desc="الأسعار النهائية تعتمد على المدينة وعدد الضيوف ومدة الخدمة، ويصلك عرضٌ مكتوب قبل أي تأكيد."
-        />
-        <PriceCards />
-        <div class="mid-cta rv">
-          <a class="btn btn-line" href="/prices">
-            دليل الأسعار وما يحدّدها
-            <Ico n="arrow" />
-          </a>
-        </div>
-      </div>
-    </section>
-
-    {/* ─── MENU TEASER ─── */}
-    <section class="sec">
-      <div class="wrap">
-        <SecHead kicker="قائمة الضيافة" title="أكثر من ٧٠ صنفاً بصورٍ حقيقية" desc="القهوة والتمور والحلى والفواكه والمقبلات والساندويتشات والمعجنات." />
-        <div class="grid g2 g-md3 g-lg4">
-          {MENU.map((m) => (
-            <a class="mcat rv" href={`/menu/${m.slug}`}>
-              <Img n={m.hero} alt={m.cat} sizes="(min-width:1024px) 280px, 46vw" />
-              <div class="mcat-in">
-                <Icon n={m.icon} />
-                <h3>{m.cat}</h3>
-                <span>{m.items.length} صنفاً</span>
-              </div>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* ─── CITIES ─── */}
-    <section class="sec sec-alt">
-      <div class="wrap">
-        <SecHead kicker="مناطق الخدمة" title="عشر مدن — بفرقٍ محلية لا وكلاء" desc="اختر مدينتك لتعرف تفاصيل الخدمة والأحياء والقاعات التي نغطّيها." />
-        <CityChips />
-        <div class="mid-cta rv">
-          <a class="btn btn-line" href="/locations">
-            صفحات المدن كاملة
-            <Ico n="arrow" />
-          </a>
-        </div>
-      </div>
-    </section>
-
-    {/* ─── REVIEWS ─── */}
-    <section class="sec">
-      <div class="wrap">
-        <SecHead kicker="آراء العملاء" title="ما يقوله من جرّبنا" />
-        <div class="grid g-md2 g-lg4">
-          {REVIEWS.map((r) => (
-            <blockquote class="rev rv">
-              <Stars r={r.r} />
-              <p>{r.t}</p>
-              <footer>
-                <b>{r.n}</b>
-                <span>{r.c}</span>
-              </footer>
-            </blockquote>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* ─── FAQ ─── */}
-    <section class="sec sec-alt">
-      <div class="wrap wrap-nar">
-        <SecHead kicker="أسئلة متكررة" title="أجوبة مباشرة بلا مواربة" />
-        <Faq items={FAQ} />
-      </div>
-    </section>
-
-    <CtaBand />
+    <MiniSite
+      faq={FAQ}
+      active="/"
+      contact={{ title: 'خلِّ ضيافتك حديث ضيوفك', msg: 'السلام عليكم، أرغب في حجز ضيافة لمناسبة.' }}
+    />
   </Layout>
-)
-
-/* ── price cards (shared) ─────────────────────────────────── */
-const PriceCards = () => (
-  <div class="grid g-md3">
-    {PRICING.map((p) => (
-      <div class={'price rv' + ((p as any).hot ? ' hot' : '')}>
-        {(p as any).hot && <span class="price-tag">{p.badge}</span>}
-        <span class="price-ico">
-          <Icon n={p.icon} />
-        </span>
-        <h3>{p.name}</h3>
-        <p class="price-g">{p.guests}</p>
-        <Rule />
-        <ul class="ticks">
-          {p.items.map((i) => (
-            <li>
-              <Ico n="check" />
-              {i}
-            </li>
-          ))}
-        </ul>
-        <a class={'btn ' + ((p as any).hot ? 'btn-gold' : 'btn-line')} href={wa(`أرغب في عرض سعر — ${p.name}`)} rel="noopener" target="_blank">
-          <Ico n="chat" />
-          اطلب عرض سعر
-        </a>
-      </div>
-    ))}
-  </div>
 )
 
 /* ══════════════════════════════════════════════════════════
@@ -375,7 +175,7 @@ export const Services = () => (
           '@type': 'ListItem',
           position: i + 1,
           name: s.title,
-          url: `https://royal-coffee.pages.dev/services/${s.slug}`,
+          url: `${SITE}/services/${s.slug}`,
         })),
       },
     )}
@@ -409,7 +209,7 @@ export const Services = () => (
       </div>
     </section>
 
-    <CtaBand />
+    <MiniSite skip={['services', 'why']} active="/services" />
   </Layout>
 )
 
@@ -475,7 +275,7 @@ export const ServiceDetail = ({ s }: { s: Service }) => {
                   {String(i + 1).padStart(2, '0')}
                 </div>
                 <div>
-                  <h4>{it.t}</h4>
+                  <h3 class="h4">{it.t}</h3>
                   <p>{it.d}</p>
                 </div>
               </div>
@@ -491,25 +291,11 @@ export const ServiceDetail = ({ s }: { s: Service }) => {
         </div>
       </section>
 
-      <section class="sec sec-alt">
-        <div class="wrap">
-          <SecHead kicker="مناطق الخدمة" title="نصل إليك في عشر مدن" />
-          <CityChips />
-        </div>
-      </section>
-
-      <section class="sec">
-        <div class="wrap">
-          <SecHead kicker="خدمات أخرى" title="قد تحتاجها مع مناسبتك" />
-          <div class="grid g-md2 g-lg3">
-            {others.map((o) => (
-              <ServiceCard s={o} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <CtaBand title={`جاهزون لحجز ${s.title}`} />
+      <MiniSite
+        svcExclude={s.slug}
+        active={`/services/${s.slug}`}
+        contact={{ title: `جاهزون لحجز ${s.title}`, msg: `السلام عليكم، أرغب في حجز: ${s.title}` }}
+      />
     </Layout>
   )
 }
@@ -547,7 +333,7 @@ export const Occasions = () => (
                 <span class="occ-ico">
                   <Icon n={o.icon} />
                 </span>
-                <h3>{o.title}</h3>
+                <h2>{o.title}</h2>
                 <p>{o.d}</p>
                 <span class="lnk">
                   التفاصيل
@@ -560,7 +346,7 @@ export const Occasions = () => (
       </div>
     </section>
 
-    <CtaBand />
+    <MiniSite active="/occasions" />
   </Layout>
 )
 
@@ -618,7 +404,7 @@ export const OccasionDetail = ({ o }: { o: Occasion }) => {
                   {String(i + 1).padStart(2, '0')}
                 </div>
                 <div>
-                  <h4>{n}</h4>
+                  <h3 class="h4">{n}</h3>
                 </div>
               </div>
             ))}
@@ -637,7 +423,11 @@ export const OccasionDetail = ({ o }: { o: Occasion }) => {
         </div>
       </section>
 
-      <CtaBand title={`نُدير ضيافة ${o.title} كاملة`} />
+      <MiniSite
+        skip={['services']}
+        active={`/occasions/${o.slug}`}
+        contact={{ title: `نُدير ضيافة ${o.title} كاملة`, msg: `السلام عليكم، أرغب في ضيافة لمناسبة: ${o.title}` }}
+      />
     </Layout>
   )
 }
@@ -657,7 +447,7 @@ export const Locations = () => (
           '@type': 'ListItem',
           position: i + 1,
           name: c.name,
-          url: `https://royal-coffee.pages.dev/locations/${c.slug}`,
+          url: `${SITE}/locations/${c.slug}`,
         })),
       },
     )}
@@ -725,14 +515,14 @@ export const Locations = () => (
       </div>
     </section>
 
-    <CtaBand />
+    <MiniSite skip={['cover']} active="/locations" />
   </Layout>
 )
 
 export const CityHub = ({ c }: { c: City }) => (
   <Layout
     path={`/locations/${c.slug}`}
-    hero={c.hero}
+    hero={c.slug === 'jeddah' ? 'ev-team-1' : c.hero}
     jsonld={graph(
       serviceLd(
         `ضيافة ${c.name}`,
@@ -753,7 +543,7 @@ export const CityHub = ({ c }: { c: City }) => (
       kicker={c.region}
       title={`ضيافة ${c.inName}`}
       desc={`فريقٌ مقيم في ${c.inName} وعدّة مخزّنة محلياً — نصل قبل الموعد بساعتين ونعرف قاعات المدينة بأسمائها.`}
-      img={c.hero}
+      img={c.slug === 'jeddah' ? 'ev-team-1' : c.hero}
       crumbs={[{ href: '/locations', label: 'مناطق الخدمة' }, { label: c.name }]}
     >
       <QuickBar label={`احجز ضيافة ${c.name}`} />
@@ -814,10 +604,10 @@ export const CityHub = ({ c }: { c: City }) => (
         <SecHead kicker="التغطية" title={`أحياء وقاعات نخدمها في ${c.inName}`} />
         <div class="cover rv">
           <div>
-            <h4>
+            <h3 class="h4">
               <Ico n="pin" />
               الأحياء
-            </h4>
+            </h3>
             <div class="tags">
               {c.districts.map((d) => (
                 <span>{d}</span>
@@ -825,10 +615,10 @@ export const CityHub = ({ c }: { c: City }) => (
             </div>
           </div>
           <div>
-            <h4>
+            <h3 class="h4">
               <Ico n="crown" />
               المواقع والقاعات
-            </h4>
+            </h3>
             <div class="tags">
               {c.venues.map((v) => (
                 <span>{v}</span>
@@ -839,48 +629,51 @@ export const CityHub = ({ c }: { c: City }) => (
       </div>
     </section>
 
-    <section class="sec sec-alt">
-      <div class="wrap">
-        <SecHead kicker="الخدمات" title={`أقسام الضيافة المتاحة في ${c.inName}`} />
-        <div class="grid g-md2 g-lg3">
-          {SERVICES.slice(0, 6).map((s) => (
-            <ServiceCard s={s} />
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="sec">
-      <div class="wrap">
-        <SecHead kicker="من أعمالنا" title={`لمحة من مناسبات ${c.inName}`} />
-        <WorksStrip shots={GALLERY.slice(0, 6)} cols={3} />
-      </div>
-    </section>
-
-    <section class="sec sec-alt">
-      <div class="wrap">
-        <SecHead kicker="مدن أخرى" title="نخدم أيضاً" />
-        <CityChips active={c.slug} />
-      </div>
-    </section>
-
-    <CtaBand
-      kicker={`ضيافة ${c.name}`}
-      title={`فريقنا في ${c.inName} جاهز لمناسبتك`}
-      desc={`أرسل التاريخ وعدد الضيوف والحيّ في ${c.inName}، ويصلك عرض سعرٍ مكتوب خلال ساعات.`}
+    <MiniSite
+      place={c.inName}
+      active={`/locations/${c.slug}`}
+      contact={{
+        title: `فريقنا في ${c.inName} جاهز لمناسبتك`,
+        desc: `أرسل التاريخ وعدد الضيوف والحيّ في ${c.inName}، ويصلك عرض سعرٍ مكتوب خلال ساعات.`,
+        msg: `السلام عليكم، أرغب في حجز ضيافة في ${c.name}`,
+      }}
     />
   </Layout>
 )
 
+/** City-specific FAQ for family×city pages — unique Q&A per page. */
+const cityFaq = (f: Family, c: City) => [
+  {
+    q: `كم ${f.noun === 'ضيافة مناسبات' ? 'فرداً من الطاقم' : f.noun.split(' ')[0]} أحتاج لمناسبة في ${c.inName}؟`,
+    a: `نحسب فرداً لكل ٣٠ ضيفاً تقريباً، ومباشراً للمناسبات التي تتجاوز ١٠٠ ضيف. أرسل عدد ضيوفك ونوع المكان في ${c.inName} على واتساب ${BRAND.phoneDisplay} ونرسل لك التشكيل المناسب مكتوباً.`,
+  },
+  {
+    q: `هل تصلون إلى كل أحياء ${c.inName}؟`,
+    a: `نعم — نخدم ${c.districts.slice(0, 6).join('، ')} وغيرها، إضافةً إلى ${c.venues.slice(0, 3).join('، ')}. الحيّ لا يغيّر جودة الخدمة، ونصل قبل الموعد لتجهيز كل شيء.`,
+  },
+  {
+    q: `كم سعر ${f.noun} في ${c.inName}؟`,
+    a: `السعر يعتمد على عدد الضيوف ومدة المناسبة ونوع التقديمات. نرسل لك عرض سعر مكتوباً قبل أي تأكيد — بلا بنود مخفية ولا زيادات يوم المناسبة.`,
+  },
+  {
+    q: `كيف أحجز ${f.noun} في ${c.inName}؟`,
+    a: `اتصل أو أرسل واتساب على ${BRAND.phoneDisplay}: التاريخ، الحيّ أو القاعة، وعدد الضيوف. يصلك العرض خلال ساعات، ونثبّت الموعد بعد موافقتك.`,
+  },
+  ...FAQ.slice(1, 3),
+]
+
 export const FamilyCity = ({ f, c }: { f: Family; c: City }) => {
   const rel = f.services.map(svc).filter(Boolean)
   const title = `${f.noun} ${c.name}`
+  /* real team photos per page type; other cities keep their own hero */
+  const hero = ({ qahwajiin: 'ev-team-1', 'sababin-qahwa': 'ev-booth-2', 'diyafa-munasabat': 'ev-vip-2' } as Record<string, string>)[f.prefix] ?? c.hero
   return (
     <Layout
       path={`/${f.prefix}-${c.slug}`}
-      hero={c.hero}
+      hero={hero}
       jsonld={graph(
-        serviceLd(title, familyCopy(f, c), `/${f.prefix}-${c.slug}`, c.hero, c.name),
+        serviceLd(title, familyCopy(f, c), `/${f.prefix}-${c.slug}`, hero, c.name),
+        faqLd(cityFaq(f, c)),
         crumbLd([
           { name: 'مناطق الخدمة', path: '/locations' },
           { name: c.name, path: `/locations/${c.slug}` },
@@ -894,7 +687,7 @@ export const FamilyCity = ({ f, c }: { f: Family; c: City }) => {
         kicker={f.kicker}
         title={title}
         desc={`${f.kicker} بزيٍّ موحّد في ${c.inName} — حضورٌ قبل الموعد وعرض سعرٍ مكتوب قبل التأكيد.`}
-        img={c.hero}
+        img={hero}
         crumbs={[
           { href: '/locations', label: 'مناطق الخدمة' },
           { href: `/locations/${c.slug}`, label: c.name },
@@ -935,7 +728,7 @@ export const FamilyCity = ({ f, c }: { f: Family; c: City }) => {
                   {String(i + 1).padStart(2, '0')}
                 </div>
                 <div>
-                  <h4>{b.t}</h4>
+                  <h3 class="h4">{b.t}</h3>
                   <p>{b.d}</p>
                 </div>
               </div>
@@ -959,38 +752,6 @@ export const FamilyCity = ({ f, c }: { f: Family; c: City }) => {
 
       <section class="sec sec-alt">
         <div class="wrap">
-          <SecHead kicker="الخدمات" title="ما يشمله الحجز" />
-          <div class="grid g-md3">
-            {rel.map((s) => (
-              <ServiceCard s={s} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section class="sec">
-        <div class="wrap">
-          <SecHead kicker="الحزم والأسعار" title={`حزم ${title}`} desc="السعر النهائي يعتمد على عدد الضيوف ومدة الخدمة." />
-          <PriceCards />
-        </div>
-      </section>
-
-      <section class="sec sec-alt">
-        <div class="wrap">
-          <SecHead kicker="من أعمالنا" title="لمحة من تنفيذنا" />
-          <WorksStrip shots={GALLERY.slice(2, 8)} cols={3} />
-        </div>
-      </section>
-
-      <section class="sec">
-        <div class="wrap wrap-nar">
-          <SecHead kicker="أسئلة متكررة" title={`أسئلة عن ${title}`} />
-          <Faq items={FAQ.slice(0, 6)} />
-        </div>
-      </section>
-
-      <section class="sec sec-alt">
-        <div class="wrap">
           <SecHead kicker="صفحات ذات صلة" title={`${f.noun} في مدنٍ أخرى`} />
           <div class="fam-links rv">
             {CITIES.filter((x) => x.slug !== c.slug).map((x) => (
@@ -1005,14 +766,21 @@ export const FamilyCity = ({ f, c }: { f: Family; c: City }) => {
                 {x.noun} {c.name}
               </a>
             ))}
+            {c.slug === 'jeddah' &&
+              JEDDAH_PAGES.map((p) => <a href={`/${p.slug}`}>{p.chip}</a>)}
           </div>
         </div>
       </section>
 
-      <CtaBand
-        kicker={title}
-        title={`احجز ${f.noun} في ${c.inName} الآن`}
-        desc={`أرسل التاريخ والحيّ وعدد الضيوف — يصلك عرض سعرٍ مكتوب لمناسبتك في ${c.inName} خلال ساعات.`}
+      <MiniSite
+        place={c.inName}
+        active={`/${f.prefix}-${c.slug}`}
+        faq={cityFaq(f, c)}
+        contact={{
+          title: `احجز ${f.noun} في ${c.inName} الآن`,
+          desc: `أرسل التاريخ والحيّ وعدد الضيوف — يصلك عرض سعرٍ مكتوب لمناسبتك في ${c.inName} خلال ساعات.`,
+          msg: `السلام عليكم، أرغب في حجز ${title}`,
+        }}
       />
     </Layout>
   )
@@ -1031,7 +799,7 @@ export const Menu = () => (
       hasMenuSection: MENU.map((m) => ({
         '@type': 'MenuSection',
         name: m.cat,
-        url: `https://royal-coffee.pages.dev/menu/${m.slug}`,
+        url: `${SITE}/menu/${m.slug}`,
       })),
     })}
     title="قائمة الضيافة — أكثر من ٧٠ صنفاً بصور حقيقية"
@@ -1064,32 +832,33 @@ export const Menu = () => (
       </div>
     </section>
 
-    {MENU.map((m) => (
-      <section class="sec sec-alt" id={m.slug}>
+    {/* each category: a swipe rail of its items (full list lives on /menu/:slug) */}
+    {MENU.map((m, i) => (
+      <section class={'sec sec-mini' + (i % 2 ? '' : ' sec-alt')} id={m.slug}>
         <div class="wrap">
           <SecHead kicker={`${m.items.length} صنفاً`} title={m.cat} desc={m.blurb} />
-          <div class="grid g2 g-md3 g-lg4">
+          <Rail label={m.cat} cls="rail-menu">
             {m.items.map((it) => (
-              <article class="dish rv">
-                {it.img && <Img n={it.img} alt={it.n} sizes="(min-width:1024px) 260px, 46vw" />}
-                <div class="dish-in">
-                  <h4>{it.n}</h4>
-                  <p>{it.d}</p>
-                </div>
+              <article class="rcard" role="listitem">
+                {it.img && <Img n={it.img} alt={it.n} sizes="(min-width:1024px) 280px, 60vw" />}
+                <span class="rcard-cap">
+                  <b>{it.n}</b>
+                  <small>{it.d}</small>
+                </span>
               </article>
             ))}
-          </div>
-          <div class="mid-cta rv">
-            <a class="btn btn-line" href={wa(`أرغب في تفاصيل: ${m.cat}`)} rel="noopener" target="_blank">
-              <Ico n="chat" />
-              اسأل عن {m.cat}
+          </Rail>
+          <div class="mid-cta">
+            <a class="btn btn-line" href={`/menu/${m.slug}`}>
+              كل أصناف {m.cat}
+              <Ico n="arrow" />
             </a>
           </div>
         </div>
       </section>
     ))}
 
-    <CtaBand kicker="قائمة مخصّصة" title="نبني قائمتك على مقاس مناسبتك" />
+    <MiniSite skip={['menu']} active="/menu" contact={{ title: 'نبني قائمتك على مقاس مناسبتك', msg: 'السلام عليكم، أرغب في قائمة ضيافة مخصّصة.' }} />
   </Layout>
 )
 
@@ -1124,7 +893,7 @@ export const MenuCategory = ({ m }: { m: MenuCat }) => (
             <article class="dish rv">
               {it.img && <Img n={it.img} alt={it.n} sizes="(min-width:1024px) 260px, 46vw" eager={i < 4} />}
               <div class="dish-in">
-                <h4>{it.n}</h4>
+                <h3 class="h4">{it.n}</h3>
                 <p>{it.d}</p>
               </div>
             </article>
@@ -1133,25 +902,7 @@ export const MenuCategory = ({ m }: { m: MenuCat }) => (
       </div>
     </section>
 
-    <section class="sec sec-alt">
-      <div class="wrap">
-        <SecHead kicker="أقسام أخرى" title="تصفّح باقي القائمة" />
-        <div class="grid g2 g-md3 g-lg4">
-          {MENU.filter((x) => x.slug !== m.slug).map((x) => (
-            <a class="mcat rv" href={`/menu/${x.slug}`}>
-              <Img n={x.hero} alt={x.cat} sizes="(min-width:1024px) 280px, 46vw" />
-              <div class="mcat-in">
-                <Icon n={x.icon} />
-                <h3>{x.cat}</h3>
-                <span>{x.items.length} صنفاً</span>
-              </div>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <CtaBand title={`أضف ${m.cat} إلى ضيافتك`} />
+    <MiniSite menuExclude={m.slug} active={`/menu/${m.slug}`} contact={{ title: `أضف ${m.cat} إلى ضيافتك`, msg: `السلام عليكم، أرغب في: ${m.cat}` }} />
   </Layout>
 )
 
@@ -1206,14 +957,7 @@ export const Gallery = () => (
       </div>
     </section>
 
-    <section class="sec sec-alt">
-      <div class="wrap">
-        <SecHead kicker="مناطق الخدمة" title="نصوّر أعمالنا في عشر مدن" />
-        <CityChips />
-      </div>
-    </section>
-
-    <CtaBand kicker="أعجبك ما رأيت؟" title="نفّذ الأجمل منه في مناسبتك" />
+    <MiniSite skip={['works']} active="/gallery" contact={{ title: 'نفّذ الأجمل منه في مناسبتك', msg: 'السلام عليكم، أعجبتني أعمالكم وأرغب في ضيافة مثلها.' }} />
   </Layout>
 )
 
@@ -1224,7 +968,7 @@ export const Prices = () => (
   <Layout
     path="/prices"
     hero="eq-dallah-2"
-    jsonld={graph(offerLd('/prices'), crumbLd([{ name: 'الأسعار', path: '/prices' }]))}
+    jsonld={graph(offerLd('/prices'), faqLd(FAQ), crumbLd([{ name: 'الأسعار', path: '/prices' }]))}
     title="أسعار القهوجيين والضيافة — دليل واضح بلا بنود مخفية"
     desc="ثلاث حزم ضيافة وما يحدّد السعر النهائي: عدد الضيوف، مدة الخدمة، المدينة، ونوع التقديمات. عرض سعر مكتوب قبل التأكيد."
   >
@@ -1260,7 +1004,7 @@ export const Prices = () => (
                 {String(i + 1).padStart(2, '0')}
               </div>
               <div>
-                <h4>{x.t}</h4>
+                <h3 class="h4">{x.t}</h3>
                 <p>{x.d}</p>
               </div>
             </div>
@@ -1269,14 +1013,12 @@ export const Prices = () => (
       </div>
     </section>
 
-    <section class="sec">
-      <div class="wrap wrap-nar">
-        <SecHead kicker="أسئلة عن الأسعار" title="ما يسأل عنه الجميع" />
-        <Faq items={FAQ} />
-      </div>
-    </section>
-
-    <CtaBand kicker="عرض سعر مجاني" title="أرسل تفاصيل مناسبتك ويصلك السعر" />
+    <MiniSite
+      skip={['prices']}
+      active="/prices"
+      faq={FAQ}
+      contact={{ title: 'أرسل تفاصيل مناسبتك ويصلك السعر', msg: 'السلام عليكم، أرغب في عرض سعر لمناسبة.' }}
+    />
   </Layout>
 )
 
@@ -1287,9 +1029,9 @@ export const About = () => (
   <Layout
     path="/about"
     hero="sawas-4"
-    jsonld={graph(orgLd(), crumbLd([{ name: 'من نحن', path: '/about' }]), reviewsLd())}
+    jsonld={graph(orgLd(), crumbLd([{ name: 'من نحن', path: '/about' }]))}
     title={`عن ${BRAND.name} — ضيافة عربية بمعايير ملكية`}
-    desc={`${BRAND.name} — من ${BRAND.since} في جدة، والآن في عشر مدن سعودية. أكثر من ٦٥٠٠ مناسبة و٦٠ صنف ضيافة.`}
+    desc={`${BRAND.name} — ضيافة عربية من جدة إلى عشر مدن سعودية: قهوجيين وصبابين وقهوجيات بزي موحّد وعدّة نحاسية. اتصال وواتساب ${BRAND.phoneLocal}.`}
   >
     <PageHead
       kicker="من نحن"
@@ -1310,7 +1052,7 @@ export const About = () => (
             <Rule />
             <p class="lead">
               انطلقنا من جدة سنة {BRAND.since} بفكرةٍ واحدة: أن الضيافة السعودية تستحقّ أن تُدار بمعيارٍ مكتوب لا
-              بالحسّ والاعتياد. اليوم بعد أكثر من ٦٥٠٠ مناسبة، صار لدينا كتيّب تشغيلٍ لكل نوع مناسبة، وفرقٌ
+              بالحسّ والاعتياد. اليوم صار لدينا كتيّب تشغيلٍ لكل نوع مناسبة، وفرقٌ
               مقيمة في عشر مدن، وعدّة نحاسية تُصقل وتُعقَّم قبل كل خروج.
             </p>
             <p>
@@ -1340,39 +1082,27 @@ export const About = () => (
       </div>
     </section>
 
-    <section class="sec sec-alt">
-      <div class="wrap">
-        <SecHead kicker="كيف نعمل" title="من الاتصال حتى الرفع" />
-        <Steps />
-      </div>
-    </section>
-
-    <section class="sec">
-      <div class="wrap">
-        <SecHead kicker="من أعمالنا" title="لمحة من مسيرتنا" />
-        <WorksStrip shots={GALLERY.slice(0, 9)} cols={3} />
-      </div>
-    </section>
-
-    <section class="sec sec-alt">
-      <div class="wrap">
-        <SecHead kicker="آراء العملاء" title="شهاداتٌ نعتزّ بها" />
-        <div class="grid g-md2 g-lg4">
-          {REVIEWS.map((r) => (
-            <blockquote class="rev rv">
-              <Stars r={r.r} />
-              <p>{r.t}</p>
-              <footer>
-                <b>{r.n}</b>
-                <span>{r.c}</span>
-              </footer>
-            </blockquote>
-          ))}
+    {SHOW.reviews && (
+      <section class="sec sec-alt">
+        <div class="wrap">
+          <SecHead kicker="آراء العملاء" title="شهاداتٌ نعتزّ بها" />
+          <div class="grid g-md2 g-lg4">
+            {REVIEWS.map((r) => (
+              <blockquote class="rev rv">
+                <Stars r={r.r} />
+                <p>{r.t}</p>
+                <footer>
+                  <b>{r.n}</b>
+                  <span>{r.c}</span>
+                </footer>
+              </blockquote>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    )}
 
-    <CtaBand />
+    <MiniSite skip={['why']} active="/about" />
   </Layout>
 )
 
@@ -1403,7 +1133,11 @@ export const FaqPage = () => (
       </div>
     </section>
 
-    <CtaBand kicker="لم تجد سؤالك؟" title="اسألنا مباشرة" desc="نجيب على واتساب خلال دقائق، وعلى الهاتف على مدار الساعة." />
+    <MiniSite
+      skip={['faq']}
+      active="/faq"
+      contact={{ title: 'لم تجد سؤالك؟ اسألنا مباشرة', desc: 'نجيب على واتساب خلال دقائق، وعلى الهاتف على مدار الساعة.', msg: 'السلام عليكم، عندي سؤال عن خدمات الضيافة.' }}
+    />
   </Layout>
 )
 
@@ -1416,28 +1150,28 @@ export const Contact = () => (
     hero="eq-stand"
     jsonld={graph(orgLd(), {
       '@type': 'ContactPage',
-      url: 'https://royal-coffee.pages.dev/contact',
+      url: `${SITE}/contact`,
       name: `تواصل مع ${BRAND.name}`,
     }, crumbLd([{ name: 'تواصل معنا', path: '/contact' }]))}
-    title="تواصل معنا واحجز ضيافتك — استقبال ٢٤ ساعة"
+    title="تواصل معنا واحجز ضيافتك — 0504968113"
     desc={`احجز ضيافة مناسبتك عبر واتساب أو الهاتف ${BRAND.phoneDisplay} أو نموذج الحجز. عرض سعر مكتوب خلال ساعات.`}
   >
     <PageHead
       kicker="تواصل معنا"
       title="احجز ضيافتك"
-      desc="اختر الطريقة الأسرع لك — واتساب، اتصال، أو النموذج أدناه. نردّ خلال دقائق."
+      desc={`رقم واحد للاتصال والواتساب: ${BRAND.phoneDisplay} — أو املأ النموذج أدناه. نردّ خلال دقائق.`}
       img="eq-stand"
       crumbs={[{ label: 'تواصل معنا' }]}
     />
 
     <section class="sec">
       <div class="wrap">
-        <div class="grid g-md3">
+        <div class={SHOW.email ? 'grid g-md3' : 'grid g-md2'}>
           <a class="ccard rv" href={BRAND.whatsapp} rel="noopener" target="_blank">
             <span class="ccard-ico" style="--hue:#25D366">
               <Icon n="chat" />
             </span>
-            <h3>واتساب</h3>
+            <h2>واتساب</h2>
             <p>أسرع طريقة — نردّ خلال دقائق</p>
             <b class="ltr">{BRAND.phoneDisplay}</b>
           </a>
@@ -1445,18 +1179,20 @@ export const Contact = () => (
             <span class="ccard-ico" style="--hue:#c5a059">
               <Icon n="phone" />
             </span>
-            <h3>اتصال مباشر</h3>
+            <h2>اتصال مباشر</h2>
             <p>استقبال الحجوزات ٢٤ ساعة</p>
             <b class="ltr">{BRAND.phoneDisplay}</b>
           </a>
-          <a class="ccard rv" href={`mailto:${BRAND.email}`}>
-            <span class="ccard-ico" style="--hue:#a67c37">
-              <Icon n="send" />
-            </span>
-            <h3>البريد الإلكتروني</h3>
-            <p>للعروض المؤسسية والفواتير</p>
-            <b class="ltr">{BRAND.email}</b>
-          </a>
+          {SHOW.email && (
+            <a class="ccard rv" href={`mailto:${BRAND.email}`}>
+              <span class="ccard-ico" style="--hue:#a67c37">
+                <Icon n="send" />
+              </span>
+              <h2>البريد الإلكتروني</h2>
+              <p>للعروض المؤسسية والفواتير</p>
+              <b class="ltr">{BRAND.email}</b>
+            </a>
+          )}
         </div>
       </div>
     </section>
@@ -1531,24 +1267,7 @@ export const Contact = () => (
       </div>
     </section>
 
-    <section class="sec">
-      <div class="wrap">
-        <SecHead kicker="حساباتنا" title="تابعنا على كل المنصات" desc="أو امسح الباركود في صفحة التواصل السريع." />
-        <div class="mid-cta rv">
-          <a class="btn btn-gold btn-lg" href="/social">
-            <Ico n="qr" />
-            صفحة التواصل والباركود
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec sec-alt">
-      <div class="wrap">
-        <SecHead kicker="مناطق الخدمة" title="أين نصل إليك" />
-        <CityChips />
-      </div>
-    </section>
+    <MiniSite skip={['contact', 'steps']} active="/contact" />
   </Layout>
 )
 
@@ -1566,9 +1285,9 @@ export const Social = () => {
       bare
       jsonld={graph(orgLd(), siteLd(), {
         '@type': 'ProfilePage',
-        url: 'https://royal-coffee.pages.dev/social',
+        url: `${SITE}/social`,
         name: `حسابات ${BRAND.name}`,
-        mainEntity: { '@id': 'https://royal-coffee.pages.dev/#business' },
+        mainEntity: { '@id': `${SITE}/#business` },
       })}
       title={`${BRAND.name} — كل حساباتنا وطرق التواصل`}
       desc="امسح ثم اضغط: واتساب، اتصال، إنستقرام، سناب، تيك توك، إكس، فيسبوك، يوتيوب، تيليجرام والمزيد — كل حساباتنا في صفحة واحدة."
@@ -1685,7 +1404,6 @@ export const Social = () => {
             <a href="/services">الخدمات</a>
             <a href="/menu">قائمة الضيافة</a>
             <a href="/gallery">معرض الأعمال</a>
-            <a href="/prices">الأسعار</a>
             <a href="/locations">مناطق الخدمة</a>
             <a href="/about">من نحن</a>
             <a href="/contact">نموذج الحجز</a>
@@ -1705,7 +1423,7 @@ export const Social = () => {
  * 404
  * ══════════════════════════════════════════════════════════ */
 export const NotFound = () => (
-  <Layout path="/404" hero="eq-teaset" title="الصفحة غير موجودة" desc="الصفحة التي تبحث عنها غير متاحة — تفضّل بالعودة إلى الرئيسية أو تصفّح خدماتنا.">
+  <Layout path="/404" noindex hero="eq-teaset" title="الصفحة غير موجودة" desc="الصفحة التي تبحث عنها غير متاحة — تفضّل بالعودة إلى الرئيسية أو تصفّح خدماتنا.">
     <section class="sec sec-404">
       <div class="wrap wrap-nar">
         <Crumbs items={[{ label: 'صفحة غير موجودة' }]} />
@@ -1722,10 +1440,131 @@ export const NotFound = () => (
           <a href="/menu">قائمة الضيافة</a>
           <a href="/gallery">معرض الأعمال</a>
           <a href="/locations">مناطق الخدمة</a>
-          <a href="/prices">الأسعار</a>
-          <a href="/social">تواصل سريع</a>
+          <a href="/contact">تواصل معنا</a>
         </div>
       </div>
     </section>
   </Layout>
 )
+
+/* ══════════════════════════════════════════════════════════
+ * JEDDAH KEYWORD PAGES — one search intent per URL
+ * ══════════════════════════════════════════════════════════ */
+export const JeddahLanding = ({ p }: { p: JeddahPage }) => {
+  const rel = p.services.map(svc).filter(Boolean)
+  const jed = CITIES[0]
+  return (
+    <Layout
+      path={`/${p.slug}`}
+      hero={p.hero}
+      title={p.title}
+      desc={p.desc}
+      jsonld={graph(
+        serviceLd(p.h1, p.body[0], `/${p.slug}`, p.hero, 'جدة'),
+        faqLd(p.faq),
+        crumbLd([
+          { name: 'مناطق الخدمة', path: '/locations' },
+          { name: 'جدة', path: '/locations/jeddah' },
+          { name: p.chip, path: `/${p.slug}` },
+        ]),
+      )}
+    >
+      <PageHead
+        kicker={p.kicker}
+        title={p.h1}
+        desc={p.body[0]}
+        img={p.hero}
+        crumbs={[
+          { href: '/locations', label: 'مناطق الخدمة' },
+          { href: '/locations/jeddah', label: 'جدة' },
+          { label: p.chip },
+        ]}
+      >
+        <QuickBar label="احجز عبر واتساب" />
+      </PageHead>
+
+      <section class="sec">
+        <div class="wrap">
+          <div class="split">
+            <div class="split-txt rv">
+              <Eyebrow>{p.chip}</Eyebrow>
+              <h2>كيف نخدم مناسبتك في جدة</h2>
+              <Rule />
+              {p.body.slice(1).map((t) => (
+                <p class="lead">{t}</p>
+              ))}
+              <Actions msg={p.msg} />
+              <Trust />
+            </div>
+            <div class="split-img rv">
+              <Img n={p.hero} alt={p.h1} sizes="(min-width:1024px) 560px, 92vw" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec sec-alt">
+        <div class="wrap">
+          <SecHead kicker="ما يميّزنا" title={`لماذا ${p.chip} معنا`} />
+          <div class="grid g-md2">
+            {p.bullets.map((b, i) => (
+              <div class="pillar rv">
+                <div class="medal num" aria-hidden="true">
+                  {String(i + 1).padStart(2, '0')}
+                </div>
+                <div>
+                  <h3 class="h4">{b.t}</h3>
+                  <p>{b.d}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="sec">
+        <div class="wrap">
+          <SecHead kicker="الخدمات المرتبطة" title="ما يشمله الحجز" />
+          <div class="tiles">
+            {rel.map((s) => (
+              <a class="tile rv" href={`/services/${s.slug}`}>
+                <span class="tile-media">
+                  <Img n={s.img} alt={s.title} sizes="(min-width:1024px) 280px, 46vw" />
+                </span>
+                <span class="tile-in">
+                  <b>{s.title}</b>
+                  <small>{s.short}</small>
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="sec sec-alt">
+        <div class="wrap">
+          <SecHead kicker="التغطية" title="أحياء جدة التي نخدمها" />
+          <div class="tags tags-wide rv">
+            {jed.districts.map((d) => (
+              <span>{d}</span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <MiniSite
+        skip={['services', 'cover']}
+        active={`/${p.slug}`}
+        faq={p.faq}
+        contact={{ title: `احجز ${p.chip} الآن`, msg: p.msg }}
+      />
+
+      <section class="sec sec-mini sec-alt">
+        <div class="wrap">
+          <SecHead kicker="صفحات جدة" title="خدماتنا الأخرى في جدة" />
+          <CoverLinks active={`/${p.slug}`} />
+        </div>
+      </section>
+    </Layout>
+  )
+}

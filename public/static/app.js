@@ -1,5 +1,5 @@
 /*!
- * القهوة الملكية — front-end behaviour
+ * قهوجيين — front-end behaviour
  * Vanilla, zero dependencies. Progressive enhancement only:
  * every page works fully with JS disabled.
  */
@@ -59,6 +59,7 @@
     };
 
     btn.addEventListener('click', function () { set(!open); });
+    var x = $('#sheetX'); if (x) x.addEventListener('click', function () { set(false); btn.focus(); });
     bd.addEventListener('click', function () { set(false); });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && open) { set(false); btn.focus(); }
@@ -67,10 +68,10 @@
       a.addEventListener('click', function () { set(false); });
     });
     var y0 = null;
-    sh.addEventListener('touchstart', function (e) { y0 = e.touches[0].clientY; }, { passive: true });
+    sh.addEventListener('touchstart', function (e) { y0 = e.touches[0].clientX; }, { passive: true });
     sh.addEventListener('touchmove', function (e) {
       if (y0 === null) return;
-      if (e.touches[0].clientY - y0 > 70) { set(false); y0 = null; }
+      if (e.touches[0].clientX - y0 > 70) { set(false); y0 = null; }
     }, { passive: true });
     sh.addEventListener('touchend', function () { y0 = null; }, { passive: true });
   })();
@@ -276,7 +277,7 @@
       if (val('note')) lines.push('• ملاحظات: ' + val('note'));
       lines.push('', 'أرجو تزويدي بعرض سعر مفصّل. شكراً لكم.');
 
-      var base = form.getAttribute('data-wa') || 'https://wa.me/966500000000';
+      var base = form.getAttribute('data-wa') || 'https://wa.me/966504968113';
       var sep = base.indexOf('?') === -1 ? '?' : '&';
       var href = base + sep + 'text=' + encodeURIComponent(lines.join('\n'));
 
@@ -425,4 +426,17 @@
     }, { threshold: 0.05 });
     io.observe(c);
   })();
+
+  /* ─── 12. Footer city mesh: open by default on desktop ─── */
+  (function mesh() {
+    var d = $('.ftr-mesh');
+    if (d && window.matchMedia('(min-width:1024px)').matches) d.open = true;
+  })();
+})();
+
+/* bottom bar: hidden while the first screen (with its own buttons) is visible */
+(function () {
+  var bar = document.querySelector('.bnav'), hero = document.querySelector('.hero-art .hero-cta');
+  if (!bar || !hero || !('IntersectionObserver' in window)) return;
+  new IntersectionObserver(function (e) { bar.classList.toggle('hide', e[0].isIntersecting); }, { threshold: 0.2 }).observe(hero);
 })();
