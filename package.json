@@ -12,14 +12,18 @@
     "clean-port": "fuser -k 3000/tcp 2>/dev/null || true",
     "test": "curl -sS -o /dev/null -w \"%{http_code}\n\" http://localhost:3000",
     "build:vercel": "BUILD_TARGET=vercel vite build",
-    "deploy:vercel": "BUILD_TARGET=vercel vite build && vercel deploy --prebuilt --prod"
+    "deploy:vercel": "BUILD_TARGET=vercel vite build && vercel deploy --prebuilt --prod",
+    "build:node": "esbuild src/server.node.ts --bundle --platform=node --target=node22 --format=esm --minify --jsx=automatic --jsx-import-source=hono/jsx --outfile=dist-node/server.mjs",
+    "start": "node dist-node/server.mjs"
   },
   "dependencies": {
     "hono": "^4.13.3"
   },
   "devDependencies": {
+    "@hono/node-server": "^1.19.17",
     "@hono/vite-build": "^1.11.1",
     "@hono/vite-dev-server": "^0.26.1",
+    "esbuild": "^0.28.2",
     "vite": "^8.1.4",
     "wrangler": "^4.110.0"
   }

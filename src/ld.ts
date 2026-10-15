@@ -2,7 +2,7 @@
  * Structured data (JSON-LD) builders.
  * One place for every schema.org node so pages stay declarative.
  */
-import { BRAND, SOCIAL, SERVICES, PRICING, REVIEWS } from './data'
+import { BRAND, SOCIAL, SERVICES, PRICING, REVIEWS, SHOW } from './data'
 import { CITIES } from './cities'
 import { SITE } from './layout'
 import { imgSrc } from './ui'
@@ -19,7 +19,7 @@ export const orgLd = () => ({
   description: `${BRAND.tagline} — قهوجيين وصبابين وضيافة مناسبات في ${CITIES.length} مدن سعودية.`,
   url: SITE,
   telephone: `+${BRAND.phoneRaw}`,
-  email: BRAND.email,
+  ...(SHOW.email ? { email: BRAND.email } : {}),
   image: abs(imgSrc('hero-station')),
   logo: abs('/static/img/logo-512.webp'),
   priceRange: '$$',
@@ -33,18 +33,19 @@ export const orgLd = () => ({
   },
   geo: { '@type': 'GeoCoordinates', latitude: '21.4858', longitude: '39.1925' },
   areaServed: CITIES.map((c) => ({ '@type': 'City', name: c.name })),
-  sameAs: SOCIAL.filter((s) => s.kind === 'social').map((s) => s.href),
+  ...(SHOW.social ? { sameAs: SOCIAL.filter((s) => s.kind === 'social').map((s) => s.href) } : {}),
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: `+${BRAND.phoneRaw}`,
+    contactType: 'reservations',
+    areaServed: 'SA',
+    availableLanguage: ['ar'],
+  },
   openingHoursSpecification: {
     '@type': 'OpeningHoursSpecification',
     dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
     opens: '00:00',
     closes: '23:59',
-  },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.9',
-    reviewCount: String(REVIEWS.length * 47),
-    bestRating: '5',
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
@@ -105,12 +106,6 @@ export const serviceLd = (
   areaServed: area
     ? { '@type': 'City', name: area }
     : CITIES.map((c) => ({ '@type': 'City', name: c.name })),
-  offers: {
-    '@type': 'AggregateOffer',
-    priceCurrency: 'SAR',
-    availability: 'https://schema.org/InStock',
-    offerCount: PRICING.length,
-  },
 })
 
 export const eventLd = (name: string, desc: string, path: string, img: string) => ({

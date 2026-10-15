@@ -1,6 +1,6 @@
 import { Hono } from 'hono'
 import { html } from 'hono/html'
-import { SERVICES, OCCASIONS, MENU } from './data'
+import { SERVICES, OCCASIONS, MENU, SHOW } from './data'
 import { FAMILIES, cityBySlug, localPaths } from './cities'
 import { SITE } from './layout'
 import {
@@ -15,15 +15,42 @@ import {
   Menu,
   MenuCategory,
   Gallery,
-  Prices,
   About,
   FaqPage,
   Contact,
-  Social,
   NotFound,
-} from './views'
+  JeddahLanding,
+} from './pages'
+import { Social } from './views'
+import { JEDDAH_PAGES, jeddahBySlug } from './jeddah'
 
 const app = new Hono()
+
+/* Security headers for every Worker response (Cloudflare `_headers`
+ * does not apply to Worker/Functions output) + trailing-slash 301. */
+app.use('*', async (c, next) => {
+  const { pathname, search, hostname } = new URL(c.req.url)
+  // Canonical host: www → apex (single indexable origin)
+  if (hostname === 'www.qahwajeen.com') {
+    return c.redirect(SITE + pathname.replace(/(.)\/+$/, '$1') + search, 301)
+  }
+  if (pathname.length > 1 && pathname.endsWith('/')) {
+    return c.redirect(pathname.replace(/\/+$/, '') + search, 301)
+  }
+  await next()
+  // Platform preview hosts must never compete with qahwajeen.com in Google
+  if (/\.(vercel\.app|pages\.dev)$/.test(hostname)) {
+    c.header('X-Robots-Tag', 'noindex, nofollow')
+  }
+  c.header('X-Content-Type-Options', 'nosniff')
+  c.header('Referrer-Policy', 'strict-origin-when-cross-origin')
+  c.header('X-Frame-Options', 'SAMEORIGIN')
+  c.header('Permissions-Policy', 'geolocation=(), microphone=(), camera=()')
+  c.header('Strict-Transport-Security', 'max-age=31536000; includeSubDomains')
+  if ((c.res.headers.get('Content-Type') || '').includes('text/html')) {
+    c.header('Cache-Control', 'public, max-age=0, must-revalidate')
+  }
+})
 
 /** hono/jsx does not emit a doctype — prepend it here. */
 const page = (c: any, node: any, status = 200) =>
@@ -59,11 +86,11 @@ app.get('/menu/:slug', (c) => {
 })
 
 app.get('/gallery', (c) => page(c, <Gallery />))
-app.get('/prices', (c) => page(c, <Prices />))
+app.get('/prices', (c) => c.redirect('/contact', 301))
 app.get('/about', (c) => page(c, <About />))
 app.get('/faq', (c) => page(c, <FaqPage />))
 app.get('/contact', (c) => page(c, <Contact />))
-app.get('/social', (c) => page(c, <Social />))
+app.get('/social', (c) => (SHOW.social ? page(c, <Social />) : c.redirect('/contact', 302)))
 
 /* ══════════════════════════════════════════════════════════
  * LOCAL SEO — 41 pages
@@ -75,6 +102,11 @@ app.get('/locations/:slug', (c) => {
   if (!city) return page(c, <NotFound />, 404)
   return page(c, <CityHub c={city} />)
 })
+
+/** Jeddah keyword pages — qahwajiat-jeddah, coffee-break-jeddah … */
+for (const jp of JEDDAH_PAGES) {
+  app.get(`/${jp.slug}`, (c) => page(c, <JeddahLanding p={jeddahBySlug(jp.slug)!} />))
+}
 
 /** qahwajiin-jeddah · sababin-qahwa-riyadh · diyafa-munasabat-makkah … */
 app.get('/:combo{(qahwajiin|sababin-qahwa|diyafa-munasabat)-[a-z]+}', (c) => {
@@ -110,15 +142,18 @@ app.get('/sitemap.xml', (c) => {
   add('/menu', '0.8', 'monthly')
   for (const m of MENU) add(`/menu/${m.slug}`, '0.7')
   add('/gallery', '0.7', 'weekly')
-  add('/prices', '0.9', 'monthly')
   add('/about', '0.6', 'yearly')
   add('/faq', '0.6', 'monthly')
   add('/contact', '0.8', 'yearly')
-  add('/social', '0.7', 'yearly')
+  if (SHOW.social) add('/social', '0.7', 'yearly')
+
+  // Jeddah keyword pages — home market, top priority
+  for (const jp of JEDDAH_PAGES) add(`/${jp.slug}`, '0.9')
 
   // local SEO spine — city hubs get higher priority than family pages
   for (const p of localPaths()) {
     if (p === '/locations') add(p, '0.9', 'monthly')
+    else if (p.endsWith('-jeddah') || p === '/locations/jeddah') add(p, '1.0', 'weekly')
     else if (p.startsWith('/locations/')) {
       const city = cityBySlug(p.split('/')[2])
       add(p, city && city.priority === 1 ? '0.9' : '0.8')
