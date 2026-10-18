@@ -5,7 +5,7 @@ import { hasImg } from './imgmap'
 import { BRAND, SHOW, SOCIAL_LINKS, TRACKING } from './data'
 import { raw } from './icons'
 
-const V = '19' // asset cache-bust — bump on every CSS/JS change
+const V = '26' // asset cache-bust — bump on every CSS/JS change
 export const SITE = 'https://qahwajeen.com'
 
 /**
@@ -98,8 +98,9 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'hero-real'
         <link rel="icon" href={`/static/img/favicon.png?v=${V}`} type="image/png" />
         <link rel="apple-touch-icon" href={`/static/img/apple-touch-icon.png?v=${V}`} />
 
-        {/* Body font only — the display font (Amiri) swaps in without blocking LCP */}
+        {/* Body + display fonts (Amiri renders the brand and every H1 — the LCP text) */}
         <link rel="preload" as="font" type="font/woff2" href="/static/fonts/tajawal-400-arabic.woff2" crossorigin="" />
+        <link rel="preload" as="font" type="font/woff2" href="/static/fonts/amiri-700-arabic.woff2" crossorigin="" />
 
         {/* LCP preload — per-page hero, split by the same media query as <picture> */}
         {bare ? null : hasImg(`${hero}-tall`) ? (
@@ -126,7 +127,7 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'hero-real'
         <header class="hdr hdr-top" id="hdr">
           <div class="wrap hdr-shell">
             <a href="/" class="brand" aria-label={`${BRAND.name} — الصفحة الرئيسية`}>
-              <img src="/static/img/logo-192.webp" alt="" width="44" height="44" />
+              <img src="/static/img/logo-96.webp" alt="" width="44" height="44" />
               <span class="brand-txt" aria-hidden="true">
                 <b>{BRAND.name}</b>
                 <span>{BRAND.latin}</span>
@@ -158,7 +159,7 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'hero-real'
         <footer class="ftr">
           <div class="wrap">
             <div class="ftr-mini">
-              <img src="/static/img/logo-192.webp" alt="" width="56" height="56" loading="lazy" />
+              <img src="/static/img/logo-96.webp" alt="" width="56" height="56" loading="lazy" />
               <b>{BRAND.name}</b>
               <small>{BRAND.latin} · ضيافة المناسبات في جدة</small>
               <a class="ftr-phone ltr" href={`tel:${BRAND.phoneLocal}`} data-track="call" data-location="footer">

@@ -158,7 +158,7 @@ export const ServiceDetail = ({ s }: { s: Service }) => {
       {s.gal.length > 1 && (
         <FocusGrid
           k="من أعمالنا الميدانية"
-          t={`لقطات حقيقية من ${s.title}`}
+          t={`لقطات من ${s.title}`}
           items={s.gal.map((g) => ({ img: g, t: s.title, d: s.short }))}
         />
       )}

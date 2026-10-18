@@ -327,7 +327,7 @@ export const OCC_URL: Record<string, string> = {
 export const svcUrl = (slug: string) => SVC_URL[slug] ?? `/services/${slug}`
 export const occUrl = (slug: string) => OCC_URL[slug] ?? `/occasions/${slug}`
 
-/* ── Menu — every item has a real photo ───────────────────── */
+/* ── Menu (photos illustrate the dish types we serve) ───────── */
 export type MenuItem = { n: string; d: string; img?: string }
 export type MenuCat = { slug: string; cat: string; icon: string; hero: string; blurb: string; items: MenuItem[] }
 

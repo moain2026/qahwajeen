@@ -21,7 +21,7 @@ import {
   occUrl,
   type Service,
 } from './data'
-import { Img, HeroPic, Faq } from './ui'
+import { Img, HeroPic, Faq, imgSrc, imgSet } from './ui'
 import { Ico, wa } from './blocks'
 
 /** first-screen copy is ONE short line — cut at a clause/word boundary */
@@ -72,11 +72,12 @@ export const Hero = ({ h }: { h: HeroSpec }) => {
           )}
         </div>
         {/* Animated Crossfading Background Frames (Cinematic Ken-Burns) */}
+        {/* ambient slides: fetched by app.js only after load (data-src) */}
         <div class="hero-slide s2" aria-hidden="true">
-          <Img n="ev-vip-2" alt="" sizes="100vw" />
+          <img data-src={imgSrc('ev-vip-2')} data-srcset={imgSet('ev-vip-2')} sizes="100vw" alt="" width="1600" height="900" decoding="async" />
         </div>
         <div class="hero-slide s3" aria-hidden="true">
-          <Img n="ev-booth-5" alt="" sizes="100vw" />
+          <img data-src={imgSrc('ev-booth-5')} data-srcset={imgSet('ev-booth-5')} sizes="100vw" alt="" width="1600" height="900" decoding="async" />
         </div>
       </div>
 
@@ -300,7 +301,7 @@ export const RoyalConcierge = ({ place, h1 }: { place: string; h1?: boolean }) =
 }
 
 /* Compact 2-column Service Card with inline <details> drawer */
-export const CompactServiceCard = ({ s, place }: { s: Service; place: string }) => (
+export const CompactServiceCard = ({ s, place, brief }: { s: Service; place: string; brief?: boolean }) => (
   <article class="ksvc-card rv" id={`s-${s.slug}`}>
     <div class="ksvc-media">
       <Img
@@ -313,6 +314,12 @@ export const CompactServiceCard = ({ s, place }: { s: Service; place: string }) 
     <div class="ksvc-body">
       <h3>{s.title}</h3>
       <p class="ksvc-short">{s.short}</p>
+      {brief ? (
+        <a class="lnk" href={svcUrl(s.slug)}>
+          تفاصيل الخدمة
+          <Ico n="arrow" />
+        </a>
+      ) : (
       <details class="ksvc-more">
         <summary>
           <span>التفاصيل ومشتملات الخدمة</span>
@@ -352,6 +359,7 @@ export const CompactServiceCard = ({ s, place }: { s: Service; place: string }) 
           </div>
         </div>
       </details>
+      )}
     </div>
   </article>
 )
@@ -492,95 +500,72 @@ export const MenuSec = ({ showAllCategories = false }: { showAllCategories?: boo
   <section class="sx sx-alt" id="menu">
     <div class="wrap">
       <Head
-        k="التقديمات والمعدات"
-        t="ما الذي يصل إلى ضيوفك؟"
-        sub="اختر القسم لتصفّح الأصناف — والقائمة تُخصَّص بحسب مناسبتك."
+        k="التقديمات"
+        t={showAllCategories ? 'أقسام القائمة' : 'ما الذي يصل إلى ضيوفك؟'}
+        sub="تختار ما يناسب مناسبتك، ونستبعد أي صنف أو نضيف بدائل عند الطلب."
       />
       {!showAllCategories ? (
         <>
-          <div class="tabs rv" role="tablist" aria-label="أقسام التقديمات">
-            {MENU.map((m, i) => (
-              <button
-                type="button"
-                role="tab"
-                class="tab"
-                id={`t-${m.slug}`}
-                aria-controls={`p-${m.slug}`}
-                aria-selected={i === 0 ? 'true' : 'false'}
-              >
-                {m.cat}
-              </button>
+          {/* Home: a short, calm preview — 8 signature items + one clear path to the full menu */}
+          <div class="dishx">
+            {MENU.flatMap((m) => m.items.filter((it) => it.img).slice(0, 1).map((it) => ({ it, m }))).slice(0, 8).map(({ it, m }) => (
+              <a class="dishx-card" href={`/menu/${m.slug}`}>
+                <Img n={it.img!} alt={`${it.n} — ${m.cat} من ${BRAND.name}`} sizes="(min-width:1024px) 220px, 44vw" />
+                <span class="dishx-cap">
+                  <b>{m.cat}</b>
+                  <small>{it.n}</small>
+                </span>
+              </a>
             ))}
           </div>
-          {MENU.map((m, i) => (
-            <div
-              class="tabp"
-              role="tabpanel"
-              id={`p-${m.slug}`}
-              aria-labelledby={`t-${m.slug}`}
-              hidden={i !== 0}
-            >
-              <p class="tabp-blurb">{m.blurb}</p>
-              <div class="dishx">
-                {m.items
-                  .filter((it) => it.img)
-                  .map((it) => (
-                    <figure class="dishx-card">
-                      <Img
-                        n={it.img!}
-                        alt={`${it.n} — ${m.cat} من ${BRAND.name}`}
-                        sizes="(min-width:1024px) 220px, 44vw"
-                      />
-                      <figcaption>
-                        <b>{it.n}</b>
-                        <small>{it.d}</small>
-                      </figcaption>
-                    </figure>
-                  ))}
-              </div>
-            </div>
-          ))}
+          <div class="sx-more">
+            <a class="btn btn-line" href="/menu">
+              القائمة الكاملة
+              <Ico n="arrow" />
+            </a>
+          </div>
         </>
       ) : (
-        /* On dedicated /menu page: show every category organized cleanly one after another, just like keifaldiafa.com/offerings */
-        <div class="menu-full-stack">
-          {MENU.map((m) => (
-            <div class="ksvc-group" id={m.slug}>
-              <h3 class="ksvc-gtitle">
-                <span>{m.cat}</span>
-                <a class="lnk" href={`/menu/${m.slug}`}>
-                  صفحة القسم ({m.items.length})
-                  <Ico n="arrow" />
+        /* /menu: one calm card per category — cover photo + item list + link to the full category page */
+        <>
+          <nav class="mcat-nav" aria-label="أقسام القائمة">
+            {MENU.map((m) => (
+              <a class="mcat-chip" href={`#${m.slug}`}>{m.cat}</a>
+            ))}
+          </nav>
+          <div class="mcat-grid">
+            {MENU.map((m) => (
+              <article class="mcat rv" id={m.slug}>
+                <a class="mcat-media" href={`/menu/${m.slug}`} tabindex={-1} aria-hidden="true">
+                  <Img n={m.hero} alt="" sizes="(min-width:1024px) 380px, 92vw" />
                 </a>
-              </h3>
-              <p class="tabp-blurb" style="text-align:start;margin:0 0 14px">{m.blurb}</p>
-              <div class="dishx">
-                {m.items
-                  .filter((it) => it.img)
-                  .map((it) => (
-                    <figure class="dishx-card rv">
-                      <Img
-                        n={it.img!}
-                        alt={`${it.n} — ${m.cat} من ${BRAND.name}`}
-                        sizes="(min-width:1024px) 220px, 44vw"
-                      />
-                      <figcaption>
+                <div class="mcat-body">
+                  <h3>{m.cat}</h3>
+                  <p class="mcat-blurb">{m.blurb}</p>
+                  <ul class="mcat-list">
+                    {m.items.map((it) => (
+                      <li>
                         <b>{it.n}</b>
                         <small>{it.d}</small>
-                      </figcaption>
-                    </figure>
-                  ))}
-              </div>
-            </div>
-          ))}
-        </div>
+                      </li>
+                    ))}
+                  </ul>
+                  <a class="lnk" href={`/menu/${m.slug}`}>
+                    صور {m.cat}
+                    <Ico n="arrow" />
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </>
       )}
     </div>
   </section>
 )
 
 /* ═══ 6. ALL SERVICES SECTION ═══ */
-export const ServicesSec = ({ place = 'جدة', only, k = 'الخدمات', t = 'كل ما تحتاجه مناسبتك — من طاقم واحد' }: { place?: string; only?: readonly string[]; k?: string; t?: string }) => {
+export const ServicesSec = ({ place = 'جدة', only, brief, k = 'الخدمات', t = 'كل ما تحتاجه مناسبتك — من طاقم واحد' }: { place?: string; only?: readonly string[]; brief?: boolean; k?: string; t?: string }) => {
   if (only) {
     const list = SERVICES.filter((s) => only.includes(s.slug))
     return (
@@ -589,7 +574,7 @@ export const ServicesSec = ({ place = 'جدة', only, k = 'الخدمات', t = 
           <Head k={k} t={t} />
           <div class="ksvc-grid">
             {list.map((s) => (
-              <CompactServiceCard s={s} place={place} />
+              <CompactServiceCard s={s} place={place} brief={brief} />
             ))}
           </div>
         </div>
@@ -606,7 +591,7 @@ export const ServicesSec = ({ place = 'جدة', only, k = 'الخدمات', t = 
         <Head
           k={k}
           t={t}
-          sub="اضغط «التفاصيل» في أي بطاقة لعرض مشتملات الخدمة."
+          sub={brief ? undefined : "اضغط «التفاصيل» في أي بطاقة لعرض مشتملات الخدمة."}
         />
 
         <div class="ksvc-group" id="g-male">
@@ -615,7 +600,7 @@ export const ServicesSec = ({ place = 'جدة', only, k = 'الخدمات', t = 
           </h3>
           <div class="ksvc-grid">
             {menSvcs.map((s) => (
-              <CompactServiceCard s={s} place={place} />
+              <CompactServiceCard s={s} place={place} brief={brief} />
             ))}
           </div>
         </div>
@@ -626,7 +611,7 @@ export const ServicesSec = ({ place = 'جدة', only, k = 'الخدمات', t = 
           </h3>
           <div class="ksvc-grid">
             {womenSvcs.map((s) => (
-              <CompactServiceCard s={s} place={place} />
+              <CompactServiceCard s={s} place={place} brief={brief} />
             ))}
           </div>
         </div>
@@ -637,7 +622,7 @@ export const ServicesSec = ({ place = 'جدة', only, k = 'الخدمات', t = 
           </h3>
           <div class="ksvc-grid">
             {royalSvcs.map((s) => (
-              <CompactServiceCard s={s} place={place} />
+              <CompactServiceCard s={s} place={place} brief={brief} />
             ))}
           </div>
         </div>
@@ -847,7 +832,7 @@ export const OnePage = ({
     <WorksSec />
     <CrewSec />
     <MenuSec />
-    <ServicesSec place={place} />
+    <ServicesSec place={place} brief />
     <RolesSec />
     <ArrangementsSec />
     <OccasionsSec place={place} />

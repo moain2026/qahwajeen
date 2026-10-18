@@ -9,6 +9,15 @@
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var IO = 'IntersectionObserver' in window;
+  var go = function () {
+    var run = function () {
+      $$('img[data-src]').forEach(function (i) { i.srcset = i.getAttribute('data-srcset') || ''; i.src = i.getAttribute('data-src'); });
+      document.documentElement.classList.add('go');
+    };
+    // ambient motion is decoration: start it only once the page is idle and the user has had time to read
+    setTimeout(function () { (window.requestIdleCallback || setTimeout)(run, { timeout: 2000 }); }, 4000);
+  };
+  if (document.readyState === 'complete') go(); else window.addEventListener('load', go);
 
   /* ── toast ── */
   var toast = (function () {
@@ -120,32 +129,6 @@
     var bar = $('.bnav'), hero = $('.hero-cta');
     if (!bar || !hero || !IO) return;
     new IntersectionObserver(function (e) { bar.classList.toggle('hide', e[0].isIntersecting); }, { threshold: 0.2 }).observe(hero);
-  })();
-
-  /* ── home menu tabs (roving tabindex, RTL arrows) ── */
-  (function () {
-    var tabs = $$('.tab');
-    if (!tabs.length) return;
-    var show = function (t) {
-      tabs.forEach(function (x) {
-        var on = x === t;
-        x.setAttribute('aria-selected', on ? 'true' : 'false');
-        x.tabIndex = on ? 0 : -1;
-        var p = document.getElementById(x.getAttribute('aria-controls'));
-        if (p) p.hidden = !on;
-      });
-    };
-    tabs.forEach(function (t, i) {
-      t.tabIndex = i === 0 ? 0 : -1;
-      t.addEventListener('click', function () { show(t); });
-      t.addEventListener('keydown', function (e) {
-        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-        e.preventDefault();
-        var j = tabs.indexOf(t);
-        var n = tabs[(j + (e.key === 'ArrowLeft' ? 1 : -1) + tabs.length) % tabs.length];
-        n.focus(); show(n);
-      });
-    });
   })();
 
   /* ── gallery: "show all" + category filter ── */
