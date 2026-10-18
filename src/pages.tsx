@@ -22,6 +22,7 @@ import {
 import { type JeddahPage } from './jeddah'
 import { graph, orgLd, siteLd, faqLd, crumbLd, serviceLd, eventLd, galleryLd } from './ld'
 import { Ico } from './blocks'
+import { Img } from './ui'
 import {
   OnePage,
   Hero,
@@ -197,7 +198,8 @@ export const Occasions = () => {
           />
           <div class="arr-grid">
             {OCCASIONS.map((o, i) => (
-              <article class="arr-card rv" style={`--i:${i}`}>
+              <article class="arr-card arr-ph rv" style={`--i:${i}`}>
+                <Img n={o.img} alt={`${o.h1} — ${BRAND.name} في جدة`} sizes="(min-width:1024px) 380px, 92vw" cls="arr-img" />
                 <h3>{o.title}</h3>
                 <p class="arr-sub">{o.desc}</p>
                 <ul class="arr-pts">

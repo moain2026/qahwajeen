@@ -80,7 +80,7 @@ export const Hero = ({ h }: { h: HeroSpec }) => {
           <img data-src={imgSrc('ev-vip-2')} data-srcset={imgSet('ev-vip-2')} sizes="100vw" alt="" width="1600" height="900" decoding="async" />
         </div>
         <div class="hero-slide s3" aria-hidden="true">
-          <img data-src={imgSrc('ev-booth-5')} data-srcset={imgSet('ev-booth-5')} sizes="100vw" alt="" width="1600" height="900" decoding="async" />
+          <img data-src={imgSrc('ev-booth-7')} data-srcset={imgSet('ev-booth-7')} sizes="100vw" alt="" width="1600" height="900" decoding="async" />
         </div>
       </div>
 

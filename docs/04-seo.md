@@ -1,210 +1,190 @@
 <div dir="rtl">
 
-# 04 — استراتيجية السيو
+# 04 — السيو والفهرسة
 
-> الطلب الأصلي من العميل: **«موقع يكنّس السوق»** وأن تكون **كل صفحات المدن
-> صفحات مستقلّة قابلة للفهرسة**. هذا الملف يشرح كيف نُفِّذ ذلك بالتفصيل،
-> وأين تكمن المخاطر.
+> المرجع الوحيد لكل ما يخصّ ظهور qahwajeen.com في محركات البحث.
+> كل رقم هنا ناتج عن تشغيل `qa/scripts/index_audit.py` و`qa/scripts/seo.py`
+> على الموقع المنشور — لا تقديرات.
 
-**نتيجة التدقيق الآلي الأخيرة** (`qa/scripts/seo.py`):
-**73 رابطًا · 0 عنوان مكرّر · 0 وصف مكرّر · 0 مشكلة · أطول عنوان 70 حرفًا.**
+**آخر قياس (2026-10-18، الموقع الحي):**
+
+```
+index_audit.py → 23 رابطًا · 23 تُرجع 200 · 64 صورة فريدة في خريطة الموقع
+                 (كل صورة ظاهرة لها نص بديل = مُدرَجة) · 0 رابط داخلي مُحوَّل أو مكسور
+                 · 0 صفحة يتيمة · 0 رابط داخل JSON-LD لا يُرجع 200 · issues: 0
+seo.py         → 23 رابطًا · 0 عنوان مكرّر · 0 وصف مكرّر · أطول عنوان 60 · issues: 0
+```
 
 ---
 
-## 1. العمود الفقري: 30 صفحة هبوط محلّية مستقلّة
+## 1. المبدأ: رابط واحد لكل نيّة بحث، جدة فقط
 
-```
-3 عوائل كلمات مفتاحية  ×  10 مدن  =  30 صفحة هبوط
-+ 10 مراكز مدن  +  /locations
-```
+لا صفحات مدن متشابهة، ولا نسخ من نفس الصفحة بكلمة مختلفة (doorway pages).
+كل صفحة تجيب عن **نيّة بحث واحدة** بنص مكتوب لها.
 
-| العائلة | البادئة | مثال الرابط | H1 |
-|---|---|---|---|
-| قهوجيين | `qahwajiin` | `/qahwajiin-jeddah` | قهوجيين جدة |
-| صبابين قهوة | `sababin-qahwa` | `/sababin-qahwa-riyadh` | صبابين قهوة الرياض |
-| ضيافة مناسبات | `diyafa-munasabat` | `/diyafa-munasabat-makkah` | ضيافة مناسبات مكة |
-
-### 🔴 لماذا مسار في الجذر ولا `?city=` ولا مجلّد فرعي؟
-
-- **معاملات الاستعلام** (`?city=jeddah`) تُعالج كصفحة واحدة بمتغيّرات، وقد
-  تُدمَج أو تُتجاهَل في الفهرس.
-- **مسار الجذر** (`/qahwajiin-jeddah`) يمنح الكلمة المفتاحية أعلى موضع
-  ممكن في الرابط، وهذا هو النمط الذي تستخدمه كل المواقع المنافسة الناجحة
-  في هذا السوق (موثَّق في `research/competitor-analysis/ANALYSIS.md`).
-
-### 🔴 كيف نجونا من فخّ *doorway pages*؟
-
-جوجل تحذف الصفحات المولّدة قالبيًا. الحصانة الوحيدة هي **نص فريد فعلي**:
-
-لكل مدينة **أربعة** حقول نصية طويلة مكتوبة يدويًا:
-`intro` · `qahwajiin` · `sababin` · `munasabat`
-تذكر أحياء المدينة الحقيقية، قاعاتها، ومواسمها الخاصة.
-
-> **قاعدة صارمة:** إضافة مدينة بنسخ نص مدينة أخرى = تعريض **الثلاثين
-> صفحة** كلها للخطر، لا الصفحة الجديدة فقط.
-
----
-
-## 2. العناوين: `fitTitle()` وميزانية الـ 70 حرفًا
-
-الغلاف يُلحق ` | القهوة الملكية` بكل عنوان. لذلك الميزانية الفعلية أقل:
-
-```ts
-const fitTitle = (base: string, ...suffixes: string[]) => {
-  /* Layout appends " | <brand>" — reserve that from the 70-char budget. */
-  const budget = 70 - ` | ${BRAND.name}`.length
-  for (const s of suffixes) {
-    const t = s ? `${base} — ${s}` : base
-    if (t.length <= budget) return t
-  }
-  return base
-}
-```
-
-**كيف تُستخدم:** تُمرَّر اللواحق **من الأطول إلى الأقصر**، فتختار الدالة
-أطول لاحقة تناسب المساحة:
-
-```ts
-title={fitTitle(title,
-  `${f.kicker} بأسعار واضحة`,   // المحاولة الأولى: الأغنى
-  f.kicker,                      // ثم أقصر
-  'أسعار واضحة')}                // ثم الحد الأدنى
-```
-
-هذا هو ما حلّ مشكلة قطع عناوين صفحات `FamilyCity` — وهي أكثر العناوين
-طولًا لأنها تجمع العائلة + المدينة + اللاحقة + العلامة.
-
----
-
-## 3. الوسوم في `<head>` (من `src/layout.tsx`)
-
-```html
-<html lang="ar" dir="rtl">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#080706">
-<title>{العنوان} | القهوة الملكية</title>
-<meta name="description" content="…">
-<link rel="canonical" href="{SITE}{path}">
-<meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="author" content="القهوة الملكية">
-
-<!-- إشارات جغرافية -->
-<meta name="geo.region" content="SA">
-<meta name="geo.placename" content="Jeddah">
-
-<!-- Open Graph + Twitter -->
-og:type · og:locale=ar_SA · og:site_name · og:title · og:description
-og:url · og:image · og:image:alt · twitter:card=summary_large_image …
-```
-
-نقاط مهمّة:
-- `lang="ar" dir="rtl"` على `<html>` — ليس على `<body>`.
-- `max-image-preview:large` يسمح لجوجل بعرض صورة كبيرة في نتائج البحث،
-  وهذا مهم لموقع بصري.
-- `canonical` مطلق دائمًا ومبنيّ من `SITE + path`، فلا تنشأ نسخ مكرّرة
-  بسبب `www` أو الشرطة المائلة الأخيرة.
-- `og:image` يشير إلى بطل الصفحة نفسها لا صورة عامة.
-
----
-
-## 4. البيانات المنظّمة — 11 بانيًا في `src/ld.ts`
-
-| الباني | المخرَج | يُستخدم في |
+| الرابط | نيّة البحث | ملف المحتوى |
 |---|---|---|
-| `orgLd()` | `Organization` / `LocalBusiness` | كل الصفحات |
-| `siteLd()` | `WebSite` + `SearchAction` | كل الصفحات |
-| `faqLd(items)` | `FAQPage` | `/faq` وأقسام الأسئلة |
-| `crumbLd(items)` | `BreadcrumbList` | كل صفحة داخلية |
-| `serviceLd(...)` | `Service` | `/services/:slug`، صفحات العوائل |
-| `eventLd(...)` | `Event` | `/occasions/:slug` |
-| `menuLd(...)` | `Menu` / `MenuSection` | `/menu/:slug` |
-| `galleryLd(...)` | `ImageGallery` | `/gallery` |
-| `reviewsLd()` | `Review` + `AggregateRating` | الرئيسية |
-| `offerLd(path)` | `Offer` / `AggregateOffer` | `/prices` |
-| `personListLd(...)` | `Person[]` | `/about` |
-| `graph(...nodes)` | يجمعها في `@graph` واحد | `layout.tsx` |
+| `/` | قهوجي وصبابين جدة | `data.ts` |
+| `/services` | خدمات الضيافة في جدة | `data.ts → SERVICES` |
+| `/services/{qahwajiin,zamzam,offerings,buffet,equipment,royal,extras}` | كل خدمة منفردة | `data.ts → SERVICES` |
+| `/occasions` | ضيافة مناسبات جدة | `data.ts → OCCASIONS` |
+| `/occasions/{graduation,newborn,camps}` | كل مناسبة منفردة | `data.ts → OCCASIONS` |
+| `/qahwajiat-jeddah` | قهوجيات وصبابات جدة | `jeddah.ts` |
+| `/mubashirin-jeddah` | مباشرين قهوة جدة | `jeddah.ts` |
+| `/diyafat-zawajat-jeddah` | ضيافة زواجات جدة | `jeddah.ts` |
+| `/coffee-break-jeddah` | كوفي بريك شركات جدة | `jeddah.ts` |
+| `/diyafat-aza-jeddah` | ضيافة عزاء جدة | `jeddah.ts` |
+| `/menu` | منيو / تقديمات ضيافة جدة (صفحة واحدة بكل الأقسام) | `data.ts → MENU` |
+| `/gallery` | صور أعمال ضيافة جدة | `data.ts → GALLERY` |
+| `/faq` | أسئلة حجز قهوجي | `data.ts → FAQ` |
+| `/booking` | حجز سريع | `onepage.tsx` |
+| `/links` | التواصل + من نحن | `views.tsx` |
 
-**لماذا `@graph` واحد؟** بدلًا من عدّة وسوم `<script type="application/ld+json">`
-متفرّقة، تُدمَج كل العُقَد في رسم واحد مع `@id` مترابطة — فتفهم جوجل أن
-الخدمة تنتمي لهذه المنظّمة، وأن التقييم يخصّها هي، لا كيانات منفصلة.
+**المجموع: 23 صفحة مفهرسة.** أي صفحة جديدة يجب أن تجيب عن نيّة بحث غير
+مغطّاة — وإلا فهي تنافس صفحة موجودة وتضعفها.
 
-```ts
-export const abs = (p) => p.startsWith('http') ? p : `${SITE}${p}`
-```
-كل الروابط والصور في البيانات المنظّمة **مطلقة** — نسبية تعني تجاهلًا.
+### 1.1 صفحة خدمة/مناسبة لها صفحة كلمة مفتاحية
 
----
-
-## 5. `robots.txt` و `sitemap.xml` مولّدان برمجيًا
-
-### `/robots.txt`
-```
-User-agent: *
-Allow: /
-
-Sitemap: {SITE}/sitemap.xml
-```
-مع `Cache-Control: public, max-age=86400`.
-
-### `/sitemap.xml` — 73 رابطًا بأولويات مدروسة
+عندما تملك نيّة البحث صفحة في `jeddah.ts`، تُحوَّل صفحة الخدمة/المناسبة
+القديمة إليها، ولا تُدرَج في خريطة الموقع. يُدار ذلك من مكان واحد:
 
 ```ts
-add('/',          '1.0', 'weekly')
-add('/services',  '0.9', 'monthly')
-add('/prices',    '0.9', 'monthly')
-add('/locations', '0.9', 'monthly')
-add('/gallery',   '0.7', 'weekly')
-add('/about',     '0.6', 'yearly')
-// مراكز المدن: 0.9 للمدن ذات priority=1، و0.8 لغيرها
-// صفحات العوائل: 0.8
-// صفحات الخدمات: 0.8 · المناسبات والتقديمات: 0.7
+// src/data.ts
+SVC_URL = { qahwajiat: '/qahwajiat-jeddah' }
+OCC_URL = { weddings: '/diyafat-zawajat-jeddah', condolences: '/diyafat-aza-jeddah', corporate: '/coffee-break-jeddah' }
+svcUrl(slug) / occUrl(slug)   // كل رابط داخلي و JSON-LD يمرّ عبرهما
 ```
 
-**فلسفة الأولويات:** مراكز المدن تُمنح أولوية **أعلى** من صفحات العوائل،
-لأن المركز هو صفحة المِحوَر (hub) التي تصبّ فيها الروابط الداخلية، وصفحات
-العوائل أوراق (leaves) تتفرّع منها.
-
-> **مهم:** خريطة الموقع مولّدة من نفس `localPaths()` التي تولّد المسارات
-> الفعلية. فلا يمكن أن يوجد في الخريطة رابط لا صفحة له، ولا صفحة غائبة عن
-> الخريطة. هذا التصميم يقتل صنفًا كاملًا من أخطاء السيو.
-
 ---
 
-## 6. معايير فهرسة جوجل العشرة — حالة كل واحد
+## 2. التحويلات 301 (قفزة واحدة دائمًا إلى صفحة 200)
 
-| # | المعيار | الحالة | كيف |
-|---|---|---|---|
-| 1 | HTML من السيرفر بلا اعتماد على JS | ✅ | Hono SSR، صفر ترطيب |
-| 2 | عنوان فريد لكل صفحة | ✅ | 0 تكرار في 73 رابطًا |
-| 3 | وصف فريد لكل صفحة | ✅ | 0 تكرار |
-| 4 | `canonical` مطلق | ✅ | `layout.tsx` |
-| 5 | بيانات منظّمة صحيحة | ✅ | `@graph` من 11 بانيًا |
-| 6 | خريطة موقع + robots | ✅ | مولّدان، 73 رابطًا |
-| 7 | ترابط داخلي (hub ↔ leaf) | ✅ | شرائح المدن، مسار التنقّل، شرائط CTA |
-| 8 | جوّال أولًا | ✅ | تصميم جوّال أولًا + إخراج فني للصور |
-| 9 | نص فريد لكل صفحة محلّية | ✅ | 4 حقول يدوية لكل مدينة |
-| 10 | صور بنص بديل ومقاسات معلنة | ✅ | `imgmap.ts` يفرض `width`/`height` |
-
----
-
-## 7. المخاطر المعروفة
-
-| الخطر | الأثر | الحل |
+| من | إلى | السبب |
 |---|---|---|
-| **بيانات تواصل مؤقّتة** في `orgLd` | جوجل تفهرس رقمًا وبريدًا غير حقيقيين | محجوز على العميل — انظر [`08-roadmap.md`](./08-roadmap.md) |
-| مقابض تواصل اجتماعي وهمية (`sameAs`) | إشارات كيان ضعيفة | نفس البند |
-| النطاق غير منشور بعد | لا فهرسة أصلًا | النشر ثم إضافة الموقع إلى Search Console |
-| إضافة مدن بنسخ نصوص | خطر doorway على الـ30 صفحة | القاعدة الصارمة في القسم 1 |
+| `/about` `/contact` `/prices` `/social` `/qr` | `/links` | دُمجت في صفحة واحدة |
+| `/concierge` | `/booking` | |
+| `/locations` `/locations/*` | `/` | الخدمة في جدة فقط |
+| `/{qahwajiin,sababin-qahwa,diyafa-munasabat}-{مدينة}` | `/` | صفحات المدن الأخرى أُلغيت |
+| `/qahwajiin-jeddah` `/sababin-qahwa-jeddah` | `/` | نفس نيّة الرئيسية |
+| `/diyafa-munasabat-jeddah` | `/occasions` | |
+| `/services/qahwajiat` | `/qahwajiat-jeddah` | `SVC_URL` |
+| `/occasions/{weddings,condolences,corporate}` | صفحة جدة المقابلة | `OCC_URL` |
+| `/menu/{slug}` | `/menu#{slug}` | التقديمات صفحة واحدة (مثل keifaldiafa.com/offerings) |
+| `/sitemap-images.xml` | `/sitemap.xml` | خريطة واحدة تشمل الصور |
+| `www.qahwajeen.com/*` | `qahwajeen.com/*` | نطاق واحد |
+| `/أي-مسار/` | بدون الشرطة الأخيرة | رابط واحد لكل صفحة |
+
+`index_audit.py` يتحقق من أن كل تحويل قفزة واحدة إلى 200.
 
 ---
 
-## 8. كيف أتحقّق بعد أي تعديل؟
+## 3. وسوم `<head>` في كل صفحة (`src/layout.tsx`)
+
+| الوسم | القيمة |
+|---|---|
+| `<html lang="ar" dir="rtl">` | |
+| `<title>` | ≤ 60 حرفًا شاملة « \| القهوة الملكية» — `fit()` في `pages.tsx` يقصّ بحدود الكلمات |
+| `meta description` | فريد، 60–165 حرفًا |
+| `link canonical` | الرابط المطلق نفسه على `https://qahwajeen.com` |
+| `hreflang` | `ar-SA` + `x-default` إلى نفس الرابط |
+| `meta robots` | `index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1` |
+| Open Graph / Twitter | عنوان، وصف، صورة 200، نص بديل للصورة |
+| `google-site-verification` / `msvalidate.01` | تظهر فقط عند تعبئة `SEARCH` في `data.ts` |
+
+صفحة 404: `noindex,follow` وحالة HTTP 404.
+روابط المعاينة `*.vercel.app` و`*.pages.dev`: ترويسة `X-Robots-Tag: noindex, nofollow`.
+
+---
+
+## 4. البيانات المنظّمة (JSON-LD) — `src/ld.ts`
+
+| النوع | أين | ملاحظات |
+|---|---|---|
+| `LocalBusiness` | الرئيسية، `/links` | `@id = https://qahwajeen.com/#business`؛ كل العُقد الأخرى تشير إليه. الهاتف، البريد، جدة، `hasOfferCatalog` بروابط الخدمات القانونية |
+| `WebSite` | الرئيسية | |
+| `Service` | كل صفحة خدمة وكل صفحة جدة | `provider → #business`، `areaServed = جدة` |
+| `FAQPage` | 11 صفحة | الأسئلة نفسها ظاهرة في الصفحة (شرط Google) |
+| `BreadcrumbList` | 22 صفحة | كل الصفحات عدا الرئيسية |
+| `Menu` + `MenuSection` + `MenuItem` | `/menu` | كل قسم بـ `url: /menu#slug` |
+| `ImageGallery` + `ImageObject` | `/gallery` + صفحة | لكل صورة: `contentUrl`، `caption`، `width/height`، `creator → #business`، `creditText`، `copyrightNotice` (مؤهّلة لـ «بيانات الترخيص» في صور Google) |
+| `ContactPage` | `/links` | |
+
+**ممنوع:** `AggregateRating` / `Review` / `Offer` بسعر — لا توجد تقييمات ولا أسعار حقيقية.
+
+---
+
+## 5. الصور — كيف تُفهرس كل صورة
+
+1. **الصورة ذات المحتوى = `<img>` بنص بديل غير فارغ.**
+   النص البديل الفارغ `alt=""` معناه «زخرفية» (الشعار بجانب اسمه، خلفيات
+   البطل، خلفية قسم التواصل) — لا تُفهرس عمدًا.
+2. **خريطة الموقع تُبنى من HTML المُولَّد نفسه** (`pageImages()` في
+   `src/index.tsx`): الخادم يرسم كل صفحة داخليًا، ويستخرج كل صورة لها نص
+   بديل، ويضعها تحت رابط صفحتها بأكبر مقاس متاح. **أي صورة تُضاف لأي صفحة
+   تدخل خريطة الموقع تلقائيًا** — لا قائمة يدوية تنسى.
+3. النتيجة محسوبة مرّة واحدة لكل نسخة منشورة (ذاكرة في `sitemapCache`).
+4. `robots.txt` لا يحجب `/static/` — جوجل يصل للصور والـ CSS.
+5. كل صورة WebP، ≤ 300KB، `width`/`height` مطابقة للملف الحقيقي
+   (`index_audit.py` يقارن `imgmap.ts` بالملفات على القرص).
+6. أسماء الملفات وصفية (`dates-stuffed`، `ev-women-2`…)، والنص البديل
+   يتبع الصيغة: **ما في الصورة — القهوة الملكية** (وأحيانًا «في جدة»).
+
+### صور ممنوعة
+صور تُظهر شعارات أو أسماء شركات أخرى (أجنحة معارض) لا تُستخدم — تعطي
+انطباع «شريك» غير موثّق. حُذفت `ev-booth-1/3/4/5/8` لهذا السبب.
+
+---
+
+## 6. ملفات الآلة
+
+```
+/robots.txt              User-agent: * · Allow: / · Sitemap: https://qahwajeen.com/sitemap.xml
+/sitemap.xml             23 <url> · <lastmod>=CONTENT_DATE · <image:image> لكل صورة محتوى
+/{indexNowKey}.txt       مفتاح IndexNow (علني بطبيعة البروتوكول)
+```
+
+`CONTENT_DATE` في `data.ts`: **حدّثه عند كل تغيير محتوى حقيقي** — جوجل
+يتجاهل `lastmod` إن كان يتغيّر بلا تغيير فعلي.
+
+---
+
+## 7. ربط محركات البحث (خطوات المالك)
+
+| المحرك | الطريقة | ما يلزم في الكود |
+|---|---|---|
+| **Google Search Console** | خاصية «بادئة URL» `https://qahwajeen.com/` → طريقة «علامة HTML» | الصق قيمة `content` في `SEARCH.googleVerify` ثم انشر. لا يحتاج DNS. بعد التحقق: «خرائط المواقع» → `sitemap.xml` |
+| **Bing Webmaster** | «استيراد من Google Search Console» أو علامة HTML | `SEARCH.bingVerify` (اختياري إن استوردت) |
+| **IndexNow** (Bing، Yandex، Seznam، Naver) | جاهز | بعد كل نشر: `python3 qa/scripts/indexnow.py` |
+| **Google Business Profile** | يدوي من المالك | أهم مصدر لنتائج «قريب مني» والخرائط — يحتاج قرار المالك (الموقع لا يعرض خرائط حاليًا) |
+
+---
+
+## 8. الروابط الداخلية
+
+- القائمة العلوية: 7 صفحات رئيسية.
+- التذييل: نفس الصفحات + **صفحات جدة الخمس** — كل صفحة مفهرسة لها رابط من كل الصفحات.
+- كل بطاقة خدمة/مناسبة تربط بصفحتها القانونية عبر `svcUrl/occUrl` (لا رابط داخلي يمرّ بتحويل).
+- `/menu` ترتبط بصفحات الطاقم؛ الرئيسية ترتبط بأقسام `/menu#…`.
+
+---
+
+## 9. التحقق بعد أي تعديل
 
 ```bash
-python3 qa/scripts/seo.py
+npm run build && (npx wrangler pages dev dist --ip 0.0.0.0 --port 3000 &)
+python3 qa/scripts/index_audit.py            # الفهرسة: صفحات + صور + تحويلات + JSON-LD
+python3 qa/scripts/seo.py                    # العناوين والأوصاف والوسوم
+# بعد النشر
+python3 qa/scripts/index_audit.py https://qahwajeen.com
+python3 qa/scripts/seo.py https://qahwajeen.com
+python3 qa/scripts/indexnow.py
 ```
-يزحف كل الروابط ويتحقّق من: تكرار العناوين، تكرار الأوصاف، طول العنوان،
-وجود `canonical`، صحّة JSON-LD، تطابق خريطة الموقع مع المسارات الفعلية.
-**المطلوب: `issues: 0`.**
+
+## 10. ما لا يمكن التحقق منه من داخل الكود
+
+- هل جوجل **فهرس** الصفحات فعلًا؟ لا يُعرف إلا من Search Console
+  (تقرير «الصفحات» و«فحص عنوان URL»). يحتاج تحقّق المالك أولًا (القسم 7).
+- الترتيب في النتائج يعتمد أيضًا على عوامل خارج الموقع (Google Business
+  Profile، الروابط الخارجية، عمر النطاق) — لا يضمنه أي كود.
 
 </div>

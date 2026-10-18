@@ -39,6 +39,20 @@ export const TRACKING = {
 } as const
 
 /**
+ * Search-engine ownership + instant indexing.
+ * - googleVerify / bingVerify: paste only the content="" value of the
+ *   <meta> tag that Search Console / Bing Webmaster gives you
+ *   (HTML-tag method: no DNS change needed). Empty = tag not emitted.
+ * - indexNowKey: public by design (served at /{key}.txt). Bing, Yandex,
+ *   Seznam and Naver read it to accept URL pings — see qa/scripts/indexnow.py.
+ */
+export const SEARCH = {
+  googleVerify: '',
+  bingVerify: '',
+  indexNowKey: '18a197b2799047c6ef3caf1c86c0a2cc',
+} as const
+
+/**
  * Visibility switches. Everything stays in the code; flip a flag to
  * bring it back. While a flag is false the item is removed from the
  * HTML, the sitemap and the structured data (no dead/fake signals).
@@ -81,7 +95,7 @@ export const SERVICES: Service[] = [
     desc:
       'فريق من القهوجيين والمباشرين المدرَّبين على أصول الضيافة السعودية، بزيٍّ موحّد أنيق وحضورٍ منظّم لا يُخطئ الموعد. نتولّى استقبال الضيوف عند الباب، صبّ القهوة العربية والشاي بالدلال النحاسية، وتقديم التمور والحلى على الصواني — بانسيابيةٍ تامة ودون أي تدخّلٍ منك. المباشر يدير مسار الخدمة ويوزّع الفريق حتى لا ينتظر ضيفٌ فنجاله.',
     img: 'ev-team-1',
-    gal: ['ev-team-1', 'ev-booth-2', 'ev-booth-5', 'ev-vip-1', 'ev-booth-9', 'ev-table-1'],
+    gal: ['ev-team-1', 'ev-booth-2', 'ev-booth-7', 'ev-vip-1', 'ev-booth-9', 'ev-table-1'],
     icon: 'servers',
     badge: 'الأكثر طلباً',
     points: ['زي موحّد مكويّ وفاخر', 'مباشر لتنظيم الصفوف', 'صبّ مستمر دون انتظار', 'إشراف ميداني كامل'],
@@ -271,7 +285,7 @@ export const OCCASIONS: Occasion[] = [
     h1: 'الضيافة المؤسسية للمؤتمرات والمعارض',
     d: 'ضيافة مؤسسية بزي موحّد وعرض سعر مكتوب',
     icon: 'users',
-    img: 'ev-booth-4',
+    img: 'ev-booth-7',
     desc:
       'الضيافة المؤسسية تُقاس بالانضباط: عرض سعر مكتوب، فريق بزيٍّ موحّد، ومسار خدمة مرسوم على مخطّط القاعة قبل يوم الحدث. نغطّي فترات الاستراحة (Coffee Break) بتوقيتٍ مضبوط على الأجندة، لا على التقدير.',
     needs: ['عرض سعر مكتوب', 'زي رسمي موحّد', 'كوفي بريك مضبوط بالتوقيت', 'بوفيه مقبلات مصغّرة'],
@@ -583,7 +597,6 @@ export const GALLERY: Shot[] = [
   { img: 'ev-table-1', cap: 'طاولة ضيافة منسّقة', cat: 'تقديمات' },
   { img: 'ev-tent-1', cap: 'جلسة خيمة للمخيمات', cat: 'إضافات' },
   { img: 'pf-spread-1', cap: 'سفرة أكلات شعبية', tall: true, cat: 'تقديمات' },
-  { img: 'ev-booth-5', cap: 'ركن ضيافة في فعالية شركة', tall: true, cat: 'عدّة' },
   { img: 'ev-vip-1', cap: 'استقبال كبار الشخصيات', tall: true, cat: 'ملكية' },
   { img: 'sawas-3', cap: 'سواس نحاسية مذهّبة', tall: true, cat: 'ملكية' },
   { img: 'souqiya', cap: 'سوقية المدخل بالزهور', cat: 'ملكية' },
@@ -609,6 +622,15 @@ export const GALLERY: Shot[] = [
   { img: 'eq-stand-4', cap: 'ركن الضيافة المصغّر', cat: 'عدّة' },
   { img: 'sw-baklava', cap: 'بقلاوة بالفستق', cat: 'تقديمات' },
   { img: 'souqiya-4', cap: 'صفّ الدلال النحاسية', cat: 'عدّة' },
+  { img: 'ev-booth-7', cap: 'قهوجي بزيّ رسمي في معرض بجدة', tall: true, cat: 'عدّة' },
+  { img: 'sawas-2', cap: 'سواس ذهبية بنقش يدوي', tall: true, cat: 'ملكية' },
+  { img: 'souqiya-2', cap: 'سوقية ذهبية بالفناجيل', cat: 'ملكية' },
+  { img: 'eq-stand-2', cap: 'حاملات فناجيل ذهبية على الطاولة', cat: 'عدّة' },
+  { img: 'gift-tray', cap: 'صواني التوزيعات المنسّقة', cat: 'تقديمات' },
+  { img: 'booth', cap: 'كوش تصوير فوري بسجادة', tall: true, cat: 'إضافات' },
+  { img: 'booth-3', cap: 'كوش التصوير مع السجادة الحمراء', cat: 'إضافات' },
+  { img: 'artist-2', cap: 'حنّاية في جلسة خيمة شعبية', cat: 'إضافات' },
+  { img: 'artist-3', cap: 'نقش الحنّاء للمناسبات النسائية', cat: 'إضافات' },
 ]
 
 
@@ -641,7 +663,7 @@ export const WHY = [
 /* ── Who we serve (3 compact cards right after Hero — Keif cadence) ── */
 export const AUDIENCE = [
   { t: 'الجهات والمجالس الرسمية', d: 'بروتوكول رسمي لكبار الضيوف', img: 'ev-vip-1', href: '/services/qahwajiin' },
-  { t: 'الشركات والمؤتمرات', d: 'كوفي بريك وأجنحة معارض', img: 'ev-booth-5', href: '/coffee-break-jeddah' },
+  { t: 'الشركات والمؤتمرات', d: 'كوفي بريك وأجنحة معارض', img: 'ev-booth-7', href: '/coffee-break-jeddah' },
   { t: 'المناسبات الخاصة', d: 'أعراس وملكات ومجالس وعزاء', img: 'ev-team-1', href: '/diyafat-zawajat-jeddah' },
 ] as const
 

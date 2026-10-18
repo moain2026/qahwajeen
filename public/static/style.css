@@ -61,3 +61,5 @@ html.lbx-on{overflow:hidden}
 .mcrew-it svg{grid-row:1/3;grid-column:2;width:18px;height:18px;color:var(--gl)}
 .mcrew-it:hover{border-color:var(--gl)}
 .mcat-order{padding-inline:14px;white-space:normal;text-align:center;line-height:1.35}
+.ftr-seo{margin-top:0;padding-top:8px;border-top:0}.ftr-seo a{font-size:13px;font-weight:500}
+.arr-ph{padding-top:0;overflow:hidden}.arr-ph .arr-img{display:block;width:calc(100% + 40px);max-width:none;margin:0 -20px 16px;aspect-ratio:16/9;object-fit:cover;border-bottom:1px solid rgba(226,198,142,.2)}

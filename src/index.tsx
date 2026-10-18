@@ -1,6 +1,6 @@
 import { Hono } from 'hono'
 import { html } from 'hono/html'
-import { SERVICES, OCCASIONS, MENU, GALLERY, STAFF, CONTENT_DATE, SVC_URL, OCC_URL } from './data'
+import { SERVICES, OCCASIONS, MENU, CONTENT_DATE, SVC_URL, OCC_URL, SEARCH } from './data'
 import { SITE } from './layout'
 import { imgSrc } from './ui'
 import {
@@ -138,41 +138,66 @@ app.get('/robots.txt', (c) =>
   ),
 )
 
-app.get('/sitemap.xml', (c) => {
-  // Only canonical 200 URLs. Google reads <loc>, <lastmod> and <image:loc> only.
-  const e: { loc: string; imgs: string[] }[] = []
-  const add = (loc: string, imgs: string[] = []) => e.push({ loc, imgs: [...new Set(imgs)] })
+/** Every canonical, indexable 200 URL — the single source for sitemap.xml. */
+const sitemapPaths = () => [
+  '/',
+  '/services',
+  ...SERVICES.filter((x) => !SVC_URL[x.slug]).map((s) => `/services/${s.slug}`),
+  '/occasions',
+  ...OCCASIONS.filter((x) => !OCC_URL[x.slug]).map((o) => `/occasions/${o.slug}`),
+  ...JEDDAH_PAGES.map((jp) => `/${jp.slug}`),
+  '/menu',
+  '/gallery',
+  '/faq',
+  '/booking',
+  '/links',
+]
 
-  add('/', ['hero-real', ...STAFF.map((s) => s.img)])
-  add('/services', SERVICES.map((s) => s.img))
-  for (const s of SERVICES.filter((x) => !SVC_URL[x.slug])) add(`/services/${s.slug}`, s.gal)
-  add('/occasions', OCCASIONS.map((o) => o.img))
-  for (const o of OCCASIONS.filter((x) => !OCC_URL[x.slug])) add(`/occasions/${o.slug}`, [o.img])
-  for (const jp of JEDDAH_PAGES) add(`/${jp.slug}`, [jp.hero])
-  add('/menu', [...MENU.map((m) => m.hero), 'eq-teaset', 'gift-dates'])
-  add('/gallery', GALLERY.map((g) => g.img))
-  add('/faq')
-  add('/booking')
-  add('/links')
+/** Content images of a rendered page = every <img> with real alt text
+ *  (alt="" is decorative by WCAG and stays out of the index on purpose).
+ *  Reading the rendered HTML means a new photo is indexed automatically. */
+const pageImages = (html: string) => {
+  const out: string[] = []
+  for (const tag of html.match(/<img\b[^>]*>/g) || []) {
+    const alt = /\balt="([^"]*)"/.exec(tag)?.[1]?.trim()
+    const src = /\b(?:data-)?src="(\/static\/img\/[^"]+)"/.exec(tag)?.[1]
+    if (!alt || !src || /aria-hidden="true"/.test(tag)) continue
+    const m = /\/static\/img\/(.+?)-(?:sm|md|lg)\.webp$/.exec(src)
+    out.push(m ? imgSrc(m[1]) : src) // largest variant of each photo
+  }
+  return [...new Set(out)]
+}
 
-  const xml =
-    `<?xml version="1.0" encoding="UTF-8"?>\n` +
-    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n` +
-    e
-      .map(
-        (x) =>
-          `  <url><loc>${SITE}${x.loc}</loc><lastmod>${CONTENT_DATE}</lastmod>` +
-          x.imgs.map((n) => `<image:image><image:loc>${xmlEsc(SITE + imgSrc(n))}</image:loc></image:image>`).join('') +
+let sitemapCache: string | null = null
+app.get('/sitemap.xml', async (c) => {
+  if (!sitemapCache) {
+    const rows: string[] = []
+    for (const path of sitemapPaths()) {
+      const r = await app.request(`http://internal${path}`)
+      if (r.status !== 200) continue // never list a non-200 URL
+      const imgs = pageImages(await r.text())
+      rows.push(
+        `  <url><loc>${SITE}${path}</loc><lastmod>${CONTENT_DATE}</lastmod>` +
+          imgs.map((u) => `<image:image><image:loc>${xmlEsc(SITE + u)}</image:loc></image:image>`).join('') +
           `</url>`,
       )
-      .join('\n') +
-    `\n</urlset>\n`
-
-  return c.body(xml, 200, {
+    }
+    sitemapCache =
+      `<?xml version="1.0" encoding="UTF-8"?>\n` +
+      `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n` +
+      rows.join('\n') +
+      `\n</urlset>\n`
+  }
+  return c.body(sitemapCache, 200, {
     'Content-Type': 'application/xml; charset=utf-8',
     'Cache-Control': 'public, max-age=3600',
   })
 })
+
+// IndexNow ownership file (Bing · Yandex · Seznam · Naver). Key is public by protocol.
+app.get(`/${SEARCH.indexNowKey}.txt`, (c) =>
+  c.text(SEARCH.indexNowKey, 200, { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'public, max-age=86400' }),
+)
 
 app.get('/sitemap-images.xml', (c) => c.redirect('/sitemap.xml', 301))
 

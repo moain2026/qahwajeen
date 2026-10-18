@@ -2,9 +2,19 @@
  * Structured data (JSON-LD) builders.
  * One place for every schema.org node so pages stay declarative.
  */
-import { BRAND, SOCIAL_LINKS, SERVICES, SHOW } from './data'
+import { BRAND, SOCIAL_LINKS, SERVICES, SHOW, svcUrl } from './data'
 import { SITE } from './layout'
 import { imgSrc } from './ui'
+import { IMG, varW } from './imgmap'
+
+/** pixel size of the variant imgSrc() returns (largest available) */
+const imgDims = (n: string) => {
+  const r = IMG[n]
+  if (!r) return {}
+  const v = r[0][r[0].length - 1]
+  const w = varW(n, v)
+  return { width: w, height: Math.round((w * r[2]) / r[1]) }
+}
 
 export const abs = (p: string) => (p.startsWith('http') ? p : `${SITE}${p}`)
 
@@ -43,7 +53,7 @@ export const orgLd = () => ({
     name: `خدمات الضيافة — ${BRAND.name}`,
     itemListElement: SERVICES.map((s) => ({
       '@type': 'Offer',
-      itemOffered: { '@type': 'Service', name: s.title, url: abs(`/services/${s.slug}`) },
+      itemOffered: { '@type': 'Service', name: s.title, url: abs(svcUrl(s.slug)) },
     })),
   },
 })
@@ -135,7 +145,11 @@ export const galleryLd = (path: string, shots: readonly { img: string; cap: stri
     contentUrl: abs(imgSrc(s.img)),
     name: `${s.cap} — ${BRAND.name}`,
     caption: `${s.cap} — ضيافة ${BRAND.name} في جدة`,
+    ...imgDims(s.img),
     contentLocation: { '@type': 'Place', name: 'جدة، المملكة العربية السعودية' },
+    creator: { '@id': `${SITE}/#business` },
+    creditText: BRAND.name,
+    copyrightNotice: `© ${BRAND.name}`,
   })),
 })
 
