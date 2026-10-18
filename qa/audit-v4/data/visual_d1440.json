@@ -1,0 +1,2562 @@
+{
+ "/": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 12809,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 16
+  }
+ },
+ "/about": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 7365,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 9
+  }
+ },
+ "/booking": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 1,
+   "ctaTotal": 5,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 3078,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 900,
+   "screens": 4
+  }
+ },
+ "/coffee-break-jeddah": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7504,
+   "maxCtaOneScreen": 7,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/contact": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 4014,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 5
+  }
+ },
+ "/diyafa-munasabat-abha": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/diyafa-munasabat-dammam": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/diyafa-munasabat-jeddah": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/diyafa-munasabat-khobar": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/diyafa-munasabat-madinah": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/diyafa-munasabat-makkah": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/diyafa-munasabat-riyadh": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/diyafa-munasabat-tabuk": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/diyafa-munasabat-taif": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/diyafa-munasabat-yanbu": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/diyafat-aza-jeddah": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7444,
+   "maxCtaOneScreen": 7,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/diyafat-zawajat-jeddah": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7474,
+   "maxCtaOneScreen": 7,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/faq": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 4313,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 6
+  }
+ },
+ "/gallery": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6598,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 8
+  }
+ },
+ "/links": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 2301,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 3
+  }
+ },
+ "/locations": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 5096,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 6
+  }
+ },
+ "/locations/abha": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6803,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 9
+  }
+ },
+ "/locations/dammam": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6803,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 9
+  }
+ },
+ "/locations/jeddah": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6855,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 9
+  }
+ },
+ "/locations/khobar": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6803,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 9
+  }
+ },
+ "/locations/madinah": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6803,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 9
+  }
+ },
+ "/locations/makkah": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6803,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 9
+  }
+ },
+ "/locations/riyadh": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6803,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 9
+  }
+ },
+ "/locations/tabuk": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6803,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 9
+  }
+ },
+ "/locations/taif": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6803,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 9
+  }
+ },
+ "/locations/yanbu": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6803,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 9
+  }
+ },
+ "/menu": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 9553,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 8460,
+   "screens": 12
+  }
+ },
+ "/menu/coffee": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 3592,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 2580,
+   "screens": 5
+  }
+ },
+ "/menu/cold": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 3574,
+   "maxCtaOneScreen": 7,
+   "maxCtaAtY": 2580,
+   "screens": 5
+  }
+ },
+ "/menu/dates": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 4296,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 6
+  }
+ },
+ "/menu/fruits": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 3574,
+   "maxCtaOneScreen": 7,
+   "maxCtaAtY": 2580,
+   "screens": 5
+  }
+ },
+ "/menu/pastry": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 3273,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 4
+  }
+ },
+ "/menu/popular": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 3592,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 2580,
+   "screens": 5
+  }
+ },
+ "/menu/sandwiches": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 3574,
+   "maxCtaOneScreen": 7,
+   "maxCtaAtY": 2580,
+   "screens": 5
+  }
+ },
+ "/menu/snacks": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 3574,
+   "maxCtaOneScreen": 7,
+   "maxCtaAtY": 2580,
+   "screens": 5
+  }
+ },
+ "/menu/sweets": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 4296,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 6
+  }
+ },
+ "/mubashirin-jeddah": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7474,
+   "maxCtaOneScreen": 7,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/occasions": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6429,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 4260,
+   "screens": 8
+  }
+ },
+ "/occasions/camps": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6355,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 4260,
+   "screens": 8
+  }
+ },
+ "/occasions/condolences": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6355,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 4260,
+   "screens": 8
+  }
+ },
+ "/occasions/corporate": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6355,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 4260,
+   "screens": 8
+  }
+ },
+ "/occasions/graduation": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6355,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 4260,
+   "screens": 8
+  }
+ },
+ "/occasions/newborn": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6355,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 4260,
+   "screens": 8
+  }
+ },
+ "/occasions/weddings": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6355,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 4260,
+   "screens": 8
+  }
+ },
+ "/qahwajiat-jeddah": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7504,
+   "maxCtaOneScreen": 7,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/qahwajiin-abha": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/qahwajiin-dammam": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/qahwajiin-jeddah": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/qahwajiin-khobar": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/qahwajiin-madinah": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/qahwajiin-makkah": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/qahwajiin-riyadh": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/qahwajiin-tabuk": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/qahwajiin-taif": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/qahwajiin-yanbu": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/sababin-qahwa-abha": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/sababin-qahwa-dammam": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/sababin-qahwa-jeddah": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/sababin-qahwa-khobar": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/sababin-qahwa-madinah": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/sababin-qahwa-makkah": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/sababin-qahwa-riyadh": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/sababin-qahwa-tabuk": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/sababin-qahwa-taif": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/sababin-qahwa-yanbu": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 7407,
+   "maxCtaOneScreen": 8,
+   "maxCtaAtY": 5100,
+   "screens": 9
+  }
+ },
+ "/services": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 8528,
+   "maxCtaOneScreen": 7,
+   "maxCtaAtY": 5940,
+   "screens": 11
+  }
+ },
+ "/services/buffet": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6896,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 9
+  }
+ },
+ "/services/equipment": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6859,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 9
+  }
+ },
+ "/services/extras": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6896,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 9
+  }
+ },
+ "/services/offerings": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6896,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 9
+  }
+ },
+ "/services/qahwajiat": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6859,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 9
+  }
+ },
+ "/services/qahwajiin": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6896,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 9
+  }
+ },
+ "/services/royal": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6896,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 9
+  }
+ },
+ "/services/zamzam": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": true,
+   "H": 6896,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 9
+  }
+ },
+ "/this-page-does-not-exist": {
+  "d1440": {
+   "chrome": 77,
+   "chromePct": 9,
+   "parts": [
+    "hdr hdr-top:77"
+   ],
+   "tel": 2,
+   "wa": 2,
+   "booking": 2,
+   "ctaTotal": 6,
+   "ox": 0,
+   "clipped": [],
+   "small": [
+    "الرئيسية 79x38",
+    "حجز فوري 96x38",
+    "الخدمات 78x38",
+    "التقديمات 88x38",
+    "أعمالنا 69x38",
+    "المناسبات 92x38",
+    "المدن 62x38",
+    "من نحن 73x38",
+    "روابطنا 72x38",
+    "تواصل 68x38"
+   ],
+   "actVis": null,
+   "H": 1528,
+   "maxCtaOneScreen": 6,
+   "maxCtaAtY": 0,
+   "screens": 2
+  }
+ }
+}
