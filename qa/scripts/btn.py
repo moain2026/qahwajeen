@@ -18,7 +18,7 @@ from playwright.sync_api import sync_playwright
 import sys
 B = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:3000"
 PAGES = ["/", "/services", "/services/royal", "/occasions", "/occasions/camps",
-         "/qahwajiat-jeddah", "/coffee-break-jeddah", "/menu", "/menu/coffee",
+         "/qahwajiat-jeddah", "/coffee-break-jeddah", "/menu",
          "/gallery", "/faq", "/booking", "/links"]
 
 PROBE = """

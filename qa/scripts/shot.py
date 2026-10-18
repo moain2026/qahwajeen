@@ -2,7 +2,7 @@ import asyncio, json, os
 from playwright.async_api import async_playwright
 OUT="/home/user/qa/shots"; os.makedirs(OUT, exist_ok=True)
 PAGES=[("home","/"),("services","/services"),("svc","/services/qahwajiin"),
-       ("occ","/occasions/weddings"),("menu","/menu"),("mcat","/menu/coffee"),
+       ("occ","/occasions/weddings"),("menu","/menu"),
        ("gallery","/gallery"),("prices","/prices"),("about","/about"),
        ("faq","/faq"),("contact","/contact"),("social","/social"),
        ("locs","/locations"),("city","/locations/jeddah"),("fam","/qahwajiin-jeddah"),

@@ -17,6 +17,9 @@ import {
   ARRANGEMENTS,
   HERO_METRICS,
   CONCIERGE,
+  MENU_EQUIP,
+  MENU_GIFTS,
+  MENU_FAQ,
   svcUrl,
   occUrl,
   type Service,
@@ -496,73 +499,139 @@ export const CrewSec = () => (
 )
 
 /* ═══ 5. OFFERINGS & MENU SECTION ═══ */
-export const MenuSec = ({ showAllCategories = false }: { showAllCategories?: boolean }) => (
-  <section class="sx sx-alt" id="menu">
-    <div class="wrap">
-      <Head
-        k="التقديمات"
-        t={showAllCategories ? 'أقسام القائمة' : 'ما الذي يصل إلى ضيوفك؟'}
-        sub="تختار ما يناسب مناسبتك، ونستبعد أي صنف أو نضيف بدائل عند الطلب."
-      />
-      {!showAllCategories ? (
-        <>
-          {/* Home: a short, calm preview — 8 signature items + one clear path to the full menu */}
-          <div class="dishx">
-            {MENU.flatMap((m) => m.items.filter((it) => it.img).slice(0, 1).map((it) => ({ it, m }))).slice(0, 8).map(({ it, m }) => (
-              <a class="dishx-card" href={`/menu/${m.slug}`}>
-                <Img n={it.img!} alt={`${it.n} — ${m.cat} من ${BRAND.name}`} sizes="(min-width:1024px) 220px, 44vw" />
-                <span class="dishx-cap">
-                  <b>{m.cat}</b>
-                  <small>{it.n}</small>
-                </span>
-              </a>
-            ))}
-          </div>
-          <div class="sx-more">
-            <a class="btn btn-line" href="/menu">
-              القائمة الكاملة
-              <Ico n="arrow" />
+/* WhatsApp message for one menu section — the visitor only fills the blanks */
+export const orderMsg = (what: string) => `السلام عليكم، أرغب بإضافة «${what}» لمناسبتي:\nالتاريخ:\nالحي:\nعدد الضيوف:`
+
+const OrderBtn = ({ what, loc }: { what: string; loc: string }) => (
+  <a class="btn btn-line mcat-order" href={wa(orderMsg(what))} rel="noopener" target="_blank" data-track="whatsapp" data-location={loc}>
+    <Ico n="chat" />
+    اطلب {what}
+  </a>
+)
+
+/* One block = photo, count, name, one line, plain item list, one order button */
+const MenuBlock = ({ id, img, alt, count, t, line, items, what, loc }: { id: string; img: string; alt: string; count: string; t: string; line: string; items: readonly string[]; what: string; loc: string }) => (
+  <article class="mcat rv" id={id}>
+    <div class="mcat-media">
+      <Img n={img} alt={alt} sizes="(min-width:1024px) 380px, 92vw" />
+      <span class="mcat-count">{count}</span>
+    </div>
+    <div class="mcat-body">
+      <h3>{t}</h3>
+      <p class="mcat-blurb">{line}</p>
+      <ul class="mcat-items">
+        {items.map((n) => (
+          <li>{n}</li>
+        ))}
+      </ul>
+      <OrderBtn what={what} loc={loc} />
+    </div>
+  </article>
+)
+
+export const MenuSec = ({ showAllCategories = false }: { showAllCategories?: boolean }) =>
+  !showAllCategories ? (
+    <section class="sx sx-alt" id="menu">
+      <div class="wrap">
+        <Head k="التقديمات" t="ما الذي يصل إلى ضيوفك؟" sub="تختار ما يناسب مناسبتك، ونستبعد أي صنف أو نضيف بدائل عند الطلب." />
+        {/* Home: a short preview — one photo per section, each opens that section on /menu */}
+        <div class="dishx">
+          {MENU.slice(0, 8).map((m) => (
+            <a class="dishx-card" href={`/menu#${m.slug}`}>
+              <Img n={m.hero} alt={`${m.cat} — ${BRAND.name}`} sizes="(min-width:1024px) 220px, 44vw" />
+              <span class="dishx-cap">
+                <b>{m.cat}</b>
+                <small>{m.items.length} صنفاً</small>
+              </span>
             </a>
-          </div>
-        </>
-      ) : (
-        /* /menu: one calm card per category — cover photo + item list + link to the full category page */
-        <>
-          <nav class="mcat-nav" aria-label="أقسام القائمة">
+          ))}
+        </div>
+        <div class="sx-more">
+          <a class="btn btn-line" href="/menu">
+            كل التقديمات
+            <Ico n="arrow" />
+          </a>
+        </div>
+      </div>
+    </section>
+  ) : (
+    <>
+      <section class="sx sx-alt" id="menu">
+        <div class="wrap">
+          <Head k="التقديمات والمعدات" t="ما الذي يصل إلى ضيوفك؟" sub="اختر من الأقسام ما يناسب مناسبتك، واضغط «اطلب» ليصلك واتساب جاهز تكمل فيه التاريخ والحي وعدد الضيوف." />
+          <nav class="mcat-nav" aria-label="أقسام التقديمات">
             {MENU.map((m) => (
               <a class="mcat-chip" href={`#${m.slug}`}>{m.cat}</a>
             ))}
+            <a class="mcat-chip" href="#equipment">معدات التقديم</a>
+            <a class="mcat-chip" href="#gifts">التوزيعات</a>
           </nav>
           <div class="mcat-grid">
             {MENU.map((m) => (
-              <article class="mcat rv" id={m.slug}>
-                <a class="mcat-media" href={`/menu/${m.slug}`} tabindex={-1} aria-hidden="true">
-                  <Img n={m.hero} alt="" sizes="(min-width:1024px) 380px, 92vw" />
-                </a>
-                <div class="mcat-body">
-                  <h3>{m.cat}</h3>
-                  <p class="mcat-blurb">{m.blurb}</p>
-                  <ul class="mcat-list">
-                    {m.items.map((it) => (
-                      <li>
-                        <b>{it.n}</b>
-                        <small>{it.d}</small>
-                      </li>
-                    ))}
-                  </ul>
-                  <a class="lnk" href={`/menu/${m.slug}`}>
-                    صور {m.cat}
-                    <Ico n="arrow" />
-                  </a>
-                </div>
-              </article>
+              <MenuBlock
+                id={m.slug}
+                img={m.hero}
+                alt={`${m.cat} — ${BRAND.name}`}
+                count={`${m.items.length} صنفاً`}
+                t={m.cat}
+                line={m.line}
+                items={m.items.map((it) => it.n)}
+                what={m.cat}
+                loc={`menu-${m.slug}`}
+              />
             ))}
           </div>
-        </>
-      )}
-    </div>
-  </section>
-)
+        </div>
+      </section>
+
+      <section class="sx" id="extras">
+        <div class="wrap">
+          <Head k="مع التقديمات" t="المعدات والتوزيعات" />
+          <div class="mcat-grid mcat-grid-2">
+            <MenuBlock
+              id="equipment"
+              img={MENU_EQUIP.img}
+              alt={`طقم شاي ودلال — معدات التقديم من ${BRAND.name}`}
+              count={`${MENU_EQUIP.items.length} أنواع`}
+              t="معدات التقديم"
+              line={MENU_EQUIP.line}
+              items={MENU_EQUIP.items}
+              what="معدات التقديم"
+              loc="menu-equipment"
+            />
+            <MenuBlock
+              id="gifts"
+              img={MENU_GIFTS.img}
+              alt={`علب تمور مُغلَّفة — توزيعات ${BRAND.name}`}
+              count="هدايا الضيوف"
+              t="التوزيعات"
+              line={MENU_GIFTS.line}
+              items={MENU_GIFTS.items}
+              what="التوزيعات"
+              loc="menu-gifts"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="sx sx-alt" id="crew">
+        <div class="wrap">
+          <Head k="الطاقم" t="التقديمات تصل مع طاقمها" sub="الفريق يرتّب الطاولات ويقدّم ويجدّد ثم يرفع العدّة بعد المناسبة." />
+          <div class="mcrew">
+            {SERVICES.filter((x) => ['qahwajiin', 'qahwajiat', 'zamzam'].includes(x.slug)).map((x) => (
+              <a class="mcrew-it" href={svcUrl(x.slug)}>
+                <b>{x.title}</b>
+                <small>{x.short}</small>
+                <Ico n="arrow" />
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <FaqSec items={MENU_FAQ} />
+    </>
+  )
 
 /* ═══ 6. ALL SERVICES SECTION ═══ */
 export const ServicesSec = ({ place = 'جدة', only, brief, k = 'الخدمات', t = 'كل ما تحتاجه مناسبتك — من طاقم واحد' }: { place?: string; only?: readonly string[]; brief?: boolean; k?: string; t?: string }) => {
@@ -796,19 +865,24 @@ export const EndCta = ({ msg }: { msg: string }) => (
     </section>
 
     <dialog class="lbx" id="lbx" aria-label="معاينة الصورة بحجم كامل">
-      <button type="button" class="lbx-x" aria-label="إغلاق المعاينة">
-        <Ico n="close" />
-      </button>
-      <button type="button" class="lbx-nav lbx-prev" aria-label="الصورة السابقة">
-        <Ico n="chevron" />
-      </button>
+      <div class="lbx-top">
+        <span class="lbx-count" id="lbxCount" dir="ltr" aria-live="polite"></span>
+        <button type="button" class="lbx-x" aria-label="إغلاق المعاينة">
+          <Ico n="close" />
+        </button>
+      </div>
       <figure class="lbx-fig">
         <img alt="" width="900" height="1200" decoding="async" />
-        <figcaption id="lbxCap"></figcaption>
       </figure>
-      <button type="button" class="lbx-nav lbx-next" aria-label="الصورة التالية">
-        <Ico n="chevron" />
-      </button>
+      <div class="lbx-bar">
+        <button type="button" class="lbx-nav lbx-prev" aria-label="الصورة السابقة">
+          <Ico n="chevron" />
+        </button>
+        <p class="lbx-cap" id="lbxCap"></p>
+        <button type="button" class="lbx-nav lbx-next" aria-label="الصورة التالية">
+          <Ico n="chevron" />
+        </button>
+      </div>
     </dialog>
   </>
 )

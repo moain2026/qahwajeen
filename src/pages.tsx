@@ -12,15 +12,15 @@ import {
   SERVICES,
   OCCASIONS,
   MENU,
+  MENU_FAQ,
   GALLERY,
   FAQ,
   occUrl,
   type Service,
   type Occasion,
-  type MenuCat,
 } from './data'
 import { type JeddahPage } from './jeddah'
-import { graph, orgLd, siteLd, faqLd, crumbLd, serviceLd, eventLd, menuLd, galleryLd } from './ld'
+import { graph, orgLd, siteLd, faqLd, crumbLd, serviceLd, eventLd, galleryLd } from './ld'
 import { Ico } from './blocks'
 import {
   OnePage,
@@ -38,7 +38,6 @@ import {
   RoyalConcierge,
   FocusText,
   FocusGrid,
-  oneLine,
 } from './onepage'
 
 /** keep <title> ≤ 60 chars (Layout appends " | القهوة الملكية") */
@@ -262,78 +261,32 @@ export const Menu = () => {
     <Layout
       path="/menu"
       hero="sw-station"
-      jsonld={graph(crumbLd([{ name: 'قائمة الضيافة', path: '/menu' }]), {
+      jsonld={graph(crumbLd([{ name: 'التقديمات', path: '/menu' }]), {
         '@type': 'Menu',
         name: `قائمة الضيافة — ${BRAND.name}`,
-        hasMenuSection: MENU.map((m) => ({ '@type': 'MenuSection', name: m.cat, url: `${SITE}/menu/${m.slug}` })),
-      })}
-      title="منيو ضيافة جدة — قهوة وتمور وحلى ومقبلات"
-      desc="منيو ضيافة القهوة الملكية في جدة: قهوة سعودية وشاي، مشروبات باردة، تمور فاخرة، حلى وشرقيات، فواكه، مقبلات، ساندويتشات وأكلات شعبية."
+        url: `${SITE}/menu`,
+        hasMenuSection: MENU.map((m) => ({
+          '@type': 'MenuSection',
+          name: m.cat,
+          url: `${SITE}/menu#${m.slug}`,
+          hasMenuItem: m.items.map((it) => ({ '@type': 'MenuItem', name: it.n, description: it.d })),
+        })),
+      }, faqLd(MENU_FAQ))}
+      title="تقديمات ومنيو ضيافة جدة — قهوة وتمور وحلى"
+      desc="كل تقديمات القهوة الملكية في جدة بصفحة واحدة: مشروبات حارة وباردة، تمور، حلويات، معجنات، مقبلات، فواكه، معدات التقديم والتوزيعات."
     >
       <Hero
         h={{
           img: 'sw-station',
           alt: `محطة ضيافة وحلى — ${BRAND.name}`,
-          kick: 'قائمة الضيافة',
-          h1: 'منيو ضيافة المناسبات في جدة',
+          kick: 'التقديمات',
+          h1: 'تقديمات ومنيو ضيافة المناسبات في جدة',
           lead: 'قهوة سعودية وشاي، مشروبات باردة، تمور وحلى، مقبلات وأكلات شعبية — تختار منها ما يناسب مناسبتك.',
           dots: ['المشروبات الحارة والباردة', 'التمور والحلى والشرقيات', 'المعجنات والأكلات الشعبية'],
           msg,
         }}
       />
       <MenuSec showAllCategories />
-      <EndCta msg={msg} />
-    </Layout>
-  )
-}
-
-export const MenuCategory = ({ m }: { m: MenuCat }) => {
-  const msg = `السلام عليكم، أرغب في طلب (${m.cat}) من ${BRAND.name}.`
-  return (
-    <Layout
-      path={`/menu/${m.slug}`}
-      hero={m.hero}
-      jsonld={graph(
-        menuLd(m.cat, `/menu/${m.slug}`, m.items),
-        crumbLd([
-          { name: 'قائمة الضيافة', path: '/menu' },
-          { name: m.cat, path: `/menu/${m.slug}` },
-        ]),
-      )}
-      title={fit(`${m.cat} للمناسبات في جدة`, '', )}
-      desc={m.blurb.slice(0, 155)}
-    >
-      <Hero
-        h={{
-          img: m.hero,
-          alt: `${m.cat} — ${BRAND.name}`,
-          kick: 'قائمة التقديمات',
-          h1: `${m.cat} للمناسبات في جدة`,
-          lead: oneLine(m.blurb),
-          msg,
-        }}
-      />
-      <FocusGrid
-        k={`${m.items.length} صنفاً في هذا القسم`}
-        t={m.cat}
-        items={m.items.filter((i) => i.img).map((i) => ({ img: i.img!, t: i.n, d: i.d }))}
-      />
-      <section class="sx sx-alt">
-        <div class="wrap">
-          <Head k="بقية أقسام القائمة" t="تصفّح الأقسام الأخرى" />
-          <div class="seo-hub-grid" style="justify-content:center">
-            {MENU.map((cat) => (
-              <a
-                class="seo-hub-link"
-                href={`/menu/${cat.slug}`}
-                aria-current={cat.slug === m.slug ? 'page' : undefined}
-              >
-                {cat.cat} ({cat.items.length})
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
       <EndCta msg={msg} />
     </Layout>
   )
