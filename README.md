@@ -76,6 +76,13 @@ python3 qa/scripts/btn.py      # كل زر ≥44px وبلا قصّ — 320/390/1
 
 ## ٦) النشر
 
+| المستودع | الدور |
+|---|---|
+| `MoTechSys/qahwajeen` (خاص) | **النشر** — Vercel ينشر `main` تلقائيًا |
+| `moain2026/royal-coffee-docs` (عام) | **التطوير** — نسخة مطابقة تمامًا، بلا نشر وبلا مفاتيح |
+
+المستودعان متطابقان (نفس الفروع والكوميتات). طريقة المزامنة: `HANDOFF.md` §2.
+
 الإنتاج: مستودع MoTechSys/qahwajeen فرع `main` على Vercel.
 مؤلف الكوميت يجب أن يكون `MoTechSys <256226456+MoTechSys@users.noreply.github.com>`.
 بعد النشر: `index_audit.py` و`seo.py` على `https://qahwajeen.com` + `indexnow.py` + Lighthouse.
