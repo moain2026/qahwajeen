@@ -14,8 +14,8 @@ export const BRAND = {
   phoneDisplay: '050 496 8113',
   phoneLocal: '0504968113',
   whatsapp: 'https://wa.me/966504968113',
-  // ── Kept for later — hidden while SHOW.email is false ──
-  email: 'hello@example.com',
+  // ── Official Email & Location ──
+  email: 'qahwajiyin@gmail.com',
   mapsUrl: 'https://maps.google.com/?q=Jeddah',
 } as const
 
@@ -25,10 +25,10 @@ export const BRAND = {
  * HTML, the sitemap and the structured data (no dead/fake signals).
  */
 export const SHOW = {
-  /** social accounts: footer icons, /social page, sameAs */
-  social: true,
-  /** email address in footer, contact page and JSON-LD */
-  email: false,
+  /** social accounts: keep false so fake/unused social accounts stay hidden */
+  social: false,
+  /** email address in footer, contact page, /links page and JSON-LD */
+  email: true,
   /** sample testimonials — keep hidden until real client reviews arrive
    *  (Google treats invented reviews as spam; never emit them as schema) */
   reviews: false,
@@ -683,35 +683,25 @@ export const AUDIENCE = [
   { t: 'المناسبات الخاصة', d: 'أعراس وملكات ومجالس وعزاء', img: 'ev-team-1', href: '/diyafat-zawajat-jeddah' },
 ] as const
 
-/* ── Partners of Success (شركاء النجاح — جهات وشركات وثقت بنا) ── */
+/* ── Partners of Success (شركاء النجاح — مستنسخة بدقة من موقعنا الأول alqahwaalmalakiya.com ومضغوطة WebP) ── */
 export type Partner = {
   name: string
   sub: string
-  cat: 'gov' | 'edu' | 'corp' | 'forum'
-  icon: string
   img: string
-  mark: string
 }
 
 export const PARTNERS: Partner[] = [
-  { name: 'وزارة التجارة', sub: 'المركز السعودي للأعمال', cat: 'gov', icon: 'crown', img: 'ev-vip-1', mark: 'MC' },
-  { name: 'وزارة الطاقة', sub: 'المنتديات والفعاليات الرسمية', cat: 'gov', icon: 'shield', img: 'ev-vip-2', mark: 'MOE' },
-  { name: 'وزارة الإعلام', sub: 'أجنحة المعارض والاستقبال', cat: 'gov', icon: 'award', img: 'ev-booth-5', mark: 'MEDIA' },
-  { name: 'وزارة الحج والعمرة', sub: 'مؤتمر ومعرض الحج بجدة', cat: 'gov', icon: 'sparkle', img: 'sawas-3', mark: 'HAJJ' },
-  { name: 'جامعة الملك سعود للعلوم الصحية', sub: 'KSAU-HS · المؤتمرات الطبية', cat: 'edu', icon: 'award', img: 'ev-booth-4', mark: 'KSAU' },
-  { name: 'جامعة الملك عبدالعزيز', sub: 'جدة · الندوات والحفلات', cat: 'edu', icon: 'crown', img: 'ev-team-1', mark: 'KAU' },
-  { name: 'مجموعة دلة البركة', sub: 'الفعاليات المؤسسية بجدة', cat: 'corp', icon: 'shield', img: 'eq-dallah-2', mark: 'DALLAH' },
-  { name: 'مجموعة بن لادن الدولية', sub: 'BIHG · استقبالات كبار الضيوف', cat: 'corp', icon: 'crown', img: 'ev-booth-2', mark: 'BIHG' },
-  { name: 'مجموعة العليان', sub: 'Olayan · اجتماعات الأعمال', cat: 'corp', icon: 'award', img: 'ev-table-1', mark: 'OLAYAN' },
-  { name: 'النادي الأهلي السعودي', sub: 'جدة · ضيافة كبار الشخصيات', cat: 'corp', icon: 'sparkle', img: 'souqiya', mark: 'AHLI' },
-  { name: 'طيران أديل · flyadeal', sub: 'أجنحة المعارض والفعاليات', cat: 'corp', icon: 'send', img: 'ev-booth-6', mark: 'ADEAL' },
-  { name: 'غرفة جدة التجارية', sub: 'ملتقيات قطاع الأعمال', cat: 'forum', icon: 'users', img: 'ev-booth-8', mark: 'JCCI' },
-  { name: 'منتدى مكة للحلال', sub: 'قاعات كبار الشخصيات VIP', cat: 'forum', icon: 'crown', img: 'souqiya-3', mark: 'HALAL' },
-  { name: 'معرض جدة الدولي للكتاب', sub: 'أجنحة الضيافة الرسمية', cat: 'forum', icon: 'sparkle', img: 'ev-booth-9', mark: 'JIBF' },
-  { name: 'سوبر دوم جدة', sub: 'Jeddah Superdome · المعارض الكبرى', cat: 'forum', icon: 'award', img: 'booth-2', mark: 'DOME' },
-  { name: 'فنادق وقاعات الكورنيش', sub: 'جدة · حفلات الزواج والملكات', cat: 'corp', icon: 'crown', img: 'wedding', mark: 'VIP' },
-  { name: 'شنايدر إلكتريك · Schneider', sub: 'اللقاءات التنفيذية', cat: 'corp', icon: 'shield', img: 'ev-booth-3', mark: 'SE' },
-  { name: 'نجيب أوتو · Suzuki', sub: 'حفلات التدشين والفروع', cat: 'corp', icon: 'sparkle', img: 'ev-booth-7', mark: 'AUTO' },
+  { name: 'أرامكو', sub: 'Aramco', img: 'ptn-aramco' },
+  { name: 'STC', sub: 'الاتصالات السعودية', img: 'ptn-stc' },
+  { name: 'سابك', sub: 'SABIC', img: 'ptn-sabic' },
+  { name: 'المراعي', sub: 'Almarai', img: 'ptn-almarai' },
+  { name: 'مصرف الراجحي', sub: 'Al Rajhi Bank', img: 'ptn-alrajhi' },
+  { name: 'موبايلي', sub: 'Mobily', img: 'ptn-mobily' },
+  { name: 'زين السعودية', sub: 'Zain KSA', img: 'ptn-zain' },
+  { name: 'نيوم', sub: 'NEOM', img: 'ptn-neom' },
+  { name: 'أكوا باور', sub: 'ACWA Power', img: 'ptn-acwa' },
+  { name: 'جرير', sub: 'مكتبة جرير', img: 'ptn-jarir' },
+  { name: 'جاهز', sub: 'Jahez', img: 'ptn-jahez' },
 ] as const
 
 /* ── Team Arrangements (كيف نرتب الطاقم لمناسبتك — no prices) ── */

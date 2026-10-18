@@ -4,7 +4,7 @@ import { hasImg } from './imgmap'
 import { BRAND } from './data'
 import { raw } from './icons'
 
-const V = '16' // asset cache-bust
+const V = '17' // asset cache-bust
 export const SITE = 'https://qahwajeen.com'
 
 const TOP_NAV = [
@@ -16,7 +16,7 @@ const TOP_NAV = [
   { href: '/occasions', label: 'المناسبات', match: '/occasions', hot: false },
   { href: '/locations', label: 'المدن', match: '/locations', hot: false },
   { href: '/about', label: 'من نحن', match: '/about', hot: false },
-  { href: '/social', label: 'حساباتنا', match: '/social', hot: false },
+  { href: '/links', label: 'روابطنا', match: '/links', hot: false },
   { href: '/contact', label: 'تواصل', match: '/contact', hot: false },
 ] as const
 
@@ -198,8 +198,8 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'souqiya', 
                 const isHome = item.href === '/'
                 const active = isHome
                   ? path === '/'
-                  : item.match === '/social'
-                    ? path === '/social' || path === '/links'
+                  : item.match === '/links'
+                    ? path === '/links' || path === '/social'
                     : path === item.match || path.startsWith(item.match + '/')
                 return (
                   <a
@@ -233,6 +233,12 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'souqiya', 
               >
                 {BRAND.phoneDisplay}
               </a>
+              <a
+                class="ftr-mail ltr"
+                href={`mailto:${BRAND.email}`}
+              >
+                {BRAND.email}
+              </a>
             </div>
             <nav class="ftr-links" aria-label="روابط سريعة">
               <a href="/">الرئيسية</a>
@@ -244,7 +250,7 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'souqiya', 
               <a href="/locations">المدن</a>
               <a href="/faq">الأسئلة الشائعة</a>
               <a href="/about">من نحن</a>
-              <a href="/social">حساباتنا والباركود</a>
+              <a href="/links">روابطنا والباركود</a>
               <a href="/contact">تواصل معنا</a>
             </nav>
             <div class="ftr-base">

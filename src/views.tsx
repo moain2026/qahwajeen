@@ -1,17 +1,98 @@
 /**
- * Social QR & Links landing page view (/social and /links).
- * (All other routes live in src/pages.tsx on top of <OnePage>.)
+ * Official Links & QR Code Landing Page (`/links` and `/social`).
+ * Modelled on https://keifaldiafa.com/links, tailored exclusively to
+ * «القهوة الملكية — ROYAL COFFEE» with ONLY our real, active channels:
+ *   1. WhatsApp (050 496 8113)
+ *   2. Direct Call (050 496 8113)
+ *   3. Fast 10-Second Booking (/booking)
+ *   4. Official Website (qahwajeen.com)
+ *   5. Official Email (qahwajiyin@gmail.com)
+ *   6. Google Maps Location (Jeddah, Saudi Arabia)
+ *   7. Official QR Code card (share / copy)
+ * Unused social media accounts are strictly hidden.
  */
 import { Layout, SITE } from './layout'
-import { Icon } from './icons'
-import { BRAND, SOCIAL } from './data'
+import { BRAND } from './data'
 import { graph, orgLd, siteLd, crumbLd } from './ld'
-import { Ico } from './blocks'
+import { Ico, wa } from './blocks'
 
-export const Social = ({ path = '/social' }: { path?: '/social' | '/links' }) => {
-  const contact = SOCIAL.filter((s) => s.kind === 'contact' && (s.n !== 'send'))
-  const social = SOCIAL.filter((s) => s.kind === 'social')
-  const place = SOCIAL.filter((s) => s.kind === 'place')
+export const Social = ({ path = '/links' }: { path?: '/links' | '/social' }) => {
+  const waMsg = `السلام عليكم، وصلتكم من صفحة الروابط والباركود. أرغب بالاستفسار عن خدمات ${BRAND.name} لمناسبة.`
+  const channels = [
+    {
+      id: 'whatsapp',
+      en: 'WhatsApp',
+      ar: 'واتساب فوري',
+      sub: BRAND.phoneDisplay,
+      note: 'الأسرع للردّ وعرض السعر المكتوب',
+      href: wa(waMsg),
+      tint: '#25D366',
+      icon: 'chat',
+      ext: true,
+      ltr: true,
+    },
+    {
+      id: 'call',
+      en: 'Call',
+      ar: 'اتصال مباشر ٢٤/٧',
+      sub: BRAND.phoneDisplay,
+      note: 'استقبال الحجوزات على مدار الساعة',
+      href: `tel:${BRAND.phoneLocal}`,
+      tint: '#E2C68E',
+      icon: 'phone',
+      ext: false,
+      ltr: true,
+    },
+    {
+      id: 'booking',
+      en: 'Fast Booking',
+      ar: 'حجز سريع في ١٠ ثوانٍ',
+      sub: 'حدّد مناسبتك وعدد الضيوف فوراً',
+      note: 'مُحدّد الضيافة الملكي للزبون المستعجل',
+      href: '/booking',
+      tint: '#f3d48b',
+      icon: 'sparkle',
+      ext: false,
+      ltr: false,
+    },
+    {
+      id: 'website',
+      en: 'Website',
+      ar: 'الموقع الرسمي',
+      sub: 'qahwajeen.com',
+      note: 'تصفّح الخدمات والتقديمات ومعرض الأعمال',
+      href: '/',
+      tint: '#c5a059',
+      icon: 'home',
+      ext: false,
+      ltr: true,
+    },
+    {
+      id: 'email',
+      en: 'Email',
+      ar: 'البريد الإلكتروني الرسمي',
+      sub: BRAND.email,
+      note: 'لعروض الأسعار المؤسسية والجهات والشركات',
+      href: `mailto:${BRAND.email}`,
+      tint: '#d9b56d',
+      icon: 'send',
+      ext: false,
+      ltr: true,
+    },
+    {
+      id: 'maps',
+      en: 'Google Maps',
+      ar: 'الموقع على الخريطة',
+      sub: 'جدة · المملكة العربية السعودية',
+      note: 'المقر الرئيسي ومركز العمليات',
+      href: BRAND.mapsUrl,
+      tint: '#34A853',
+      icon: 'maps',
+      ext: true,
+      ltr: false,
+    },
+  ] as const
+
   return (
     <Layout
       path={path}
@@ -20,85 +101,85 @@ export const Social = ({ path = '/social' }: { path?: '/social' | '/links' }) =>
       jsonld={graph(
         orgLd(),
         siteLd(),
-        crumbLd([{ name: 'حساباتنا والباركود', path }]),
+        crumbLd([{ name: 'روابطنا والباركود', path }]),
         {
-          '@type': 'ProfilePage',
-          '@id': `${SITE}${path}#profile`,
+          '@type': 'WebPage',
+          '@id': `${SITE}${path}#webpage`,
           url: `${SITE}${path}`,
-          name: `حسابات ${BRAND.name} والباركود الرسمي`,
-          description: `صفحة الروابط والباركود الرسمية لـ ${BRAND.name} في جدة — تواصل عبر واتساب أو الاتصال المباشر 0504968113 وتابع جميع حساباتنا.`,
+          name: `روابط ${BRAND.name} — تواصل معنا`,
+          description: `كل قنوات التواصل الرسمية مع ${BRAND.name} في صفحة واحدة: واتساب ${BRAND.phoneLocal}، اتصال مباشر، الموقع الرسمي، البريد الإلكتروني ${BRAND.email}، والموقع على خرائط Google.`,
+          isPartOf: { '@id': `${SITE}/#site` },
           inLanguage: 'ar',
           mainEntity: { '@id': `${SITE}/#business` },
         },
       )}
-      title="حساباتنا والباركود — كل روابط التواصل السريع"
-      desc={`صفحة الروابط والباركود الرسمية لـ ${BRAND.name} في جدة: امسح رمز QR أو اضغط للتواصل عبر واتساب، الاتصال المباشر ${BRAND.phoneLocal}، الحجز الفوري، وحسابات التواصل.`}
+      title="روابطنا والباركود — تواصل مع القهوة الملكية"
+      desc={`كل قنوات التواصل الرسمية مع ${BRAND.name} في صفحة واحدة: واتساب ${BRAND.phoneLocal}، اتصال مباشر، الموقع الرسمي qahwajeen.com، والبريد الإلكتروني ${BRAND.email}.`}
     >
-      <section class="sx" id="sx">
-        <div class="sx-orb sx-orb1" aria-hidden="true" />
-        <div class="sx-orb sx-orb2" aria-hidden="true" />
-        <div class="sx-orb sx-orb3" aria-hidden="true" />
-        <div class="sx-grid" aria-hidden="true" />
-
-        <div class="sx-in">
-          <div class="coin" id="coin" aria-hidden="true">
-            <div class="coin-in">
-              <div class="coin-f">
-                <img src="/static/img/logo-512.webp" alt="" width="160" height="160" decoding="async" />
-              </div>
-              <div class="coin-b">
-                <span class="coin-mark">{BRAND.latin}</span>
-              </div>
-              <div class="coin-edge" />
+      <section class="klinks-hero" aria-label="تواصل معنا">
+        <div class="wrap klinks-head">
+          <div class="klinks-lh-row">
+            <div class="klinks-emblem" aria-hidden="true">
+              <span class="klinks-orbit" />
+              <span class="klinks-orbit o2" />
+              <img
+                src="/static/img/logo-512.webp"
+                alt={BRAND.name}
+                width="112"
+                height="112"
+                decoding="async"
+                fetchpriority="high"
+              />
             </div>
-            <div class="coin-shadow" />
+            <div class="klinks-lh-tx">
+              <span class="klinks-label">تواصل معنا · OFFICIAL LINKS</span>
+              <h1>
+                {BRAND.name} <em>{BRAND.latin}</em>
+              </h1>
+              <p class="klinks-tag">قهوجيين · صبّابين · قهوجيات · ضيافة ملكية فاخرة</p>
+            </div>
           </div>
+          <p class="klinks-sub">
+            اختر القناة الأنسب لك — واتساب هو الأسرع، والاستشارة وعرض السعر المكتوب مجانيان بلا التزام.
+          </p>
+        </div>
+      </section>
 
-          <h1 class="sx-h1">حسابات {BRAND.name} والباركود الرسمي</h1>
-          <p class="sx-sub">{BRAND.tagline} · جدة والمملكة</p>
-          <div class="sx-rule" aria-hidden="true">
-            <i />
-          </div>
-          <p class="sx-lead">اضغط أي زر للتواصل المباشر أو امسح الباركود بكاميرا الجوال.</p>
-
-          <div class="sx-prime">
-            {contact.map((s) => (
+      <section class="klinks-sec" id="channels" aria-label="قنوات التواصل الرسمية">
+        <div class="wrap klinks-wrap">
+          <nav class="klinks-list" aria-label={`قنوات التواصل مع ${BRAND.name}`}>
+            {channels.map((ch, i) => (
               <a
-                class="sx-big tilt"
-                href={s.href}
-                style={`--hue:${s.hue}`}
-                rel="noopener"
-                target={s.href.startsWith('http') ? '_blank' : undefined}
+                class={`klink-card ch-${ch.id}`}
+                href={ch.href}
+                target={ch.ext ? '_blank' : undefined}
+                rel={ch.ext ? 'noopener' : undefined}
+                style={`--tint:${ch.tint};--i:${i}`}
+                aria-label={`${ch.ar} — ${ch.sub}`}
+                data-track={ch.id === 'whatsapp' ? 'whatsapp' : ch.id === 'call' ? 'call' : undefined}
+                data-location="links-page"
               >
-                <span class="sx-big-ico">
-                  <Icon n={s.n} />
+                <span class="klink-shine" aria-hidden="true" />
+                <span class="klink-ic" aria-hidden="true">
+                  <Ico n={ch.icon} />
                 </span>
-                <span class="sx-big-txt">
-                  <b>{s.label}</b>
-                  <em class={s.n === 'phone' || s.n === 'send' ? 'ltr' : ''}>{s.handle}</em>
+                <span class="klink-tx">
+                  <span class="klink-name">
+                    <b>{ch.en}</b>
+                    <i>— {ch.ar}</i>
+                  </span>
+                  <small class={ch.ltr ? 'ltr' : undefined}>{ch.sub}</small>
+                  <em class="klink-note">{ch.note}</em>
                 </span>
-                <span class="sx-big-note">{s.note}</span>
-                <span class="sx-shine" aria-hidden="true" />
+                <span class="klink-arr" aria-hidden="true">
+                  <Ico n="arrow" />
+                </span>
               </a>
             ))}
-            <a
-              class="sx-big tilt"
-              href="/booking"
-              style="--hue:#e2c68e"
-            >
-              <span class="sx-big-ico">
-                <Icon n="sparkle" />
-              </span>
-              <span class="sx-big-txt">
-                <b>حجز سريع في ١٠ ثوانٍ</b>
-                <em>حدّد مناسبتك وعدد الضيوف</em>
-              </span>
-              <span class="sx-big-note">للزبون المستعجل</span>
-              <span class="sx-shine" aria-hidden="true" />
-            </a>
-          </div>
+          </nav>
 
-          <div class="qr-card tilt rv">
+          {/* Official QR Code Card for scanning & sharing */}
+          <div class="qr-card rv" id="qr">
             <div class="qr-frame">
               <img
                 src="/static/img/qr.png"
@@ -108,18 +189,17 @@ export const Social = ({ path = '/social' }: { path?: '/social' | '/links' }) =>
                 loading="lazy"
                 decoding="async"
               />
-              <span class="qr-corner qr-tl" aria-hidden="true" />
-              <span class="qr-corner qr-tr" aria-hidden="true" />
-              <span class="qr-corner qr-bl" aria-hidden="true" />
-              <span class="qr-corner qr-br" aria-hidden="true" />
             </div>
             <div class="qr-txt">
-              <h2>امسح الباركود (QR Code)</h2>
-              <p>وجّه كاميرا جوالك على الرمز لفتح صفحة روابط {BRAND.name} وحفظ الرقم {BRAND.phoneDisplay} مباشرة.</p>
+              <h2>امسح الباركود الرسمي (QR Code)</h2>
+              <p>
+                وجّه كاميرا الجوال إلى الرمز لفتح صفحة روابط <b>{BRAND.name}</b> مباشرة — أو انسخ الرقم الموحّد والمعتمد:{' '}
+                <strong class="ltr">{BRAND.phoneDisplay}</strong>
+              </p>
               <div class="qr-btns">
-                <button class="btn btn-gold" type="button" id="shareBtn" data-share="/social">
+                <button class="btn btn-gold" type="button" id="shareBtn" data-share="/links">
                   <Ico n="share" />
-                  مشاركة صفحة الباركود
+                  مشاركة صفحة الروابط
                 </button>
                 <button class="btn btn-line" type="button" id="copyBtn" data-copy={BRAND.phoneDisplay}>
                   <Ico n="copy" />
@@ -129,51 +209,19 @@ export const Social = ({ path = '/social' }: { path?: '/social' | '/links' }) =>
             </div>
           </div>
 
-          <h2 class="sx-h2">كل حساباتنا على المنصات</h2>
-          <div class="sx-deck">
-            {social.map((s, i) => (
-              <a
-                class="sx-tile tilt"
-                href={s.href}
-                style={`--hue:${s.hue};--d:${i * 55}ms`}
-                rel="noopener"
-                target="_blank"
-              >
-                <span class="sx-tile-ico">
-                  <Icon n={s.n} />
-                </span>
-                <b>{s.label}</b>
-                <em class="ltr">{s.handle}</em>
-                <small>{s.note}</small>
-                <span class="sx-shine" aria-hidden="true" />
-              </a>
-            ))}
-          </div>
+          <p class="klinks-note">
+            نعمل على مدار الساعة (٢٤/٧) طوال أيام الأسبوع، ونستقبل طلبات المناسبات الرسمية والخاصة والعاجلة في جدة وجميع مدن المملكة.
+          </p>
 
-          {place.map((s) => (
-            <a class="sx-map tilt" href={s.href} style={`--hue:${s.hue}`} rel="noopener" target="_blank">
-              <span class="sx-big-ico">
-                <Icon n="maps" />
-              </span>
-              <span class="sx-big-txt">
-                <b>{s.label}</b>
-                <em>{s.handle}</em>
-              </span>
-              <span class="sx-shine" aria-hidden="true" />
-            </a>
-          ))}
-
-          <h2 class="sx-h2">تصفّح أقسام الموقع</h2>
-          <div class="sx-links">
-            <a href="/">الرئيسية</a>
+          <div class="sx-links" aria-label="روابط أقسام الموقع">
+            <a href="/">الصفحة الرئيسية</a>
             <a href="/booking">حجز فوري في ١٠ ثوانٍ</a>
-            <a href="/services">الخدمات</a>
-            <a href="/menu">قائمة الضيافة</a>
-            <a href="/gallery">معرض الأعمال</a>
+            <a href="/services">خدماتنا</a>
+            <a href="/menu">قائمة التقديمات</a>
+            <a href="/gallery">معرض أعمالنا</a>
             <a href="/occasions">المناسبات</a>
-            <a href="/locations">مناطق الخدمة</a>
+            <a href="/locations">المدن</a>
             <a href="/about">من نحن</a>
-            <a href="/contact">تواصل معنا</a>
           </div>
         </div>
       </section>

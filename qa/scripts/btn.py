@@ -93,7 +93,7 @@ with sync_playwright() as pw:
     pg = ctx.new_page()
 
     for path in ["/", "/booking", "/services", "/menu", "/gallery",
-                 "/qahwajiin-jeddah", "/contact", "/social", "/faq"]:
+                 "/qahwajiin-jeddah", "/contact", "/links", "/faq"]:
         pg.goto(B + path, wait_until="networkidle")
         time.sleep(0.6)
         pg.mouse.wheel(0, 1000)
@@ -106,7 +106,7 @@ with sync_playwright() as pw:
     # ---------- desktop ----------
     ctx2 = br.new_context(viewport={"width": 1440, "height": 900}, device_scale_factor=2)
     p2 = ctx2.new_page()
-    for path in ["/", "/booking", "/services", "/social"]:
+    for path in ["/", "/booking", "/services", "/links"]:
         p2.goto(B + path, wait_until="networkidle")
         time.sleep(0.6)
         p2.mouse.wheel(0, 1400)

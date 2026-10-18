@@ -2,6 +2,17 @@
 // [availableSizes, intrinsicW, intrinsicH] of the largest variant.
 export const IMG: Record<string, [string[], number, number]> = {
   "ev-booth-1": [["sm", "md"], 768, 1360],
+  "ptn-aramco": [["sm"], 300, 168],
+  "ptn-stc": [["sm"], 318, 159],
+  "ptn-sabic": [["sm"], 225, 225],
+  "ptn-almarai": [["sm"], 225, 225],
+  "ptn-alrajhi": [["sm"], 225, 225],
+  "ptn-mobily": [["sm"], 281, 180],
+  "ptn-zain": [["sm"], 225, 225],
+  "ptn-neom": [["sm"], 284, 177],
+  "ptn-acwa": [["sm"], 225, 225],
+  "ptn-jarir": [["sm"], 225, 225],
+  "ptn-jahez": [["sm"], 225, 225],
   "hero-real-tall": [["sm", "md"], 900, 675],
   "hero-real": [["sm", "md"], 900, 675],
   "ev-booth-2": [["sm", "md"], 768, 1360],

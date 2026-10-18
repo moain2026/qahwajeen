@@ -1,29 +1,13 @@
 /**
- * OnePage Royal Merge — Built on the exact visual cadence & proportions
- * of keifaldiafa.com while retaining our emerald-gold identity ("القهوة الملكية — ROYAL COFFEE")
- * and bespoke creative differentiators:
- *
- * 1. First Screen: Royal Emerald & Gold Frosted Glass Card (.hero-art .glass) + Multi-Layer
- *    Cinematic Background Animation (Ken-Burns multi-frame crossfade + golden light rays +
- *    floating golden dust particles) + 2 CTAs + Fast-Booking shortcut pill.
- * 2. Partners of Success (#partners): "شركاء النجاح — جهات وشركات وثقت بنا"
- *    Immediately below the Hero (before #who) as a compact auto-scrolling & touch-draggable
- *    marquee strip with real partner event photos & royal crests.
- * 3. Who We Serve (#who): 3 bespoke Royal Arch cards (109×146px on mobile) —
- *    الجهات الحكومية · الشركات والمؤتمرات · المناسبات الخاصة.
- * 4. Our Works (#works): Horizontal auto-moving & swipeable gallery rail (250×334px cards)
- *    with category pills, arrow buttons + "عرض كل الصور (33)" inline expansion & Lightbox.
- * 5. Crew & Attire (#crew): "اختر زيّ طاقمك" — dynamically moving left/right carousel with
- *    touch drag & navigation arrows (200×268px).
- * 6. Offerings & Hospitality Menu (#menu): "ما الذي يصل إلى ضيوفك؟" — interactive
- *    category tabs + compact 2-column square cards (170×170px).
- * 7. All Services (#services): "كل ما تحتاجه مناسبتك — من طاقم واحد" — grouped
- *    into (الطاقم الرجالي · الطاقم النسائي · التجهيزات واللمسات الملكية) in a compact
- *    2-column grid where each card expands inline (<details>).
- * 8. Crew Roles (#roles) + Team Arrangements (#arrangements): "ماذا يفعل طاقمنا" &
- *    "كيف نرتّب الطاقم لمناسبتك" (no prices).
- * 9. Why Royal Coffee (#why): 6 compact diamond-bulleted bars.
- * 10. FAQ (#faq) + Closing Contact Card (#contact).
+ * OnePage & Modular Sections —
+ * - <OnePage> is used on the Homepage (/) as the complete executive showcase.
+ * - Individual sections (<PartnersStrip>, <ServicesSec>, <MenuSec>, <WorksSec>,
+ *   <CrewSec>, <RolesSec>, <ArrangementsSec>, <OccasionsSec>, <WhySec>,
+ *   <FaqSec>, <EndCta>, <RoyalConcierge>, <FocusText>, <FocusGrid>) are exported
+ *   so every inner page (/services, /menu, /gallery, /occasions, /locations,
+ *   /about, /faq, /contact, /booking, etc.) renders ONLY its own focused,
+ *   well-organized sections (just like keifaldiafa.com), without repeating
+ *   unrelated homepage blocks!
  */
 import type { Child } from 'hono/jsx'
 import {
@@ -58,7 +42,7 @@ export const oneLine = (t: string, max = 88) => {
 const n2 = (i: number) => String(i + 1).padStart(2, '0')
 
 /* ── section header ─────────────────────────────────────────── */
-const Head = ({ k, t, sub, start, light }: { k: string; t: string; sub?: string; start?: boolean; light?: boolean }) => (
+export const Head = ({ k, t, sub, start, light }: { k: string; t: string; sub?: string; start?: boolean; light?: boolean }) => (
   <header class={'sx-head rv' + (start ? ' sx-start' : '') + (light ? ' sx-light' : '')}>
     <p class="sx-k">{k}</p>
     <h2>{t}</h2>
@@ -193,6 +177,67 @@ export const Hero = ({ h }: { h: HeroSpec }) => {
   )
 }
 
+/* ═══ 1.5 PARTNERS OF SUCCESS MARQUEE (شعارات شركاء النجاح الأصلية من موقعنا الأول — مضغوطة WebP) ═══ */
+export const PartnersStrip = () => (
+  <section class="ptn-strip" id="partners" aria-label="شركاء النجاح — جهات وشركات وثقت بنا">
+    <div class="wrap ptn-strip-head">
+      <div class="ptn-title-grp">
+        <span class="ptn-eyebrow">
+          <Ico n="crown" />
+          شركاء النجاح
+        </span>
+        <h2>جهات وشركات وثقت بنا</h2>
+      </div>
+      <p class="ptn-strip-sub">اسحب يميناً ويساراً · كبرى الشركات والجهات في المملكة</p>
+    </div>
+
+    <div class="ptn-ticker" id="ptnTicker" data-auto-rail="continuous">
+      <div class="ptn-track">
+        {[...PARTNERS, ...PARTNERS].map((p, idx) => (
+          <div class="ptn-logo-card" aria-hidden={idx >= PARTNERS.length ? 'true' : undefined}>
+            <span class="ptn-logo-box">
+              <Img
+                n={p.img}
+                alt={`شعار ${p.name} — من شركاء نجاح ${BRAND.name}`}
+                sizes="140px"
+              />
+            </span>
+            <b class="ptn-logo-name">{p.name}</b>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+)
+
+/* ═══ 2. WHO WE SERVE (لمن نخدم — 3 عقود ملكية مدمجة) ═══ */
+export const WhoSec = ({ place = 'جدة' }: { place?: string }) => (
+  <section class="sx sx-who" id="who">
+    <div class="wrap">
+      <Head
+        k="لمن نخدم"
+        t="طاقم واحد مدرَّب — وزيّ وتقديم بحسب طابع مناسبتك"
+      />
+      <div class="who-grid">
+        {AUDIENCE.map((a, i) => (
+          <a class="who-card rv" style={`--i:${i}`} href={a.href}>
+            <span class="who-num" aria-hidden="true">٠{i + 1}</span>
+            <Img
+              n={a.img}
+              alt={`${a.t} — ${BRAND.name} في ${place}`}
+              sizes="(min-width:1024px) 260px, 31vw"
+            />
+            <span class="who-cap">
+              <b>{a.t}</b>
+              <small>{a.d}</small>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)
+
 /* ═══ ROYAL 10-SECOND CONCIERGE (مُحدّد الضيافة الملكي السريع — يُعرض في صفحته المستقلة /booking) ═══ */
 export const RoyalConcierge = ({ place }: { place: string }) => {
   const defOcc = CONCIERGE.occasions[0].id
@@ -311,7 +356,7 @@ export const RoyalConcierge = ({ place }: { place: string }) => {
 }
 
 /* Compact 2-column Service Card with inline <details> drawer */
-const CompactServiceCard = ({ s, place }: { s: Service; place: string }) => (
+export const CompactServiceCard = ({ s, place }: { s: Service; place: string }) => (
   <article class="ksvc-card rv" id={`s-${s.slug}`}>
     <div class="ksvc-media">
       <Img
@@ -367,221 +412,147 @@ const CompactServiceCard = ({ s, place }: { s: Service; place: string }) => (
   </article>
 )
 
-/* ═══ THE FULL PAGE EXPERIENCE (Royal Coffee Signature) ═══ */
-export const OnePage = ({
-  hero,
-  focus,
-  faq = FAQ.slice(0, 6),
-  place = 'جدة',
-}: {
-  hero: HeroSpec
-  focus?: Child
-  faq?: readonly { q: string; a: string }[]
-  place?: string
-}) => {
-  const menSvcs = SERVICES.filter((s) => ['qahwajiin', 'zamzam'].includes(s.slug))
-  const womenSvcs = SERVICES.filter((s) => ['qahwajiat', 'offerings'].includes(s.slug))
-  const royalSvcs = SERVICES.filter((s) => ['royal', 'equipment', 'buffet', 'extras'].includes(s.slug))
-
-  return (
-    <>
-      <Hero h={hero} />
-
-      {/* ═══ 1.5 PARTNERS OF SUCCESS MARQUEE (مباشرة تحت الهيرو قبل "لمن نخدم" — شريط صغير يلف ويدور ويسحب باليد مع الصور) ═══ */}
-      <section class="ptn-strip" id="partners" aria-label="شركاء النجاح — جهات وشركات وثقت بنا">
-        <div class="wrap ptn-strip-head">
-          <div class="ptn-title-grp">
-            <span class="ptn-eyebrow">
-              <Ico n="crown" />
-              شركاء النجاح
-            </span>
-            <h2>جهات وشركات وثقت بنا</h2>
-          </div>
-          <p class="ptn-strip-sub">اسحب يميناً ويساراً · جهات حكومية وجامعات وشركات كبرى</p>
+/* ═══ 3. OUR WORKS SECTION ═══ */
+export const WorksSec = ({ expandAll = false }: { expandAll?: boolean }) => (
+  <section class="sx sx-alt" id="works">
+    <div class="wrap">
+      <Head
+        k="أعمالنا الموثّقة"
+        t="صور حقيقية من مناسبات نفّذناها"
+        sub="شريط متحرك يتجدد تلقائياً — اسحب يميناً ويساراً أو اضغط على أي صورة لتكبيرها."
+      />
+      <div class="works-toolbar">
+        <div class="works-filters" id="worksFilters" role="tablist" aria-label="تصفية معرض الأعمال">
+          <button type="button" class="w-pill on" data-wcat="all" aria-selected="true">الكل ({GALLERY.length})</button>
+          <button type="button" class="w-pill" data-wcat="فريق" aria-selected="false">الطاقم والزيّ</button>
+          <button type="button" class="w-pill" data-wcat="ملكية" aria-selected="false">الضيافة الملكية VIP</button>
+          <button type="button" class="w-pill" data-wcat="عدّة" aria-selected="false">الدلال والعدّة</button>
+          <button type="button" class="w-pill" data-wcat="تقديمات" aria-selected="false">التقديمات والحلى</button>
         </div>
-
-        <div class="ptn-ticker" id="ptnTicker" data-auto-rail="continuous">
-          <div class="ptn-track">
-            {[...PARTNERS, ...PARTNERS].map((p, idx) => (
-              <div class="ptn-pill" aria-hidden={idx >= PARTNERS.length ? 'true' : undefined}>
-                <span class="ptn-thumb">
-                  <Img
-                    n={p.img}
-                    alt={`ضيافة ${p.name} — ${BRAND.name}`}
-                    sizes="64px"
-                  />
-                  <em class="ptn-mark">{p.mark}</em>
-                </span>
-                <span class="ptn-meta">
-                  <b>{p.name}</b>
-                  <small>{p.sub}</small>
-                </span>
-              </div>
-            ))}
-          </div>
+        <div class="rail-ctrls" aria-label="تحكم بتمرير المعرض">
+          <button type="button" class="rail-btn" data-rail-target="worksRail" data-dir="prev" aria-label="السابق">
+            <Ico n="arrow" />
+          </button>
+          <span class="k-swipe-hint" aria-hidden="true">يتحرك تلقائياً · اسحب</span>
+          <button type="button" class="rail-btn is-next" data-rail-target="worksRail" data-dir="next" aria-label="التالي">
+            <Ico n="arrow" />
+          </button>
         </div>
-      </section>
+      </div>
+      <div class="k-rail is-auto" id="worksRail" data-auto-rail="step" role="region" aria-label="معرض أعمال القهوة الملكية">
+        {GALLERY.slice(0, 12).map((g) => (
+          <button
+            type="button"
+            class="k-work-card galx-it"
+            data-wcat={g.cat}
+            data-full={g.img}
+            data-cap={g.cap}
+            aria-label={`تكبير صورة: ${g.cap}`}
+          >
+            <Img
+              n={g.img}
+              alt={`${g.cap} — ${BRAND.name}`}
+              sizes="(min-width:1024px) 280px, 64vw"
+            />
+            <span class="k-work-tag">{g.cat}</span>
+            <span class="k-work-cap">{g.cap}</span>
+          </button>
+        ))}
+      </div>
 
-      {/* ═══ 2. WHO WE SERVE (لمن نخدم — 3 عقود ملكية مدمجة بتميّز بصري خاص بالقهوة الملكية) ═══ */}
-      <section class="sx sx-who" id="who">
-        <div class="wrap">
-          <Head
-            k="لمن نخدم"
-            t="طاقم واحد مدرَّب — وزيّ وتقديم بحسب طابع مناسبتك"
-          />
-          <div class="who-grid">
-            {AUDIENCE.map((a, i) => (
-              <a class="who-card rv" style={`--i:${i}`} href={a.href}>
-                <span class="who-num" aria-hidden="true">٠{i + 1}</span>
-                <Img
-                  n={a.img}
-                  alt={`${a.t} — ${BRAND.name} في ${place}`}
-                  sizes="(min-width:1024px) 260px, 31vw"
-                />
-                <span class="who-cap">
-                  <b>{a.t}</b>
-                  <small>{a.d}</small>
-                </span>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {focus}
-
-      {/* ═══ 3. OUR WORKS (أعمالنا — شريط سحب متحرك + أزرار تنقل + فلاتر + تكبير الصور) ═══ */}
-      <section class="sx sx-alt" id="works">
-        <div class="wrap">
-          <Head
-            k="أعمالنا الموثّقة"
-            t="صور حقيقية من مناسبات نفّذناها"
-            sub="شريط متحرك يتجدد تلقائياً — اسحب يميناً ويساراً أو اضغط على أي صورة لتكبيرها."
-          />
-          <div class="works-toolbar">
-            <div class="works-filters" id="worksFilters" role="tablist" aria-label="تصفية معرض الأعمال">
-              <button type="button" class="w-pill on" data-wcat="all" aria-selected="true">الكل ({GALLERY.length})</button>
-              <button type="button" class="w-pill" data-wcat="فريق" aria-selected="false">الطاقم والزيّ</button>
-              <button type="button" class="w-pill" data-wcat="ملكية" aria-selected="false">الضيافة الملكية VIP</button>
-              <button type="button" class="w-pill" data-wcat="عدّة" aria-selected="false">الدلال والعدّة</button>
-              <button type="button" class="w-pill" data-wcat="تقديمات" aria-selected="false">التقديمات والحلى</button>
-            </div>
-            <div class="rail-ctrls" aria-label="تحكم بتمرير المعرض">
-              <button type="button" class="rail-btn" data-rail-target="worksRail" data-dir="prev" aria-label="السابق">
-                <Ico n="arrow" />
-              </button>
-              <span class="k-swipe-hint" aria-hidden="true">يتحرك تلقائياً · اسحب</span>
-              <button type="button" class="rail-btn is-next" data-rail-target="worksRail" data-dir="next" aria-label="التالي">
-                <Ico n="arrow" />
-              </button>
-            </div>
-          </div>
-          <div class="k-rail is-auto" id="worksRail" data-auto-rail="step" role="region" aria-label="معرض أعمال القهوة الملكية">
-            {GALLERY.slice(0, 12).map((g) => (
-              <button
-                type="button"
-                class="k-work-card galx-it"
-                data-wcat={g.cat}
-                data-full={g.img}
-                data-cap={g.cap}
-                aria-label={`تكبير صورة: ${g.cap}`}
-              >
-                <Img
-                  n={g.img}
-                  alt={`${g.cap} — ${BRAND.name}`}
-                  sizes="(min-width:1024px) 280px, 64vw"
-                />
-                <span class="k-work-tag">{g.cat}</span>
-                <span class="k-work-cap">{g.cap}</span>
-              </button>
-            ))}
-          </div>
-
-          {/* Expandable full gallery inline */}
-          <div class="galx-extra" id="galx" hidden>
-            <div class="k-gal-grid">
-              {GALLERY.slice(12).map((g) => (
-                <button
-                  type="button"
-                  class="k-work-card galx-it"
-                  data-wcat={g.cat}
-                  data-full={g.img}
-                  data-cap={g.cap}
-                  aria-label={`تكبير صورة: ${g.cap}`}
-                >
-                  <Img
-                    n={g.img}
-                    alt={`${g.cap} — ${BRAND.name}`}
-                    sizes="(min-width:1024px) 240px, 46vw"
-                  />
-                  <span class="k-work-tag">{g.cat}</span>
-                  <span class="k-work-cap">{g.cap}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div class="sx-more">
+      {/* Expandable full gallery inline */}
+      <div class="galx-extra" id="galx" hidden={!expandAll}>
+        <div class="k-gal-grid">
+          {GALLERY.slice(12).map((g) => (
             <button
               type="button"
-              class="btn btn-line"
-              id="galMore"
-              aria-controls="galx"
-              aria-expanded="false"
+              class="k-work-card galx-it"
+              data-wcat={g.cat}
+              data-full={g.img}
+              data-cap={g.cap}
+              aria-label={`تكبير صورة: ${g.cap}`}
             >
-              معرض الأعمال الكامل ({GALLERY.length} صورة)
-              <Ico n="chevron" />
+              <Img
+                n={g.img}
+                alt={`${g.cap} — ${BRAND.name}`}
+                sizes="(min-width:1024px) 240px, 46vw"
+              />
+              <span class="k-work-tag">{g.cat}</span>
+              <span class="k-work-cap">{g.cap}</span>
             </button>
-          </div>
+          ))}
         </div>
-      </section>
+      </div>
 
-      {/* ═══ 4. CREW & ATTIRE (اختر زيّ طاقمك — شريط متحرك يمين ويسار تلقائياً وباللمس) ═══ */}
-      <section class="sx" id="crew">
-        <div class="wrap">
-          <Head
-            k="الطاقم والزيّ الرسمي"
-            t="اختر زيّ طاقمك"
-            sub="قهوجيين وصبابين ومباشرين بزيٍّ موحّد — وطاقم نسائي مستقل للمناسبات النسائية."
-          />
-          <div class="rail-bar">
-            <div class="rail-ctrls" aria-label="تحكم بتمرير أزياء الطاقم">
-              <button type="button" class="rail-btn" data-rail-target="crewRail" data-dir="prev" aria-label="الزي السابق">
-                <Ico n="arrow" />
-              </button>
-              <span class="k-swipe-hint" aria-hidden="true">يتحرك تلقائياً يميناً ويساراً · اسحب للتصفح</span>
-              <button type="button" class="rail-btn is-next" data-rail-target="crewRail" data-dir="next" aria-label="الزي التالي">
-                <Ico n="arrow" />
-              </button>
-            </div>
-          </div>
-          <div class="k-rail k-rail-crew is-auto" id="crewRail" data-auto-rail="pingpong" role="region" aria-label="أزياء طاقم القهوة الملكية">
-            {STAFF.map((s, idx) => (
-              <figure class="k-crew-card">
-                <span class="crew-badge">زيّ ٠{idx + 1}</span>
-                <Img
-                  n={s.img}
-                  alt={`${s.t} — ${s.d} من ${BRAND.name}`}
-                  sizes="(min-width:1024px) 240px, 52vw"
-                />
-                <figcaption>
-                  <b>{s.t}</b>
-                  <small>{s.d}</small>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
+      {!expandAll && (
+        <div class="sx-more">
+          <button
+            type="button"
+            class="btn btn-line"
+            id="galMore"
+            aria-controls="galx"
+            aria-expanded="false"
+          >
+            معرض الأعمال الكامل ({GALLERY.length} صورة)
+            <Ico n="chevron" />
+          </button>
         </div>
-      </section>
+      )}
+    </div>
+  </section>
+)
 
-      {/* ═══ 5. OFFERINGS & MENU (ما الذي يصل إلى ضيوفك؟ — تبويبات + بطاقات مدمجة) ═══ */}
-      <section class="sx sx-alt" id="menu">
-        <div class="wrap">
-          <Head
-            k="التقديمات والمعدات"
-            t="ما الذي يصل إلى ضيوفك؟"
-            sub="اختر القسم لتصفّح الأصناف بصورها الحقيقية — أكثر من ٧٠ صنفاً من القهوة والتمور والحلى."
-          />
+/* ═══ 4. CREW & ATTIRE SECTION ═══ */
+export const CrewSec = () => (
+  <section class="sx" id="crew">
+    <div class="wrap">
+      <Head
+        k="الطاقم والزيّ الرسمي"
+        t="اختر زيّ طاقمك"
+        sub="قهوجيين وصبابين ومباشرين بزيٍّ موحّد — وطاقم نسائي مستقل للمناسبات النسائية."
+      />
+      <div class="rail-bar">
+        <div class="rail-ctrls" aria-label="تحكم بتمرير أزياء الطاقم">
+          <button type="button" class="rail-btn" data-rail-target="crewRail" data-dir="prev" aria-label="الزي السابق">
+            <Ico n="arrow" />
+          </button>
+          <span class="k-swipe-hint" aria-hidden="true">يتحرك تلقائياً يميناً ويساراً · اسحب للتصفح</span>
+          <button type="button" class="rail-btn is-next" data-rail-target="crewRail" data-dir="next" aria-label="الزي التالي">
+            <Ico n="arrow" />
+          </button>
+        </div>
+      </div>
+      <div class="k-rail k-rail-crew is-auto" id="crewRail" data-auto-rail="pingpong" role="region" aria-label="أزياء طاقم القهوة الملكية">
+        {STAFF.map((s, idx) => (
+          <figure class="k-crew-card">
+            <span class="crew-badge">زيّ ٠{idx + 1}</span>
+            <Img
+              n={s.img}
+              alt={`${s.t} — ${s.d} من ${BRAND.name}`}
+              sizes="(min-width:1024px) 240px, 52vw"
+            />
+            <figcaption>
+              <b>{s.t}</b>
+              <small>{s.d}</small>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+)
+
+/* ═══ 5. OFFERINGS & MENU SECTION ═══ */
+export const MenuSec = ({ showAllCategories = false }: { showAllCategories?: boolean }) => (
+  <section class="sx sx-alt" id="menu">
+    <div class="wrap">
+      <Head
+        k="التقديمات والمعدات"
+        t="ما الذي يصل إلى ضيوفك؟"
+        sub="اختر القسم لتصفّح الأصناف بصورها الحقيقية — أكثر من ٧٠ صنفاً من القهوة والتمور والحلى."
+      />
+      {!showAllCategories ? (
+        <>
           <div class="tabs rv" role="tablist" aria-label="أقسام التقديمات">
             {MENU.map((m, i) => (
               <button
@@ -624,229 +595,314 @@ export const OnePage = ({
               </div>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* ═══ 6. ALL SERVICES (الخدمات — مقسّمة بوضوح في عمودين مدمجين مع فتح التفاصيل) ═══ */}
-      <section class="sx" id="services">
-        <div class="wrap">
-          <Head
-            k="الخدمات"
-            t="كل ما تحتاجه مناسبتك — من طاقم واحد"
-            sub="طاقم مدرَّب، وتجهيز المكان، ولمسات فنية تكمّل الضيافة — اضغط «التفاصيل» في أي بطاقة لعرض المشتملات الكاملة."
-          />
-
-          <div class="ksvc-group">
-            <h3 class="ksvc-gtitle">
-              <span>الطاقم الرجالي</span>
-            </h3>
-            <div class="ksvc-grid">
-              {menSvcs.map((s) => (
-                <CompactServiceCard s={s} place={place} />
-              ))}
-            </div>
-          </div>
-
-          <div class="ksvc-group">
-            <h3 class="ksvc-gtitle">
-              <span>الطاقم النسائي والتقديمات</span>
-            </h3>
-            <div class="ksvc-grid">
-              {womenSvcs.map((s) => (
-                <CompactServiceCard s={s} place={place} />
-              ))}
-            </div>
-          </div>
-
-          <div class="ksvc-group">
-            <h3 class="ksvc-gtitle">
-              <span>تجهيزات ملكية ولمسات فنية</span>
-            </h3>
-            <div class="ksvc-grid">
-              {royalSvcs.map((s) => (
-                <CompactServiceCard s={s} place={place} />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ 7. ROLES (كيف نعمل — ماذا يفعل طاقمنا في مناسبتك؟) ═══ */}
-      <section class="sx sx-alt" id="roles">
-        <div class="wrap">
-          <Head
-            k="كيف نعمل"
-            t="ماذا يفعل طاقمنا في مناسبتك؟"
-            sub="ثلاثة أدوار يعرفها أهل الضيافة في السعودية — ونوزّعها على عدد ضيوفك وشكل المكان."
-          />
-          <div class="rolx">
-            {ROLES.map((r, i) => (
-              <article class="rolx-card rv" style={`--i:${i}`}>
-                <div class="rolx-txt">
-                  <span class="rolx-k">الأدوار · {n2(i)}</span>
-                  <h3>{r.t}</h3>
-                  <p>{r.d}</p>
-                </div>
-                <span class="rolx-img">
-                  <Img
-                    n={r.img}
-                    alt={`دور ${r.t} في خدمة الضيافة — ${BRAND.name}`}
-                    sizes="(min-width:1024px) 360px, 90vw"
-                  />
-                </span>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ 8. TEAM ARRANGEMENTS (الترتيبات — كيف نرتّب الطاقم لمناسبتك بدون أسعار) ═══ */}
-      <section class="sx" id="arrangements">
-        <div class="wrap">
-          <Head
-            k="الترتيبات"
-            t="كيف نرتّب الطاقم لمناسبتك"
-            sub="ثلاثة تشكيلات شائعة — ويُحسب عدد الطاقم بدقة على عدد ضيوفك ومساحة المكان."
-          />
-          <div class="arr-grid">
-            {ARRANGEMENTS.map((ar, i) => (
-              <article class="arr-card rv" style={`--i:${i}`}>
-                <h3>{ar.title}</h3>
-                <p class="arr-sub">{ar.sub}</p>
-                <ul class="arr-pts">
-                  {ar.points.map((pt) => (
-                    <li>{pt}</li>
-                  ))}
-                </ul>
-                <a
-                  class="btn btn-gold btn-block"
-                  href={wa(ar.msg)}
-                  rel="noopener"
-                  target="_blank"
-                  data-track="whatsapp"
-                  data-location={`arrangement-${i + 1}`}
-                >
-                  <Ico n="chat" />
-                  اطلب هذا الترتيب
+        </>
+      ) : (
+        /* On dedicated /menu page: show every category organized cleanly one after another, just like keifaldiafa.com/offerings */
+        <div class="menu-full-stack">
+          {MENU.map((m) => (
+            <div class="ksvc-group" id={m.slug}>
+              <h3 class="ksvc-gtitle">
+                <span>{m.cat}</span>
+                <a class="lnk" href={`/menu/${m.slug}`}>
+                  صفحة القسم ({m.items.length})
+                  <Ico n="arrow" />
                 </a>
-              </article>
+              </h3>
+              <p class="tabp-blurb" style="text-align:start;margin:0 0 14px">{m.blurb}</p>
+              <div class="dishx">
+                {m.items
+                  .filter((it) => it.img)
+                  .map((it) => (
+                    <figure class="dishx-card rv">
+                      <Img
+                        n={it.img!}
+                        alt={`${it.n} — ${m.cat} من ${BRAND.name}`}
+                        sizes="(min-width:1024px) 220px, 44vw"
+                      />
+                      <figcaption>
+                        <b>{it.n}</b>
+                        <small>{it.d}</small>
+                      </figcaption>
+                    </figure>
+                  ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+)
+
+/* ═══ 6. ALL SERVICES SECTION ═══ */
+export const ServicesSec = ({ place = 'جدة' }: { place?: string }) => {
+  const menSvcs = SERVICES.filter((s) => ['qahwajiin', 'zamzam'].includes(s.slug))
+  const womenSvcs = SERVICES.filter((s) => ['qahwajiat', 'offerings'].includes(s.slug))
+  const royalSvcs = SERVICES.filter((s) => ['royal', 'equipment', 'buffet', 'extras'].includes(s.slug))
+
+  return (
+    <section class="sx" id="services">
+      <div class="wrap">
+        <Head
+          k="الخدمات"
+          t="كل ما تحتاجه مناسبتك — من طاقم واحد"
+          sub="طاقم مدرَّب، وتجهيز المكان، ولمسات فنية تكمّل الضيافة — اضغط «التفاصيل» في أي بطاقة لعرض المشتملات الكاملة."
+        />
+
+        <div class="ksvc-group" id="g-male">
+          <h3 class="ksvc-gtitle">
+            <span>الطاقم الرجالي</span>
+          </h3>
+          <div class="ksvc-grid">
+            {menSvcs.map((s) => (
+              <CompactServiceCard s={s} place={place} />
             ))}
           </div>
         </div>
-      </section>
 
-      {/* ═══ 9. OCCASIONS (المناسبات — لمحة سريعة مدمجة) ═══ */}
-      <section class="sx sx-alt" id="occasions">
-        <div class="wrap">
-          <Head
-            k="المناسبات"
-            t="ضيافة مُفصَّلة لكل نوع مناسبة"
-          />
-          <div class="occx">
-            {OCCASIONS.map((o, i) => (
-              <a class="occx-card rv" style={`--i:${i}`} href={`/occasions/${o.slug}`}>
-                <Img
-                  n={o.img}
-                  alt={`${o.h1} — ${BRAND.name} في ${place}`}
-                  sizes="(min-width:1024px) 280px, 46vw"
-                />
-                <span class="occx-cap">
-                  <b>{o.title}</b>
-                  <small>{o.d}</small>
-                </span>
-              </a>
+        <div class="ksvc-group" id="g-female">
+          <h3 class="ksvc-gtitle">
+            <span>الطاقم النسائي والتقديمات</span>
+          </h3>
+          <div class="ksvc-grid">
+            {womenSvcs.map((s) => (
+              <CompactServiceCard s={s} place={place} />
             ))}
           </div>
         </div>
-      </section>
 
-      {/* ═══ 10. WHY US (لماذا نحن — لماذا يختارنا منظمو الفعاليات وأصحاب المجالس؟) ═══ */}
-      <section class="sx" id="why">
-        <div class="wrap wrap-nar">
-          <Head k="لماذا نحن" t={`لماذا يختارنا منظّمو الفعاليات في ${place}؟`} />
-          <ul class="why-bars">
-            {WHY.map((w, i) => (
-              <li class="rv" style={`--i:${i}`}>
-                <i aria-hidden="true">✦</i>
-                <span>{w}</span>
-              </li>
+        <div class="ksvc-group" id="g-royal">
+          <h3 class="ksvc-gtitle">
+            <span>تجهيزات ملكية ولمسات فنية</span>
+          </h3>
+          <div class="ksvc-grid">
+            {royalSvcs.map((s) => (
+              <CompactServiceCard s={s} place={place} />
             ))}
-          </ul>
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
+  )
+}
 
-      {/* ═══ 11. FAQ (الأسئلة الشائعة) ═══ */}
-      <section class="sx sx-alt" id="faq">
-        <div class="wrap wrap-nar">
-          <Head k="الأسئلة الشائعة" t="إجابات صريحة قبل تأكيد حجزك" />
-          <Faq items={faq} />
-        </div>
-      </section>
+/* ═══ 7. ROLES SECTION ═══ */
+export const RolesSec = () => (
+  <section class="sx sx-alt" id="roles">
+    <div class="wrap">
+      <Head
+        k="كيف نعمل"
+        t="ماذا يفعل طاقمنا في مناسبتك؟"
+        sub="ثلاثة أدوار يعرفها أهل الضيافة في السعودية — ونوزّعها على عدد ضيوفك وشكل المكان."
+      />
+      <div class="rolx">
+        {ROLES.map((r, i) => (
+          <article class="rolx-card rv" style={`--i:${i}`}>
+            <div class="rolx-txt">
+              <span class="rolx-k">الأدوار · {n2(i)}</span>
+              <h3>{r.t}</h3>
+              <p>{r.d}</p>
+            </div>
+            <span class="rolx-img">
+              <Img
+                n={r.img}
+                alt={`دور ${r.t} في خدمة الضيافة — ${BRAND.name}`}
+                sizes="(min-width:1024px) 360px, 90vw"
+              />
+            </span>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+)
 
-      {/* ═══ 12. FINAL CALL (خاتمة التواصل والحجز) ═══ */}
-      <section class="endx" id="contact">
-        <div class="endx-bg">
-          <Img n="ev-vip-2" alt="" sizes="100vw" />
-        </div>
-        <div class="endx-in wrap rv">
-          <div class="endx-card">
-            <p class="sx-k">تواصل مباشر ٢٤/٧</p>
-            <h2>مناسبتك القادمة — نتولّى ضيافتها بمعيار ملكي</h2>
-            <p class="sx-sub">
-              أرسل موعد المناسبة والموقع وعدد الضيوف، ويصلك عرض سعر مكتوب ومفصّل خلال دقائق.
-            </p>
+/* ═══ 8. TEAM ARRANGEMENTS SECTION ═══ */
+export const ArrangementsSec = () => (
+  <section class="sx" id="arrangements">
+    <div class="wrap">
+      <Head
+        k="الترتيبات"
+        t="كيف نرتّب الطاقم لمناسبتك"
+        sub="ثلاثة تشكيلات شائعة — ويُحسب عدد الطاقم بدقة على عدد ضيوفك ومساحة المكان."
+      />
+      <div class="arr-grid">
+        {ARRANGEMENTS.map((ar, i) => (
+          <article class="arr-card rv" style={`--i:${i}`}>
+            <h3>{ar.title}</h3>
+            <p class="arr-sub">{ar.sub}</p>
+            <ul class="arr-pts">
+              {ar.points.map((pt) => (
+                <li>{pt}</li>
+              ))}
+            </ul>
             <a
-              class="endx-phone ltr"
+              class="btn btn-gold btn-block"
+              href={wa(ar.msg)}
+              rel="noopener"
+              target="_blank"
+              data-track="whatsapp"
+              data-location={`arrangement-${i + 1}`}
+            >
+              <Ico n="chat" />
+              اطلب هذا الترتيب
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+)
+
+/* ═══ 9. OCCASIONS SECTION ═══ */
+export const OccasionsSec = ({ place = 'جدة' }: { place?: string }) => (
+  <section class="sx sx-alt" id="occasions">
+    <div class="wrap">
+      <Head
+        k="المناسبات"
+        t="ضيافة مُفصَّلة لكل نوع مناسبة"
+      />
+      <div class="occx">
+        {OCCASIONS.map((o, i) => (
+          <a class="occx-card rv" style={`--i:${i}`} href={`/occasions/${o.slug}`}>
+            <Img
+              n={o.img}
+              alt={`${o.h1} — ${BRAND.name} في ${place}`}
+              sizes="(min-width:1024px) 280px, 46vw"
+            />
+            <span class="occx-cap">
+              <b>{o.title}</b>
+              <small>{o.d}</small>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)
+
+/* ═══ 10. WHY US SECTION ═══ */
+export const WhySec = ({ place = 'جدة' }: { place?: string }) => (
+  <section class="sx" id="why">
+    <div class="wrap wrap-nar">
+      <Head k="لماذا نحن" t={`لماذا يختارنا منظّمو الفعاليات في ${place}؟`} />
+      <ul class="why-bars">
+        {WHY.map((w, i) => (
+          <li class="rv" style={`--i:${i}`}>
+            <i aria-hidden="true">✦</i>
+            <span>{w}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)
+
+/* ═══ 11. FAQ SECTION ═══ */
+export const FaqSec = ({ items = FAQ.slice(0, 6) }: { items?: readonly { q: string; a: string }[] }) => (
+  <section class="sx sx-alt" id="faq">
+    <div class="wrap wrap-nar">
+      <Head k="الأسئلة الشائعة" t="إجابات صريحة قبل تأكيد حجزك" />
+      <Faq items={items} />
+    </div>
+  </section>
+)
+
+/* ═══ 12. FINAL CALL & LIGHTBOX ═══ */
+export const EndCta = ({ msg }: { msg: string }) => (
+  <>
+    <section class="endx" id="contact">
+      <div class="endx-bg">
+        <Img n="ev-vip-2" alt="" sizes="100vw" />
+      </div>
+      <div class="endx-in wrap rv">
+        <div class="endx-card">
+          <p class="sx-k">تواصل مباشر ٢٤/٧</p>
+          <h2>مناسبتك القادمة — نتولّى ضيافتها بمعيار ملكي</h2>
+          <p class="sx-sub">
+            أرسل موعد المناسبة والموقع وعدد الضيوف، ويصلك عرض سعر مكتوب ومفصّل خلال دقائق.
+          </p>
+          <a
+            class="endx-phone ltr"
+            href={`tel:${BRAND.phoneLocal}`}
+            data-track="call"
+            data-location="footer-cta"
+          >
+            {BRAND.phoneDisplay}
+          </a>
+          <div class="hx-cta">
+            <a
+              class="btn btn-gold btn-lg"
               href={`tel:${BRAND.phoneLocal}`}
               data-track="call"
               data-location="footer-cta"
             >
-              {BRAND.phoneDisplay}
+              <Ico n="phone" />
+              اتصل الآن
             </a>
-            <div class="hx-cta">
-              <a
-                class="btn btn-gold btn-lg"
-                href={`tel:${BRAND.phoneLocal}`}
-                data-track="call"
-                data-location="footer-cta"
-              >
-                <Ico n="phone" />
-                اتصل الآن
-              </a>
-              <a
-                class="btn btn-line btn-lg"
-                href={wa(hero.msg)}
-                rel="noopener"
-                target="_blank"
-                data-track="whatsapp"
-                data-location="footer-cta"
-              >
-                <Ico n="chat" />
-                واتساب
-              </a>
-            </div>
+            <a
+              class="btn btn-line btn-lg"
+              href={wa(msg)}
+              rel="noopener"
+              target="_blank"
+              data-track="whatsapp"
+              data-location="footer-cta"
+            >
+              <Ico n="chat" />
+              واتساب
+            </a>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <dialog class="lbx" id="lbx" aria-label="معاينة الصورة بحجم كامل">
-        <button type="button" class="lbx-x" aria-label="إغلاق المعاينة">
-          <Ico n="close" />
-        </button>
-        <button type="button" class="lbx-nav lbx-prev" aria-label="الصورة السابقة">
-          <Ico n="chevron" />
-        </button>
-        <figure class="lbx-fig">
-          <img alt="" width="900" height="1200" decoding="async" />
-          <figcaption id="lbxCap"></figcaption>
-        </figure>
-        <button type="button" class="lbx-nav lbx-next" aria-label="الصورة التالية">
-          <Ico n="chevron" />
-        </button>
-      </dialog>
-    </>
-  )
-}
+    <dialog class="lbx" id="lbx" aria-label="معاينة الصورة بحجم كامل">
+      <button type="button" class="lbx-x" aria-label="إغلاق المعاينة">
+        <Ico n="close" />
+      </button>
+      <button type="button" class="lbx-nav lbx-prev" aria-label="الصورة السابقة">
+        <Ico n="chevron" />
+      </button>
+      <figure class="lbx-fig">
+        <img alt="" width="900" height="1200" decoding="async" />
+        <figcaption id="lbxCap"></figcaption>
+      </figure>
+      <button type="button" class="lbx-nav lbx-next" aria-label="الصورة التالية">
+        <Ico n="chevron" />
+      </button>
+    </dialog>
+  </>
+)
+
+/* ═══ THE FULL HOMEPAGE EXPERIENCE (Used on `/` and Local City Landing Pages) ═══ */
+export const OnePage = ({
+  hero,
+  focus,
+  faq = FAQ.slice(0, 6),
+  place = 'جدة',
+}: {
+  hero: HeroSpec
+  focus?: Child
+  faq?: readonly { q: string; a: string }[]
+  place?: string
+}) => (
+  <>
+    <Hero h={hero} />
+    <PartnersStrip />
+    <WhoSec place={place} />
+    {focus}
+    <WorksSec />
+    <CrewSec />
+    <MenuSec />
+    <ServicesSec place={place} />
+    <RolesSec />
+    <ArrangementsSec />
+    <OccasionsSec place={place} />
+    <WhySec place={place} />
+    <FaqSec items={faq} />
+    <EndCta msg={hero.msg} />
+  </>
+)
 
 /* ═══ FOCUS BLOCKS — each URL's own content (compact & proportional) ═══ */
 export const FocusText = ({

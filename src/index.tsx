@@ -102,9 +102,9 @@ app.get('/faq', (c) => page(c, <FaqPage />))
 app.get('/contact', (c) => page(c, <Contact />))
 app.get('/booking', (c) => page(c, <FastBooking />))
 app.get('/concierge', (c) => c.redirect('/booking', 301))
-app.get('/social', (c) => (SHOW.social ? page(c, <Social path="/social" />) : c.redirect('/contact', 302)))
-app.get('/links', (c) => c.redirect('/social', 301))
-app.get('/qr', (c) => c.redirect('/social', 301))
+app.get('/links', (c) => page(c, <Social path="/links" />))
+app.get('/social', (c) => c.redirect('/links', 301))
+app.get('/qr', (c) => c.redirect('/links', 301))
 
 /* ══════════════════════════════════════════════════════════
  * LOCAL SEO — 41 pages
@@ -226,7 +226,7 @@ app.get('/sitemap.xml', (c) => {
   add('/faq', '0.6', 'monthly')
   add('/contact', '0.8', 'yearly')
   add('/booking', '0.9', 'weekly')
-  if (SHOW.social) add('/social', '0.7', 'monthly')
+  add('/links', '0.8', 'monthly')
 
   // Jeddah keyword pages — home market, top priority
   for (const jp of JEDDAH_PAGES) {
