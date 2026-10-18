@@ -36,6 +36,8 @@ import {
   AUDIENCE,
   PARTNERS,
   ARRANGEMENTS,
+  HERO_METRICS,
+  CONCIERGE,
   type Service,
 } from './data'
 import { Img, HeroPic, Faq } from './ui'
@@ -134,8 +136,135 @@ export const Hero = ({ h }: { h: HeroSpec }) => {
             data-location="hero"
           >
             <Ico n="chat" />
-            واتساب
+            واتساب فوري
           </a>
+        </div>
+
+        {/* Royal Trust Ribbon — immediate credibility below the fold */}
+        <ul class="hero-metrics" aria-label="إنجازات وضمانات القهوة الملكية">
+          {HERO_METRICS.map((m) => (
+            <li>
+              <b>{m.num}</b>
+              <small>{m.label}</small>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+/* ═══ ROYAL 10-SECOND CONCIERGE (مُحدّد الضيافة الملكي السريع للزبون المستعجل) ═══ */
+export const RoyalConcierge = ({ place }: { place: string }) => {
+  const defOcc = CONCIERGE.occasions[0].id
+  const defCrew = CONCIERGE.crews[0].id
+  const defGuest = CONCIERGE.guests[1]
+  const defMsg = `السلام عليكم، أرغب في عرض سعر فوري من ${BRAND.name} في ${place}:\n• نوع المناسبة: ${defOcc}\n• الطاقم المطلوب: ${defCrew}\n• عدد الضيوف: ${defGuest.id}`
+
+  return (
+    <section class="sx sx-concierge" id="concierge" aria-labelledby="concierge-title">
+      <div class="wrap">
+        <div class="conc-box rv" id="concBox" data-place={place} data-brand={BRAND.name}>
+          <div class="conc-head">
+            <span class="conc-badge">
+              <Ico n="sparkle" />
+              للزبون المستعجل · بدون تعقيد
+            </span>
+            <h2 id="concierge-title">حدّد مناسبتك في ١٠ ثوانٍ — ويصلك الترتيب وعرض السعر فوراً</h2>
+            <p>اختر ٣ نقرات فقط، وسنجهّز لك التشكيل المثالي ورسالة واتساب مفصّلة جاهزة للإرسال.</p>
+          </div>
+
+          <div class="conc-steps">
+            {/* Step 1: Occasion */}
+            <div class="conc-step">
+              <span class="conc-lbl">
+                <em>١</em> نوع المناسبة
+              </span>
+              <div class="conc-pills" role="group" aria-label="نوع المناسبة" data-conc-group="occ">
+                {CONCIERGE.occasions.map((o, i) => (
+                  <button
+                    type="button"
+                    class={'conc-pill' + (i === 0 ? ' on' : '')}
+                    data-val={o.id}
+                    aria-pressed={i === 0 ? 'true' : 'false'}
+                  >
+                    <Ico n={o.icon} />
+                    <span>{o.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Step 2: Crew */}
+            <div class="conc-step">
+              <span class="conc-lbl">
+                <em>٢</em> نوع الطاقم
+              </span>
+              <div class="conc-pills" role="group" aria-label="نوع الطاقم" data-conc-group="crew">
+                {CONCIERGE.crews.map((c, i) => (
+                  <button
+                    type="button"
+                    class={'conc-pill' + (i === 0 ? ' on' : '')}
+                    data-val={c.id}
+                    aria-pressed={i === 0 ? 'true' : 'false'}
+                  >
+                    <span>{c.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Step 3: Guests */}
+            <div class="conc-step">
+              <span class="conc-lbl">
+                <em>٣</em> عدد الضيوف التقريبي
+              </span>
+              <div class="conc-pills" role="group" aria-label="عدد الضيوف" data-conc-group="guest">
+                {CONCIERGE.guests.map((g, i) => (
+                  <button
+                    type="button"
+                    class={'conc-pill' + (i === 1 ? ' on' : '')}
+                    data-val={g.id}
+                    data-rec={g.rec}
+                    aria-pressed={i === 1 ? 'true' : 'false'}
+                  >
+                    <span>{g.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Live Smart Recommendation + Instant CTA */}
+          <div class="conc-foot">
+            <div class="conc-rec">
+              <span class="conc-rec-k">الترتيب المقترح لمناسبتك:</span>
+              <b id="concRecText">{defGuest.rec}</b>
+            </div>
+            <div class="conc-actions">
+              <a
+                id="concWaBtn"
+                class="btn btn-gold btn-lg conc-cta"
+                href={wa(defMsg)}
+                rel="noopener"
+                target="_blank"
+                data-track="whatsapp"
+                data-location="concierge"
+              >
+                <Ico n="chat" />
+                <span>أرسل الترتيب عبر واتساب الآن</span>
+              </a>
+              <a
+                class="btn btn-line conc-call"
+                href={`tel:${BRAND.phoneLocal}`}
+                data-track="call"
+                data-location="concierge"
+              >
+                <Ico n="phone" />
+                <span>أو اتصل مباشرة</span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -246,23 +375,36 @@ export const OnePage = ({
 
       {focus}
 
-      {/* ═══ 3. OUR WORKS (أعمالنا — شريط سحب أفقي متناسق + تكبير الصور) ═══ */}
+      {/* ═══ 2.5 ROYAL 10-SECOND CONCIERGE (ابتكار حصري للزبون المستعجل) ═══ */}
+      <RoyalConcierge place={place} />
+
+      {/* ═══ 3. OUR WORKS (أعمالنا — شريط سحب أفقي متناسق + فلاتر + تكبير الصور) ═══ */}
       <section class="sx sx-alt" id="works">
         <div class="wrap">
           <Head
-            k="أعمالنا"
-            t="صور من مناسبات نفّذناها"
-            sub="اضغط على أي صورة لتكبيرها والتنقّل بين الباقي."
+            k="أعمالنا الموثّقة"
+            t="صور حقيقية من مناسبات نفّذناها"
+            sub="اضغط على أي صورة لتكبيرها، أو صفِّ الصور حسب نوع الخدمة."
           />
-          <p class="k-swipe-hint" aria-hidden="true">
-            اسحب لليسار
-            <Ico n="arrow" />
-          </p>
+          <div class="works-toolbar">
+            <div class="works-filters" id="worksFilters" role="tablist" aria-label="تصفية معرض الأعمال">
+              <button type="button" class="w-pill on" data-wcat="all" aria-selected="true">الكل ({GALLERY.length})</button>
+              <button type="button" class="w-pill" data-wcat="فريق" aria-selected="false">الطاقم والزيّ</button>
+              <button type="button" class="w-pill" data-wcat="ملكية" aria-selected="false">الضيافة الملكية VIP</button>
+              <button type="button" class="w-pill" data-wcat="عدّة" aria-selected="false">الدلال والعدّة</button>
+              <button type="button" class="w-pill" data-wcat="تقديمات" aria-selected="false">التقديمات والحلى</button>
+            </div>
+            <p class="k-swipe-hint" aria-hidden="true">
+              اسحب لليسار
+              <Ico n="arrow" />
+            </p>
+          </div>
           <div class="k-rail" id="worksRail" role="region" aria-label="معرض أعمال القهوة الملكية">
             {GALLERY.slice(0, 12).map((g) => (
               <button
                 type="button"
                 class="k-work-card galx-it"
+                data-wcat={g.cat}
                 data-full={g.img}
                 data-cap={g.cap}
                 aria-label={`تكبير صورة: ${g.cap}`}
@@ -285,6 +427,7 @@ export const OnePage = ({
                 <button
                   type="button"
                   class="k-work-card galx-it"
+                  data-wcat={g.cat}
                   data-full={g.img}
                   data-cap={g.cap}
                   aria-label={`تكبير صورة: ${g.cap}`}

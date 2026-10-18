@@ -84,7 +84,7 @@ def run(page, label):
 
 
 with sync_playwright() as pw:
-    br = pw.chromium.launch(args=["--force-color-profile=srgb"])
+    br = pw.chromium.launch(executable_path="/usr/bin/chromium", args=["--no-sandbox", "--force-color-profile=srgb"])
     tot_c = tot_s = 0
 
     # ---------- mobile ----------

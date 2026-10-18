@@ -501,6 +501,85 @@
     });
   }
 
+  /* Royal 10-Second Concierge (مُحدّد الضيافة الملكي السريع للزبون المستعجل) */
+  var concBox = $('#concBox');
+  if (concBox) {
+    var concWaBtn = $('#concWaBtn', concBox);
+    var concRecText = $('#concRecText', concBox);
+    var placeName = concBox.getAttribute('data-place') || 'جدة';
+    var brandName = concBox.getAttribute('data-brand') || 'القهوة الملكية';
+
+    var updateConcierge = function () {
+      var occBtn = $('.conc-pills[data-conc-group="occ"] .conc-pill.on', concBox);
+      var crewBtn = $('.conc-pills[data-conc-group="crew"] .conc-pill.on', concBox);
+      var guestBtn = $('.conc-pills[data-conc-group="guest"] .conc-pill.on', concBox);
+
+      var occ = occBtn ? occBtn.getAttribute('data-val') : 'زواج أو ملكة';
+      var crew = crewBtn ? crewBtn.getAttribute('data-val') : 'طاقم رجالي';
+      var guest = guestBtn ? guestBtn.getAttribute('data-val') : '٥٠ إلى ١٢٠ ضيفاً';
+      var rec = guestBtn ? guestBtn.getAttribute('data-rec') : '';
+
+      if (concRecText && rec) {
+        if (crew.indexOf('نسائي') !== -1 && crew.indexOf('رجالي') === -1) {
+          rec = rec.replace('قهوجيين وصبّابين', 'قهوجيات وصبّابات').replace('قهوجي وصبّاب', 'قهوجية وصبّابة').replace('مباشر تنظيم', 'مباشرة تنظيم').replace('مشرف ميداني', 'مشرفة ميدانية');
+        }
+        concRecText.textContent = rec;
+      }
+
+      if (concWaBtn) {
+        var msg = 'السلام عليكم، أرغب في عرض سعر فوري من ' + brandName + ' في ' + placeName + ':\n' +
+                  '• نوع المناسبة: ' + occ + '\n' +
+                  '• الطاقم المطلوب: ' + crew + '\n' +
+                  '• عدد الضيوف: ' + guest +
+                  (concRecText ? '\n• الترتيب المقترح: ' + concRecText.textContent : '');
+        concWaBtn.href = 'https://wa.me/966504968113?text=' + encodeURIComponent(msg);
+      }
+    };
+
+    $$('.conc-pills', concBox).forEach(function (grp) {
+      var pills = $$('.conc-pill', grp);
+      pills.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          pills.forEach(function (p) {
+            var active = p === btn;
+            p.classList.toggle('on', active);
+            p.setAttribute('aria-pressed', active ? 'true' : 'false');
+          });
+          updateConcierge();
+        });
+      });
+    });
+  }
+
+  /* Works inline category filter (#worksFilters) */
+  var wBar = $('#worksFilters');
+  if (wBar) {
+    var wPills = $$('.w-pill', wBar);
+    var wCards = $$('#works .k-work-card');
+    wPills.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var cat = btn.getAttribute('data-wcat') || 'all';
+        wPills.forEach(function (p) {
+          var on = p === btn;
+          p.classList.toggle('on', on);
+          p.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        if (cat !== 'all' && gal && gal.hidden) {
+          gal.hidden = false;
+          if (more) {
+            more.setAttribute('aria-expanded', 'true');
+            more.firstChild.nodeValue = 'إخفاء الصور الإضافية ';
+          }
+        }
+        wCards.forEach(function (c) {
+          var match = cat === 'all' || c.getAttribute('data-wcat') === cat;
+          c.hidden = !match;
+          c.style.display = match ? '' : 'none';
+        });
+      });
+    });
+  }
+
   /* lightbox with next/prev & caption */
   var lb = $('#lbx');
   if (lb && lb.showModal) {

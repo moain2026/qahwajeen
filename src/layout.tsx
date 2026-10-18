@@ -4,8 +4,18 @@ import { hasImg } from './imgmap'
 import { BRAND } from './data'
 import { raw } from './icons'
 
-const V = '13' // asset cache-bust
+const V = '15' // asset cache-bust
 export const SITE = 'https://qahwajeen.com'
+
+const DESKTOP_NAV = [
+  { href: '/', label: 'الرئيسية', match: '/' },
+  { href: '#concierge', label: 'حجز فوري', match: '/concierge' },
+  { href: '#services', label: 'الخدمات', match: '/services' },
+  { href: '#menu', label: 'التقديمات', match: '/menu' },
+  { href: '#works', label: 'أعمالنا', match: '/gallery' },
+  { href: '#partners', label: 'شركاء النجاح', match: '/partners' },
+  { href: '#faq', label: 'الأسئلة', match: '/faq' },
+] as const
 
 type Props = {
   title: string
@@ -154,15 +164,29 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'souqiya', 
               </span>
             </a>
 
+            <nav class="nav" aria-label="التنقل الرئيسي">
+              {DESKTOP_NAV.map((item) => {
+                const isHome = item.href === '/'
+                const active = isHome ? path === '/' : path.startsWith(item.match)
+                const href = isHome ? '/' : path === '/' ? item.href : `/${item.href}`
+                return (
+                  <a href={href} aria-current={active ? 'page' : undefined}>
+                    {item.label}
+                  </a>
+                )
+              })}
+            </nav>
+
             <div class="hdr-act">
               <a
                 href={`tel:${BRAND.phoneLocal}`}
-                class="hdr-tel"
-                aria-label={`اتصل بـ ${BRAND.name}`}
+                class="hdr-call-pill"
+                aria-label={`اتصل بـ ${BRAND.name} ${BRAND.phoneDisplay}`}
                 data-track="call"
                 data-location="header"
               >
                 <span dangerouslySetInnerHTML={{ __html: raw('phone') }} />
+                <b class="ltr">{BRAND.phoneDisplay}</b>
               </a>
               <a
                 href={BRAND.whatsapp}
@@ -173,7 +197,16 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'souqiya', 
                 data-location="header"
               >
                 <span dangerouslySetInnerHTML={{ __html: raw('chat') }} />
-                واتساب
+                احجز عبر واتساب
+              </a>
+              <a
+                href={`tel:${BRAND.phoneLocal}`}
+                class="hdr-tel-mob"
+                aria-label={`اتصل الآن ${BRAND.phoneDisplay}`}
+                data-track="call"
+                data-location="header-mobile"
+              >
+                <span dangerouslySetInnerHTML={{ __html: raw('phone') }} />
               </a>
               <button
                 class="burger"
@@ -236,17 +269,25 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'souqiya', 
               <span dangerouslySetInnerHTML={{ __html: raw('home') }} />
               الرئيسية
             </a>
-            <a href="#services">
+            <a href={path === '/' ? '#concierge' : '/#concierge'}>
+              <span dangerouslySetInnerHTML={{ __html: raw('sparkle') }} />
+              حجز سريع في ١٠ ثوانٍ
+            </a>
+            <a href={path === '/' ? '#services' : '/#services'}>
               <span dangerouslySetInnerHTML={{ __html: raw('grid') }} />
-              الخدمات
+              الخدمات والمشتملات
             </a>
-            <a href="#works">
+            <a href={path === '/' ? '#menu' : '/#menu'}>
+              <span dangerouslySetInnerHTML={{ __html: raw('finjan') }} />
+              قائمة التقديمات
+            </a>
+            <a href={path === '/' ? '#works' : '/#works'}>
               <span dangerouslySetInnerHTML={{ __html: raw('images') }} />
-              أعمالنا
+              معرض أعمالنا
             </a>
-            <a href="#faq">
+            <a href={path === '/' ? '#faq' : '/#faq'}>
               <span dangerouslySetInnerHTML={{ __html: raw('help') }} />
-              الأسئلة
+              الأسئلة الشائعة
             </a>
           </div>
 
