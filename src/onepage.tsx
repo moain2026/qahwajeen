@@ -1,22 +1,25 @@
 /**
  * OnePage Royal Merge — Built on the exact visual cadence & proportions
  * of keifaldiafa.com while retaining our emerald-gold identity ("القهوة الملكية — ROYAL COFFEE")
- * and full in-page expandable details:
+ * and bespoke creative differentiators:
  *
- * 1. First Screen: Royal Emerald & Gold Frosted Glass Card (.hero-art .glass) + 2 CTAs.
- * 2. Who We Serve (#who): 3 compact side-by-side cards (109×146px on mobile) —
- *    الجهات الحكومية · الشركات والمؤتمرات · المناسبات الخاصة (fits in half a screen!).
- * 3. Our Works (#works): Horizontal swipeable gallery rail (250×334px cards) with
- *    category pills + "عرض كل الصور (33)" inline expansion & full-screen Lightbox.
- * 4. Partners of Success (#partners): "شركاء النجاح — جهات وشركات وثقت بنا"
- *    3×3 compact badge grid on a pearl/ivory luxury surface + expandable 18 partners.
- * 5. Crew & Attire (#crew): "اختر زيّ طاقمك" — compact swipeable cards (200×268px).
+ * 1. First Screen: Royal Emerald & Gold Frosted Glass Card (.hero-art .glass) + Multi-Layer
+ *    Cinematic Background Animation (Ken-Burns multi-frame crossfade + golden light rays +
+ *    floating golden dust particles) + 2 CTAs + Fast-Booking shortcut pill.
+ * 2. Partners of Success (#partners): "شركاء النجاح — جهات وشركات وثقت بنا"
+ *    Immediately below the Hero (before #who) as a compact auto-scrolling & touch-draggable
+ *    marquee strip with real partner event photos & royal crests.
+ * 3. Who We Serve (#who): 3 bespoke Royal Arch cards (109×146px on mobile) —
+ *    الجهات الحكومية · الشركات والمؤتمرات · المناسبات الخاصة.
+ * 4. Our Works (#works): Horizontal auto-moving & swipeable gallery rail (250×334px cards)
+ *    with category pills, arrow buttons + "عرض كل الصور (33)" inline expansion & Lightbox.
+ * 5. Crew & Attire (#crew): "اختر زيّ طاقمك" — dynamically moving left/right carousel with
+ *    touch drag & navigation arrows (200×268px).
  * 6. Offerings & Hospitality Menu (#menu): "ما الذي يصل إلى ضيوفك؟" — interactive
  *    category tabs + compact 2-column square cards (170×170px).
  * 7. All Services (#services): "كل ما تحتاجه مناسبتك — من طاقم واحد" — grouped
  *    into (الطاقم الرجالي · الطاقم النسائي · التجهيزات واللمسات الملكية) in a compact
- *    2-column grid (168×110px image) where each card expands inline (<details>) to
- *    reveal full service details & direct WhatsApp booking without giant images!
+ *    2-column grid where each card expands inline (<details>).
  * 8. Crew Roles (#roles) + Team Arrangements (#arrangements): "ماذا يفعل طاقمنا" &
  *    "كيف نرتّب الطاقم لمناسبتك" (no prices).
  * 9. Why Royal Coffee (#why): 6 compact diamond-bulleted bars.
@@ -76,18 +79,45 @@ export type HeroSpec = {
   msg: string
 }
 
-/* ═══ 1. FIRST SCREEN — Royal Emerald & Gold Frosted Glass Card ═══ */
+/* ═══ 1. FIRST SCREEN — Royal Emerald & Gold Frosted Glass Card + Animated Background ═══ */
 export const Hero = ({ h }: { h: HeroSpec }) => {
   const dots = h.dots ?? ['فعاليات رسمية', 'فعاليات الشركات', 'مناسبات خاصة']
   return (
     <section class={'hero hero-lux hero-art' + (h.wordmark ? ' is-home' : ' is-inner')}>
       <div class="hero-bg">
-        {h.tall ? (
-          <HeroPic wide={h.img} tall={h.tall} alt={h.alt} eager />
-        ) : (
-          <Img n={h.img} alt={h.alt} sizes="100vw" eager />
-        )}
+        {/* Primary LCP Frame */}
+        <div class="hero-slide s1">
+          {h.tall ? (
+            <HeroPic wide={h.img} tall={h.tall} alt={h.alt} eager />
+          ) : (
+            <Img n={h.img} alt={h.alt} sizes="100vw" eager />
+          )}
+        </div>
+        {/* Animated Crossfading Background Frames (Cinematic Ken-Burns) */}
+        <div class="hero-slide s2" aria-hidden="true">
+          <Img n="ev-vip-2" alt="" sizes="100vw" />
+        </div>
+        <div class="hero-slide s3" aria-hidden="true">
+          <Img n="ev-booth-5" alt="" sizes="100vw" />
+        </div>
       </div>
+
+      {/* Cinematic Ambient Light Rays + Floating Golden Shimmer Particles */}
+      <div class="hero-fx" aria-hidden="true">
+        <span class="h-ray r1" />
+        <span class="h-ray r2" />
+        <span class="h-orb o1" />
+        <span class="h-orb o2" />
+        <i class="h-spark p1" />
+        <i class="h-spark p2" />
+        <i class="h-spark p3" />
+        <i class="h-spark p4" />
+        <i class="h-spark p5" />
+        <i class="h-spark p6" />
+        <i class="h-spark p7" />
+        <i class="h-spark p8" />
+      </div>
+
       <div class="hero-veil" aria-hidden="true" />
       <div class="hero-in">
         <div class="glass tilt">
@@ -95,6 +125,7 @@ export const Hero = ({ h }: { h: HeroSpec }) => {
           <span class="glass-corner c-tr" aria-hidden="true" />
           <span class="glass-corner c-bl" aria-hidden="true" />
           <span class="glass-corner c-br" aria-hidden="true" />
+          <span class="glass-shimmer" aria-hidden="true" />
           <p class="glass-kick">{h.kick}</p>
           {h.wordmark ? (
             <>
@@ -140,6 +171,14 @@ export const Hero = ({ h }: { h: HeroSpec }) => {
           </a>
         </div>
 
+        {/* Dedicated Button to the Standalone Busy-Customer Fast Booking Page */}
+        <a class="hero-fast-btn" href="/booking" data-track="fast-booking" data-location="hero">
+          <span class="hf-pulse" aria-hidden="true" />
+          <Ico n="sparkle" />
+          <span>مستعجل؟ حدّد مناسبتك واحصل على الترتيب في ١٠ ثوانٍ</span>
+          <Ico n="arrow" />
+        </a>
+
         {/* Royal Trust Ribbon — immediate credibility below the fold */}
         <ul class="hero-metrics" aria-label="إنجازات وضمانات القهوة الملكية">
           {HERO_METRICS.map((m) => (
@@ -154,7 +193,7 @@ export const Hero = ({ h }: { h: HeroSpec }) => {
   )
 }
 
-/* ═══ ROYAL 10-SECOND CONCIERGE (مُحدّد الضيافة الملكي السريع للزبون المستعجل) ═══ */
+/* ═══ ROYAL 10-SECOND CONCIERGE (مُحدّد الضيافة الملكي السريع — يُعرض في صفحته المستقلة /booking) ═══ */
 export const RoyalConcierge = ({ place }: { place: string }) => {
   const defOcc = CONCIERGE.occasions[0].id
   const defCrew = CONCIERGE.crews[0].id
@@ -328,7 +367,7 @@ const CompactServiceCard = ({ s, place }: { s: Service; place: string }) => (
   </article>
 )
 
-/* ═══ THE FULL PAGE EXPERIENCE (Keif Cadence + Royal Emerald Luxury) ═══ */
+/* ═══ THE FULL PAGE EXPERIENCE (Royal Coffee Signature) ═══ */
 export const OnePage = ({
   hero,
   focus,
@@ -348,7 +387,42 @@ export const OnePage = ({
     <>
       <Hero h={hero} />
 
-      {/* ═══ 2. WHO WE SERVE (لمن نخدم — 3 بطاقات مدمجة متناسقة في شاشة واحدة) ═══ */}
+      {/* ═══ 1.5 PARTNERS OF SUCCESS MARQUEE (مباشرة تحت الهيرو قبل "لمن نخدم" — شريط صغير يلف ويدور ويسحب باليد مع الصور) ═══ */}
+      <section class="ptn-strip" id="partners" aria-label="شركاء النجاح — جهات وشركات وثقت بنا">
+        <div class="wrap ptn-strip-head">
+          <div class="ptn-title-grp">
+            <span class="ptn-eyebrow">
+              <Ico n="crown" />
+              شركاء النجاح
+            </span>
+            <h2>جهات وشركات وثقت بنا</h2>
+          </div>
+          <p class="ptn-strip-sub">اسحب يميناً ويساراً · جهات حكومية وجامعات وشركات كبرى</p>
+        </div>
+
+        <div class="ptn-ticker" id="ptnTicker" data-auto-rail="continuous">
+          <div class="ptn-track">
+            {[...PARTNERS, ...PARTNERS].map((p, idx) => (
+              <div class="ptn-pill" aria-hidden={idx >= PARTNERS.length ? 'true' : undefined}>
+                <span class="ptn-thumb">
+                  <Img
+                    n={p.img}
+                    alt={`ضيافة ${p.name} — ${BRAND.name}`}
+                    sizes="64px"
+                  />
+                  <em class="ptn-mark">{p.mark}</em>
+                </span>
+                <span class="ptn-meta">
+                  <b>{p.name}</b>
+                  <small>{p.sub}</small>
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ 2. WHO WE SERVE (لمن نخدم — 3 عقود ملكية مدمجة بتميّز بصري خاص بالقهوة الملكية) ═══ */}
       <section class="sx sx-who" id="who">
         <div class="wrap">
           <Head
@@ -358,6 +432,7 @@ export const OnePage = ({
           <div class="who-grid">
             {AUDIENCE.map((a, i) => (
               <a class="who-card rv" style={`--i:${i}`} href={a.href}>
+                <span class="who-num" aria-hidden="true">٠{i + 1}</span>
                 <Img
                   n={a.img}
                   alt={`${a.t} — ${BRAND.name} في ${place}`}
@@ -375,16 +450,13 @@ export const OnePage = ({
 
       {focus}
 
-      {/* ═══ 2.5 ROYAL 10-SECOND CONCIERGE (ابتكار حصري للزبون المستعجل) ═══ */}
-      <RoyalConcierge place={place} />
-
-      {/* ═══ 3. OUR WORKS (أعمالنا — شريط سحب أفقي متناسق + فلاتر + تكبير الصور) ═══ */}
+      {/* ═══ 3. OUR WORKS (أعمالنا — شريط سحب متحرك + أزرار تنقل + فلاتر + تكبير الصور) ═══ */}
       <section class="sx sx-alt" id="works">
         <div class="wrap">
           <Head
             k="أعمالنا الموثّقة"
             t="صور حقيقية من مناسبات نفّذناها"
-            sub="اضغط على أي صورة لتكبيرها، أو صفِّ الصور حسب نوع الخدمة."
+            sub="شريط متحرك يتجدد تلقائياً — اسحب يميناً ويساراً أو اضغط على أي صورة لتكبيرها."
           />
           <div class="works-toolbar">
             <div class="works-filters" id="worksFilters" role="tablist" aria-label="تصفية معرض الأعمال">
@@ -394,12 +466,17 @@ export const OnePage = ({
               <button type="button" class="w-pill" data-wcat="عدّة" aria-selected="false">الدلال والعدّة</button>
               <button type="button" class="w-pill" data-wcat="تقديمات" aria-selected="false">التقديمات والحلى</button>
             </div>
-            <p class="k-swipe-hint" aria-hidden="true">
-              اسحب لليسار
-              <Ico n="arrow" />
-            </p>
+            <div class="rail-ctrls" aria-label="تحكم بتمرير المعرض">
+              <button type="button" class="rail-btn" data-rail-target="worksRail" data-dir="prev" aria-label="السابق">
+                <Ico n="arrow" />
+              </button>
+              <span class="k-swipe-hint" aria-hidden="true">يتحرك تلقائياً · اسحب</span>
+              <button type="button" class="rail-btn is-next" data-rail-target="worksRail" data-dir="next" aria-label="التالي">
+                <Ico n="arrow" />
+              </button>
+            </div>
           </div>
-          <div class="k-rail" id="worksRail" role="region" aria-label="معرض أعمال القهوة الملكية">
+          <div class="k-rail is-auto" id="worksRail" data-auto-rail="step" role="region" aria-label="معرض أعمال القهوة الملكية">
             {GALLERY.slice(0, 12).map((g) => (
               <button
                 type="button"
@@ -459,42 +536,7 @@ export const OnePage = ({
         </div>
       </section>
 
-      {/* ═══ 4. PARTNERS OF SUCCESS (شركاء النجاح — جهات وشركات وثقت بنا) ═══ */}
-      <section class="sx sx-partners" id="partners">
-        <div class="wrap">
-          <Head
-            k="شركاء النجاح"
-            t="جهات وشركات وثقت بنا"
-            sub="جهات حكومية · جامعات · منتديات ومؤتمرات دولية · شركات ومجموعات وقاعات كبرى"
-            light
-          />
-          <div class="ptn-grid" id="ptnGrid">
-            {PARTNERS.map((p, i) => (
-              <div class={'ptn-card' + (i >= 9 ? ' ptn-more' : '')}>
-                <span class="ptn-crest" aria-hidden="true">
-                  <Ico n={p.icon} />
-                </span>
-                <b class="ptn-name">{p.name}</b>
-                <small class="ptn-sub">{p.sub}</small>
-              </div>
-            ))}
-          </div>
-          <div class="sx-more">
-            <button
-              type="button"
-              class="btn btn-ptn"
-              id="ptnMore"
-              aria-controls="ptnGrid"
-              aria-expanded="false"
-            >
-              عرض كل الشركاء · {PARTNERS.length} جهة
-              <Ico n="chevron" />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ 5. CREW & ATTIRE (اختر زيّ طاقمك — بطاقات سحب متناسقة) ═══ */}
+      {/* ═══ 4. CREW & ATTIRE (اختر زيّ طاقمك — شريط متحرك يمين ويسار تلقائياً وباللمس) ═══ */}
       <section class="sx" id="crew">
         <div class="wrap">
           <Head
@@ -502,13 +544,21 @@ export const OnePage = ({
             t="اختر زيّ طاقمك"
             sub="قهوجيين وصبابين ومباشرين بزيٍّ موحّد — وطاقم نسائي مستقل للمناسبات النسائية."
           />
-          <p class="k-swipe-hint" aria-hidden="true">
-            اسحب لليسار
-            <Ico n="arrow" />
-          </p>
-          <div class="k-rail k-rail-crew" role="region" aria-label="أزياء طاقم القهوة الملكية">
-            {STAFF.map((s) => (
+          <div class="rail-bar">
+            <div class="rail-ctrls" aria-label="تحكم بتمرير أزياء الطاقم">
+              <button type="button" class="rail-btn" data-rail-target="crewRail" data-dir="prev" aria-label="الزي السابق">
+                <Ico n="arrow" />
+              </button>
+              <span class="k-swipe-hint" aria-hidden="true">يتحرك تلقائياً يميناً ويساراً · اسحب للتصفح</span>
+              <button type="button" class="rail-btn is-next" data-rail-target="crewRail" data-dir="next" aria-label="الزي التالي">
+                <Ico n="arrow" />
+              </button>
+            </div>
+          </div>
+          <div class="k-rail k-rail-crew is-auto" id="crewRail" data-auto-rail="pingpong" role="region" aria-label="أزياء طاقم القهوة الملكية">
+            {STAFF.map((s, idx) => (
               <figure class="k-crew-card">
+                <span class="crew-badge">زيّ ٠{idx + 1}</span>
                 <Img
                   n={s.img}
                   alt={`${s.t} — ${s.d} من ${BRAND.name}`}
@@ -524,7 +574,7 @@ export const OnePage = ({
         </div>
       </section>
 
-      {/* ═══ 6. OFFERINGS & MENU (ما الذي يصل إلى ضيوفك؟ — تبويبات + بطاقات مدمجة) ═══ */}
+      {/* ═══ 5. OFFERINGS & MENU (ما الذي يصل إلى ضيوفك؟ — تبويبات + بطاقات مدمجة) ═══ */}
       <section class="sx sx-alt" id="menu">
         <div class="wrap">
           <Head
@@ -577,7 +627,7 @@ export const OnePage = ({
         </div>
       </section>
 
-      {/* ═══ 7. ALL SERVICES (الخدمات — مقسّمة بوضوح في عمودين مدمجين مع فتح التفاصيل) ═══ */}
+      {/* ═══ 6. ALL SERVICES (الخدمات — مقسّمة بوضوح في عمودين مدمجين مع فتح التفاصيل) ═══ */}
       <section class="sx" id="services">
         <div class="wrap">
           <Head
@@ -621,7 +671,7 @@ export const OnePage = ({
         </div>
       </section>
 
-      {/* ═══ 8. ROLES (كيف نعمل — ماذا يفعل طاقمنا في مناسبتك؟) ═══ */}
+      {/* ═══ 7. ROLES (كيف نعمل — ماذا يفعل طاقمنا في مناسبتك؟) ═══ */}
       <section class="sx sx-alt" id="roles">
         <div class="wrap">
           <Head
@@ -650,7 +700,7 @@ export const OnePage = ({
         </div>
       </section>
 
-      {/* ═══ 9. TEAM ARRANGEMENTS (الترتيبات — كيف نرتّب الطاقم لمناسبتك بدون أسعار) ═══ */}
+      {/* ═══ 8. TEAM ARRANGEMENTS (الترتيبات — كيف نرتّب الطاقم لمناسبتك بدون أسعار) ═══ */}
       <section class="sx" id="arrangements">
         <div class="wrap">
           <Head
@@ -685,7 +735,7 @@ export const OnePage = ({
         </div>
       </section>
 
-      {/* ═══ 10. OCCASIONS (المناسبات — لمحة سريعة مدمجة) ═══ */}
+      {/* ═══ 9. OCCASIONS (المناسبات — لمحة سريعة مدمجة) ═══ */}
       <section class="sx sx-alt" id="occasions">
         <div class="wrap">
           <Head
@@ -710,7 +760,7 @@ export const OnePage = ({
         </div>
       </section>
 
-      {/* ═══ 11. WHY US (لماذا نحن — لماذا يختارنا منظمو الفعاليات وأصحاب المجالس؟) ═══ */}
+      {/* ═══ 10. WHY US (لماذا نحن — لماذا يختارنا منظمو الفعاليات وأصحاب المجالس؟) ═══ */}
       <section class="sx" id="why">
         <div class="wrap wrap-nar">
           <Head k="لماذا نحن" t={`لماذا يختارنا منظّمو الفعاليات في ${place}؟`} />
@@ -725,7 +775,7 @@ export const OnePage = ({
         </div>
       </section>
 
-      {/* ═══ 12. FAQ (الأسئلة الشائعة) ═══ */}
+      {/* ═══ 11. FAQ (الأسئلة الشائعة) ═══ */}
       <section class="sx sx-alt" id="faq">
         <div class="wrap wrap-nar">
           <Head k="الأسئلة الشائعة" t="إجابات صريحة قبل تأكيد حجزك" />
@@ -733,7 +783,7 @@ export const OnePage = ({
         </div>
       </section>
 
-      {/* ═══ 13. FINAL CALL (خاتمة التواصل والحجز) ═══ */}
+      {/* ═══ 12. FINAL CALL (خاتمة التواصل والحجز) ═══ */}
       <section class="endx" id="contact">
         <div class="endx-bg">
           <Img n="ev-vip-2" alt="" sizes="100vw" />

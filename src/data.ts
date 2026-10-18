@@ -26,7 +26,7 @@ export const BRAND = {
  */
 export const SHOW = {
   /** social accounts: footer icons, /social page, sameAs */
-  social: false,
+  social: true,
   /** email address in footer, contact page and JSON-LD */
   email: false,
   /** sample testimonials — keep hidden until real client reviews arrive
@@ -684,27 +684,34 @@ export const AUDIENCE = [
 ] as const
 
 /* ── Partners of Success (شركاء النجاح — جهات وشركات وثقت بنا) ── */
-export type Partner = { name: string; sub: string; cat: 'gov' | 'edu' | 'corp' | 'forum'; icon: string }
+export type Partner = {
+  name: string
+  sub: string
+  cat: 'gov' | 'edu' | 'corp' | 'forum'
+  icon: string
+  img: string
+  mark: string
+}
 
 export const PARTNERS: Partner[] = [
-  { name: 'وزارة التجارة', sub: 'المركز السعودي للأعمال', cat: 'gov', icon: 'crown' },
-  { name: 'وزارة الطاقة', sub: 'المنتديات والفعاليات الرسمية', cat: 'gov', icon: 'shield' },
-  { name: 'وزارة الإعلام', sub: 'أجنحة المعارض والاستقبال', cat: 'gov', icon: 'award' },
-  { name: 'وزارة الحج والعمرة', sub: 'مؤتمر ومعرض الحج بجدة', cat: 'gov', icon: 'sparkle' },
-  { name: 'جامعة الملك سعود للعلوم الصحية', sub: 'KSAU-HS · المؤتمرات الطبية', cat: 'edu', icon: 'award' },
-  { name: 'جامعة الملك عبدالعزيز', sub: 'جدة · الندوات والحفلات', cat: 'edu', icon: 'crown' },
-  { name: 'مجموعة دلة البركة', sub: 'الفعاليات المؤسسية بجدة', cat: 'corp', icon: 'shield' },
-  { name: 'مجموعة بن لادن الدولية', sub: 'BIHG · استقبالات كبار الضيوف', cat: 'corp', icon: 'crown' },
-  { name: 'مجموعة العليان', sub: 'Olayan · اجتماعات الأعمال', cat: 'corp', icon: 'award' },
-  { name: 'النادي الأهلي السعودي', sub: 'جدة · ضيافة كبار الشخصيات', cat: 'corp', icon: 'sparkle' },
-  { name: 'طيران أديل · flyadeal', sub: 'أجنحة المعارض والفعاليات', cat: 'corp', icon: 'send' },
-  { name: 'غرفة جدة التجارية', sub: 'ملتقيات قطاع الأعمال', cat: 'forum', icon: 'users' },
-  { name: 'منتدى مكة للحلال', sub: 'قاعات كبار الشخصيات VIP', cat: 'forum', icon: 'crown' },
-  { name: 'معرض جدة الدولي للكتاب', sub: 'أجنحة الضيافة الرسمية', cat: 'forum', icon: 'sparkle' },
-  { name: 'سوبر دوم جدة', sub: 'Jeddah Superdome · المعارض الكبرى', cat: 'forum', icon: 'award' },
-  { name: 'فنادق وقاعات الكورنيش', sub: 'جدة · حفلات الزواج والملكات', cat: 'corp', icon: 'crown' },
-  { name: 'شنايدر إلكتريك · Schneider', sub: 'اللقاءات التنفيذية', cat: 'corp', icon: 'shield' },
-  { name: 'نجيب أوتو · Suzuki', sub: 'حفلات التدشين والفروع', cat: 'corp', icon: 'sparkle' },
+  { name: 'وزارة التجارة', sub: 'المركز السعودي للأعمال', cat: 'gov', icon: 'crown', img: 'ev-vip-1', mark: 'MC' },
+  { name: 'وزارة الطاقة', sub: 'المنتديات والفعاليات الرسمية', cat: 'gov', icon: 'shield', img: 'ev-vip-2', mark: 'MOE' },
+  { name: 'وزارة الإعلام', sub: 'أجنحة المعارض والاستقبال', cat: 'gov', icon: 'award', img: 'ev-booth-5', mark: 'MEDIA' },
+  { name: 'وزارة الحج والعمرة', sub: 'مؤتمر ومعرض الحج بجدة', cat: 'gov', icon: 'sparkle', img: 'sawas-3', mark: 'HAJJ' },
+  { name: 'جامعة الملك سعود للعلوم الصحية', sub: 'KSAU-HS · المؤتمرات الطبية', cat: 'edu', icon: 'award', img: 'ev-booth-4', mark: 'KSAU' },
+  { name: 'جامعة الملك عبدالعزيز', sub: 'جدة · الندوات والحفلات', cat: 'edu', icon: 'crown', img: 'ev-team-1', mark: 'KAU' },
+  { name: 'مجموعة دلة البركة', sub: 'الفعاليات المؤسسية بجدة', cat: 'corp', icon: 'shield', img: 'eq-dallah-2', mark: 'DALLAH' },
+  { name: 'مجموعة بن لادن الدولية', sub: 'BIHG · استقبالات كبار الضيوف', cat: 'corp', icon: 'crown', img: 'ev-booth-2', mark: 'BIHG' },
+  { name: 'مجموعة العليان', sub: 'Olayan · اجتماعات الأعمال', cat: 'corp', icon: 'award', img: 'ev-table-1', mark: 'OLAYAN' },
+  { name: 'النادي الأهلي السعودي', sub: 'جدة · ضيافة كبار الشخصيات', cat: 'corp', icon: 'sparkle', img: 'souqiya', mark: 'AHLI' },
+  { name: 'طيران أديل · flyadeal', sub: 'أجنحة المعارض والفعاليات', cat: 'corp', icon: 'send', img: 'ev-booth-6', mark: 'ADEAL' },
+  { name: 'غرفة جدة التجارية', sub: 'ملتقيات قطاع الأعمال', cat: 'forum', icon: 'users', img: 'ev-booth-8', mark: 'JCCI' },
+  { name: 'منتدى مكة للحلال', sub: 'قاعات كبار الشخصيات VIP', cat: 'forum', icon: 'crown', img: 'souqiya-3', mark: 'HALAL' },
+  { name: 'معرض جدة الدولي للكتاب', sub: 'أجنحة الضيافة الرسمية', cat: 'forum', icon: 'sparkle', img: 'ev-booth-9', mark: 'JIBF' },
+  { name: 'سوبر دوم جدة', sub: 'Jeddah Superdome · المعارض الكبرى', cat: 'forum', icon: 'award', img: 'booth-2', mark: 'DOME' },
+  { name: 'فنادق وقاعات الكورنيش', sub: 'جدة · حفلات الزواج والملكات', cat: 'corp', icon: 'crown', img: 'wedding', mark: 'VIP' },
+  { name: 'شنايدر إلكتريك · Schneider', sub: 'اللقاءات التنفيذية', cat: 'corp', icon: 'shield', img: 'ev-booth-3', mark: 'SE' },
+  { name: 'نجيب أوتو · Suzuki', sub: 'حفلات التدشين والفروع', cat: 'corp', icon: 'sparkle', img: 'ev-booth-7', mark: 'AUTO' },
 ] as const
 
 /* ── Team Arrangements (كيف نرتب الطاقم لمناسبتك — no prices) ── */

@@ -9,7 +9,7 @@ import { BRAND, SERVICES, OCCASIONS, MENU, GALLERY, FAQ, type Service, type Occa
 import { CITIES, FAMILIES, familyCopy, type City, type Family } from './cities'
 import { JEDDAH_PAGES, type JeddahPage } from './jeddah'
 import { graph, orgLd, siteLd, faqLd, crumbLd, serviceLd, eventLd, menuLd, galleryLd } from './ld'
-import { OnePage, FocusText, FocusGrid, oneLine } from './onepage'
+import { OnePage, RoyalConcierge, FocusText, FocusGrid, oneLine } from './onepage'
 
 const JED = 'jeddah'
 /** real-team photos for Jeddah pages */
@@ -495,6 +495,39 @@ export const Contact = () => (
         lead: `رقم موحّد للاتصال المباشر والواتساب: ${BRAND.phoneDisplay}`,
         msg: `السلام عليكم، أرغب في حجز ضيافة مناسبة مع ${BRAND.name}.`,
       }}
+    />
+  </Layout>
+)
+
+/* ══ FAST BOOKING (صفحة الحجز الفوري المستقلة للزبون المستعجل) ══ */
+export const FastBooking = () => (
+  <Layout
+    path="/booking"
+    hero="ev-vip-2"
+    jsonld={graph(
+      orgLd(),
+      serviceLd(
+        `حجز قهوجي وصبابين فوري في جدة — ${BRAND.name}`,
+        'حدّد نوع مناسبتك وعدد الضيوف والطاقم المطلوب في ١٠ ثوانٍ فقط، واحصل على التشكيل المثالي وعرض السعر المكتوب عبر واتساب فوراً.',
+        '/booking',
+        'ev-vip-2',
+        'جدة',
+      ),
+      crumbLd([{ name: 'حجز فوري في ١٠ ثوانٍ', path: '/booking' }]),
+    )}
+    title="حجز قهوجي فوري في جدة — حدّد مناسبتك في ١٠ ثوانٍ"
+    desc="صفحة الحجز السريع للزبون المستعجل من القهوة الملكية في جدة: اختر نوع المناسبة والطاقم وعدد الضيوف في ٣ نقرات، ويصلك الترتيب وعرض السعر عبر واتساب 0504968113."
+  >
+    <OnePage
+      hero={{
+        img: 'ev-vip-2',
+        alt: `حجز ضيافة سريع — ${BRAND.name}`,
+        kick: 'حجز فوري بدون انتظار · جدة والمملكة',
+        h1: 'مُحدّد الضيافة الملكي السريع في ١٠ ثوانٍ',
+        lead: 'ثلاث نقرات فقط لتحصل على التشكيل المثالي لمناسبتك وعرض السعر عبر واتساب فوراً.',
+        msg: `السلام عليكم، أرغب في حجز ضيافة عاجلة في جدة مع ${BRAND.name}.`,
+      }}
+      focus={<RoyalConcierge place="جدة" />}
     />
   </Layout>
 )

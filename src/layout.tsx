@@ -4,17 +4,20 @@ import { hasImg } from './imgmap'
 import { BRAND } from './data'
 import { raw } from './icons'
 
-const V = '15' // asset cache-bust
+const V = '16' // asset cache-bust
 export const SITE = 'https://qahwajeen.com'
 
-const DESKTOP_NAV = [
-  { href: '/', label: 'الرئيسية', match: '/' },
-  { href: '#concierge', label: 'حجز فوري', match: '/concierge' },
-  { href: '#services', label: 'الخدمات', match: '/services' },
-  { href: '#menu', label: 'التقديمات', match: '/menu' },
-  { href: '#works', label: 'أعمالنا', match: '/gallery' },
-  { href: '#partners', label: 'شركاء النجاح', match: '/partners' },
-  { href: '#faq', label: 'الأسئلة', match: '/faq' },
+const TOP_NAV = [
+  { href: '/', label: 'الرئيسية', match: '/', hot: false },
+  { href: '/booking', label: 'حجز فوري', match: '/booking', hot: true },
+  { href: '/services', label: 'الخدمات', match: '/services', hot: false },
+  { href: '/menu', label: 'التقديمات', match: '/menu', hot: false },
+  { href: '/gallery', label: 'أعمالنا', match: '/gallery', hot: false },
+  { href: '/occasions', label: 'المناسبات', match: '/occasions', hot: false },
+  { href: '/locations', label: 'المدن', match: '/locations', hot: false },
+  { href: '/about', label: 'من نحن', match: '/about', hot: false },
+  { href: '/social', label: 'حساباتنا', match: '/social', hot: false },
+  { href: '/contact', label: 'تواصل', match: '/contact', hot: false },
 ] as const
 
 type Props = {
@@ -146,157 +149,76 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'souqiya', 
         <div class="pgline" id="pgline" aria-hidden="true"></div>
         <div class="sprog" id="sprog" aria-hidden="true"></div>
 
-        {/* ── Header ── */}
-        <header class="hdr" id="hdr">
-          <div class="hdr-in">
-            <a href="/" class="brand">
-              <img
-                src="/static/img/logo-192.webp"
-                srcset="/static/img/logo-192.webp 192w, /static/img/logo-512.webp 512w"
-                sizes="52px"
-                alt={BRAND.name}
-                width="52"
-                height="52"
-              />
-              <span class="brand-txt">
-                <b>{BRAND.name}</b>
-                <span>{BRAND.latin}</span>
-              </span>
-            </a>
+        {/* ── Header: Top Horizontal Navigation Bar (No Side Drawer) ── */}
+        <header class="hdr hdr-top" id="hdr">
+          <div class="wrap hdr-shell">
+            <div class="hdr-row">
+              <a href="/" class="brand" title="الرئيسية">
+                <img
+                  src="/static/img/logo-192.webp"
+                  srcset="/static/img/logo-192.webp 192w, /static/img/logo-512.webp 512w"
+                  sizes="48px"
+                  alt={BRAND.name}
+                  width="48"
+                  height="48"
+                />
+                <span class="brand-txt">
+                  <b>{BRAND.name}</b>
+                  <span>{BRAND.latin}</span>
+                </span>
+              </a>
 
-            <nav class="nav" aria-label="التنقل الرئيسي">
-              {DESKTOP_NAV.map((item) => {
+              <div class="hdr-act">
+                <a
+                  href={`tel:${BRAND.phoneLocal}`}
+                  class="hdr-call-pill"
+                  aria-label={`اتصل بـ ${BRAND.name} ${BRAND.phoneDisplay}`}
+                  data-track="call"
+                  data-location="header"
+                >
+                  <span dangerouslySetInnerHTML={{ __html: raw('phone') }} />
+                  <b class="ltr">{BRAND.phoneDisplay}</b>
+                </a>
+                <a
+                  href={BRAND.whatsapp}
+                  class="btn btn-gold hdr-wa-btn"
+                  rel="noopener"
+                  target="_blank"
+                  data-track="whatsapp"
+                  data-location="header"
+                >
+                  <span dangerouslySetInnerHTML={{ __html: raw('chat') }} />
+                  <span>تواصل الآن</span>
+                </a>
+              </div>
+            </div>
+
+            <nav class="top-pages" aria-label="صفحات الموقع">
+              {TOP_NAV.map((item) => {
                 const isHome = item.href === '/'
-                const active = isHome ? path === '/' : path.startsWith(item.match)
-                const href = isHome ? '/' : path === '/' ? item.href : `/${item.href}`
+                const active = isHome
+                  ? path === '/'
+                  : item.match === '/social'
+                    ? path === '/social' || path === '/links'
+                    : path === item.match || path.startsWith(item.match + '/')
                 return (
-                  <a href={href} aria-current={active ? 'page' : undefined}>
+                  <a
+                    href={item.href}
+                    class={'top-link' + (item.hot ? ' is-hot' : '')}
+                    aria-current={active ? 'page' : undefined}
+                  >
+                    {item.hot && <span class="top-dot" aria-hidden="true" />}
                     {item.label}
                   </a>
                 )
               })}
             </nav>
-
-            <div class="hdr-act">
-              <a
-                href={`tel:${BRAND.phoneLocal}`}
-                class="hdr-call-pill"
-                aria-label={`اتصل بـ ${BRAND.name} ${BRAND.phoneDisplay}`}
-                data-track="call"
-                data-location="header"
-              >
-                <span dangerouslySetInnerHTML={{ __html: raw('phone') }} />
-                <b class="ltr">{BRAND.phoneDisplay}</b>
-              </a>
-              <a
-                href={BRAND.whatsapp}
-                class="btn btn-gold hdr-cta"
-                rel="noopener"
-                target="_blank"
-                data-track="whatsapp"
-                data-location="header"
-              >
-                <span dangerouslySetInnerHTML={{ __html: raw('chat') }} />
-                احجز عبر واتساب
-              </a>
-              <a
-                href={`tel:${BRAND.phoneLocal}`}
-                class="hdr-tel-mob"
-                aria-label={`اتصل الآن ${BRAND.phoneDisplay}`}
-                data-track="call"
-                data-location="header-mobile"
-              >
-                <span dangerouslySetInnerHTML={{ __html: raw('phone') }} />
-              </a>
-              <button
-                class="burger"
-                id="burger"
-                aria-label="فتح القائمة"
-                aria-expanded="false"
-                aria-controls="sheet"
-              >
-                <span dangerouslySetInnerHTML={{ __html: raw('menu') }} />
-              </button>
-            </div>
           </div>
         </header>
 
-        {/* ── Side drawer: strictly the 6 essentials (Call, WhatsApp, Home, Services, Works, FAQ) ── */}
-        <div class="sheet-bd" id="sheetBd" hidden></div>
-        <nav class="sheet drawer" id="sheet" aria-label="القائمة الرئيسية" aria-hidden="true">
-          <div class="dr-top">
-            <span class="sheet-id">
-              <img src="/static/img/logo-192.webp" alt={BRAND.name} width="40" height="40" loading="lazy" />
-              <span>
-                <b>{BRAND.name}</b>
-                <small>{BRAND.latin} · JEDDAH</small>
-              </span>
-            </span>
-            <button class="dr-x" type="button" id="sheetX" aria-label="إغلاق القائمة">
-              <span dangerouslySetInnerHTML={{ __html: raw('close') }} />
-            </button>
-          </div>
-
-          <a
-            class="dr-call"
-            href={`tel:${BRAND.phoneLocal}`}
-            data-track="call"
-            data-location="drawer"
-          >
-            <span dangerouslySetInnerHTML={{ __html: raw('phone') }} />
-            <span>
-              <b>اتصل الآن</b>
-              <small class="ltr">{BRAND.phoneDisplay}</small>
-            </span>
-          </a>
-          <a
-            class="dr-wa"
-            href={BRAND.whatsapp}
-            rel="noopener"
-            target="_blank"
-            data-track="whatsapp"
-            data-location="drawer"
-          >
-            <span dangerouslySetInnerHTML={{ __html: raw('chat') }} />
-            <span>
-              <b>واتساب</b>
-              <small>ردّ فوري وعرض سعر مكتوب</small>
-            </span>
-          </a>
-
-          <div class="dr-list">
-            <a href="/" aria-current={path === '/' ? 'page' : undefined}>
-              <span dangerouslySetInnerHTML={{ __html: raw('home') }} />
-              الرئيسية
-            </a>
-            <a href={path === '/' ? '#concierge' : '/#concierge'}>
-              <span dangerouslySetInnerHTML={{ __html: raw('sparkle') }} />
-              حجز سريع في ١٠ ثوانٍ
-            </a>
-            <a href={path === '/' ? '#services' : '/#services'}>
-              <span dangerouslySetInnerHTML={{ __html: raw('grid') }} />
-              الخدمات والمشتملات
-            </a>
-            <a href={path === '/' ? '#menu' : '/#menu'}>
-              <span dangerouslySetInnerHTML={{ __html: raw('finjan') }} />
-              قائمة التقديمات
-            </a>
-            <a href={path === '/' ? '#works' : '/#works'}>
-              <span dangerouslySetInnerHTML={{ __html: raw('images') }} />
-              معرض أعمالنا
-            </a>
-            <a href={path === '/' ? '#faq' : '/#faq'}>
-              <span dangerouslySetInnerHTML={{ __html: raw('help') }} />
-              الأسئلة الشائعة
-            </a>
-          </div>
-
-          <p class="dr-foot">{BRAND.name} · استقبال الحجوزات ٢٤ ساعة</p>
-        </nav>
-
         <main id="main">{children}</main>
 
-        {/* ── Footer: clean luxury brand signature + zero city chips clutter ── */}
+        {/* ── Footer: clean luxury brand signature + Developer credit ── */}
         <footer class="ftr">
           <div class="wrap">
             <div class="ftr-mini">
@@ -314,22 +236,35 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'souqiya', 
             </div>
             <nav class="ftr-links" aria-label="روابط سريعة">
               <a href="/">الرئيسية</a>
+              <a href="/booking">حجز سريع</a>
               <a href="/services">الخدمات</a>
               <a href="/menu">التقديمات</a>
               <a href="/occasions">المناسبات</a>
               <a href="/gallery">أعمالنا</a>
+              <a href="/locations">المدن</a>
               <a href="/faq">الأسئلة الشائعة</a>
               <a href="/about">من نحن</a>
+              <a href="/social">حساباتنا والباركود</a>
               <a href="/contact">تواصل معنا</a>
             </nav>
             <div class="ftr-base">
-              <span>© {new Date().getFullYear()} {BRAND.name} ({BRAND.latin})</span>
-              <span>جدة — المملكة العربية السعودية</span>
+              <span>© {new Date().getFullYear()} {BRAND.name} ({BRAND.latin}) · جدة — المملكة العربية السعودية</span>
+              <span class="ftr-dev">
+                تطوير وتصميم{' '}
+                <a
+                  href="https://alabbasi.uk"
+                  target="_blank"
+                  rel="noopener"
+                  class="ftr-dev-lnk"
+                >
+                  Alabbasi Tech
+                </a>
+              </span>
             </div>
           </div>
         </footer>
 
-        {/* ── Bottom contact bar: WhatsApp + prominent center Call + Quote ── */}
+        {/* ── Bottom contact bar: WhatsApp + prominent center Call + Fast Booking ── */}
         {!bare && (
           <nav class="bnav" aria-label="تواصل سريع">
             <a
@@ -354,15 +289,13 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'souqiya', 
               <em>اتصل الآن</em>
             </a>
             <a
-              href={`${BRAND.whatsapp}?text=${encodeURIComponent(`السلام عليكم، أرغب في عرض سعر لضيافة مناسبة مع ${BRAND.name}.`)}`}
+              href="/booking"
               class="b-quote"
-              rel="noopener"
-              target="_blank"
-              data-track="quote"
+              data-track="fast-booking"
               data-location="bottom-bar"
             >
-              <span dangerouslySetInnerHTML={{ __html: raw('send') }} />
-              عرض سعر
+              <span dangerouslySetInnerHTML={{ __html: raw('sparkle') }} />
+              حجز فوري
             </a>
           </nav>
         )}

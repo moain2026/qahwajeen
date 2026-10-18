@@ -92,7 +92,7 @@ with sync_playwright() as pw:
                          device_scale_factor=3, is_mobile=True, has_touch=True)
     pg = ctx.new_page()
 
-    for path in ["/", "/services", "/menu", "/gallery", "/prices",
+    for path in ["/", "/booking", "/services", "/menu", "/gallery",
                  "/qahwajiin-jeddah", "/contact", "/social", "/faq"]:
         pg.goto(B + path, wait_until="networkidle")
         time.sleep(0.6)
@@ -101,22 +101,12 @@ with sync_playwright() as pw:
         c, s = run(pg, f"mobile {path}")
         tot_c += c
         tot_s += s
-
-    # sheet menu open
-    pg.goto(B + "/", wait_until="networkidle")
-    time.sleep(0.6)
-    pg.click("#burger")
-    time.sleep(1.1)
-    c, s = run(pg, "mobile / (menu open)")
-    tot_c += c
-    tot_s += s
-    pg.screenshot(path="v2/m_menu_full.png", full_page=False)
     ctx.close()
 
     # ---------- desktop ----------
     ctx2 = br.new_context(viewport={"width": 1440, "height": 900}, device_scale_factor=2)
     p2 = ctx2.new_page()
-    for path in ["/", "/services", "/social"]:
+    for path in ["/", "/booking", "/services", "/social"]:
         p2.goto(B + path, wait_until="networkidle")
         time.sleep(0.6)
         p2.mouse.wheel(0, 1400)

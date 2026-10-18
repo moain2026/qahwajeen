@@ -636,6 +636,103 @@
   addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(frame); } }, { passive: true });
   frame();
 
+  /* ─── 13. Auto-Scrolling & Touch-Draggable Rails (Partners Ticker, Crew, Works) ─── */
+  (function autoRails() {
+    var rails = $$('[data-auto-rail]');
+    if (!rails.length) return;
+
+    /* Prev / Next buttons for rails */
+    $$('.rail-btn[data-rail-target]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var targetId = btn.getAttribute('data-rail-target');
+        var dir = btn.getAttribute('data-dir');
+        var rail = document.getElementById(targetId);
+        if (!rail) return;
+        var card = rail.firstElementChild;
+        var step = card ? (card.getBoundingClientRect().width + 16) : 240;
+        /* In RTL, scrolling left means negative scrollLeft in modern browsers */
+        var delta = dir === 'next' ? -step : step;
+        rail.scrollBy({ left: delta, behavior: REDUCE ? 'auto' : 'smooth' });
+        rail.setAttribute('data-user-pause', String(Date.now() + 5000));
+      });
+    });
+
+    rails.forEach(function (rail) {
+      var mode = rail.getAttribute('data-auto-rail');
+      var paused = false;
+      var dragging = false;
+      var startX = 0;
+      var startScroll = 0;
+      var dir = -1; /* RTL: -1 scrolls toward left (end of Arabic list), +1 scrolls back right */
+
+      var pauseTmp = function (ms) {
+        rail.setAttribute('data-user-pause', String(Date.now() + (ms || 4000)));
+      };
+
+      rail.addEventListener('mouseenter', function () { paused = true; });
+      rail.addEventListener('mouseleave', function () { paused = false; dragging = false; });
+      rail.addEventListener('touchstart', function () { paused = true; pauseTmp(5000); }, { passive: true });
+      rail.addEventListener('touchend', function () { paused = false; pauseTmp(4000); }, { passive: true });
+
+      /* Mouse drag-to-scroll support for desktop */
+      rail.addEventListener('mousedown', function (e) {
+        if (e.button !== 0) return;
+        dragging = true;
+        paused = true;
+        startX = e.pageX;
+        startScroll = rail.scrollLeft;
+      });
+      window.addEventListener('mousemove', function (e) {
+        if (!dragging) return;
+        var dx = e.pageX - startX;
+        rail.scrollLeft = startScroll - dx;
+      }, { passive: true });
+      window.addEventListener('mouseup', function () {
+        if (!dragging) return;
+        dragging = false;
+        paused = false;
+        pauseTmp(3500);
+      });
+
+      if (REDUCE) return;
+
+      if (mode === 'continuous') {
+        /* Smooth continuous ticker for #partners */
+        var speed = 0.65;
+        var stepCont = function () {
+          var until = Number(rail.getAttribute('data-user-pause') || 0);
+          if (!paused && !dragging && Date.now() > until) {
+            rail.scrollLeft -= speed;
+            var maxScroll = rail.scrollWidth - rail.clientWidth;
+            if (Math.abs(rail.scrollLeft) >= maxScroll * 0.5) {
+              rail.scrollLeft = 0;
+            }
+          }
+          requestAnimationFrame(stepCont);
+        };
+        requestAnimationFrame(stepCont);
+      } else {
+        /* Step-based ping-pong left & right carousel for #crew and #works */
+        var intervalMs = mode === 'pingpong' ? 2800 : 3400;
+        setInterval(function () {
+          var until = Number(rail.getAttribute('data-user-pause') || 0);
+          if (paused || dragging || Date.now() < until) return;
+          var maxScroll = rail.scrollWidth - rail.clientWidth;
+          if (maxScroll <= 10) return;
+          var card = rail.firstElementChild;
+          var step = card ? (card.getBoundingClientRect().width + 14) : 220;
+          var cur = Math.abs(rail.scrollLeft);
+          if (cur + step >= maxScroll - 8) {
+            dir = 1; /* reverse direction to right */
+          } else if (cur <= 8) {
+            dir = -1; /* forward direction to left */
+          }
+          rail.scrollBy({ left: dir * step, behavior: 'smooth' });
+        }, intervalMs);
+      }
+    });
+  })();
+
   /* Google Ads / GA4 conversion tracking hooks on Call & WhatsApp clicks */
   document.addEventListener('click', function (e) {
     var a = e.target.closest ? e.target.closest('a[data-track]') : null;
