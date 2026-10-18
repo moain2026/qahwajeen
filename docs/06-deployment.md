@@ -2,8 +2,16 @@
 
 # 06 — النشر
 
-> الحالة الحالية: **جاهز للنشر على Vercel** (الدومين qahwajeen.com مسجَّل في Spaceship).
-> البناء ناجح للهدفين (Vercel وCloudflare)، والتشغيل محليًا يعمل.
+> الحالة الحالية: **منشور ✅ على https://qahwajeen.com** (منذ 2026-10-18).
+>
+> | العنصر | القيمة |
+> |---|---|
+> | المستودع | `MoTechSys/qahwajeen` (خاص) — الفرع `main` ينشر تلقائيًا |
+> | Vercel | مشروع `qahwajeen` في `motechsys-projects` |
+> | الدومين | Spaceship، NS = `launch1/launch2.spaceship.net` |
+> | DNS | `A @ 216.198.79.1` · `A @ 64.29.17.1` · `CNAME www a8e465602d52792d.vercel-dns-017.com` |
+> | SSL | تلقائي من Vercel (الجذر + www) |
+> | التوجيه | `http→https` 308 · `www→الجذر` 301 · `*.vercel.app` = noindex |
 
 ---
 
@@ -111,7 +119,7 @@ npm run deploy:vercel
 المخرَج: `.vercel/output/functions/__hono.func/index.js` (≈181 كيلوبايت، Node 22).
 
 ### الطريقة الأسهل — ربط GitHub (بدون أي إعدادات يدوية)
-1. vercel.com → **Add New → Project** → اختر المستودع `royal-coffee-docs`.
+1. vercel.com → **Add New → Project** → اختر المستودع `MoTechSys/qahwajeen`.
 2. لا تغيّر شيئًا: `vercel.json` يحدّد `installCommand: npm ci`
    و`buildCommand: npm run build:vercel` و`framework: null`.
 3. **Deploy**. كل دفع إلى `main` ينشر تلقائيًا.
@@ -180,7 +188,7 @@ npm run deploy:vercel
 | `.dockerignore` | يستبعد node_modules والوثائق وQA |
 
 ### الخطوات
-1. Spaceship → **Hyperlift Manager** → اربط GitHub → المستودع `royal-coffee-docs`، الفرع `main`.
+1. Spaceship → **Hyperlift Manager** → اربط GitHub → المستودع `MoTechSys/qahwajeen`، الفرع `main`.
 2. Dockerfile path: `Dockerfile` (في الجذر). فعّل **Automatic builds**.
 3. **Build** — النشر يبدأ تلقائيًا بعد نجاح البناء (يظهر رابط `*.hyperlift.io`).
 4. **Connections** → أضف `qahwajeen.com` و`www.qahwajeen.com` (الدومين في نفس الحساب، فالربط والـSSL تلقائيان).
