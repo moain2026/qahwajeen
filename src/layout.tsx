@@ -2,10 +2,11 @@ import type { Child } from 'hono/jsx'
 import { html, raw as rawHtml } from 'hono/html'
 import { imgSrc, imgSet } from './ui'
 import { hasImg } from './imgmap'
-import { BRAND, SHOW, SOCIAL_LINKS, TRACKING } from './data'
+import { BRAND, SHOW, SOCIAL_LINKS, TRACKING, SEARCH } from './data'
 import { raw } from './icons'
+import { JEDDAH_PAGES } from './jeddah'
 
-const V = '28' // asset cache-bust — bump on every CSS/JS change
+const V = '29' // asset cache-bust — bump on every CSS/JS change
 export const SITE = 'https://qahwajeen.com'
 
 /**
@@ -80,6 +81,8 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'hero-real'
             <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
           </>
         )}
+        {SEARCH.googleVerify && <meta name="google-site-verification" content={SEARCH.googleVerify} />}
+        {SEARCH.bingVerify && <meta name="msvalidate.01" content={SEARCH.bingVerify} />}
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
@@ -183,6 +186,11 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'hero-real'
                 <a href={item.href}>{item.label}</a>
               ))}
               <a href="/booking">حجز سريع</a>
+            </nav>
+            <nav class="ftr-links ftr-seo" aria-label="ضيافة جدة">
+              {JEDDAH_PAGES.map((jp) => (
+                <a href={`/${jp.slug}`}>{jp.chip}</a>
+              ))}
             </nav>
             <div class="ftr-base">
               <span>© {new Date().getFullYear()} {BRAND.name} · جدة — المملكة العربية السعودية</span>

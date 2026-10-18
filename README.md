@@ -21,33 +21,29 @@ src/
 ├── onepage.tsx  أقسام الصفحات (Hero، الخدمات، القائمة، المعرض، الحجز السريع…)
 ├── data.ts      كل المحتوى: الهوية، الخدمات، المناسبات، القائمة، الأسئلة، التتبّع
 ├── jeddah.ts    صفحات كلمات جدة (قهوجيات، مباشرين، زواجات، كوفي بريك، عزاء)
-├── ld.ts        JSON-LD: LocalBusiness · Service · FAQPage · BreadcrumbList · Menu · ImageGallery
+├── ld.ts        JSON-LD: LocalBusiness · Service · FAQPage · BreadcrumbList · ImageGallery
 ├── ui.tsx       Img / HeroPic / Faq
 └── imgmap.ts    مقاسات الصور (sm/md/lg)
 public/static/   style.css · app.js · fonts/ · img/
-qa/scripts/      seo.py · btn.py (فحوص آلية)
+qa/scripts/      index_audit.py · seo.py · btn.py · indexnow.py
 qa/audit-v4/     تقرير التدقيق v4 وأدواته
 ```
 
-## ٢) خريطة الصفحات — رابط واحد لكل نيّة بحث (٣٢ صفحة مفهرسة)
+## ٢) خريطة الصفحات — رابط واحد لكل نيّة بحث (٢٣ صفحة مفهرسة)
 
 | الرابط | نيّة البحث |
 |---|---|
 | `/` | قهوجي وصبابين جدة |
 | `/services` + ٧ صفحات خدمة | خدمات الضيافة في جدة |
 | `/occasions` + ٣ صفحات | ضيافة مناسبات جدة (تخرّج، مواليد، مخيمات) |
-| `/qahwajiat-jeddah` | قهوجيات وصبابات جدة |
-| `/mubashirin-jeddah` | مباشرين ضيافة جدة |
-| `/diyafat-zawajat-jeddah` | ضيافة زواجات جدة |
-| `/coffee-break-jeddah` | كوفي بريك شركات جدة |
-| `/diyafat-aza-jeddah` | ضيافة عزاء جدة |
-| `/menu` + ٩ أقسام | منيو ضيافة جدة |
+| `/qahwajiat-jeddah` · `/mubashirin-jeddah` · `/diyafat-zawajat-jeddah` · `/coffee-break-jeddah` · `/diyafat-aza-jeddah` | صفحات كلمات جدة |
+| `/menu` | كل التقديمات في صفحة واحدة (٩ أقسام + المعدات + التوزيعات) |
 | `/gallery` · `/faq` · `/booking` · `/links` | الأعمال · الأسئلة · الحجز · التواصل ومن نحن |
 
-**تحويلات 301 (قفزة واحدة):** `/about` `/contact` `/prices` `/social` `/qr` → `/links` ·
-`/concierge` → `/booking` · صفحات المدن الأخرى و`/locations*` → `/` ·
-`/qahwajiin-jeddah` `/sababin-qahwa-jeddah` → `/` · `/diyafa-munasabat-jeddah` → `/occasions` ·
-`/services/qahwajiat` و`/occasions/{weddings,condolences,corporate}` → صفحة جدة المقابلة.
+التحويلات 301 كاملة في `docs/04-seo.md` القسم 2 (منها `/menu/{قسم}` → `/menu#{قسم}`).
+
+**الفهرسة:** `sitemap.xml` تُبنى من HTML المرسوم نفسه — كل صورة لها نص بديل
+تُدرَج تلقائيًا تحت صفحتها (٦٤ صورة). التفاصيل وخطوات Search Console في `docs/04-seo.md`.
 
 ## ٣) التشغيل
 
@@ -55,6 +51,7 @@ qa/audit-v4/     تقرير التدقيق v4 وأدواته
 npm install
 npm run build && npx wrangler pages dev dist --ip 0.0.0.0 --port 3000   # محلياً
 npm run build:vercel                                                    # بناء الإنتاج
+python3 qa/scripts/index_audit.py  # الفهرسة: صفحات، صور، تحويلات، روابط داخلية، JSON-LD
 python3 qa/scripts/seo.py      # عناوين ≤60، وصف، canonical، H1، JSON-LD، sitemap
 python3 qa/scripts/btn.py      # كل زر ≥44px وبلا قصّ — 320/390/1440
 ```
@@ -78,6 +75,21 @@ python3 qa/scripts/btn.py      # كل زر ≥44px وبلا قصّ — 320/390/1
 
 الإنتاج: مستودع MoTechSys/qahwajeen فرع `main` على Vercel.
 مؤلف الكوميت يجب أن يكون `MoTechSys <256226456+MoTechSys@users.noreply.github.com>`.
-بعد النشر: `python3 qa/scripts/seo.py https://qahwajeen.com` + Lighthouse على الموقع الحقيقي.
+بعد النشر: `index_audit.py` و`seo.py` على `https://qahwajeen.com` + `indexnow.py` + Lighthouse.
+التفاصيل: `docs/06-deployment.md`.
+
+## ٧) التوثيق
+
+| الملف | المحتوى |
+|---|---|
+| `docs/01-architecture.md` | البنية والملفات ومسؤولياتها |
+| `docs/02-design-system.md` | الألوان والطباعة العربية والمكوّنات |
+| `docs/03-content-model.md` | أين يعيش كل نص وكيف تضيف محتوى |
+| `docs/04-seo.md` | السيو والفهرسة والصور والتحويلات وربط محركات البحث |
+| `docs/05-performance.md` | قياسات الأداء والصور والكاش |
+| `docs/06-deployment.md` | خطوات النشر والتحقق والتراجع |
+| `docs/07-decisions.md` | سجل القرارات |
+| `docs/08-roadmap.md` | ما ينتظر المالك وما تبقّى |
+| `qa/README.md` | سكربتات الفحص ونتائجها |
 
 </div>
