@@ -92,6 +92,10 @@ diff <($P ls-remote prod | sort -k2) <(git ls-remote origin | grep -v refs/pull 
 ```
 لا تدفع إلى `main` في مستودع التطوير شيئًا لم يُدفع إلى الإنتاج — يبقيان متطابقين.
 
+> **ملاحظة Vercel:** كل فرع يُدفع إلى المستودع الخاص يصنع «معاينة» (Preview) على
+> `*.vercel.app` — لا تمسّ الإنتاج، وعليها `noindex`. معاينة `design/v2-glass-card`
+> تظهر **BLOCKED** لأن كوميتها القديم ليس باسم MoTechSys — متوقّع ولا يؤثر على شيء.
+
 ### تاريخ الإنتاج (`MoTechSys/qahwajeen main`)
 | الكوميت | النسخة | المحتوى |
 |---|---|---|
