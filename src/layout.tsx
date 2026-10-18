@@ -4,7 +4,7 @@ import { hasImg } from './imgmap'
 import { BRAND } from './data'
 import { raw } from './icons'
 
-const V = '12' // asset cache-bust
+const V = '13' // asset cache-bust
 export const SITE = 'https://qahwajeen.com'
 
 type Props = {
