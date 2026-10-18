@@ -1,5 +1,7 @@
 <div dir="rtl">
 
+> **مطوّر أو وكيل جديد؟ ابدأ بـ [`HANDOFF.md`](HANDOFF.md)** — القواعد، طريقة العمل والنشر، ما بُحث فيه، وما فشل.
+
 # القهوة الملكية — qahwajeen.com
 
 موقع حجز ضيافة في **جدة**: قهوجيين وصبابين، قهوجيات وصبابات، وضيافة مناسبات.
@@ -26,6 +28,7 @@ src/
 └── imgmap.ts    مقاسات الصور (sm/md/lg)
 public/static/   style.css · app.js · fonts/ · img/
 qa/scripts/      index_audit.py · seo.py · btn.py · indexnow.py
+qa/tools/        أدوات العمل: Lighthouse، لقطات، فائض، حذف CSS الآمن
 qa/audit-v4/     تقرير التدقيق v4 وأدواته
 ```
 
