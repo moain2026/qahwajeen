@@ -1,150 +1,83 @@
 <div dir="rtl">
 
-# القهوة الملكية — موقع ضيافة عربية فاخرة
+# القهوة الملكية — qahwajeen.com
 
-موقع تسويقي كامل (٧٦ صفحة) لخدمات القهوجيين والصبابين والضيافة في السعودية.
-مبني بـ **Hono + TypeScript** ويُنشر على **Cloudflare Pages** أو **Vercel Edge**
-من نفس الكود، بدون أي مكتبة خارجية وقت التشغيل.
+موقع حجز ضيافة في **جدة**: قهوجيين وصبابين، قهوجيات وصبابات، وضيافة مناسبات.
+هدف كل صفحة واحد: أن يتصل الزائر أو يراسل على واتساب **0504968113**.
 
-> **هذا المستودع ليس كوداً فقط.** هو أرشيف كامل يضم: الكود، تحليل المنافسين
-> الذي بُني عليه التصميم، جرد أصول الموقع القديم، أدوات الفحص الآلي، وأدلة
-> بصرية موثقة لكل قرار. الهدف: لو رجعنا بعد سنة نبرمج أو نصمم، كل شيء واضح ومعلَّل.
+مبني بـ **Hono + TypeScript (JSX على الخادم)**. الإنتاج على **Vercel** (`build:vercel`)،
+ويُبنى أيضاً لـ Cloudflare (`build`) و Node (`build:node`) من نفس الكود.
 
 ---
 
-## ١) خريطة المستودع
+## ١) خريطة الكود
 
 ```
-royal-coffee/
-│
-├── src/                        ← كود التطبيق (TypeScript + Hono JSX)
-│   ├── index.tsx               ← ١٨ معالج مسار → ٧٦ صفحة + robots + sitemap
-│   ├── layout.tsx              ← الهيكل المشترك: <head>، الترويسة، القائمة، التذييل
-│   ├── views.tsx               ← ١٧ مكوّن صفحة (Home، Services، CityHub…)
-│   ├── ui.tsx                  ← الذرات المشتركة: Img، HeroPic، Rule، Crumbs…
-│   ├── data.ts                 ← بيانات المحتوى: الخدمات، القائمة، المناسبات، الأسعار
-│   ├── cities.ts               ← ١٠ مدن × ٣ عائلات خدمة = ٤١ صفحة محلية
-│   ├── ld.ts                   ← ١١ مُولّد JSON-LD (Schema.org)
-│   ├── icons.tsx               ← أيقونات SVG مضمّنة (لا خطوط أيقونات)
-│   └── imgmap.ts               ← خريطة مولّدة آلياً لمقاسات كل صورة
-│
-├── public/
-│   ├── static/style.css        ← ٢٠ قسماً منظماً (17.7 KB مضغوطاً)
-│   ├── static/app.js           ← ١١ وحدة بـ JS خالص (4.8 KB مضغوطاً)
-│   ├── static/img/             ← ١٩٨ صورة WebP (sm/md/lg)
-│   └── _headers                ← ترويسات التخزين المؤقت والأمان
-│
-├── docs/                       ← 📘 التوثيق الكامل — ابدأ من هنا
-│   ├── 01-architecture.md      ← البنية، تدفّق الطلب، لماذا هذه الخيارات
-│   ├── 02-design-system.md     ← الرموز، الطباعة العربية، المكوّنات
-│   ├── 03-content-model.md     ← نماذج البيانات وكيف تُولَّد الصفحات
-│   ├── 04-seo.md               ← استراتيجية السيو ومعايير فهرسة Google
-│   ├── 05-performance.md       ← الأداء: القياسات والقرارات
-│   ├── 06-deployment.md        ← النشر على Cloudflare و Vercel خطوة بخطوة
-│   ├── 07-decisions.md         ← 🔑 سجل القرارات: كل قرار وسببه ودليله
-│   └── 08-roadmap.md           ← ما لم يُنجز بعد وما هو محجوز على العميل
-│
-├── research/                   ← 🔬 الأبحاث التي بُني عليها الموقع
-│   ├── competitor-analysis/    ← تحليل keifaldiafa.com و asoulaldiafa.com
-│   │   ├── ANALYSIS.md         ← ١٩ قسماً من التحليل العميق
-│   │   ├── screenshots/        ← ٣٢ لقطة دليل (جوال + سطح مكتب)
-│   │   ├── raw-html/           ← HTML و CSS الأصلي كما تم التقاطه
-│   │   └── scripts/            ← أدوات الالتقاط والقياس
-│   ├── asset-harvest/          ← جرد أصول الموقع القديم (خرائط، مخزون، فحص)
-│   └── generated-images/       ← مراجع الصور المولّدة الأصلية
-│
-└── qa/                         ← 🧪 الفحص الآلي
-    ├── scripts/                ← seo.py · btn.py · cine.py · sheet.py · home.py
-    └── screenshots/            ← ٢٩ لقطة دليل لحالة الموقع
+src/
+├── index.tsx    المسارات، تحويلات 301، robots.txt، sitemap.xml
+├── layout.tsx   <head> + الترويسة (صف واحد) + التذييل + شريط واتساب/اتصال + التتبّع
+├── pages.tsx    صفحات: الرئيسية، الخدمات، المناسبات، القائمة، الأعمال، الأسئلة، الحجز، صفحات جدة
+├── views.tsx    /links — صفحة التواصل و«من نحن» (الوحيدة)
+├── onepage.tsx  أقسام الصفحات (Hero، الخدمات، القائمة، المعرض، الحجز السريع…)
+├── data.ts      كل المحتوى: الهوية، الخدمات، المناسبات، القائمة، الأسئلة، التتبّع
+├── jeddah.ts    صفحات كلمات جدة (قهوجيات، مباشرين، زواجات، كوفي بريك، عزاء)
+├── ld.ts        JSON-LD: LocalBusiness · Service · FAQPage · BreadcrumbList · Menu · ImageGallery
+├── ui.tsx       Img / HeroPic / Faq
+└── imgmap.ts    مقاسات الصور (sm/md/lg)
+public/static/   style.css · app.js · fonts/ · img/
+qa/scripts/      seo.py · btn.py (فحوص آلية)
+qa/audit-v4/     تقرير التدقيق v4 وأدواته
 ```
 
----
+## ٢) خريطة الصفحات — رابط واحد لكل نيّة بحث (٣٢ صفحة مفهرسة)
 
-## ٢) البدء السريع
+| الرابط | نيّة البحث |
+|---|---|
+| `/` | قهوجي وصبابين جدة |
+| `/services` + ٧ صفحات خدمة | خدمات الضيافة في جدة |
+| `/occasions` + ٣ صفحات | ضيافة مناسبات جدة (تخرّج، مواليد، مخيمات) |
+| `/qahwajiat-jeddah` | قهوجيات وصبابات جدة |
+| `/mubashirin-jeddah` | مباشرين ضيافة جدة |
+| `/diyafat-zawajat-jeddah` | ضيافة زواجات جدة |
+| `/coffee-break-jeddah` | كوفي بريك شركات جدة |
+| `/diyafat-aza-jeddah` | ضيافة عزاء جدة |
+| `/menu` + ٩ أقسام | منيو ضيافة جدة |
+| `/gallery` · `/faq` · `/booking` · `/links` | الأعمال · الأسئلة · الحجز · التواصل ومن نحن |
+
+**تحويلات 301 (قفزة واحدة):** `/about` `/contact` `/prices` `/social` `/qr` → `/links` ·
+`/concierge` → `/booking` · صفحات المدن الأخرى و`/locations*` → `/` ·
+`/qahwajiin-jeddah` `/sababin-qahwa-jeddah` → `/` · `/diyafa-munasabat-jeddah` → `/occasions` ·
+`/services/qahwajiat` و`/occasions/{weddings,condolences,corporate}` → صفحة جدة المقابلة.
+
+## ٣) التشغيل
 
 ```bash
-npm install                  # التبعيات (Hono + Vite + Wrangler فقط)
-npm run build                # بناء Cloudflare
-npm run dev:sandbox          # تشغيل محلي على المنفذ 3000
+npm install
+npm run build && npx wrangler pages dev dist --ip 0.0.0.0 --port 3000   # محلياً
+npm run build:vercel                                                    # بناء الإنتاج
+python3 qa/scripts/seo.py      # عناوين ≤60، وصف، canonical، H1، JSON-LD، sitemap
+python3 qa/scripts/btn.py      # كل زر ≥44px وبلا قصّ — 320/390/1440
 ```
 
-| الأمر | الوظيفة |
-|---|---|
-| `npm run build` | بناء Cloudflare Pages → `dist/_worker.js` |
-| `npm run build:vercel` | بناء Vercel Edge → `.vercel/output/` |
-| `npm run deploy` | نشر على Cloudflare Pages |
-| `npm run dev` | خادم Vite للتطوير على جهاز محلي |
+## ٤) قواعد ثابتة
 
----
+- الاسم «القهوة الملكية» والدومين qahwajeen.com لا يتغيّران.
+- قنوات التواصل الظاهرة: الاتصال، واتساب، البريد qahwajeen@gmail.com فقط.
+  حسابات التواصل الاجتماعي مخفية (`SOCIAL_LINKS = []` في `data.ts`).
+- لا أسعار، لا باقات، لا تقييمات، ولا ادعاء لا يمكن إثباته (مدة وصول، نسب، فواتير، مدن أخرى).
+- زمرّدي داكن + ذهبي، بلا خلفيات بيضاء. الحركة transform/opacity فقط وتحترم reduced-motion.
+- عند تعديل CSS/JS ارفع `V` في `layout.tsx`.
 
-## ٣) الصفحات — ٧٦ صفحة من ١٨ معالجاً
+## ٥) التتبّع (Google Ads / GA4)
 
-| المسار | العدد | الوصف |
-|---|---|---|
-| `/` | ١ | الرئيسية (هيرو سينمائي) |
-| `/services` + `/services/:slug` | ٩ | ٨ خدمات + الفهرس |
-| `/occasions` + `/occasions/:slug` | ٧ | ٦ مناسبات + الفهرس |
-| `/menu` + `/menu/:slug` | ٨ | ٧ أقسام تقديمات + الفهرس |
-| `/locations` + `/locations/:slug` | ١١ | ١٠ مدن + الفهرس |
-| `/{qahwajiin\|sababin-qahwa\|diyafa-munasabat}-{city}` | ٣٠ | صفحات محلية مستهدفة |
-| `/gallery` `/prices` `/about` `/faq` `/contact` `/social` | ٦ | صفحات مساندة |
-| `/robots.txt` `/sitemap.xml` | ٢ | ملفات فهرسة |
+ضع المعرّفات في `TRACKING` داخل `src/data.ts`. لا يُحمَّل أي سكربت قبل ذلك.
+الأحداث: `click_call` · `click_whatsapp` · `booking_submit` · `click_email`،
+مع Consent Mode v2 (مرفوض افتراضياً) وتحميل gtag بعد `load`.
 
-**كل صفحة مستقلة وقابلة للفهرسة** — لا تبويبات JS، لا محتوى مخفي.
+## ٦) النشر
 
----
-
-## ٤) حالة التحقق
-
-| الفحص | الأداة | النتيجة |
-|---|---|---|
-| معايير فهرسة Google (١٠ × ٧٣ صفحة) | `qa/scripts/seo.py` | ✅ **0 مشاكل** |
-| عناوين مكرّرة | `qa/scripts/seo.py` | ✅ **0** |
-| أوصاف مكرّرة | `qa/scripts/seo.py` | ✅ **0** |
-| قصّ نصوص الأزرار | `qa/scripts/btn.py` | ✅ **0** |
-| تمدّد أفقي | `qa/scripts/cine.py` | ✅ **overflowX = 0** |
-| بناء Cloudflare | `npm run build` | ✅ gzip **52.6 KB** |
-| بناء Vercel | `npm run build:vercel` | ✅ gzip **55.9 KB** |
-
----
-
-## ٥) الأرقام
-
-| البند | القيمة |
-|---|---|
-| CSS مضغوط | **17.7 KB** |
-| JavaScript مضغوط | **4.8 KB** |
-| Worker مضغوط | **52.6 KB** |
-| صورة الهيرو (جوال) | **23 KB** |
-| صورة الهيرو (سطح مكتب) | **72 KB** |
-| مكتبات خارجية وقت التشغيل | **صفر** |
-| إجمالي كود المصدر | **~200 KB** في ٩ ملفات |
-
-لا React · لا Tailwind وقت التشغيل · لا jQuery · لا خطوط أيقونات · لا إيموجي.
-
----
-
-## ⚠️ ٦) محجوز على العميل قبل النشر
-
-بيانات الاتصال في `src/data.ts` لا تزال **قيماً مؤقتة**:
-
-```ts
-phone:    '966504968113'      // ← مؤقت
-email:    'hello@example.com' // ← مؤقت
-whatsapp: '...'               // ← مؤقت
-```
-
-**يجب استبدالها بالأرقام الحقيقية، ثم إعادة توليد رمز QR** في صفحة `/social`.
-التفاصيل الكاملة في [`docs/08-roadmap.md`](docs/08-roadmap.md).
-
----
-
-## ٧) الترخيص والأصول
-
-- **الكود:** خاص، مملوك للعميل.
-- **الصور:** جميع صور الهيرو والصور الرئيسية **مولّدة أصلية** — لا شعارات،
-  لا علامات مائية، لا صور من مواقع منافسة. المراجع في `research/generated-images/`.
-- **مواد البحث:** لقطات وHTML المنافسين محفوظة في `research/` **لأغراض
-  التحليل التنافسي فقط** ولا تُستخدم في الموقع المنشور.
+الإنتاج: مستودع MoTechSys/qahwajeen فرع `main` على Vercel.
+مؤلف الكوميت يجب أن يكون `MoTechSys <256226456+MoTechSys@users.noreply.github.com>`.
+بعد النشر: `python3 qa/scripts/seo.py https://qahwajeen.com` + Lighthouse على الموقع الحقيقي.
 
 </div>

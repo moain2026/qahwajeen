@@ -15,13 +15,16 @@ import time
 
 from playwright.sync_api import sync_playwright
 
-B = "http://localhost:3000"
+import sys
+B = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:3000"
+PAGES = ["/", "/services", "/services/royal", "/occasions", "/occasions/camps",
+         "/qahwajiat-jeddah", "/coffee-break-jeddah", "/menu", "/menu/coffee",
+         "/gallery", "/faq", "/booking", "/links"]
 
 PROBE = """
 () => {
-  const sels = ['a.btn','a.dock-btn','.bnav a','.sheet-list a','.sact',
-                '.sheet-chips a','.hdr-tel','.crumbs a','.social a',
-                '.mesh a','.sx-links a','.qb a','button'];
+  const sels = ['a.btn','.bnav a','.hdr-call','.hdr-menu','.top-pages.open .top-link',
+                '.lnk','.mcat-chip','.klink-card','.ftr a','a.dishx-card','summary','button'];
   const out = [];
   const seen = new Set();
   for (const sel of sels) {
@@ -84,37 +87,26 @@ def run(page, label):
 
 
 with sync_playwright() as pw:
-    br = pw.chromium.launch(executable_path="/usr/bin/chromium", args=["--no-sandbox", "--force-color-profile=srgb"])
+    br = pw.chromium.launch(args=["--force-color-profile=srgb"])
     tot_c = tot_s = 0
-
-    # ---------- mobile ----------
-    ctx = br.new_context(viewport={"width": 390, "height": 844},
-                         device_scale_factor=3, is_mobile=True, has_touch=True)
-    pg = ctx.new_page()
-
-    for path in ["/", "/booking", "/services", "/menu", "/gallery",
-                 "/qahwajiin-jeddah", "/contact", "/links", "/faq"]:
-        pg.goto(B + path, wait_until="networkidle")
-        time.sleep(0.6)
-        pg.mouse.wheel(0, 1000)
-        time.sleep(1.4)          # let the dock finish its transition
-        c, s = run(pg, f"mobile {path}")
-        tot_c += c
-        tot_s += s
-    ctx.close()
-
-    # ---------- desktop ----------
-    ctx2 = br.new_context(viewport={"width": 1440, "height": 900}, device_scale_factor=2)
-    p2 = ctx2.new_page()
-    for path in ["/", "/booking", "/services", "/links"]:
-        p2.goto(B + path, wait_until="networkidle")
-        time.sleep(0.6)
-        p2.mouse.wheel(0, 1400)
-        time.sleep(1.4)
-        c, s = run(p2, f"desktop {path}")
-        tot_c += c
-        tot_s += s
-    ctx2.close()
+    for w, h, mobile in [(320, 700, True), (390, 844, True), (1440, 900, False)]:
+        ctx = br.new_context(viewport={"width": w, "height": h}, is_mobile=mobile, has_touch=mobile)
+        pg = ctx.new_page()
+        for path in PAGES:
+            pg.goto(B + path, wait_until="networkidle")
+            pg.mouse.wheel(0, 900)
+            time.sleep(0.5)
+            c, s_ = run(pg, f"{w}px {path}")
+            tot_c += c
+            tot_s += s_
+        if mobile:  # the open menu sheet
+            pg.goto(B + "/", wait_until="networkidle")
+            pg.click("#menuBtn")
+            time.sleep(0.4)
+            c, s_ = run(pg, f"{w}px menu-open")
+            tot_c += c
+            tot_s += s_
+        ctx.close()
     br.close()
 
 print(f"\n{'='*56}\nTOTAL clipped: {tot_c}   |   TOTAL under-44px: {tot_s}")

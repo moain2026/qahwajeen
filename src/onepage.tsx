@@ -146,7 +146,7 @@ export const Hero = ({ h }: { h: HeroSpec }) => {
             data-location="hero"
           >
             <Ico n="chat" />
-            واتساب فوري
+            واتساب<span class="w-xs"> فوري</span>
           </a>
         </div>
 

@@ -5,7 +5,7 @@ import { hasImg } from './imgmap'
 import { BRAND, SHOW, SOCIAL_LINKS, TRACKING } from './data'
 import { raw } from './icons'
 
-const V = '26' // asset cache-bust — bump on every CSS/JS change
+const V = '27' // asset cache-bust — bump on every CSS/JS change
 export const SITE = 'https://qahwajeen.com'
 
 /**
