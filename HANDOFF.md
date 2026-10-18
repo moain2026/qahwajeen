@@ -59,18 +59,38 @@
 
 ## 2. المستودعات والفروع
 
+**مستودعان متطابقان تمامًا** (نفس الفروع ونفس الكوميتات ونفس الوسوم):
+
 | المستودع | الوصول | الدور |
 |---|---|---|
-| `github.com/MoTechSys/qahwajeen` | **خاص** | **المصدر المنشور.** `main` = الإنتاج |
-| `github.com/moain2026/royal-coffee-docs` | عام | نسخة تطوير/أرشيف قديمة (حتى `fc77e55`). **لا ترفع إليه مفاتيح.** لا يوجد رمز دفع له في البيئة |
+| `github.com/MoTechSys/qahwajeen` | **خاص** | **النشر.** Vercel يراقب `main` فيه — أي دفع إلى `main` يُنشر على qahwajeen.com خلال ~30 ثانية |
+| `github.com/moain2026/royal-coffee-docs` | **عام** | **التطوير.** نسخة مطابقة للعمل والمراجعة. لا يرتبط بأي نشر. **لا ترفع إليه مفاتيح أبدًا** |
 
-| الفرع المحلي | المحتوى |
+| الفرع | المحتوى |
 |---|---|
-| `audit/v4` | خط العمل التفصيلي (كل كوميتات v4 → v4.2) |
-| `release/prod` | كوميت واحد مضغوط لكل نشر، أبوه `prod/main` — هذا ما يُدفع |
-| `main`, `feature/royal-merge` | تاريخ قديم (v3، قبل التدقيق) |
+| `main` | **الإنتاج.** كوميت واحد مضغوط لكل نشر، مؤلفه MoTechSys |
+| `audit/v4` | خط التطوير التفصيلي (كل كوميتات v4 → اليوم). اعمل هنا أو في فرع منه |
+| `genspark_ai_developer` | فرع عمل وكيل Genspark — مساوٍ لـ `main` عند كل مزامنة |
+| `design/v3-editorial` | أرشيف: أول نسخة نُشرت (`8130348`) |
+| `design/v2-glass-card` | أرشيف: تصميم البطاقة الزجاجية السابق |
+| `feature/royal-merge` | أرشيف: آخر نسخة قبل التدقيق (`fc77e55`) |
+| وسم `archive/pre-v4-main` | `main` القديم في مستودع التطوير قبل التوحيد (`fc77e55`) |
 
-**الريموتات:** `prod` = MoTechSys/qahwajeen · `origin` = moain2026/royal-coffee-docs.
+**الريموتات المحلية:** `prod` = MoTechSys/qahwajeen · `origin` = moain2026/royal-coffee-docs.
+
+### المزامنة — بعد كل نشر، ادفع نفس المراجع للمستودعين
+
+```bash
+H="store --file=$HOME/.qahwa-secrets/git-cred"          # رمز MoTechSys
+P="git -c credential.helper= -c credential.helper=$H"   # للمستودع الخاص
+REFS="release/prod:main audit/v4:audit/v4 release/prod:genspark_ai_developer"
+$P push prod $REFS                                       # 1) النشر أولًا
+git push origin $REFS --force-with-lease                 # 2) ثم التطوير (رمز moain2026 من بيئة العمل)
+git push origin --tags && $P push prod --tags
+# تحقق التطابق:
+diff <($P ls-remote prod | sort -k2) <(git ls-remote origin | grep -v refs/pull | sort -k2) && echo IDENTICAL
+```
+لا تدفع إلى `main` في مستودع التطوير شيئًا لم يُدفع إلى الإنتاج — يبقيان متطابقين.
 
 ### تاريخ الإنتاج (`MoTechSys/qahwajeen main`)
 | الكوميت | النسخة | المحتوى |
@@ -79,7 +99,8 @@
 | `b5e376c` | v4 | التدقيق الشامل: رابط لكل نيّة، جدة فقط، حذف الادعاءات، ترويسة جديدة، أداء |
 | `b910f9f` | v4.1 | نافذة الصور + التقديمات صفحة واحدة |
 | `bdad0b6` | v4.2 | الفهرسة الكاملة (صور الخريطة، يتيمة، JSON-LD) + تنظيف الصور + التوثيق |
-| (هذا الكوميت) | v4.3 | التوثيق والتسليم (`HANDOFF.md`، `qa/tools/`) — لا تغيير في الموقع |
+| `82c3e40` | v4.3 | التوثيق والتسليم (`HANDOFF.md`، `qa/tools/`) — لا تغيير في الموقع |
+| (التالي) | v4.4 | توحيد المستودعين + توثيق المزامنة — لا تغيير في الموقع |
 
 ---
 
