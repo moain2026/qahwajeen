@@ -10,7 +10,6 @@ import {
   Occasions,
   OccasionDetail,
   Menu,
-  MenuCategory,
   Gallery,
   FaqPage,
   FastBooking,
@@ -87,10 +86,10 @@ app.get('/occasions/:slug', (c) => {
 
 app.get('/menu', (c) => page(c, <Menu />))
 
+// one offerings page (Keif-style): old per-category pages fold into their section
 app.get('/menu/:slug', (c) => {
   const m = MENU.find((x) => x.slug === c.req.param('slug'))
-  if (!m) return page(c, <NotFound />, 404)
-  return page(c, <MenuCategory m={m} />)
+  return c.redirect(m ? `/menu#${m.slug}` : '/menu', 301)
 })
 
 app.get('/gallery', (c) => page(c, <Gallery />))
@@ -150,8 +149,7 @@ app.get('/sitemap.xml', (c) => {
   add('/occasions', OCCASIONS.map((o) => o.img))
   for (const o of OCCASIONS.filter((x) => !OCC_URL[x.slug])) add(`/occasions/${o.slug}`, [o.img])
   for (const jp of JEDDAH_PAGES) add(`/${jp.slug}`, [jp.hero])
-  add('/menu')
-  for (const m of MENU) add(`/menu/${m.slug}`, m.items.filter((it) => it.img).map((it) => it.img!))
+  add('/menu', [...MENU.map((m) => m.hero), 'eq-teaset', 'gift-dates'])
   add('/gallery', GALLERY.map((g) => g.img))
   add('/faq')
   add('/booking')

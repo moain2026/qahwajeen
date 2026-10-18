@@ -124,23 +124,6 @@ export const eventLd = (name: string, desc: string, path: string, img: string) =
   areaServed: JEDDAH,
 })
 
-export const menuLd = (cat: string, path: string, items: readonly { n: string; d: string; img?: string }[]) => ({
-  '@context': 'https://schema.org',
-  '@type': 'Menu',
-  name: `${cat} — ${BRAND.name}`,
-  url: abs(path),
-  hasMenuSection: {
-    '@type': 'MenuSection',
-    name: cat,
-    hasMenuItem: items.map((i) => ({
-      '@type': 'MenuItem',
-      name: i.n,
-      description: i.d,
-      ...(i.img ? { image: abs(imgSrc(i.img)) } : {}),
-    })),
-  },
-})
-
 export const galleryLd = (path: string, shots: readonly { img: string; cap: string }[]) => ({
   '@context': 'https://schema.org',
   '@type': 'ImageGallery',
