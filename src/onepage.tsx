@@ -196,12 +196,12 @@ export const RoyalConcierge = ({ place, h1 }: { place: string; h1?: boolean }) =
   const defOcc = CONCIERGE.occasions[0].id
   const defCrew = CONCIERGE.crews[0].id
   const defGuest = CONCIERGE.guests[1]
-  const defMsg = `السلام عليكم، أرغب في عرض سعر فوري من ${BRAND.name} في ${place}:\n• نوع المناسبة: ${defOcc}\n• الطاقم المطلوب: ${defCrew}\n• عدد الضيوف: ${defGuest.id}`
+  const defMsg = `السلام عليكم، أرغب في عرض سعر من ${BRAND.name} في ${place}:\n• نوع المناسبة: ${defOcc}\n• الطاقم المطلوب: ${defCrew}\n• عدد الضيوف: ${defGuest.id}`
 
   return (
     <section class="sx sx-concierge" id="concierge" aria-labelledby="concierge-title">
       <div class="wrap">
-        <div class="conc-box rv" id="concBox" data-place={place} data-brand={BRAND.name}>
+        <div class="conc-box rv" id="concBox" data-place={place} data-brand={BRAND.name} data-wa={BRAND.whatsapp}>
           <div class="conc-head">
             {h1 ? (
               <h1 id="concierge-title">احجز قهوجي وصبابين في جدة بثلاث اختيارات</h1>

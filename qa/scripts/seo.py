@@ -5,8 +5,8 @@ Google-indexing compliance audit for every URL in the sitemap.
 Checks each page against the criteria Google actually uses to decide
 whether a page is indexable and how it renders in the SERP:
 
-  * <title>            present, unique, <= 70 chars (SERP pixel budget)
-  * <meta description> present, unique, 70..165 chars
+  * <title>            present, unique, <= 60 chars (SERP pixel budget)
+  * <meta description> present, unique, 60..165 chars
   * <link canonical>   present and self-referencing
   * <h1>               exactly one
   * JSON-LD            present and parseable
@@ -56,16 +56,16 @@ def audit(path):
     title = one(r"<title>(.*?)</title>", html)
     if not title:
         issues.append("no <title>")
-    elif len(title) > 70:
-        issues.append(f"title {len(title)} chars (>70)")
+    elif len(title) > 60:
+        issues.append(f"title {len(title)} chars (>60)")
     elif len(title) < 15:
         issues.append(f"title only {len(title)} chars")
 
     desc = one(r'<meta\s+name="description"\s+content="(.*?)"', html)
     if not desc:
         issues.append("no meta description")
-    elif not (70 <= len(desc) <= 165):
-        issues.append(f"desc {len(desc)} chars (want 70-165)")
+    elif not (60 <= len(desc) <= 165):
+        issues.append(f"desc {len(desc)} chars (want 60-165)")
 
     canon = one(r'<link\s+rel="canonical"\s+href="(.*?)"', html)
     if not canon:

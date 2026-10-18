@@ -1243,12 +1243,9 @@ main{ padding-bottom:0 }
 .bnav a{ font-size:12.5px; color:#efe4cb }
 .bnav .center em{ font-weight:800 }
 .bnav .b-quote{ position:relative }
-.bnav .b-quote::before{ content:'مجاني'; position:absolute; top:6px; inset-inline-start:calc(50% + 6px);
-  padding:1px 6px; border-radius:999px; font-size:9.5px; font-weight:800; color:#06140f; background:var(--gold-grad) }
 .bnav{ transition:transform .35s var(--ease) }
 .bnav.hide{ transform:translateY(110%) }
 .bnav.hide{ transform:translateY(calc(100% + 48px)) }
-.bnav .b-quote::before{ top:2px; inset-inline-start:calc(50% + 12px) }
 
 /* ═══════════════════════════════════════════════════════════════════
  * 30. ROYAL COFFEE (القهوة الملكية) — MERGED LUXURY DESIGN SYSTEM
@@ -2193,7 +2190,6 @@ main{ padding-bottom:0 }
   color:#06140f; background:var(--gold-grad); border-color:transparent;
 }
 
-/* ── 31.7 REAL PARTNER LOGO CARDS IN MARQUEE (from alqahwaalmalakiya.com, smart WebP) ── */
 .ptn-logo-card{
   flex:none; display:flex; flex-direction:column; align-items:center; justify-content:center;
   gap:6px; width:156px; height:96px; padding:10px 14px; border-radius:16px;
@@ -2316,3 +2312,71 @@ main{ padding-bottom:0 }
 .ftr-mail:hover{ opacity:1; text-decoration:underline }
 
 
+
+/* ═══ v4 — single-row header, menu sheet, 2-item bottom bar ═══ */
+:root{ --hdr-h:60px }
+@media (min-width:1024px){ :root{ --hdr-h:76px } }
+.hdr.hdr-top{ min-height:var(--hdr-h); height:var(--hdr-h) }
+.hdr-shell{ flex-direction:row; align-items:center; justify-content:space-between; gap:10px; height:var(--hdr-h) }
+.hdr-shell .brand{ flex:none; min-width:0 }
+.hdr-shell .brand img{ width:38px; height:38px }
+.hdr-act{ display:flex; align-items:center; gap:8px; margin-inline-start:auto; flex:none }
+.hdr-call{
+  display:inline-flex; align-items:center; gap:7px; min-height:44px; padding:0 14px;
+  border-radius:999px; border:1px solid rgba(226,198,142,.34); background:rgba(197,160,89,.1);
+  color:var(--gl); font-size:14px; font-weight:800; white-space:nowrap;
+}
+.hdr-call svg{ width:17px; height:17px }
+.hdr-call:hover{ border-color:var(--gl); background:rgba(197,160,89,.18) }
+.hdr-menu{
+  display:grid; place-items:center; width:44px; height:44px; border-radius:14px;
+  border:1px solid rgba(226,198,142,.26); background:rgba(197,160,89,.06); color:var(--gl);
+}
+.hdr-menu svg{ width:21px; height:21px }
+@media (max-width:379px){ .hdr-call b{ display:none } .hdr-call{ padding:0; width:44px; justify-content:center } .brand-txt span{ display:none } }
+
+/* mobile: links live in a drop-down sheet under the header */
+@media (max-width:1023px){
+  .top-pages{
+    position:fixed; inset-inline:0; top:var(--hdr-h); z-index:74;
+    display:grid; grid-template-columns:1fr 1fr; gap:8px; height:auto; overflow:visible;
+    margin:0; padding:14px var(--gutter) 18px; border-top:1px solid rgba(226,198,142,.18);
+    background:#06140f; box-shadow:0 24px 48px -12px rgba(0,0,0,.85);
+    opacity:0; visibility:hidden; transform:translateY(-8px);
+    transition:opacity .22s var(--ease), transform .22s var(--ease), visibility .22s;
+  }
+  .top-pages.open{ opacity:1; visibility:visible; transform:none }
+  .top-link{ min-height:48px; justify-content:center; border:1px solid rgba(226,198,142,.16); border-radius:14px; font-size:15px; background:rgba(255,255,255,.02) }
+}
+@media (min-width:1024px){
+  .hdr-menu{ display:none }
+  .top-pages{ order:0; flex:0 1 auto; min-width:0; justify-content:center; gap:2px; padding:4px; overflow:visible; margin:0; height:auto; border-top:0; border-radius:999px; background:rgba(9,26,20,.76); border:1px solid rgba(226,198,142,.22) }
+  .top-link{ min-height:44px; padding:0 12px; font-size:14px }
+}
+@media (min-width:1024px) and (max-width:1199px){ .top-link{ padding:0 9px; font-size:13px } .hdr-call b{ font-size:13px } .brand-txt span{ display:none } }
+
+/* skip link */
+.skip:focus{ position:fixed; top:8px; inset-inline-start:8px; z-index:100; width:auto; height:auto; clip:auto; padding:10px 16px; border-radius:12px; background:var(--gold-grad); color:#06140f; font-weight:800 }
+
+/* bottom bar: WhatsApp + call */
+.bnav{ grid-template-columns:1fr 1fr; gap:10px; padding-inline:12px; background:rgba(4,16,12,.96); border-top:1px solid rgba(226,198,142,.22) }
+.bnav::before,.bnav::after{ display:none }
+.bnav a{ flex-direction:row; justify-content:center; gap:8px; min-height:48px; border-radius:14px; font-size:15px; font-weight:800 }
+.bnav .b-wa{ background:#128c4a; color:#fff }
+.bnav .b-call{ background:var(--gold-grad); color:#06140f }
+.bnav a svg{ width:20px; height:20px }
+.bnav .b-wa span,.bnav .b-call span{ color:inherit }
+
+/* content stays visible without JS — the reveal only arms once JS runs */
+.rv{ opacity:1; transform:none }
+html.js .rv:not(.in){ opacity:0; transform:translate3d(0,24px,0) }
+@media (prefers-reduced-motion:reduce){ html.js .rv:not(.in){ opacity:1; transform:none } }
+
+/* /links: about + faq blocks */
+.links-about,.links-faq{ max-width:720px; margin:28px auto 0; padding:22px; border-radius:22px; border:1px solid rgba(226,198,142,.2); background:rgba(9,26,20,.6) }
+.links-about h2,.links-faq h2{ font-family:var(--f-display); font-size:24px; color:var(--gl); margin:0 0 10px }
+.links-about p{ font-size:15.5px; line-height:1.95; color:rgba(244,234,210,.88); margin:0 0 12px }
+.klinks-list{ list-style:none; margin:0; padding:0 }
+.klinks-list li+li{ margin-top:12px }
+.conc-head h1{ font-family:var(--f-display); font-size:clamp(26px,6.4vw,40px); line-height:1.3; color:var(--pearl); margin:0 0 10px }
+.sx-concierge{ padding-top:calc(var(--hdr-h) + 24px) }
