@@ -36,3 +36,4 @@ lerna-debug.log*
 raw/
 .vercel
 dist-node/
+.worktree-v2/
