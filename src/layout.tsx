@@ -1,23 +1,26 @@
 import type { Child } from 'hono/jsx'
+import { html, raw as rawHtml } from 'hono/html'
 import { imgSrc, imgSet } from './ui'
 import { hasImg } from './imgmap'
-import { BRAND } from './data'
+import { BRAND, SHOW, SOCIAL_LINKS, TRACKING } from './data'
 import { raw } from './icons'
 
-const V = '17' // asset cache-bust
+const V = '18' // asset cache-bust — bump on every CSS/JS change
 export const SITE = 'https://qahwajeen.com'
 
-const TOP_NAV = [
-  { href: '/', label: 'الرئيسية', match: '/', hot: false },
-  { href: '/booking', label: 'حجز فوري', match: '/booking', hot: true },
-  { href: '/services', label: 'الخدمات', match: '/services', hot: false },
-  { href: '/menu', label: 'التقديمات', match: '/menu', hot: false },
-  { href: '/gallery', label: 'أعمالنا', match: '/gallery', hot: false },
-  { href: '/occasions', label: 'المناسبات', match: '/occasions', hot: false },
-  { href: '/locations', label: 'المدن', match: '/locations', hot: false },
-  { href: '/about', label: 'من نحن', match: '/about', hot: false },
-  { href: '/links', label: 'روابطنا', match: '/links', hot: false },
-  { href: '/contact', label: 'تواصل', match: '/contact', hot: false },
+/**
+ * One header for every page: brand + ONE contact action.
+ * Page navigation lives in the menu sheet (mobile) / inline links (desktop),
+ * so no contact button is ever repeated inside the header itself.
+ */
+const NAV = [
+  { href: '/', label: 'الرئيسية' },
+  { href: '/services', label: 'الخدمات' },
+  { href: '/menu', label: 'التقديمات' },
+  { href: '/occasions', label: 'المناسبات' },
+  { href: '/gallery', label: 'أعمالنا' },
+  { href: '/faq', label: 'الأسئلة' },
+  { href: '/links', label: 'تواصل معنا' },
 ] as const
 
 type Props = {
@@ -28,15 +31,37 @@ type Props = {
   jsonld?: object
   /** name of the LCP image for this page (no size suffix) */
   hero?: string
-  /** hide the floating action dock (e.g. on the QR page) */
+  /** pages without a photo hero (links, booking, 404) */
   bare?: boolean
   /** error pages: noindex + no canonical */
   noindex?: boolean
 }
 
-export const Layout = ({ title, desc, path, children, jsonld, hero = 'souqiya', bare, noindex }: Props) => {
+const isActive = (href: string, path: string) =>
+  href === '/' ? path === '/' : path === href || path.startsWith(href + '/')
+
+/** Consent Mode v2 + gtag — only emitted when an ID is configured. */
+const Tracking = () => {
+  const ids = [TRACKING.ga4, TRACKING.ads].filter(Boolean)
+  if (!ids.length) return null
+  const cfg = {
+    ga4: TRACKING.ga4,
+    ads: TRACKING.ads,
+    labels: { call: TRACKING.adsCallLabel, whatsapp: TRACKING.adsWhatsappLabel, booking: TRACKING.adsBookingLabel },
+  }
+  return html`<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});
+gtag('js',new Date());${rawHtml(ids.map((id) => `gtag('config','${id}');`).join(''))}
+window.__trk=${rawHtml(JSON.stringify(cfg))};
+addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id=${rawHtml(ids[0])}';document.head.appendChild(s)},1200)});
+</script>`
+}
+
+export const Layout = ({ title, desc, path, children, jsonld, hero = 'hero-real', bare, noindex }: Props) => {
   const full = `${title} | ${BRAND.name}`
   const canonUrl = `${SITE}${path}`
+  const ogImg = `${SITE}${imgSrc(hero)}`
   return (
     <html lang="ar" dir="rtl">
       <head>
@@ -45,29 +70,16 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'souqiya', 
         <meta name="theme-color" content="#04100c" />
         <title>{full}</title>
         <meta name="description" content={desc} />
-        {noindex ? null : (
+        {noindex ? (
+          <meta name="robots" content="noindex,follow" />
+        ) : (
           <>
             <link rel="canonical" href={canonUrl} />
             <link rel="alternate" hreflang="ar-SA" href={canonUrl} />
-            <link rel="alternate" hreflang="ar" href={canonUrl} />
             <link rel="alternate" hreflang="x-default" href={canonUrl} />
+            <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
           </>
         )}
-        <meta
-          name="robots"
-          content={
-            noindex
-              ? 'noindex,follow'
-              : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'
-          }
-        />
-        <meta name="author" content={BRAND.name} />
-
-        {/* Geo signals — Jeddah primary headquarters */}
-        <meta name="geo.region" content="SA-02" />
-        <meta name="geo.placename" content="Jeddah" />
-        <meta name="geo.position" content="21.4858;39.1925" />
-        <meta name="ICBM" content="21.4858, 39.1925" />
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
@@ -76,238 +88,124 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'souqiya', 
         <meta property="og:title" content={full} />
         <meta property="og:description" content={desc} />
         <meta property="og:url" content={canonUrl} />
-        <meta property="og:image" content={`${SITE}${imgSrc(hero)}`} />
+        <meta property="og:image" content={ogImg} />
         <meta property="og:image:alt" content={`${title} — ${BRAND.name}`} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={full} />
         <meta name="twitter:description" content={desc} />
-        <meta name="twitter:image" content={`${SITE}${imgSrc(hero)}`} />
+        <meta name="twitter:image" content={ogImg} />
 
-        {/* Icons */}
         <link rel="icon" href={`/static/img/favicon.png?v=${V}`} type="image/png" />
         <link rel="apple-touch-icon" href={`/static/img/apple-touch-icon.png?v=${V}`} />
-        <meta name="apple-mobile-web-app-title" content={BRAND.name} />
 
-        {/* Fonts — self-hosted (same origin, no third-party round-trips). */}
-        <link
-          rel="preload"
-          as="font"
-          type="font/woff2"
-          href="/static/fonts/tajawal-400-arabic.woff2"
-          crossorigin=""
-        />
-        <link
-          rel="preload"
-          as="font"
-          type="font/woff2"
-          href="/static/fonts/amiri-700-arabic.woff2"
-          crossorigin=""
-        />
+        {/* Body font only — the display font (Amiri) swaps in without blocking LCP */}
+        <link rel="preload" as="font" type="font/woff2" href="/static/fonts/tajawal-400-arabic.woff2" crossorigin="" />
 
-        {/* LCP preload — per-page hero */}
-        {bare ? (
-          <link rel="preload" as="image" href="/static/img/logo-512.webp" fetchpriority="high" />
-        ) : hasImg(`${hero}-tall`) ? (
+        {/* LCP preload — per-page hero, split by the same media query as <picture> */}
+        {bare ? null : hasImg(`${hero}-tall`) ? (
           <>
-            <link
-              rel="preload"
-              as="image"
-              media="(max-width:767px)"
-              href={imgSrc(`${hero}-tall`)}
-              imagesrcset={imgSet(`${hero}-tall`)}
-              imagesizes="100vw"
-              fetchpriority="high"
-            />
-            <link
-              rel="preload"
-              as="image"
-              media="(min-width:768px)"
-              href={imgSrc(hero)}
-              imagesrcset={imgSet(hero)}
-              imagesizes="100vw"
-              fetchpriority="high"
-            />
+            <link rel="preload" as="image" media="(max-width:767px)" href={imgSrc(`${hero}-tall`)}
+              imagesrcset={imgSet(`${hero}-tall`)} imagesizes="100vw" fetchpriority="high" />
+            <link rel="preload" as="image" media="(min-width:768px)" href={imgSrc(hero)}
+              imagesrcset={imgSet(hero)} imagesizes="100vw" fetchpriority="high" />
           </>
         ) : (
-          <link
-            rel="preload"
-            as="image"
-            href={imgSrc(hero)}
-            imagesrcset={imgSet(hero)}
-            imagesizes="100vw"
-            fetchpriority="high"
-          />
+          <link rel="preload" as="image" href={imgSrc(hero)} imagesrcset={imgSet(hero)} imagesizes="100vw" fetchpriority="high" />
         )}
 
         <link rel="stylesheet" href={`/static/style.css?v=${V}`} />
-        {jsonld && (
-          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonld) }} />
-        )}
+        {html`<script>document.documentElement.classList.add('js')</script>`}
+        <Tracking />
+        {jsonld && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonld) }} />}
       </head>
       <body>
-        <a href="#main" class="sr">تجاوز إلى المحتوى</a>
-        <div class="pgline" id="pgline" aria-hidden="true"></div>
+        <a href="#main" class="sr skip">تجاوز إلى المحتوى</a>
         <div class="sprog" id="sprog" aria-hidden="true"></div>
 
-        {/* ── Header: Top Horizontal Navigation Bar (No Side Drawer) ── */}
+        {/* ── Header: brand · page links (desktop) · ONE call action · menu (mobile) ── */}
         <header class="hdr hdr-top" id="hdr">
           <div class="wrap hdr-shell">
-            <div class="hdr-row">
-              <a href="/" class="brand" title="الرئيسية">
-                <img
-                  src="/static/img/logo-192.webp"
-                  srcset="/static/img/logo-192.webp 192w, /static/img/logo-512.webp 512w"
-                  sizes="48px"
-                  alt={BRAND.name}
-                  width="48"
-                  height="48"
-                />
-                <span class="brand-txt">
-                  <b>{BRAND.name}</b>
-                  <span>{BRAND.latin}</span>
-                </span>
-              </a>
+            <a href="/" class="brand" aria-label={`${BRAND.name} — الصفحة الرئيسية`}>
+              <img src="/static/img/logo-192.webp" alt="" width="44" height="44" />
+              <span class="brand-txt" aria-hidden="true">
+                <b>{BRAND.name}</b>
+                <span>{BRAND.latin}</span>
+              </span>
+            </a>
 
-              <div class="hdr-act">
-                <a
-                  href={`tel:${BRAND.phoneLocal}`}
-                  class="hdr-call-pill"
-                  aria-label={`اتصل بـ ${BRAND.name} ${BRAND.phoneDisplay}`}
-                  data-track="call"
-                  data-location="header"
-                >
-                  <span dangerouslySetInnerHTML={{ __html: raw('phone') }} />
-                  <b class="ltr">{BRAND.phoneDisplay}</b>
+            <nav class="top-pages" id="topNav" aria-label="صفحات الموقع">
+              {NAV.map((item) => (
+                <a href={item.href} class="top-link" aria-current={isActive(item.href, path) ? 'page' : undefined}>
+                  {item.label}
                 </a>
-                <a
-                  href={BRAND.whatsapp}
-                  class="btn btn-gold hdr-wa-btn"
-                  rel="noopener"
-                  target="_blank"
-                  data-track="whatsapp"
-                  data-location="header"
-                >
-                  <span dangerouslySetInnerHTML={{ __html: raw('chat') }} />
-                  <span>تواصل الآن</span>
-                </a>
-              </div>
-            </div>
-
-            <nav class="top-pages" aria-label="صفحات الموقع">
-              {TOP_NAV.map((item) => {
-                const isHome = item.href === '/'
-                const active = isHome
-                  ? path === '/'
-                  : item.match === '/links'
-                    ? path === '/links' || path === '/social'
-                    : path === item.match || path.startsWith(item.match + '/')
-                return (
-                  <a
-                    href={item.href}
-                    class={'top-link' + (item.hot ? ' is-hot' : '')}
-                    aria-current={active ? 'page' : undefined}
-                  >
-                    {item.hot && <span class="top-dot" aria-hidden="true" />}
-                    {item.label}
-                  </a>
-                )
-              })}
+              ))}
             </nav>
+
+            <div class="hdr-act">
+              <a href={`tel:${BRAND.phoneLocal}`} class="hdr-call" data-track="call" data-location="header">
+                <span dangerouslySetInnerHTML={{ __html: raw('phone') }} />
+                <b class="ltr">{BRAND.phoneDisplay}</b>
+              </a>
+              <button type="button" class="hdr-menu" id="menuBtn" aria-controls="topNav" aria-expanded="false" aria-label="القائمة">
+                <span dangerouslySetInnerHTML={{ __html: raw('menu') }} />
+              </button>
+            </div>
           </div>
         </header>
 
         <main id="main">{children}</main>
 
-        {/* ── Footer: clean luxury brand signature + Developer credit ── */}
         <footer class="ftr">
           <div class="wrap">
             <div class="ftr-mini">
-              <img src="/static/img/logo-192.webp" alt={BRAND.name} width="56" height="56" loading="lazy" />
+              <img src="/static/img/logo-192.webp" alt="" width="56" height="56" loading="lazy" />
               <b>{BRAND.name}</b>
-              <small>{BRAND.latin} · LUXURY HOSPITALITY · JEDDAH</small>
-              <a
-                class="ftr-phone ltr"
-                href={`tel:${BRAND.phoneLocal}`}
-                data-track="call"
-                data-location="footer"
-              >
+              <small>{BRAND.latin} · ضيافة المناسبات في جدة</small>
+              <a class="ftr-phone ltr" href={`tel:${BRAND.phoneLocal}`} data-track="call" data-location="footer">
                 {BRAND.phoneDisplay}
               </a>
-              <a
-                class="ftr-mail ltr"
-                href={`mailto:${BRAND.email}`}
-              >
-                {BRAND.email}
-              </a>
+              {SHOW.email && (
+                <a class="ftr-mail ltr" href={`mailto:${BRAND.email}`} data-track="email" data-location="footer">
+                  {BRAND.email}
+                </a>
+              )}
+              {SOCIAL_LINKS.length > 0 && (
+                <p class="ftr-social">
+                  {SOCIAL_LINKS.map((s) => (
+                    <a href={s.href} rel="noopener me" target="_blank">{s.label}</a>
+                  ))}
+                </p>
+              )}
             </div>
-            <nav class="ftr-links" aria-label="روابط سريعة">
-              <a href="/">الرئيسية</a>
+            <nav class="ftr-links" aria-label="روابط الموقع">
+              {NAV.map((item) => (
+                <a href={item.href}>{item.label}</a>
+              ))}
               <a href="/booking">حجز سريع</a>
-              <a href="/services">الخدمات</a>
-              <a href="/menu">التقديمات</a>
-              <a href="/occasions">المناسبات</a>
-              <a href="/gallery">أعمالنا</a>
-              <a href="/locations">المدن</a>
-              <a href="/faq">الأسئلة الشائعة</a>
-              <a href="/about">من نحن</a>
-              <a href="/links">روابطنا والباركود</a>
-              <a href="/contact">تواصل معنا</a>
             </nav>
             <div class="ftr-base">
-              <span>© {new Date().getFullYear()} {BRAND.name} ({BRAND.latin}) · جدة — المملكة العربية السعودية</span>
+              <span>© {new Date().getFullYear()} {BRAND.name} · جدة — المملكة العربية السعودية</span>
               <span class="ftr-dev">
                 تطوير وتصميم{' '}
-                <a
-                  href="https://alabbasi.uk"
-                  target="_blank"
-                  rel="noopener"
-                  class="ftr-dev-lnk"
-                >
-                  Alabbasi Tech
-                </a>
+                <a href="https://alabbasi.uk" target="_blank" rel="noopener" class="ftr-dev-lnk">Alabbasi Tech</a>
               </span>
             </div>
           </div>
         </footer>
 
-        {/* ── Bottom contact bar: WhatsApp + prominent center Call + Fast Booking ── */}
-        {!bare && (
-          <nav class="bnav" aria-label="تواصل سريع">
-            <a
-              href={BRAND.whatsapp}
-              class="b-wa"
-              rel="noopener"
-              target="_blank"
-              data-track="whatsapp"
-              data-location="bottom-bar"
-            >
-              <span dangerouslySetInnerHTML={{ __html: raw('chat') }} />
-              واتساب
-            </a>
-            <a
-              href={`tel:${BRAND.phoneLocal}`}
-              class="center"
-              aria-label={`اتصل الآن ${BRAND.phoneDisplay}`}
-              data-track="call"
-              data-location="bottom-bar"
-            >
-              <span dangerouslySetInnerHTML={{ __html: raw('phone') }} />
-              <em>اتصل الآن</em>
-            </a>
-            <a
-              href="/booking"
-              class="b-quote"
-              data-track="fast-booking"
-              data-location="bottom-bar"
-            >
-              <span dangerouslySetInnerHTML={{ __html: raw('sparkle') }} />
-              حجز فوري
-            </a>
-          </nav>
-        )}
+        {/* ── Bottom bar (mobile): the two real channels. Hidden while the hero's own buttons are visible ── */}
+        <nav class="bnav" aria-label="تواصل سريع">
+          <a href={BRAND.whatsapp} class="b-wa" rel="noopener" target="_blank" data-track="whatsapp" data-location="bottom-bar">
+            <span dangerouslySetInnerHTML={{ __html: raw('chat') }} />
+            واتساب
+          </a>
+          <a href={`tel:${BRAND.phoneLocal}`} class="b-call" data-track="call" data-location="bottom-bar">
+            <span dangerouslySetInnerHTML={{ __html: raw('phone') }} />
+            اتصال
+          </a>
+        </nav>
 
         <div class="toast" id="toast" role="status" aria-live="polite">
-          <span dangerouslySetInnerHTML={{ __html: raw('check') }} />
           <span id="toastMsg"></span>
         </div>
 

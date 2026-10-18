@@ -1,189 +1,116 @@
 /**
- * Official Links & QR Code Landing Page (`/links` and `/social`).
- * Modelled on https://keifaldiafa.com/links, tailored exclusively to
- * «القهوة الملكية — ROYAL COFFEE» with ONLY our real, active channels:
- *   1. WhatsApp (050 496 8113)
- *   2. Direct Call (050 496 8113)
- *   3. Fast 10-Second Booking (/booking)
- *   4. Official Website (qahwajeen.com)
- *   5. Official Email (qahwajiyin@gmail.com)
- *   6. Google Maps Location (Jeddah, Saudi Arabia)
- *   7. Official QR Code card (share / copy)
- * Unused social media accounts are strictly hidden.
+ * /links — the ONE contact + about page (/contact, /about, /social, /qr 301 here).
+ * Only channels the owner actually has: WhatsApp, call, email — plus the
+ * quick booking page and the QR card that points back to this URL.
  */
 import { Layout, SITE } from './layout'
-import { BRAND } from './data'
-import { graph, orgLd, siteLd, crumbLd } from './ld'
+import { BRAND, FAQ } from './data'
+import { graph, orgLd, crumbLd, faqLd } from './ld'
 import { Ico, wa } from './blocks'
+import { Faq } from './ui'
 
-export const Social = ({ path = '/links' }: { path?: '/links' | '/social' }) => {
-  const waMsg = `السلام عليكم، وصلتكم من صفحة الروابط والباركود. أرغب بالاستفسار عن خدمات ${BRAND.name} لمناسبة.`
+const LINKS_FAQ = [FAQ[0], FAQ[2], FAQ[3]]
+
+export const Social = () => {
+  const path = '/links'
+  const waMsg = `السلام عليكم، أرغب في حجز ضيافة لمناسبة في جدة مع ${BRAND.name}.`
   const channels = [
-    {
-      id: 'whatsapp',
-      en: 'WhatsApp',
-      ar: 'واتساب فوري',
-      sub: BRAND.phoneDisplay,
-      note: 'الأسرع للردّ وعرض السعر المكتوب',
-      href: wa(waMsg),
-      tint: '#25D366',
-      icon: 'chat',
-      ext: true,
-      ltr: true,
-    },
-    {
-      id: 'call',
-      en: 'Call',
-      ar: 'اتصال مباشر ٢٤/٧',
-      sub: BRAND.phoneDisplay,
-      note: 'استقبال الحجوزات على مدار الساعة',
-      href: `tel:${BRAND.phoneLocal}`,
-      tint: '#E2C68E',
-      icon: 'phone',
-      ext: false,
-      ltr: true,
-    },
-    {
-      id: 'booking',
-      en: 'Fast Booking',
-      ar: 'حجز سريع في ١٠ ثوانٍ',
-      sub: 'حدّد مناسبتك وعدد الضيوف فوراً',
-      note: 'مُحدّد الضيافة الملكي للزبون المستعجل',
-      href: '/booking',
-      tint: '#f3d48b',
-      icon: 'sparkle',
-      ext: false,
-      ltr: false,
-    },
-    {
-      id: 'website',
-      en: 'Website',
-      ar: 'الموقع الرسمي',
-      sub: 'qahwajeen.com',
-      note: 'تصفّح الخدمات والتقديمات ومعرض الأعمال',
-      href: '/',
-      tint: '#c5a059',
-      icon: 'home',
-      ext: false,
-      ltr: true,
-    },
-    {
-      id: 'email',
-      en: 'Email',
-      ar: 'البريد الإلكتروني الرسمي',
-      sub: BRAND.email,
-      note: 'لعروض الأسعار المؤسسية والجهات والشركات',
-      href: `mailto:${BRAND.email}`,
-      tint: '#d9b56d',
-      icon: 'send',
-      ext: false,
-      ltr: true,
-    },
-    {
-      id: 'maps',
-      en: 'Google Maps',
-      ar: 'الموقع على الخريطة',
-      sub: 'جدة · المملكة العربية السعودية',
-      note: 'المقر الرئيسي ومركز العمليات',
-      href: BRAND.mapsUrl,
-      tint: '#34A853',
-      icon: 'maps',
-      ext: true,
-      ltr: false,
-    },
+    { id: 'whatsapp', name: 'واتساب', sub: BRAND.phoneDisplay, href: wa(waMsg), icon: 'chat', ext: true, ltr: true, tint: '#25D366' },
+    { id: 'call', name: 'اتصال', sub: BRAND.phoneDisplay, href: `tel:${BRAND.phoneLocal}`, icon: 'phone', ext: false, ltr: true, tint: '#E2C68E' },
+    { id: 'email', name: 'البريد الإلكتروني', sub: BRAND.email, href: `mailto:${BRAND.email}`, icon: 'send', ext: false, ltr: true, tint: '#d9b56d' },
+    { id: 'booking', name: 'طلب حجز سريع', sub: 'اختر المناسبة والطاقم وعدد الضيوف', href: '/booking', icon: 'sparkle', ext: false, ltr: false, tint: '#f3d48b' },
   ] as const
 
   return (
     <Layout
       path={path}
-      hero="sawas-3"
+      hero="ev-team-1"
       bare
       jsonld={graph(
         orgLd(),
-        siteLd(),
-        crumbLd([{ name: 'روابطنا والباركود', path }]),
         {
-          '@type': 'WebPage',
+          '@type': 'ContactPage',
           '@id': `${SITE}${path}#webpage`,
           url: `${SITE}${path}`,
-          name: `روابط ${BRAND.name} — تواصل معنا`,
-          description: `كل قنوات التواصل الرسمية مع ${BRAND.name} في صفحة واحدة: واتساب ${BRAND.phoneLocal}، اتصال مباشر، الموقع الرسمي، البريد الإلكتروني ${BRAND.email}، والموقع على خرائط Google.`,
+          name: `تواصل مع ${BRAND.name}`,
+          inLanguage: 'ar-SA',
           isPartOf: { '@id': `${SITE}/#site` },
-          inLanguage: 'ar',
-          mainEntity: { '@id': `${SITE}/#business` },
+          about: { '@id': `${SITE}/#business` },
         },
+        crumbLd([{ name: 'تواصل معنا', path }]),
+        faqLd(LINKS_FAQ),
       )}
-      title="روابطنا والباركود — تواصل مع القهوة الملكية"
-      desc={`كل قنوات التواصل الرسمية مع ${BRAND.name} في صفحة واحدة: واتساب ${BRAND.phoneLocal}، اتصال مباشر، الموقع الرسمي qahwajeen.com، والبريد الإلكتروني ${BRAND.email}.`}
+      title="تواصل معنا — رقم قهوجي جدة 0504968113"
+      desc={`تواصل مع ${BRAND.name} لحجز قهوجيين وصبابين وضيافة مناسبات في جدة: اتصال وواتساب ${BRAND.phoneLocal}، والبريد ${BRAND.email}.`}
     >
-      <section class="klinks-hero" aria-label="تواصل معنا">
+      <section class="klinks-hero" aria-labelledby="links-h1">
         <div class="wrap klinks-head">
           <div class="klinks-lh-row">
             <div class="klinks-emblem" aria-hidden="true">
-              <span class="klinks-orbit" />
-              <span class="klinks-orbit o2" />
-              <img
-                src="/static/img/logo-512.webp"
-                alt={BRAND.name}
-                width="112"
-                height="112"
-                decoding="async"
-                fetchpriority="high"
-              />
+              <img src="/static/img/logo-512.webp" alt="" width="112" height="112" decoding="async" fetchpriority="high" />
             </div>
             <div class="klinks-lh-tx">
-              <span class="klinks-label">تواصل معنا · OFFICIAL LINKS</span>
-              <h1>
+              <span class="klinks-label">تواصل معنا</span>
+              <h1 id="links-h1">
                 {BRAND.name} <em>{BRAND.latin}</em>
               </h1>
-              <p class="klinks-tag">قهوجيين · صبّابين · قهوجيات · ضيافة ملكية فاخرة</p>
+              <p class="klinks-tag">قهوجيين · صبابين · قهوجيات · ضيافة مناسبات في جدة</p>
             </div>
           </div>
-          <p class="klinks-sub">
-            اختر القناة الأنسب لك — واتساب هو الأسرع، والاستشارة وعرض السعر المكتوب مجانيان بلا التزام.
-          </p>
+          <p class="klinks-sub">رقم واحد للاتصال والواتساب. أرسل التاريخ والحي وعدد الضيوف ويصلك عرض سعر مكتوب.</p>
         </div>
       </section>
 
-      <section class="klinks-sec" id="channels" aria-label="قنوات التواصل الرسمية">
+      <section class="klinks-sec" id="channels" aria-label="قنوات التواصل">
         <div class="wrap klinks-wrap">
-          <nav class="klinks-list" aria-label={`قنوات التواصل مع ${BRAND.name}`}>
+          <ul class="klinks-list" role="list">
             {channels.map((ch, i) => (
-              <a
-                class={`klink-card ch-${ch.id}`}
-                href={ch.href}
-                target={ch.ext ? '_blank' : undefined}
-                rel={ch.ext ? 'noopener' : undefined}
-                style={`--tint:${ch.tint};--i:${i}`}
-                aria-label={`${ch.ar} — ${ch.sub}`}
-                data-track={ch.id === 'whatsapp' ? 'whatsapp' : ch.id === 'call' ? 'call' : undefined}
-                data-location="links-page"
-              >
-                <span class="klink-shine" aria-hidden="true" />
-                <span class="klink-ic" aria-hidden="true">
-                  <Ico n={ch.icon} />
-                </span>
-                <span class="klink-tx">
-                  <span class="klink-name">
-                    <b>{ch.en}</b>
-                    <i>— {ch.ar}</i>
+              <li>
+                <a
+                  class={`klink-card ch-${ch.id}`}
+                  href={ch.href}
+                  target={ch.ext ? '_blank' : undefined}
+                  rel={ch.ext ? 'noopener' : undefined}
+                  style={`--tint:${ch.tint};--i:${i}`}
+                  data-track={ch.id === 'booking' ? undefined : ch.id}
+                  data-location="links-page"
+                >
+                  <span class="klink-ic" aria-hidden="true">
+                    <Ico n={ch.icon} />
                   </span>
-                  <small class={ch.ltr ? 'ltr' : undefined}>{ch.sub}</small>
-                  <em class="klink-note">{ch.note}</em>
-                </span>
-                <span class="klink-arr" aria-hidden="true">
-                  <Ico n="arrow" />
-                </span>
-              </a>
+                  <span class="klink-tx">
+                    <span class="klink-name">
+                      <b>{ch.name}</b>
+                    </span>
+                    <small class={ch.ltr ? 'ltr' : undefined}>{ch.sub}</small>
+                  </span>
+                  <span class="klink-arr" aria-hidden="true">
+                    <Ico n="arrow" />
+                  </span>
+                </a>
+              </li>
             ))}
-          </nav>
+          </ul>
 
-          {/* Official QR Code Card for scanning & sharing */}
+          <section class="links-about rv" aria-labelledby="about-h">
+            <h2 id="about-h">من نحن</h2>
+            <p>
+              {BRAND.name} فريق ضيافة من جدة: قهوجيين وصبابين ومباشرين، وطاقم نسائي مستقل من القهوجيات والصبابات،
+              بزيٍّ رسمي موحّد ودلال نحاسية مصقولة. نخدم الأعراس والملكات، ومجالس العزاء، والمؤتمرات والمعارض،
+              والمناسبات العائلية في أحياء جدة وقاعاتها واستراحاتها.
+            </p>
+            <ul class="svx-pts">
+              <li>عرض سعر مكتوب قبل أي تأكيد</li>
+              <li>حضور قبل الموعد لتجهيز ركن الضيافة</li>
+              <li>رفع وتنظيف منطقة التقديم بعد المناسبة</li>
+            </ul>
+          </section>
+
           <div class="qr-card rv" id="qr">
             <div class="qr-frame">
               <img
                 src="/static/img/qr.png"
-                alt={`باركود صفحة تواصل ${BRAND.name}`}
+                alt={`رمز QR يفتح صفحة التواصل qahwajeen.com/links`}
                 width="300"
                 height="300"
                 loading="lazy"
@@ -191,38 +118,25 @@ export const Social = ({ path = '/links' }: { path?: '/links' | '/social' }) => 
               />
             </div>
             <div class="qr-txt">
-              <h2>امسح الباركود الرسمي (QR Code)</h2>
-              <p>
-                وجّه كاميرا الجوال إلى الرمز لفتح صفحة روابط <b>{BRAND.name}</b> مباشرة — أو انسخ الرقم الموحّد والمعتمد:{' '}
-                <strong class="ltr">{BRAND.phoneDisplay}</strong>
-              </p>
+              <h2>رمز QR لصفحة التواصل</h2>
+              <p>امسح الرمز بكاميرا الجوال لفتح هذه الصفحة، أو شاركها مباشرة.</p>
               <div class="qr-btns">
-                <button class="btn btn-gold" type="button" id="shareBtn" data-share="/links">
+                <button class="btn btn-line" type="button" data-share="/links">
                   <Ico n="share" />
-                  مشاركة صفحة الروابط
+                  مشاركة الصفحة
                 </button>
-                <button class="btn btn-line" type="button" id="copyBtn" data-copy={BRAND.phoneDisplay}>
+                <button class="btn btn-line" type="button" data-copy={BRAND.phoneLocal}>
                   <Ico n="copy" />
-                  نسخ الرقم: {BRAND.phoneDisplay}
+                  نسخ الرقم
                 </button>
               </div>
             </div>
           </div>
 
-          <p class="klinks-note">
-            نعمل على مدار الساعة (٢٤/٧) طوال أيام الأسبوع، ونستقبل طلبات المناسبات الرسمية والخاصة والعاجلة في جدة وجميع مدن المملكة.
-          </p>
-
-          <div class="sx-links" aria-label="روابط أقسام الموقع">
-            <a href="/">الصفحة الرئيسية</a>
-            <a href="/booking">حجز فوري في ١٠ ثوانٍ</a>
-            <a href="/services">خدماتنا</a>
-            <a href="/menu">قائمة التقديمات</a>
-            <a href="/gallery">معرض أعمالنا</a>
-            <a href="/occasions">المناسبات</a>
-            <a href="/locations">المدن</a>
-            <a href="/about">من نحن</a>
-          </div>
+          <section class="links-faq" aria-labelledby="links-faq-h">
+            <h2 id="links-faq-h">أسئلة قبل التواصل</h2>
+            <Faq items={LINKS_FAQ} />
+          </section>
         </div>
       </section>
     </Layout>

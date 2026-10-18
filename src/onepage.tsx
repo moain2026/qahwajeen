@@ -1,13 +1,6 @@
 /**
- * OnePage & Modular Sections —
- * - <OnePage> is used on the Homepage (/) as the complete executive showcase.
- * - Individual sections (<PartnersStrip>, <ServicesSec>, <MenuSec>, <WorksSec>,
- *   <CrewSec>, <RolesSec>, <ArrangementsSec>, <OccasionsSec>, <WhySec>,
- *   <FaqSec>, <EndCta>, <RoyalConcierge>, <FocusText>, <FocusGrid>) are exported
- *   so every inner page (/services, /menu, /gallery, /occasions, /locations,
- *   /about, /faq, /contact, /booking, etc.) renders ONLY its own focused,
- *   well-organized sections (just like keifaldiafa.com), without repeating
- *   unrelated homepage blocks!
+ * Home sections. <OnePage> composes the home page; inner pages reuse
+ * single sections so each URL shows only its own topic.
  */
 import type { Child } from 'hono/jsx'
 import {
@@ -21,10 +14,11 @@ import {
   ROLES,
   WHY,
   AUDIENCE,
-  PARTNERS,
   ARRANGEMENTS,
   HERO_METRICS,
   CONCIERGE,
+  svcUrl,
+  occUrl,
   type Service,
 } from './data'
 import { Img, HeroPic, Faq } from './ui'
@@ -155,16 +149,8 @@ export const Hero = ({ h }: { h: HeroSpec }) => {
           </a>
         </div>
 
-        {/* Dedicated Button to the Standalone Busy-Customer Fast Booking Page */}
-        <a class="hero-fast-btn" href="/booking" data-track="fast-booking" data-location="hero">
-          <span class="hf-pulse" aria-hidden="true" />
-          <Ico n="sparkle" />
-          <span>مستعجل؟ حدّد مناسبتك واحصل على الترتيب في ١٠ ثوانٍ</span>
-          <Ico n="arrow" />
-        </a>
-
         {/* Royal Trust Ribbon — immediate credibility below the fold */}
-        <ul class="hero-metrics" aria-label="إنجازات وضمانات القهوة الملكية">
+        <ul class="hero-metrics" aria-label="ما يميّز خدمتنا">
           {HERO_METRICS.map((m) => (
             <li>
               <b>{m.num}</b>
@@ -176,39 +162,6 @@ export const Hero = ({ h }: { h: HeroSpec }) => {
     </section>
   )
 }
-
-/* ═══ 1.5 PARTNERS OF SUCCESS MARQUEE (شعارات شركاء النجاح الأصلية من موقعنا الأول — مضغوطة WebP) ═══ */
-export const PartnersStrip = () => (
-  <section class="ptn-strip" id="partners" aria-label="شركاء النجاح — جهات وشركات وثقت بنا">
-    <div class="wrap ptn-strip-head">
-      <div class="ptn-title-grp">
-        <span class="ptn-eyebrow">
-          <Ico n="crown" />
-          شركاء النجاح
-        </span>
-        <h2>جهات وشركات وثقت بنا</h2>
-      </div>
-      <p class="ptn-strip-sub">اسحب يميناً ويساراً · كبرى الشركات والجهات في المملكة</p>
-    </div>
-
-    <div class="ptn-ticker" id="ptnTicker" data-auto-rail="continuous">
-      <div class="ptn-track">
-        {[...PARTNERS, ...PARTNERS].map((p, idx) => (
-          <div class="ptn-logo-card" aria-hidden={idx >= PARTNERS.length ? 'true' : undefined}>
-            <span class="ptn-logo-box">
-              <Img
-                n={p.img}
-                alt={`شعار ${p.name} — من شركاء نجاح ${BRAND.name}`}
-                sizes="140px"
-              />
-            </span>
-            <b class="ptn-logo-name">{p.name}</b>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-)
 
 /* ═══ 2. WHO WE SERVE (لمن نخدم — 3 عقود ملكية مدمجة) ═══ */
 export const WhoSec = ({ place = 'جدة' }: { place?: string }) => (
@@ -239,7 +192,7 @@ export const WhoSec = ({ place = 'جدة' }: { place?: string }) => (
 )
 
 /* ═══ ROYAL 10-SECOND CONCIERGE (مُحدّد الضيافة الملكي السريع — يُعرض في صفحته المستقلة /booking) ═══ */
-export const RoyalConcierge = ({ place }: { place: string }) => {
+export const RoyalConcierge = ({ place, h1 }: { place: string; h1?: boolean }) => {
   const defOcc = CONCIERGE.occasions[0].id
   const defCrew = CONCIERGE.crews[0].id
   const defGuest = CONCIERGE.guests[1]
@@ -250,12 +203,12 @@ export const RoyalConcierge = ({ place }: { place: string }) => {
       <div class="wrap">
         <div class="conc-box rv" id="concBox" data-place={place} data-brand={BRAND.name}>
           <div class="conc-head">
-            <span class="conc-badge">
-              <Ico n="sparkle" />
-              للزبون المستعجل · بدون تعقيد
-            </span>
-            <h2 id="concierge-title">حدّد مناسبتك في ١٠ ثوانٍ — ويصلك الترتيب وعرض السعر فوراً</h2>
-            <p>اختر ٣ نقرات فقط، وسنجهّز لك التشكيل المثالي ورسالة واتساب مفصّلة جاهزة للإرسال.</p>
+            {h1 ? (
+              <h1 id="concierge-title">احجز قهوجي وصبابين في جدة بثلاث اختيارات</h1>
+            ) : (
+              <h2 id="concierge-title">احجز بثلاث اختيارات</h2>
+            )}
+            <p>اختر نوع المناسبة والطاقم وعدد الضيوف، ونجهّز لك رسالة واتساب بالتفاصيل — ويصلك عرض السعر المكتوب.</p>
           </div>
 
           <div class="conc-steps">
@@ -332,20 +285,11 @@ export const RoyalConcierge = ({ place }: { place: string }) => {
                 href={wa(defMsg)}
                 rel="noopener"
                 target="_blank"
-                data-track="whatsapp"
+                data-track="booking"
                 data-location="concierge"
               >
                 <Ico n="chat" />
-                <span>أرسل الترتيب عبر واتساب الآن</span>
-              </a>
-              <a
-                class="btn btn-line conc-call"
-                href={`tel:${BRAND.phoneLocal}`}
-                data-track="call"
-                data-location="concierge"
-              >
-                <Ico n="phone" />
-                <span>أو اتصل مباشرة</span>
+                <span>أرسل الطلب عبر واتساب</span>
               </a>
             </div>
           </div>
@@ -401,7 +345,7 @@ export const CompactServiceCard = ({ s, place }: { s: Service; place: string }) 
               <Ico n="chat" />
               اطلب هذه الخدمة
             </a>
-            <a class="lnk" href={`/services/${s.slug}`}>
+            <a class="lnk" href={svcUrl(s.slug)}>
               صفحة الخدمة
               <Ico n="arrow" />
             </a>
@@ -417,23 +361,24 @@ export const WorksSec = ({ expandAll = false }: { expandAll?: boolean }) => (
   <section class="sx sx-alt" id="works">
     <div class="wrap">
       <Head
-        k="أعمالنا الموثّقة"
-        t="صور حقيقية من مناسبات نفّذناها"
-        sub="شريط متحرك يتجدد تلقائياً — اسحب يميناً ويساراً أو اضغط على أي صورة لتكبيرها."
+        k="أعمالنا"
+        t="صور من مناسبات خدمناها"
+        sub="اسحب للتصفّح، واضغط على أي صورة لتكبيرها."
       />
       <div class="works-toolbar">
-        <div class="works-filters" id="worksFilters" role="tablist" aria-label="تصفية معرض الأعمال">
-          <button type="button" class="w-pill on" data-wcat="all" aria-selected="true">الكل ({GALLERY.length})</button>
-          <button type="button" class="w-pill" data-wcat="فريق" aria-selected="false">الطاقم والزيّ</button>
-          <button type="button" class="w-pill" data-wcat="ملكية" aria-selected="false">الضيافة الملكية VIP</button>
-          <button type="button" class="w-pill" data-wcat="عدّة" aria-selected="false">الدلال والعدّة</button>
-          <button type="button" class="w-pill" data-wcat="تقديمات" aria-selected="false">التقديمات والحلى</button>
+        <div class="works-filters" id="worksFilters" role="group" aria-label="تصفية معرض الأعمال">
+          <button type="button" class="w-pill on" data-wcat="all" aria-pressed="true">الكل ({GALLERY.length})</button>
+          <button type="button" class="w-pill" data-wcat="فريق" aria-pressed="false">الطاقم والزيّ</button>
+          <button type="button" class="w-pill" data-wcat="ملكية" aria-pressed="false">الضيافة الملكية</button>
+          <button type="button" class="w-pill" data-wcat="عدّة" aria-pressed="false">الدلال والعدّة</button>
+          <button type="button" class="w-pill" data-wcat="تقديمات" aria-pressed="false">التقديمات والحلى</button>
+          <button type="button" class="w-pill" data-wcat="إضافات" aria-pressed="false">الخيام والإضافات</button>
         </div>
         <div class="rail-ctrls" aria-label="تحكم بتمرير المعرض">
           <button type="button" class="rail-btn" data-rail-target="worksRail" data-dir="prev" aria-label="السابق">
             <Ico n="arrow" />
           </button>
-          <span class="k-swipe-hint" aria-hidden="true">يتحرك تلقائياً · اسحب</span>
+          <span class="k-swipe-hint" aria-hidden="true">اسحب للتصفّح</span>
           <button type="button" class="rail-btn is-next" data-rail-target="worksRail" data-dir="next" aria-label="التالي">
             <Ico n="arrow" />
           </button>
@@ -447,7 +392,7 @@ export const WorksSec = ({ expandAll = false }: { expandAll?: boolean }) => (
             data-wcat={g.cat}
             data-full={g.img}
             data-cap={g.cap}
-            aria-label={`تكبير صورة: ${g.cap}`}
+            aria-label={`${g.cap} — تكبير الصورة`}
           >
             <Img
               n={g.img}
@@ -470,7 +415,7 @@ export const WorksSec = ({ expandAll = false }: { expandAll?: boolean }) => (
               data-wcat={g.cat}
               data-full={g.img}
               data-cap={g.cap}
-              aria-label={`تكبير صورة: ${g.cap}`}
+              aria-label={`${g.cap} — تكبير الصورة`}
             >
               <Img
                 n={g.img}
@@ -516,7 +461,7 @@ export const CrewSec = () => (
           <button type="button" class="rail-btn" data-rail-target="crewRail" data-dir="prev" aria-label="الزي السابق">
             <Ico n="arrow" />
           </button>
-          <span class="k-swipe-hint" aria-hidden="true">يتحرك تلقائياً يميناً ويساراً · اسحب للتصفح</span>
+          <span class="k-swipe-hint" aria-hidden="true">اسحب للتصفّح</span>
           <button type="button" class="rail-btn is-next" data-rail-target="crewRail" data-dir="next" aria-label="الزي التالي">
             <Ico n="arrow" />
           </button>
@@ -549,7 +494,7 @@ export const MenuSec = ({ showAllCategories = false }: { showAllCategories?: boo
       <Head
         k="التقديمات والمعدات"
         t="ما الذي يصل إلى ضيوفك؟"
-        sub="اختر القسم لتصفّح الأصناف بصورها الحقيقية — أكثر من ٧٠ صنفاً من القهوة والتمور والحلى."
+        sub="اختر القسم لتصفّح الأصناف — والقائمة تُخصَّص بحسب مناسبتك."
       />
       {!showAllCategories ? (
         <>
@@ -635,7 +580,22 @@ export const MenuSec = ({ showAllCategories = false }: { showAllCategories?: boo
 )
 
 /* ═══ 6. ALL SERVICES SECTION ═══ */
-export const ServicesSec = ({ place = 'جدة' }: { place?: string }) => {
+export const ServicesSec = ({ place = 'جدة', only, k = 'الخدمات', t = 'كل ما تحتاجه مناسبتك — من طاقم واحد' }: { place?: string; only?: readonly string[]; k?: string; t?: string }) => {
+  if (only) {
+    const list = SERVICES.filter((s) => only.includes(s.slug))
+    return (
+      <section class="sx" id="services">
+        <div class="wrap">
+          <Head k={k} t={t} />
+          <div class="ksvc-grid">
+            {list.map((s) => (
+              <CompactServiceCard s={s} place={place} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
   const menSvcs = SERVICES.filter((s) => ['qahwajiin', 'zamzam'].includes(s.slug))
   const womenSvcs = SERVICES.filter((s) => ['qahwajiat', 'offerings'].includes(s.slug))
   const royalSvcs = SERVICES.filter((s) => ['royal', 'equipment', 'buffet', 'extras'].includes(s.slug))
@@ -644,9 +604,9 @@ export const ServicesSec = ({ place = 'جدة' }: { place?: string }) => {
     <section class="sx" id="services">
       <div class="wrap">
         <Head
-          k="الخدمات"
-          t="كل ما تحتاجه مناسبتك — من طاقم واحد"
-          sub="طاقم مدرَّب، وتجهيز المكان، ولمسات فنية تكمّل الضيافة — اضغط «التفاصيل» في أي بطاقة لعرض المشتملات الكاملة."
+          k={k}
+          t={t}
+          sub="اضغط «التفاصيل» في أي بطاقة لعرض مشتملات الخدمة."
         />
 
         <div class="ksvc-group" id="g-male">
@@ -736,19 +696,21 @@ export const ArrangementsSec = () => (
                 <li>{pt}</li>
               ))}
             </ul>
-            <a
-              class="btn btn-gold btn-block"
-              href={wa(ar.msg)}
-              rel="noopener"
-              target="_blank"
-              data-track="whatsapp"
-              data-location={`arrangement-${i + 1}`}
-            >
-              <Ico n="chat" />
-              اطلب هذا الترتيب
-            </a>
           </article>
         ))}
+      </div>
+      <div class="sx-more">
+        <a
+          class="btn btn-line"
+          href={wa('السلام عليكم، أرغب في ترتيب طاقم ضيافة لمناسبتي مع القهوة الملكية.')}
+          rel="noopener"
+          target="_blank"
+          data-track="whatsapp"
+          data-location="arrangements"
+        >
+          <Ico n="chat" />
+          اسألنا عن الترتيب المناسب
+        </a>
       </div>
     </div>
   </section>
@@ -764,7 +726,7 @@ export const OccasionsSec = ({ place = 'جدة' }: { place?: string }) => (
       />
       <div class="occx">
         {OCCASIONS.map((o, i) => (
-          <a class="occx-card rv" style={`--i:${i}`} href={`/occasions/${o.slug}`}>
+          <a class="occx-card rv" style={`--i:${i}`} href={occUrl(o.slug)}>
             <Img
               n={o.img}
               alt={`${o.h1} — ${BRAND.name} في ${place}`}
@@ -817,19 +779,11 @@ export const EndCta = ({ msg }: { msg: string }) => (
       </div>
       <div class="endx-in wrap rv">
         <div class="endx-card">
-          <p class="sx-k">تواصل مباشر ٢٤/٧</p>
-          <h2>مناسبتك القادمة — نتولّى ضيافتها بمعيار ملكي</h2>
+          <p class="sx-k">احجز ضيافتك</p>
+          <h2>مناسبتك القادمة — نتولّى ضيافتها</h2>
           <p class="sx-sub">
-            أرسل موعد المناسبة والموقع وعدد الضيوف، ويصلك عرض سعر مكتوب ومفصّل خلال دقائق.
+            أرسل التاريخ والحي وعدد الضيوف، ويصلك عرض سعر مكتوب قبل أي تأكيد.
           </p>
-          <a
-            class="endx-phone ltr"
-            href={`tel:${BRAND.phoneLocal}`}
-            data-track="call"
-            data-location="footer-cta"
-          >
-            {BRAND.phoneDisplay}
-          </a>
           <div class="hx-cta">
             <a
               class="btn btn-gold btn-lg"
@@ -838,7 +792,7 @@ export const EndCta = ({ msg }: { msg: string }) => (
               data-location="footer-cta"
             >
               <Ico n="phone" />
-              اتصل الآن
+              <span class="ltr">{BRAND.phoneDisplay}</span>
             </a>
             <a
               class="btn btn-line btn-lg"
@@ -888,7 +842,6 @@ export const OnePage = ({
 }) => (
   <>
     <Hero h={hero} />
-    <PartnersStrip />
     <WhoSec place={place} />
     {focus}
     <WorksSec />
