@@ -109,7 +109,7 @@ export const Social = () => {
           <div class="qr-card rv" id="qr">
             <div class="qr-frame">
               <img
-                src="/static/img/qr.png"
+                src="/static/img/qr-links.png"
                 alt={`رمز QR يفتح صفحة التواصل qahwajeen.com/links`}
                 width="300"
                 height="300"
