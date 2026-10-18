@@ -5,8 +5,8 @@
 
 /* ── Brand & contact ──────────────────────────────────────── */
 export const BRAND = {
-  name: 'قهوجيين',
-  latin: 'QAHWAJEEN',
+  name: 'القهوة الملكية',
+  latin: 'ROYAL COFFEE',
   tagline: 'ضيافة عربية بمعايير ملكية',
   since: '٢٠١٤',
   // ── Live contact (STC) — one number for call + WhatsApp ──
@@ -52,10 +52,10 @@ export const SOCIAL: Social[] = [
   { n: 'snapchat', label: 'سناب شات', handle: '@royalcoffee', href: 'https://snapchat.com/', hue: '#FFFC00', kind: 'social', note: 'كواليس المناسبات' },
   { n: 'tiktok', label: 'تيك توك', handle: '@royalcoffee', href: 'https://tiktok.com/', hue: '#25F4EE', kind: 'social', note: 'مقاطع الضيافة' },
   { n: 'x', label: 'إكس · تويتر', handle: '@royalcoffee', href: 'https://x.com/', hue: '#e8e8e8', kind: 'social', note: 'العروض والمواسم' },
-  { n: 'facebook', label: 'فيسبوك', handle: 'Qahwajeen', href: 'https://facebook.com/', hue: '#1877F2', kind: 'social', note: 'صفحتنا الرسمية' },
-  { n: 'youtube', label: 'يوتيوب', handle: 'Qahwajeen', href: 'https://youtube.com/', hue: '#FF0000', kind: 'social', note: 'جولات في مناسباتنا' },
+  { n: 'facebook', label: 'فيسبوك', handle: 'RoyalCoffee', href: 'https://facebook.com/', hue: '#1877F2', kind: 'social', note: 'صفحتنا الرسمية' },
+  { n: 'youtube', label: 'يوتيوب', handle: 'RoyalCoffee', href: 'https://youtube.com/', hue: '#FF0000', kind: 'social', note: 'جولات في مناسباتنا' },
   { n: 'threads', label: 'ثريدز', handle: '@royalcoffee', href: 'https://threads.net/', hue: '#c9c9c9', kind: 'social', note: 'يوميات الفريق' },
-  { n: 'linkedin', label: 'لينكدإن', handle: 'Qahwajeen', href: 'https://linkedin.com/', hue: '#0A66C2', kind: 'social', note: 'الضيافة المؤسسية' },
+  { n: 'linkedin', label: 'لينكدإن', handle: 'RoyalCoffee', href: 'https://linkedin.com/', hue: '#0A66C2', kind: 'social', note: 'الضيافة المؤسسية' },
   { n: 'telegram', label: 'تيليجرام', handle: '@royalcoffee', href: 'https://telegram.org/', hue: '#26A5E4', kind: 'social', note: 'قناة العروض' },
   { n: 'pinterest', label: 'بينترست', handle: 'royalcoffee', href: 'https://pinterest.com/', hue: '#E60023', kind: 'social', note: 'أفكار تنسيق' },
   { n: 'send', label: 'البريد الإلكتروني', handle: BRAND.email, href: `mailto:${BRAND.email}`, hue: '#c5a059', kind: 'contact', note: 'للعروض المؤسسية' },

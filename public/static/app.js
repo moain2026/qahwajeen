@@ -436,7 +436,8 @@
 
 /* bottom bar: hidden while the first screen (with its own buttons) is visible */
 (function () {
-  var bar = document.querySelector('.bnav'), hero = document.querySelector('.hx .hx-cta');
+  var bar = document.querySelector('.bnav');
+  var hero = document.querySelector('.hero-art .hero-cta, .hx .hx-cta');
   if (!bar || !hero || !('IntersectionObserver' in window)) return;
   new IntersectionObserver(function (e) { bar.classList.toggle('hide', e[0].isIntersecting); }, { threshold: 0.2 }).observe(hero);
 })();
@@ -475,39 +476,91 @@
   /* gallery: inline "show more" */
   var more = $('#galMore'), gal = $('#galx');
   if (more && gal) {
+    var total = $$('.galx-it', gal).length;
     if (!$$('.galx-it.more', gal).length) more.parentNode.hidden = true;
     more.addEventListener('click', function () {
       var open = gal.classList.toggle('open');
       more.setAttribute('aria-expanded', open ? 'true' : 'false');
-      more.firstChild.nodeValue = open ? 'عرض أقل ' : 'عرض المزيد من الصور ';
+      more.firstChild.nodeValue = open ? 'عرض أقل ' : 'عرض كل الصور (' + total + ') ';
       if (!open) gal.scrollIntoView({ behavior: REDUCE ? 'auto' : 'smooth' });
     });
   }
 
-  /* lightbox */
+  /* lightbox with next/prev & caption */
   var lb = $('#lbx');
   if (lb && lb.showModal) {
     var im = $('img', lb);
-    $$('.galx-it').forEach(function (b) {
-      b.addEventListener('click', function () {
-        var src = b.querySelector('img');
-        im.src = src.currentSrc || src.src; im.alt = src.alt;
-        lb.showModal();
-      });
+    var cap = $('#lbxCap', lb);
+    var items = $$('.galx-it');
+    var idx = 0;
+
+    function openAt(i) {
+      if (!items.length) return;
+      idx = (i + items.length) % items.length;
+      var b = items[idx];
+      var src = b.querySelector('img');
+      if (src) {
+        im.src = src.currentSrc || src.src;
+        im.alt = src.alt || '';
+      }
+      if (cap) {
+        cap.textContent = b.getAttribute('data-cap') || (src ? src.alt : '');
+      }
+      if (!lb.open) lb.showModal();
+    }
+
+    items.forEach(function (b, i) {
+      b.addEventListener('click', function () { openAt(i); });
     });
-    $('.lbx-x', lb).addEventListener('click', function () { lb.close(); });
+    var closeBtn = $('.lbx-x', lb);
+    if (closeBtn) closeBtn.addEventListener('click', function () { lb.close(); });
+    var prevBtn = $('.lbx-prev', lb);
+    if (prevBtn) prevBtn.addEventListener('click', function (e) { e.stopPropagation(); openAt(idx - 1); });
+    var nextBtn = $('.lbx-next', lb);
+    if (nextBtn) nextBtn.addEventListener('click', function (e) { e.stopPropagation(); openAt(idx + 1); });
+
+    lb.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); openAt(idx + 1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); openAt(idx - 1); }
+    });
     lb.addEventListener('click', function (e) { if (e.target === lb) lb.close(); });
   }
 
   /* hero parallax + scroll progress (transform only, rAF-throttled) */
-  var bg = $('.hx-bg'), prog = document.createElement('i'), tick = false;
-  prog.className = 'sprog'; document.body.appendChild(prog);
+  var bg = $('.hero-art .hero-bg, .hx-bg'), prog = $('#sprog'), tick = false;
+  if (!prog) {
+    prog = document.createElement('i');
+    prog.className = 'sprog';
+    document.body.appendChild(prog);
+  }
   function frame() {
     var y = window.scrollY, h = document.documentElement.scrollHeight - innerHeight;
     prog.style.transform = 'scaleX(' + (h > 0 ? y / h : 0) + ')';
-    if (bg && !REDUCE && y < innerHeight * 1.2) bg.style.transform = 'translate3d(0,' + (y * 0.28) + 'px,0) scale(' + (1 + y / 5000) + ')';
+    if (bg && !REDUCE && y < innerHeight * 1.2) bg.style.transform = 'translate3d(0,' + (y * 0.24) + 'px,0) scale(' + (1 + y / 6000) + ')';
     tick = false;
   }
   addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(frame); } }, { passive: true });
   frame();
+
+  /* Google Ads / GA4 conversion tracking hooks on Call & WhatsApp clicks */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a[data-track]') : null;
+    if (!a) return;
+    var kind = a.getAttribute('data-track');
+    var loc = a.getAttribute('data-location') || 'page';
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'lead_' + kind,
+      lead_type: kind,
+      lead_location: loc,
+      page_path: location.pathname
+    });
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'generate_lead', {
+        event_category: 'engagement',
+        event_label: kind + ':' + loc,
+        value: 1
+      });
+    }
+  }, { passive: true });
 })();

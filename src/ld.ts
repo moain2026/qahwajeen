@@ -12,16 +12,23 @@ export const abs = (p: string) => (p.startsWith('http') ? p : `${SITE}${p}`)
 /* ── the business itself — referenced by @id from every other node ── */
 export const orgLd = () => ({
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
+  '@type': ['FoodEstablishment', 'LocalBusiness'],
   '@id': `${SITE}/#business`,
   name: BRAND.name,
-  alternateName: BRAND.latin,
-  description: `${BRAND.tagline} — قهوجيين وصبابين وضيافة مناسبات في ${CITIES.length} مدن سعودية.`,
+  alternateName: [BRAND.latin, 'القهوة الملكية لخدمات الضيافة', 'قهوجي وصبابين القهوة الملكية جدة'],
+  description: `${BRAND.name} (${BRAND.latin}) — ${BRAND.tagline}: قهوجيين وصبابين وقهوجيات وضيافة مناسبات فاخرة في جدة و${CITIES.length} مدن سعودية.`,
   url: SITE,
   telephone: `+${BRAND.phoneRaw}`,
   ...(SHOW.email ? { email: BRAND.email } : {}),
-  image: abs(imgSrc('hero-station')),
-  logo: abs('/static/img/logo-512.webp'),
+  image: [abs(imgSrc('hero-real')), abs(imgSrc('ev-team-1')), abs(imgSrc('ev-vip-2'))],
+  logo: {
+    '@type': 'ImageObject',
+    url: abs('/static/img/logo-512.webp'),
+    width: 512,
+    height: 512,
+    caption: `${BRAND.name} — ${BRAND.latin}`,
+  },
+  servesCuisine: ['القهوة السعودية', 'الضيافة العربية', 'الحلويات الشرقية', 'التمور الفاخرة'],
   priceRange: '$$',
   currenciesAccepted: 'SAR',
   paymentAccepted: 'نقد، تحويل بنكي، مدى',
@@ -49,7 +56,7 @@ export const orgLd = () => ({
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'خدمات الضيافة',
+    name: `خدمات الضيافة — ${BRAND.name}`,
     itemListElement: SERVICES.map((s) => ({
       '@type': 'Offer',
       itemOffered: { '@type': 'Service', name: s.title, url: abs(`/services/${s.slug}`) },
@@ -63,6 +70,7 @@ export const siteLd = () => ({
   '@id': `${SITE}/#site`,
   url: SITE,
   name: BRAND.name,
+  alternateName: BRAND.latin,
   inLanguage: 'ar-SA',
   publisher: { '@id': `${SITE}/#business` },
 })
@@ -100,7 +108,14 @@ export const serviceLd = (
   name,
   description: desc,
   url: abs(path),
-  image: abs(imgSrc(img)),
+  image: {
+    '@type': 'ImageObject',
+    url: abs(imgSrc(img)),
+    contentUrl: abs(imgSrc(img)),
+    name: `${name} — ${BRAND.name}`,
+    caption: desc,
+    representativeOfPage: true,
+  },
   serviceType: 'ضيافة ومناسبات',
   provider: { '@id': `${SITE}/#business` },
   areaServed: area
@@ -114,12 +129,19 @@ export const eventLd = (name: string, desc: string, path: string, img: string) =
   name,
   description: desc,
   url: abs(path),
-  image: abs(imgSrc(img)),
+  image: {
+    '@type': 'ImageObject',
+    url: abs(imgSrc(img)),
+    contentUrl: abs(imgSrc(img)),
+    name: `${name} — ${BRAND.name}`,
+    caption: desc,
+    representativeOfPage: true,
+  },
   serviceType: 'ضيافة مناسبات',
   provider: { '@id': `${SITE}/#business` },
 })
 
-export const menuLd = (cat: string, path: string, items: readonly { n: string; d: string }[]) => ({
+export const menuLd = (cat: string, path: string, items: readonly { n: string; d: string; img?: string }[]) => ({
   '@context': 'https://schema.org',
   '@type': 'Menu',
   name: `${cat} — ${BRAND.name}`,
@@ -127,19 +149,27 @@ export const menuLd = (cat: string, path: string, items: readonly { n: string; d
   hasMenuSection: {
     '@type': 'MenuSection',
     name: cat,
-    hasMenuItem: items.map((i) => ({ '@type': 'MenuItem', name: i.n, description: i.d })),
+    hasMenuItem: items.map((i) => ({
+      '@type': 'MenuItem',
+      name: i.n,
+      description: i.d,
+      ...(i.img ? { image: abs(imgSrc(i.img)) } : {}),
+    })),
   },
 })
 
 export const galleryLd = (path: string, shots: readonly { img: string; cap: string }[]) => ({
   '@context': 'https://schema.org',
   '@type': 'ImageGallery',
-  name: `معرض أعمال ${BRAND.name}`,
+  name: `معرض أعمال ${BRAND.name} في جدة`,
   url: abs(path),
-  image: shots.slice(0, 12).map((s) => ({
+  image: shots.map((s) => ({
     '@type': 'ImageObject',
+    url: abs(imgSrc(s.img)),
     contentUrl: abs(imgSrc(s.img)),
-    caption: s.cap,
+    name: `${s.cap} — ${BRAND.name}`,
+    caption: `${s.cap} — ضيافة ${BRAND.name} في جدة`,
+    contentLocation: { '@type': 'Place', name: 'جدة، المملكة العربية السعودية' },
   })),
 })
 

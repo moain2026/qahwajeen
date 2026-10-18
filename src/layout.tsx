@@ -2,10 +2,9 @@ import type { Child } from 'hono/jsx'
 import { imgSrc, imgSet } from './ui'
 import { hasImg } from './imgmap'
 import { BRAND } from './data'
-import { CITIES, FAMILIES } from './cities'
 import { raw } from './icons'
 
-const V = '11' // asset cache-bust
+const V = '12' // asset cache-bust
 export const SITE = 'https://qahwajeen.com'
 
 type Props = {
@@ -24,21 +23,38 @@ type Props = {
 
 export const Layout = ({ title, desc, path, children, jsonld, hero = 'souqiya', bare, noindex }: Props) => {
   const full = `${title} | ${BRAND.name}`
+  const canonUrl = `${SITE}${path}`
   return (
     <html lang="ar" dir="rtl">
       <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#04100c" />
         <title>{full}</title>
         <meta name="description" content={desc} />
-        {noindex ? null : <link rel="canonical" href={`${SITE}${path}`} />}
-        <meta name="robots" content={noindex ? 'noindex,follow' : 'index,follow,max-image-preview:large'} />
+        {noindex ? null : (
+          <>
+            <link rel="canonical" href={canonUrl} />
+            <link rel="alternate" hreflang="ar-SA" href={canonUrl} />
+            <link rel="alternate" hreflang="ar" href={canonUrl} />
+            <link rel="alternate" hreflang="x-default" href={canonUrl} />
+          </>
+        )}
+        <meta
+          name="robots"
+          content={
+            noindex
+              ? 'noindex,follow'
+              : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'
+          }
+        />
         <meta name="author" content={BRAND.name} />
 
-        {/* Geo signals */}
-        <meta name="geo.region" content="SA" />
+        {/* Geo signals — Jeddah primary headquarters */}
+        <meta name="geo.region" content="SA-02" />
         <meta name="geo.placename" content="Jeddah" />
+        <meta name="geo.position" content="21.4858;39.1925" />
+        <meta name="ICBM" content="21.4858, 39.1925" />
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
@@ -46,9 +62,9 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'souqiya', 
         <meta property="og:site_name" content={BRAND.name} />
         <meta property="og:title" content={full} />
         <meta property="og:description" content={desc} />
-        <meta property="og:url" content={`${SITE}${path}`} />
+        <meta property="og:url" content={canonUrl} />
         <meta property="og:image" content={`${SITE}${imgSrc(hero)}`} />
-        <meta property="og:image:alt" content={BRAND.name} />
+        <meta property="og:image:alt" content={`${title} — ${BRAND.name}`} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={full} />
         <meta name="twitter:description" content={desc} />
@@ -59,9 +75,7 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'souqiya', 
         <link rel="apple-touch-icon" href={`/static/img/apple-touch-icon.png?v=${V}`} />
         <meta name="apple-mobile-web-app-title" content={BRAND.name} />
 
-        {/* Fonts — self-hosted (same origin, no third-party round-trips).
-            @font-face lives at the top of style.css; only the small body
-            face is preloaded — the display face swaps in when ready. */}
+        {/* Fonts — self-hosted (same origin, no third-party round-trips). */}
         <link
           rel="preload"
           as="font"
@@ -69,11 +83,15 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'souqiya', 
           href="/static/fonts/tajawal-400-arabic.woff2"
           crossorigin=""
         />
+        <link
+          rel="preload"
+          as="font"
+          type="font/woff2"
+          href="/static/fonts/amiri-700-arabic.woff2"
+          crossorigin=""
+        />
 
-        {/* LCP preload — per-page hero (the QR page has no hero image).
-            When an art-directed portrait twin exists, the preload has to be
-            split by the SAME media query the <picture> uses, otherwise the
-            phone downloads the landscape file it will never paint. */}
+        {/* LCP preload — per-page hero */}
         {bare ? (
           <link rel="preload" as="image" href="/static/img/logo-512.webp" fetchpriority="high" />
         ) : hasImg(`${hero}-tall`) ? (
@@ -116,6 +134,7 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'souqiya', 
       <body>
         <a href="#main" class="sr">تجاوز إلى المحتوى</a>
         <div class="pgline" id="pgline" aria-hidden="true"></div>
+        <div class="sprog" id="sprog" aria-hidden="true"></div>
 
         {/* ── Header ── */}
         <header class="hdr" id="hdr">
@@ -125,7 +144,7 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'souqiya', 
                 src="/static/img/logo-192.webp"
                 srcset="/static/img/logo-192.webp 192w, /static/img/logo-512.webp 512w"
                 sizes="52px"
-                alt=""
+                alt={BRAND.name}
                 width="52"
                 height="52"
               />
@@ -135,31 +154,49 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'souqiya', 
               </span>
             </a>
 
-
             <div class="hdr-act">
-              <a href={`tel:${BRAND.phoneLocal}`} class="hdr-tel" aria-label="اتصل بنا">
+              <a
+                href={`tel:${BRAND.phoneLocal}`}
+                class="hdr-tel"
+                aria-label={`اتصل بـ ${BRAND.name}`}
+                data-track="call"
+                data-location="header"
+              >
                 <span dangerouslySetInnerHTML={{ __html: raw('phone') }} />
               </a>
-              <a href={BRAND.whatsapp} class="btn btn-gold hdr-cta" rel="noopener" target="_blank">
+              <a
+                href={BRAND.whatsapp}
+                class="btn btn-gold hdr-cta"
+                rel="noopener"
+                target="_blank"
+                data-track="whatsapp"
+                data-location="header"
+              >
                 <span dangerouslySetInnerHTML={{ __html: raw('chat') }} />
                 واتساب
               </a>
-              <button class="burger" id="burger" aria-label="فتح القائمة" aria-expanded="false" aria-controls="sheet">
+              <button
+                class="burger"
+                id="burger"
+                aria-label="فتح القائمة"
+                aria-expanded="false"
+                aria-controls="sheet"
+              >
                 <span dangerouslySetInnerHTML={{ __html: raw('menu') }} />
               </button>
             </div>
           </div>
         </header>
 
-        {/* ── Side drawer: basics only (the page itself is the site) ── */}
+        {/* ── Side drawer: strictly the 6 essentials (Call, WhatsApp, Home, Services, Works, FAQ) ── */}
         <div class="sheet-bd" id="sheetBd" hidden></div>
-        <nav class="sheet drawer" id="sheet" aria-label="القائمة" aria-hidden="true">
+        <nav class="sheet drawer" id="sheet" aria-label="القائمة الرئيسية" aria-hidden="true">
           <div class="dr-top">
             <span class="sheet-id">
-              <img src="/static/img/logo-192.webp" alt="" width="40" height="40" loading="lazy" />
+              <img src="/static/img/logo-192.webp" alt={BRAND.name} width="40" height="40" loading="lazy" />
               <span>
                 <b>{BRAND.name}</b>
-                <small>QAHWAJEEN · JEDDAH</small>
+                <small>{BRAND.latin} · JEDDAH</small>
               </span>
             </span>
             <button class="dr-x" type="button" id="sheetX" aria-label="إغلاق القائمة">
@@ -167,18 +204,30 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'souqiya', 
             </button>
           </div>
 
-          <a class="dr-call" href={`tel:${BRAND.phoneLocal}`}>
+          <a
+            class="dr-call"
+            href={`tel:${BRAND.phoneLocal}`}
+            data-track="call"
+            data-location="drawer"
+          >
             <span dangerouslySetInnerHTML={{ __html: raw('phone') }} />
             <span>
               <b>اتصل الآن</b>
               <small class="ltr">{BRAND.phoneDisplay}</small>
             </span>
           </a>
-          <a class="dr-wa" href={BRAND.whatsapp} rel="noopener" target="_blank">
+          <a
+            class="dr-wa"
+            href={BRAND.whatsapp}
+            rel="noopener"
+            target="_blank"
+            data-track="whatsapp"
+            data-location="drawer"
+          >
             <span dangerouslySetInnerHTML={{ __html: raw('chat') }} />
             <span>
               <b>واتساب</b>
-              <small>نردّ خلال دقائق</small>
+              <small>ردّ فوري وعرض سعر مكتوب</small>
             </span>
           </a>
 
@@ -187,94 +236,94 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'souqiya', 
               <span dangerouslySetInnerHTML={{ __html: raw('home') }} />
               الرئيسية
             </a>
-            <a href="/#services">
+            <a href="#services">
               <span dangerouslySetInnerHTML={{ __html: raw('grid') }} />
               الخدمات
             </a>
-            <a href="/#menu">
-              <span dangerouslySetInnerHTML={{ __html: raw('finjan') }} />
-              التقديمات
-            </a>
-            <a href="/#works">
+            <a href="#works">
               <span dangerouslySetInnerHTML={{ __html: raw('images') }} />
               أعمالنا
             </a>
-            <a href="/#faq">
+            <a href="#faq">
               <span dangerouslySetInnerHTML={{ __html: raw('help') }} />
-              أسئلة شائعة
+              الأسئلة
             </a>
           </div>
 
-          <p class="dr-foot">جدة · استقبال الحجوزات ٢٤ ساعة</p>
+          <p class="dr-foot">{BRAND.name} · استقبال الحجوزات ٢٤ ساعة</p>
         </nav>
 
         <main id="main">{children}</main>
 
-        {/* ── Footer: brand + one number + compact local links (crawlable) ── */}
+        {/* ── Footer: clean luxury brand signature + zero city chips clutter ── */}
         <footer class="ftr">
           <div class="wrap">
             <div class="ftr-mini">
-              <img src="/static/img/logo-192.webp" alt="" width="56" height="56" loading="lazy" />
+              <img src="/static/img/logo-192.webp" alt={BRAND.name} width="56" height="56" loading="lazy" />
               <b>{BRAND.name}</b>
-              <small>QAHWAJEEN · LUXURY HOSPITALITY · JEDDAH</small>
-              <a class="ftr-phone ltr" href={`tel:${BRAND.phoneLocal}`}>
+              <small>{BRAND.latin} · LUXURY HOSPITALITY · JEDDAH</small>
+              <a
+                class="ftr-phone ltr"
+                href={`tel:${BRAND.phoneLocal}`}
+                data-track="call"
+                data-location="footer"
+              >
                 {BRAND.phoneDisplay}
               </a>
             </div>
-            <details class="ftr-mesh">
-              <summary class="ftr-h">نخدم في</summary>
-              <div class="mesh">
-                {FAMILIES.map((f) =>
-                  CITIES.map((c) => (
-                    <a href={`/${f.prefix}-${c.slug}`}>
-                      {f.noun} {c.name}
-                    </a>
-                  )),
-                )}
-              </div>
-            </details>
+            <nav class="ftr-links" aria-label="روابط سريعة">
+              <a href="/">الرئيسية</a>
+              <a href="/services">الخدمات</a>
+              <a href="/menu">التقديمات</a>
+              <a href="/occasions">المناسبات</a>
+              <a href="/gallery">أعمالنا</a>
+              <a href="/faq">الأسئلة الشائعة</a>
+              <a href="/about">من نحن</a>
+              <a href="/contact">تواصل معنا</a>
+            </nav>
             <div class="ftr-base">
-              <span>© {new Date().getFullYear()} {BRAND.name}</span>
+              <span>© {new Date().getFullYear()} {BRAND.name} ({BRAND.latin})</span>
               <span>جدة — المملكة العربية السعودية</span>
             </div>
           </div>
         </footer>
 
-        {/* ── Floating action dock (mobile conversion) ── */}
+        {/* ── Bottom contact bar: WhatsApp + prominent center Call + Quote ── */}
         {!bare && (
-          <div class="dock" id="dock">
-            <a href={`tel:${BRAND.phoneLocal}`} class="dock-btn dock-tel">
-              <span dangerouslySetInnerHTML={{ __html: raw('phone') }} />
-              اتصل
-            </a>
-            <a href={BRAND.whatsapp} class="dock-btn dock-wa" rel="noopener" target="_blank">
+          <nav class="bnav" aria-label="تواصل سريع">
+            <a
+              href={BRAND.whatsapp}
+              class="b-wa"
+              rel="noopener"
+              target="_blank"
+              data-track="whatsapp"
+              data-location="bottom-bar"
+            >
               <span dangerouslySetInnerHTML={{ __html: raw('chat') }} />
               واتساب
             </a>
-          </div>
-        )}
-
-        {/* ── Bottom contact bar: no page navigation (burger lives in the header); centre = one-tap call ── */}
-        {!bare && (
-        <nav class="bnav" aria-label="تواصل سريع">
-          <a href={BRAND.whatsapp} class="b-wa" rel="noopener" target="_blank">
-            <span dangerouslySetInnerHTML={{ __html: raw('chat') }} />
-            واتساب
-          </a>
-          <a href={`tel:${BRAND.phoneLocal}`} class="center" aria-label={`اتصل الآن ${BRAND.phoneDisplay}`}>
-            <span dangerouslySetInnerHTML={{ __html: raw('phone') }} />
-            <em>اتصل الآن</em>
-          </a>
-          <a
-            href={`${BRAND.whatsapp}?text=${encodeURIComponent('السلام عليكم، أرغب في عرض سعر لضيافة مناسبة في جدة.')}`}
-            class="b-quote"
-            rel="noopener"
-            target="_blank"
-          >
-            <span dangerouslySetInnerHTML={{ __html: raw('send') }} />
-            عرض سعر
-          </a>
-        </nav>
+            <a
+              href={`tel:${BRAND.phoneLocal}`}
+              class="center"
+              aria-label={`اتصل الآن ${BRAND.phoneDisplay}`}
+              data-track="call"
+              data-location="bottom-bar"
+            >
+              <span dangerouslySetInnerHTML={{ __html: raw('phone') }} />
+              <em>اتصل الآن</em>
+            </a>
+            <a
+              href={`${BRAND.whatsapp}?text=${encodeURIComponent(`السلام عليكم، أرغب في عرض سعر لضيافة مناسبة مع ${BRAND.name}.`)}`}
+              class="b-quote"
+              rel="noopener"
+              target="_blank"
+              data-track="quote"
+              data-location="bottom-bar"
+            >
+              <span dangerouslySetInnerHTML={{ __html: raw('send') }} />
+              عرض سعر
+            </a>
+          </nav>
         )}
 
         <div class="toast" id="toast" role="status" aria-live="polite">
