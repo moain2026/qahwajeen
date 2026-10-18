@@ -476,13 +476,28 @@
   /* gallery: inline "show more" */
   var more = $('#galMore'), gal = $('#galx');
   if (more && gal) {
-    var total = $$('.galx-it', gal).length;
-    if (!$$('.galx-it.more', gal).length) more.parentNode.hidden = true;
+    var total = $$('.galx-it').length;
     more.addEventListener('click', function () {
-      var open = gal.classList.toggle('open');
+      var open = gal.hidden;
+      gal.hidden = !open;
       more.setAttribute('aria-expanded', open ? 'true' : 'false');
-      more.firstChild.nodeValue = open ? 'عرض أقل ' : 'عرض كل الصور (' + total + ') ';
-      if (!open) gal.scrollIntoView({ behavior: REDUCE ? 'auto' : 'smooth' });
+      more.firstChild.nodeValue = open ? 'إخفاء الصور الإضافية ' : 'معرض الأعمال الكامل (' + total + ' صورة) ';
+      if (!open) {
+        var wSec = $('#works');
+        if (wSec) wSec.scrollIntoView({ behavior: REDUCE ? 'auto' : 'smooth' });
+      }
+    });
+  }
+
+  /* partners of success: inline "show more" */
+  var ptnMore = $('#ptnMore'), ptnGrid = $('#ptnGrid');
+  if (ptnMore && ptnGrid) {
+    var ptnTotal = $$('.ptn-card', ptnGrid).length;
+    ptnMore.addEventListener('click', function () {
+      var open = ptnGrid.classList.toggle('open');
+      ptnMore.setAttribute('aria-expanded', open ? 'true' : 'false');
+      ptnMore.firstChild.nodeValue = open ? 'عرض أقل ' : 'عرض كل الشركاء · ' + ptnTotal + ' جهة ';
+      if (!open) ptnGrid.scrollIntoView({ behavior: REDUCE ? 'auto' : 'smooth' });
     });
   }
 

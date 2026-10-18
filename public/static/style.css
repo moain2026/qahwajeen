@@ -1288,150 +1288,202 @@ main{ padding-bottom:0 }
 @keyframes hxDot{ 0%{ transform:translateY(0); opacity:1 } 80%,100%{ transform:translateY(16px); opacity:0 } }
 @media (min-width:768px){ .hx-down{ display:block } }
 
-/* ── marquee ── */
-.mq{ overflow:hidden; border-block:1px solid rgba(226,198,142,.22); background:linear-gradient(90deg,#05120d,#0c2119,#05120d) }
-.mq-track{ display:flex; width:max-content; animation:mq 36s linear infinite }
-.mq-row{ display:flex; flex:none }
-.mq-row span{ display:flex; align-items:center; gap:22px; padding:15px 12px; font-family:'Amiri',serif; font-size:19.5px; color:var(--gl); white-space:nowrap }
-.mq-row i{ font-style:normal; font-size:11px; color:var(--gd) }
-@keyframes mq{ to{ transform:translateX(50%) } }
-
-/* ── sections ── */
-.sx{ padding-block:clamp(58px,10vw,116px); position:relative }
-.sx-alt{ background:linear-gradient(180deg, var(--em2), var(--em) 85%) }
-.sx-head{ text-align:center; margin-bottom:clamp(28px,5vw,52px) }
+/* ── sections (Keif compact luxury cadence) ── */
+.sx{ padding-block:clamp(42px,7vw,76px); position:relative }
+.sx-alt{ background:linear-gradient(180deg, var(--em2), var(--em) 90%) }
+.sx-head{ text-align:center; margin-bottom:clamp(18px,3.6vw,34px) }
 .sx-start{ text-align:start }
-.sx-k{ display:inline-flex; align-items:center; gap:10px; margin:0 0 10px; font-size:12px; font-weight:700; letter-spacing:.14em; color:var(--gd) }
+.sx-k{ display:inline-flex; align-items:center; gap:8px; margin:0 0 8px; font-size:12px; font-weight:700; letter-spacing:.1em; color:var(--gd) }
 .sx-k::before,.sx-k::after{ content:'✦'; font-size:9px; color:var(--gd) }
-.sx-head h2,.focx-txt h2,.endx h2{ font-family:'Amiri',serif; font-size:clamp(28px,7.2vw,52px); line-height:1.38; color:var(--ink); margin:0 }
-.sx-rule{ display:block; width:68px; height:2px; margin:12px auto 0; border-radius:2px;
+.sx-head h2,.focx-txt h2,.endx h2{ font-family:'Amiri',serif; font-size:clamp(24px,6.4vw,42px); line-height:1.42; color:var(--ink); margin:0 }
+.sx-rule{ display:block; width:64px; height:2px; margin:10px auto 0; border-radius:2px;
   background:linear-gradient(90deg,transparent,var(--gl),transparent) }
-.sx-sub{ max-width:50ch; margin:12px auto 0; font-size:15.5px; line-height:1.9; color:rgba(244,234,210,.76) }
-.sx-more{ display:flex; justify-content:center; margin-top:28px }
-.sx-more .btn{ border-radius:999px; min-height:52px; padding:0 30px }
+.sx-sub{ max-width:48ch; margin:10px auto 0; font-size:14.5px; line-height:1.85; color:rgba(244,234,210,.78) }
+.sx-more{ display:flex; justify-content:center; margin-top:22px }
+.sx-more .btn{ border-radius:999px; min-height:48px; padding:0 26px; font-size:14.5px }
 .sx-more .btn svg{ transition:transform .3s }
 .sx-more .btn[aria-expanded="true"] svg{ transform:rotate(180deg) }
 
-/* statement + royal badges */
-.sx-statement{ padding-block:clamp(46px,8vw,92px); border-bottom:1px solid rgba(226,198,142,.1) }
-.stmt{ font-family:'Amiri',serif; font-size:clamp(22px,5.8vw,40px); line-height:1.7; color:var(--ink); text-align:center; margin:0 }
-.stmt em{ font-style:normal; color:var(--gl) }
-.royal-badges{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px 14px; margin-top:24px }
-.royal-badges span{ display:inline-flex; align-items:center; gap:8px; padding:9px 16px; border-radius:999px;
-  font-size:13.5px; font-weight:700; color:var(--gl); background:rgba(16,39,31,.72); border:1px solid rgba(226,198,142,.24) }
-.royal-badges svg{ width:16px; height:16px; color:var(--gd); flex:none }
+/* ── 2. WHO WE SERVE (لمن نخدم — 3 بطاقات متناسقة جنب بعض 109×146px على الجوال) ── */
+.sx-who{ padding-block:clamp(34px,6vw,64px); border-bottom:1px solid rgba(226,198,142,.12);
+  background:radial-gradient(90% 80% at 50% 0%, rgba(197,160,89,.08), transparent 70%) }
+.who-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; max-width:860px; margin-inline:auto }
+@media (min-width:768px){ .who-grid{ gap:18px } }
+.who-card{ position:relative; display:block; aspect-ratio:3/4; border-radius:16px; overflow:hidden; isolation:isolate;
+  border:1px solid rgba(226,198,142,.28); background:var(--em3); box-shadow:0 14px 32px -16px rgba(0,0,0,.75) }
+.who-card img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2; transition:transform .9s var(--ease) }
+.who-card::after{ content:''; position:absolute; inset:0; z-index:-1;
+  background:linear-gradient(to top, rgba(4,16,12,.95) 0%, rgba(4,16,12,.38) 48%, transparent 78%) }
+@media (hover:hover){ .who-card:hover img{ transform:scale(1.06) } }
+.who-cap{ position:absolute; inset-inline:0; bottom:0; padding:10px 6px 11px; text-align:center }
+.who-cap b{ display:block; font-family:'Amiri',serif; font-size:clamp(14.5px,3.9vw,22px); line-height:1.3; color:#fff;
+  text-shadow:0 2px 10px rgba(0,0,0,.8) }
+.who-cap small{ display:none; margin-top:3px; font-size:11.5px; color:var(--gl) }
+@media (min-width:768px){ .who-cap{ padding:14px 12px } .who-cap small{ display:block } }
 
-/* services — editorial rows */
-.svx{ display:grid; gap:clamp(44px,8vw,96px) }
-.svx-row{ display:grid; gap:22px; align-items:center; padding:18px; border-radius:28px;
-  background:linear-gradient(165deg, rgba(16,39,31,.42), rgba(7,21,16,.24));
-  border:1px solid rgba(226,198,142,.15) }
-@media (min-width:900px){
-  .svx-row{ grid-template-columns:1.05fr .95fr; gap:52px; padding:28px }
-  .svx-row.flip .svx-media{ order:2 }
+/* ── 3 & 5. HORIZONTAL SWIPE RAILS (أعمالنا 250×334px + أزياء الطاقم 200×268px) ── */
+.k-swipe-hint{ display:flex; align-items:center; justify-content:center; gap:6px; margin:-6px 0 14px;
+  font-size:13px; font-weight:700; color:var(--gl) }
+.k-swipe-hint svg{ width:14px; height:14px }
+@media (min-width:1024px){ .k-swipe-hint{ display:none } }
+.k-rail{ display:grid; grid-auto-flow:column; grid-auto-columns:250px; gap:12px;
+  overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scrollbar-width:none;
+  margin-inline:calc(var(--gutter) * -1); padding:4px var(--gutter) 10px }
+.k-rail::-webkit-scrollbar{ display:none }
+.k-rail-crew{ grid-auto-columns:202px }
+@media (min-width:1024px){
+  .k-rail{ grid-auto-flow:row; grid-template-columns:repeat(4,1fr); grid-auto-columns:auto; overflow:visible; margin-inline:0; padding:0 }
+  .k-rail-crew{ grid-template-columns:repeat(6,1fr) }
 }
-.svx-media{ position:relative; border-radius:22px; overflow:hidden; aspect-ratio:4/3.3; background:var(--em3);
-  border:1px solid rgba(226,198,142,.22); box-shadow:0 20px 44px -22px rgba(0,0,0,.8) }
-.svx-media img{ width:100%; height:100%; object-fit:cover; transition:transform .9s var(--ease) }
-@media (hover:hover){ .svx-row:hover .svx-media img{ transform:scale(1.04) } }
-.svx-n{ position:absolute; inset-block-end:14px; inset-inline-end:16px; font-family:'Amiri',serif; font-size:48px; line-height:1;
-  padding:6px 14px; border-radius:16px; background:rgba(4,16,12,.72); border:1px solid rgba(226,198,142,.35);
-  backdrop-filter:blur(8px); color:var(--gl) }
-.svx-txt h3{ font-family:'Amiri',serif; font-size:clamp(28px,7vw,42px); line-height:1.32; color:var(--ink); margin:0 0 8px }
-.svx-short{ font-size:15.5px; line-height:1.85; color:rgba(244,234,210,.84); margin:0 0 16px }
+.k-work-card,.k-crew-card{ position:relative; aspect-ratio:3/4; margin:0; padding:0; border-radius:20px; overflow:hidden;
+  scroll-snap-align:start; border:1px solid rgba(226,198,142,.26); background:var(--em3); cursor:zoom-in; text-align:start }
+.k-crew-card{ cursor:default }
+.k-work-card img,.k-crew-card img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .9s var(--ease) }
+@media (hover:hover){ .k-work-card:hover img,.k-crew-card:hover img{ transform:scale(1.06) } }
+.k-work-card::after,.k-crew-card::after{ content:''; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(to top, rgba(4,16,12,.94) 0%, rgba(4,16,12,.25) 44%, transparent 72%) }
+.k-work-tag{ position:absolute; top:12px; inset-inline-end:12px; z-index:2; padding:4px 11px; border-radius:999px;
+  font-size:11.5px; font-weight:700; color:var(--gl); background:rgba(4,16,12,.72); border:1px solid rgba(226,198,142,.35);
+  backdrop-filter:blur(6px) }
+.k-work-cap{ position:absolute; inset-inline:0; bottom:0; z-index:2; padding:14px 14px 13px;
+  font-family:'Amiri',serif; font-size:18px; font-weight:700; line-height:1.35; color:#fff }
+.k-crew-card figcaption{ position:absolute; inset-inline:0; bottom:0; z-index:2; padding:14px 12px 13px; text-align:center }
+.k-crew-card b{ display:block; font-family:'Amiri',serif; font-size:19px; color:#fff; line-height:1.3 }
+.k-crew-card small{ display:block; margin-top:2px; font-size:12px; color:var(--gl) }
+
+.galx-extra{ margin-top:16px; animation:hxUp .5s var(--ease) both }
+.k-gal-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px }
+@media (min-width:768px){ .k-gal-grid{ grid-template-columns:repeat(4,1fr); gap:14px } }
+
+/* ── 4. PARTNERS OF SUCCESS (شركاء النجاح — خلفية عاجية/لؤلؤية فخمة لكسر اللون الداكن تماماً مثل كيف الضيافة) ── */
+.sx-partners{ background:linear-gradient(180deg,#f7f3ea 0%,#efe7d6 100%); color:#12241c;
+  border-block:1px solid rgba(197,160,89,.45) }
+.sx-head.sx-light .sx-k{ color:#8b6928 }
+.sx-head.sx-light .sx-k::before,.sx-head.sx-light .sx-k::after{ color:#8b6928 }
+.sx-head.sx-light h2{ color:#0c2018 }
+.sx-head.sx-light .sx-sub{ color:#43544c }
+.ptn-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; max-width:920px; margin-inline:auto }
+@media (min-width:768px){ .ptn-grid{ grid-template-columns:repeat(6,1fr); gap:14px } }
+.ptn-card{ display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+  min-height:106px; padding:12px 8px; border-radius:16px; background:#ffffff;
+  border:1px solid rgba(197,160,89,.32); box-shadow:0 8px 22px -12px rgba(4,16,12,.12);
+  transition:transform .25s var(--ease), border-color .25s }
+.ptn-card.ptn-more{ display:none }
+.ptn-grid.open .ptn-card.ptn-more{ display:flex; animation:hxUp .45s var(--ease) both }
+.ptn-crest{ display:grid; place-items:center; width:34px; height:34px; border-radius:50%; margin-bottom:6px;
+  background:linear-gradient(145deg,rgba(197,160,89,.18),rgba(197,160,89,.06)); color:#8b6928;
+  border:1px solid rgba(197,160,89,.35) }
+.ptn-crest svg{ width:17px; height:17px }
+.ptn-name{ display:block; font-family:'Amiri',serif; font-size:14.5px; font-weight:700; line-height:1.3; color:#0c2018 }
+.ptn-sub{ display:block; margin-top:3px; font-size:10.5px; line-height:1.35; color:#5a6b63 }
+.btn-ptn{ background:#ffffff; color:#0c2018; border:1px solid rgba(166,124,55,.55); font-weight:700;
+  box-shadow:0 8px 20px -10px rgba(4,16,12,.14) }
+.btn-ptn:hover{ background:#0c2018; color:var(--gl) }
+
+/* ── 7. COMPACT CATEGORIZED SERVICES (الخدمات في عمودين مدمجين 168×110px + تفاصيل قابلة للفتح) ── */
+.ksvc-group{ margin-top:28px }
+.ksvc-group:first-of-type{ margin-top:0 }
+.ksvc-gtitle{ display:flex; align-items:center; gap:14px; margin:0 0 14px;
+  font-family:'Amiri',serif; font-size:clamp(20px,5.2vw,26px); color:var(--gl) }
+.ksvc-gtitle::after{ content:''; flex:1; height:1px; background:linear-gradient(90deg, rgba(226,198,142,.38), transparent) }
+.ksvc-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; align-items:start }
+@media (min-width:900px){ .ksvc-grid{ grid-template-columns:repeat(4,1fr); gap:16px } }
+.ksvc-card{ border-radius:18px; overflow:hidden; background:linear-gradient(165deg, rgba(16,39,31,.72), rgba(7,21,16,.58));
+  border:1px solid rgba(226,198,142,.24); transition:border-color .3s }
+.ksvc-card:has(details[open]){ grid-column:1 / -1; border-color:rgba(226,198,142,.55);
+  background:linear-gradient(165deg, rgba(18,45,35,.88), rgba(6,19,14,.82)) }
+.ksvc-media{ position:relative; aspect-ratio:16/10.5; overflow:hidden; background:var(--em3) }
+.ksvc-card:has(details[open]) .ksvc-media{ aspect-ratio:16/8; max-height:240px }
+.ksvc-media img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .8s var(--ease) }
+.ksvc-badge{ position:absolute; top:8px; inset-inline-end:8px; padding:3px 9px; border-radius:999px;
+  font-size:10.5px; font-weight:700; color:var(--gl); background:rgba(4,16,12,.76); border:1px solid rgba(226,198,142,.35) }
+.ksvc-body{ padding:12px 12px 13px }
+.ksvc-body h3{ font-family:'Amiri',serif; font-size:clamp(17.5px,4.5vw,22px); line-height:1.35; color:var(--gl); margin:0 0 4px }
+.ksvc-short{ font-size:12.5px; line-height:1.65; color:rgba(244,234,210,.78); margin:0 0 10px }
+.ksvc-more{ border-top:1px solid rgba(226,198,142,.16) }
+.ksvc-more summary{ display:flex; align-items:center; justify-content:space-between; gap:6px; min-height:44px; padding-top:4px;
+  cursor:pointer; list-style:none; font-size:12.5px; font-weight:700; color:var(--ink) }
+.ksvc-more summary::-webkit-details-marker{ display:none }
+.ksvc-more summary svg{ width:14px; height:14px; color:var(--gl); flex:none; transition:transform .3s var(--ease) }
+.ksvc-more[open] summary svg{ transform:rotate(180deg) }
+.ksvc-drawer{ padding-top:10px; animation:hxUp .35s var(--ease) both }
+.ksvc-desc{ font-size:14px; line-height:1.9; color:rgba(244,234,210,.86); margin:0 0 12px }
+.ksvc-pts{ list-style:none; padding:0; margin:0 0 14px; display:grid; grid-template-columns:1fr 1fr; gap:8px 12px }
+@media (max-width:359px){ .ksvc-pts{ grid-template-columns:1fr } }
+.ksvc-pts li{ position:relative; padding-inline-start:16px; font-size:13px; color:var(--pearl-soft) }
+.ksvc-pts li::before{ content:'✦'; position:absolute; inset-inline-start:0; top:0; font-size:9px; color:var(--gd) }
+.ksvc-inc{ display:grid; gap:8px; margin-bottom:14px }
+@media (min-width:600px){ .ksvc-inc{ grid-template-columns:1fr 1fr } }
+.ksvc-inc div{ padding:11px 13px; border-radius:14px; background:rgba(4,16,12,.55); border:1px solid rgba(226,198,142,.18) }
+.ksvc-inc b{ display:block; font-size:13.5px; color:var(--gl); margin-bottom:2px }
+.ksvc-inc span{ font-size:12.5px; line-height:1.7; color:var(--pearl-mute) }
+.ksvc-actions{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px }
+.btn-sm{ min-height:44px; padding:0 18px; border-radius:999px; font-size:14px }
+
 .svx-pts{ list-style:none; padding:0; margin:0 0 18px; display:grid; grid-template-columns:1fr 1fr; gap:10px 14px }
 @media (max-width:359px){ .svx-pts{ grid-template-columns:1fr } }
 .svx-pts li{ position:relative; padding-inline-start:18px; font-size:14px; line-height:1.6; color:var(--pearl-soft) }
 .svx-pts li::before{ content:''; position:absolute; inset-inline-start:0; top:.62em; width:7px; height:7px; rotate:45deg; background:var(--gd) }
-.svx-more{ border-top:1px solid rgba(226,198,142,.18); border-bottom:1px solid rgba(226,198,142,.18); margin-bottom:18px }
-.svx-more summary{ display:flex; align-items:center; justify-content:space-between; min-height:52px; cursor:pointer; list-style:none;
-  font-weight:700; font-size:15px; color:var(--gl) }
-.svx-more summary::-webkit-details-marker{ display:none }
-.svx-more summary svg{ width:16px; height:16px; transition:transform .35s var(--ease) }
-.svx-more[open] summary svg{ transform:rotate(180deg) }
-.svx-more-body{ animation:hxUp .4s var(--ease) both }
-.svx-more p{ font-size:15px; line-height:1.95; color:rgba(244,234,210,.82); margin:0 0 14px }
-.svx-inc{ display:grid; gap:10px; padding-bottom:16px }
-@media (min-width:600px){ .svx-inc{ grid-template-columns:1fr 1fr } }
-.svx-inc div{ padding:14px 16px; border-radius:16px; background:rgba(16,39,31,.75); border:1px solid rgba(226,198,142,.18) }
-.svx-inc b{ display:block; color:var(--gl); font-size:14.5px; margin-bottom:4px }
-.svx-inc span{ font-size:13.5px; line-height:1.75; color:var(--pearl-mute) }
-.svx-act{ display:flex; flex-wrap:wrap; align-items:center; gap:14px 20px }
-.svx-act .btn{ border-radius:999px; min-height:52px }
-.svx-act .lnk{ margin:0; min-height:44px; padding:0 8px }
 
-/* occasions — mosaic */
-.occx{ display:grid; grid-template-columns:1fr 1fr; gap:12px }
-@media (min-width:900px){ .occx{ grid-template-columns:repeat(3,1fr); gap:18px } }
-.occx-card{ position:relative; display:block; border-radius:22px; overflow:hidden; aspect-ratio:3/4; isolation:isolate;
+/* ── 8. ROLES (ماذا يفعل طاقمنا — نص أولاً ثم صورة أفقية متناسقة 16:10 تماماً مثل كيف الضيافة) ── */
+.rolx{ display:grid; gap:18px }
+@media (min-width:900px){ .rolx{ grid-template-columns:repeat(3,1fr); gap:20px } }
+.rolx-card{ display:grid; gap:12px; padding:18px; border-radius:22px;
+  background:linear-gradient(165deg,rgba(16,39,31,.65),rgba(7,21,16,.48));
   border:1px solid rgba(226,198,142,.22) }
-.occx-card:nth-child(1){ grid-column:span 2; aspect-ratio:16/10 }
-@media (min-width:900px){ .occx-card:nth-child(1){ grid-column:span 1; grid-row:span 2; aspect-ratio:auto } }
-.occx-card img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2; transition:transform 1.2s var(--ease) }
-.occx-card::after{ content:''; position:absolute; inset:0; z-index:-1; background:linear-gradient(to top, rgba(4,16,12,.94), rgba(4,16,12,.2) 58%, transparent) }
-@media (hover:hover){ .occx-card:hover img{ transform:scale(1.07) } }
-.occx-cap{ position:absolute; inset-inline:0; bottom:0; padding:16px }
-.occx-cap b{ display:block; font-family:'Amiri',serif; font-size:clamp(20px,5vw,28px); color:var(--ink); line-height:1.35 }
-.occx-cap small{ font-size:12.5px; color:var(--gl) }
-
-/* crew film-strip */
-.film{ overflow:hidden; padding-block:6px; -webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent); mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent) }
-.film-track{ display:flex; gap:14px; width:max-content; animation:film 48s linear infinite }
-.film:hover .film-track{ animation-play-state:paused }
-@keyframes film{ to{ transform:translateX(calc(50% + 7px)) } }
-.film-card{ position:relative; flex:none; width:min(62vw,300px); aspect-ratio:3/4.3; margin:0; border-radius:24px; overflow:hidden;
-  border:1px solid rgba(226,198,142,.24) }
-.film-card img{ width:100%; height:100%; object-fit:cover }
-.film-card figcaption{ position:absolute; inset-inline:0; bottom:0; padding:40px 16px 16px; background:linear-gradient(to top, rgba(4,16,12,.94), transparent) }
-.film-card b{ display:block; font-family:'Amiri',serif; font-size:22px; color:var(--ink) }
-.film-card small{ font-size:12.5px; color:var(--gl) }
-
-/* roles */
-.rolx{ display:grid; gap:16px }
-@media (min-width:900px){ .rolx{ grid-template-columns:repeat(3,1fr); gap:22px } }
-.rolx-card{ position:relative; padding:0 0 24px; border-radius:26px; overflow:hidden; background:linear-gradient(180deg,var(--em3),var(--em2));
+.rolx-k{ display:block; font-size:12px; font-weight:700; color:var(--gd); margin-bottom:2px }
+.rolx-card h3{ font-family:'Amiri',serif; font-size:26px; color:var(--gl); margin:0 0 6px }
+.rolx-card p{ margin:0; font-size:14.5px; line-height:1.85; color:var(--pearl-mute) }
+.rolx-img{ display:block; aspect-ratio:16/10; border-radius:16px; overflow:hidden;
   border:1px solid rgba(226,198,142,.22) }
-.rolx-img{ display:block; aspect-ratio:16/11; overflow:hidden }
-.rolx-img img{ width:100%; height:100%; object-fit:cover }
-.rolx-n{ position:absolute; top:14px; inset-inline-start:16px; padding:6px 12px; border-radius:999px; font-size:12px; font-weight:800; letter-spacing:.14em;
-  color:var(--em); background:var(--gold-grad) }
-.rolx-card h3{ font-family:'Amiri',serif; font-size:30px; color:var(--gl); margin:18px 20px 6px }
-.rolx-card p{ margin:0 20px; font-size:15px; line-height:1.9; color:var(--pearl-mute) }
+.rolx-img img{ width:100%; height:100%; object-fit:cover; display:block }
 
-/* menu tabs */
-.tabs{ display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; margin:0 calc(var(--gutter) * -1) 22px; padding:4px var(--gutter);
+/* ── 9. TEAM ARRANGEMENTS (كيف نرتّب الطاقم لمناسبتك — بطاقات فخمة بدون أسعار) ── */
+.arr-grid{ display:grid; gap:14px }
+@media (min-width:900px){ .arr-grid{ grid-template-columns:repeat(3,1fr); gap:18px } }
+.arr-card{ display:flex; flex-direction:column; padding:22px 20px; border-radius:22px;
+  background:linear-gradient(165deg,rgba(16,39,31,.72),rgba(7,21,16,.55));
+  border:1px solid rgba(226,198,142,.26); box-shadow:0 18px 40px -22px rgba(0,0,0,.75) }
+.arr-card h3{ font-family:'Amiri',serif; font-size:clamp(22px,5.6vw,26px); color:var(--gl); margin:0 0 6px }
+.arr-sub{ font-size:14px; line-height:1.75; color:rgba(244,234,210,.82); margin:0 0 14px }
+.arr-pts{ list-style:none; padding:0; margin:0 0 18px; display:grid; gap:9px; flex:1 }
+.arr-pts li{ position:relative; padding-inline-start:18px; font-size:14px; line-height:1.65; color:var(--ink) }
+.arr-pts li::before{ content:'✦'; position:absolute; inset-inline-start:0; top:1px; font-size:10px; color:var(--gd) }
+.arr-card .btn{ border-radius:999px; min-height:50px }
+
+/* ── 10. OCCASIONS (لمحة مدمجة) ── */
+.occx{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px }
+@media (min-width:900px){ .occx{ grid-template-columns:repeat(6,1fr); gap:12px } }
+.occx-card{ position:relative; display:block; border-radius:18px; overflow:hidden; aspect-ratio:4/3.2; isolation:isolate;
+  border:1px solid rgba(226,198,142,.22) }
+.occx-card img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2; transition:transform 1s var(--ease) }
+.occx-card::after{ content:''; position:absolute; inset:0; z-index:-1; background:linear-gradient(to top, rgba(4,16,12,.94), rgba(4,16,12,.22) 60%, transparent) }
+@media (hover:hover){ .occx-card:hover img{ transform:scale(1.06) } }
+.occx-cap{ position:absolute; inset-inline:0; bottom:0; padding:12px }
+.occx-cap b{ display:block; font-family:'Amiri',serif; font-size:clamp(17px,4.4vw,21px); color:var(--ink); line-height:1.3 }
+.occx-cap small{ font-size:11.5px; color:var(--gl) }
+
+/* ── 6. MENU TABS & COMPACT CARDS ── */
+.tabs{ display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; margin:0 calc(var(--gutter) * -1) 18px; padding:4px var(--gutter);
   scroll-snap-type:x proximity }
 .tabs::-webkit-scrollbar{ display:none }
 @media (min-width:1024px){ .tabs{ flex-wrap:wrap; justify-content:center; overflow:visible } }
-.tab{ flex:none; min-height:46px; padding:0 18px; border-radius:999px; font-size:14.5px; font-weight:700; white-space:nowrap;
+.tab{ flex:none; min-height:44px; padding:0 16px; border-radius:999px; font-size:14px; font-weight:700; white-space:nowrap;
   color:var(--pearl-soft); background:rgba(16,39,31,.75); border:1px solid rgba(226,198,142,.24); scroll-snap-align:center;
-  transition:background .3s, color .3s, transform .2s }
+  transition:background .3s, color .3s }
 .tab[aria-selected="true"]{ color:var(--em); background:var(--gold-grad); border-color:transparent; box-shadow:0 8px 22px -8px rgba(197,160,89,.55) }
-.tabp{ animation:hxUp .5s var(--ease) both }
-.tabp-blurb{ text-align:center; max-width:56ch; margin:0 auto 20px; font-size:15px; line-height:1.9; color:var(--pearl-mute) }
+.tabp{ animation:hxUp .45s var(--ease) both }
+.tabp-blurb{ text-align:center; max-width:54ch; margin:0 auto 16px; font-size:14px; line-height:1.85; color:var(--pearl-mute) }
 .dishx{ display:grid; grid-template-columns:1fr 1fr; gap:10px }
 @media (min-width:768px){ .dishx{ grid-template-columns:repeat(3,1fr); gap:14px } }
-@media (min-width:1024px){ .dishx{ grid-template-columns:repeat(4,1fr) } }
-.dishx-card{ margin:0; border-radius:20px; overflow:hidden; background:var(--em3); border:1px solid rgba(226,198,142,.18);
-  transition:transform .35s var(--ease), border-color .35s }
-@media (hover:hover){ .dishx-card:hover{ transform:translateY(-4px); border-color:rgba(226,198,142,.45) } }
-.dishx-card img{ width:100%; aspect-ratio:1; object-fit:cover; display:block }
-.dishx-card figcaption{ padding:11px 12px 13px }
-.dishx-card b{ display:block; font-size:14.5px; color:var(--ink); line-height:1.5 }
-.dishx-card small{ display:block; margin-top:2px; font-size:12.5px; line-height:1.6; color:var(--pearl-mute) }
+@media (min-width:1024px){ .dishx{ grid-template-columns:repeat(5,1fr) } }
+.dishx-card{ margin:0; border-radius:18px; overflow:hidden; background:var(--em3); border:1px solid rgba(226,198,142,.2) }
+.dishx-card img{ width:100%; aspect-ratio:1/1; object-fit:cover; display:block }
+.dishx-card figcaption{ padding:10px 11px 12px }
+.dishx-card b{ display:block; font-size:14px; color:var(--ink); line-height:1.45 }
+.dishx-card small{ display:block; margin-top:2px; font-size:12px; line-height:1.55; color:var(--pearl-mute) }
 
-/* gallery + luxury lightbox */
-.galx{ display:grid; grid-template-columns:1fr 1fr; grid-auto-rows:156px; gap:10px; grid-auto-flow:dense }
-@media (min-width:768px){ .galx{ grid-template-columns:repeat(4,1fr); grid-auto-rows:210px; gap:14px } }
-.galx-it{ position:relative; padding:0; border-radius:18px; overflow:hidden; cursor:zoom-in; background:var(--em3);
-  border:1px solid rgba(226,198,142,.2) }
-.galx-it.tall{ grid-row:span 2 }
-.galx-it img{ width:100%; height:100%; object-fit:cover; transition:transform 1s var(--ease) }
-.galx-cap{ position:absolute; inset-inline:0; bottom:0; padding:24px 10px 8px; font-size:12px; font-weight:700; color:var(--ink);
-  background:linear-gradient(to top, rgba(4,16,12,.9), transparent); text-align:start; pointer-events:none }
-@media (hover:hover){ .galx-it:hover img{ transform:scale(1.07) } }
-.galx-it.more{ display:none }
-.galx.open .galx-it.more{ display:block; animation:hxUp .6s var(--ease) both }
+/* ── LIGHTBOX ── */
 .lbx{ border:0; padding:0; background:transparent; max-width:96vw; max-height:92vh; overflow:visible }
 .lbx::backdrop{ background:rgba(2,8,6,.92); backdrop-filter:blur(8px) }
 .lbx-fig{ margin:0; display:grid; justify-items:center; gap:10px }
@@ -1447,14 +1499,14 @@ main{ padding-bottom:0 }
 .lbx-next svg{ transform:rotate(90deg); width:20px; height:20px }
 .lbx-x svg{ width:20px; height:20px }
 
-/* why — editorial numbered list */
-.whyx{ list-style:none; margin:0; padding:0; display:grid; gap:12px; max-width:920px; margin-inline:auto }
-@media (min-width:768px){ .whyx{ grid-template-columns:1fr 1fr; gap:14px 24px } }
-.whyx li{ display:flex; align-items:center; gap:16px; padding:18px 20px; border-radius:18px;
-  background:linear-gradient(165deg, rgba(16,39,31,.65), rgba(7,21,16,.45));
-  border:1px solid rgba(226,198,142,.2) }
-.whyx b{ font-family:'Amiri',serif; font-size:28px; color:var(--gl); line-height:1; flex:none }
-.whyx span{ font-size:15.5px; font-weight:600; line-height:1.65; color:var(--ink) }
+/* ── 11. WHY BARS (لماذا يختارنا منظمو الفعاليات — أشرطة أنيقة مثل كيف الضيافة) ── */
+.why-bars{ list-style:none; margin:0; padding:0; display:grid; gap:10px }
+@media (min-width:768px){ .why-bars{ grid-template-columns:1fr 1fr; gap:12px } }
+.why-bars li{ display:flex; align-items:center; gap:12px; padding:16px 18px; border-radius:16px;
+  background:linear-gradient(165deg, rgba(16,39,31,.68), rgba(7,21,16,.52));
+  border:1px solid rgba(226,198,142,.22) }
+.why-bars i{ font-style:normal; font-size:12px; color:var(--gd); flex:none }
+.why-bars span{ font-size:15px; font-weight:600; line-height:1.6; color:var(--ink) }
 
 /* final call */
 .endx{ position:relative; overflow:hidden; isolation:isolate; padding-block:clamp(72px,13vw,140px); text-align:center }
