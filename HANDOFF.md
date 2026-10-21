@@ -5,7 +5,7 @@
 > وثيقة التسليم لأي مطوّر أو وكيل ذكاء اصطناعي يستلم المشروع في بيئة جديدة.
 > تشرح: ما هو المشروع، القواعد التي لا تُكسر، أين كل شيء، كيف تعمل وتنشر
 > وتتحقق، ما بُحث فيه، ما فشل ولماذا، وما الذي ينتظر.
-> **آخر تحديث: 2026-10-18 · الإنتاج: commit `bdad0b6` على Vercel.**
+> **آخر تحديث: 2026-10-21 · الإنتاج: commit `bdad0b6` على Vercel · `main` في هذا المستودع فيه v4.5→v4.7 (الصور، الختم الفكتوري، الترتيب، e2e) — لم يُنشر على الإنتاج بعد.**
 
 ---
 
@@ -105,6 +105,9 @@ diff <($P ls-remote prod | sort -k2) <(git ls-remote origin | grep -v refs/pull 
 | `bdad0b6` | v4.2 | الفهرسة الكاملة (صور الخريطة، يتيمة، JSON-LD) + تنظيف الصور + التوثيق |
 | `82c3e40` | v4.3 | التوثيق والتسليم (`HANDOFF.md`، `qa/tools/`) — لا تغيير في الموقع |
 | (التالي) | v4.4 | توحيد المستودعين + توثيق المزامنة — لا تغيير في الموقع |
+| (معلّق) | v4.5 | **الصور**: تدقيق 116 صورة بالعين، أسماء SEO، وصف حقيقي، علامة مائية بلا وجوه، حقوق EXIF/XMP/JSON-LD، تمويه شعارات الآخرين، تصحيح «سقيا زمزم» و«السوّاس»، 301 للصور القديمة، `tel:+966` — `docs/09-images-watermark.md` |
+| (معلّق) | v4.6 | **ختم مائي فكتوري معتم** (قرص زمردي + شعار ذهبي + شريط اسم) بدل الذهبي الشفاف — تباين 13.2:1، 0 وجوه، `/favicon.ico` → 301، `V=31` — `docs/09` §3 و`qa/evidence/v4.6-watermark/` |
+| (معلّق) | v4.7 | **ترتيب وتنظيف واختبار تفاعلي**: المعرض مرتّب بالأولوية (4 مجموعات، أول 12 للواجهة)، qa/ مقسّم evidence/archive، `qa/scripts/e2e.py` (اضغط كل شيء) = 0 أخطاء، قرار المالك عن صور keifaldiafa (أخوه — مسموح) — `docs/10-session-2026-10-21.md` |
 
 ---
 
@@ -113,14 +116,16 @@ diff <($P ls-remote prod | sort -k2) <(git ls-remote origin | grep -v refs/pull 
 ```
 HANDOFF.md            ← هذا الملف
 README.md             نظرة عامة + أوامر التشغيل
-docs/01..08           التوثيق التفصيلي (البنية، التصميم، المحتوى، السيو، الأداء، النشر، القرارات، المتبقّي)
+docs/01..09           التوثيق التفصيلي (البنية، التصميم، المحتوى، السيو، الأداء، النشر، القرارات، المتبقّي، الصور)
 src/                  الكود (انظر docs/01-architecture.md)
   data.ts             ← كل المحتوى والإعدادات (BRAND, TRACKING, SEARCH, MENU, GALLERY…)
   jeddah.ts           ← صفحات الكلمات المفتاحية الخمس
 public/static/        style.css · app.js · fonts/ · img/ (كل الصور WebP)
-qa/scripts/           فحوص رسمية: index_audit.py · seo.py · btn.py · indexnow.py (+ أدوات لقطات)
-qa/tools/             أدوات العمل اليومية (Lighthouse، لقطات، فائض، حذف CSS الآمن…) — القسم 6
-qa/audit-v4/          تقرير التدقيق الشامل v4 وأدلّته (أرشيف)
+assets/               img-src/ (الأصول الأصلية) · catalog.json (حقيقة كل صورة) ← qa/tools/build_images.py
+qa/scripts/           فحوص رسمية: e2e.py · index_audit.py · seo.py · btn.py · indexnow.py (+ أدوات لقطات)
+qa/tools/             build_images.py + أدوات العمل اليومية (Lighthouse، لقطات، حذف CSS الآمن…) — القسم 6
+qa/evidence/          أدلّة الإصدارات (v4.5-images · v4.6-watermark · e2e-latest.json · lighthouse-latest.txt)
+qa/archive/           أرشيف للقراءة فقط (audit-v4 · screenshots-v3 · report-v3.json)
 research/             تحليل المنافسين (keifaldiafa.com، asoulaldiafa.com) وأصولهم — للدراسة فقط
 vercel.json           إعداد الإنتاج
 wrangler.jsonc        Cloudflare (للمعاينة المحلية)
@@ -183,6 +188,7 @@ source ~/.qahwa-secrets/env.sh
    python3 qa/scripts/index_audit.py        # issues: 0
    python3 qa/scripts/seo.py                # issues: 0
    python3 qa/scripts/btn.py                # clipped: 0 · under-44px: 0
+   python3 qa/scripts/e2e.py                # اضغط كل شيء — failures: 0
    CHROME_PATH=… bash qa/tools/lhrun.sh / /menu /gallery
    ```
    + لقطات شاشة للتغيير البصري على 320 و390 و1280 (`qa/tools/pshot.py`) **وانظر إليها**.
@@ -212,6 +218,7 @@ source ~/.qahwa-secrets/env.sh
 |---|---|
 | `qa/scripts/index_audit.py [base]` | **الأهم.** زحف كامل: 200/noindex/canonical/H1، روابط داخلية لتحويل أو 404، صفحات يتيمة، كل صورة محتوى في الخريطة، صور الخريطة 200 و≤300KB، أبعاد `imgmap.ts` = الملفات، روابط JSON-LD = 200، og:image، التحويلات القديمة |
 | `qa/scripts/seo.py [base]` | العناوين ≤60 والأوصاف وتكرارها، OG، lang/dir، نص بديل |
+| `qa/scripts/e2e.py` | اضغط كل شيء: 23 صفحة × 320/390/1280، كل صورة ورابط، القائمة، نافذة الصور، الفلاتر، الحجز، بدون JS |
 | `qa/scripts/btn.py` | 13 صفحة × 320/390/1440 + القائمة مفتوحة: قصّ النص، أهداف < 44px |
 | `qa/scripts/indexnow.py` | إبلاغ Bing/Yandex بعد النشر |
 | `qa/tools/lhrun.sh <paths>` | Lighthouse جوال محلي → `/tmp/lh/*.json` (يحتاج `CHROME_PATH`) |
@@ -221,6 +228,8 @@ source ~/.qahwa-secrets/env.sh
 | `qa/tools/snap.py <dir>` | لقطات 11 صفحة × 390/1280 — للمقارنة بالبكسل قبل/بعد |
 | `qa/tools/usedsel.py` + `mypurge.js` | **الحذف الآمن لـ CSS:** يجمع المحدّدات المطابقة فعلًا في المتصفح على كل الصفحات، ثم يحذف ما لم يطابق شيئًا (مع إبقاء أصناف الحالة). ثم `snap.py` قبل/بعد ومقارنة بـ PIL. يحتاج `postcss` |
 | `qa/tools/live.py` | فحص الحي: أخطاء Console، فائض، القائمة، الحجز |
+| `qa/tools/build_images.py` | **يبني كل الصور** من `assets/img-src` + `assets/catalog.json`: علامة مائية تتجنّب الوجوه، تمويه شعارات، EXIF/XMP، `imgmap.ts` و`imgmeta.ts` |
+| `qa/tools/compare_competitors.py` | مطابقة إدراكية لصورنا مع خرائط صور المنافسين |
 
 ---
 
@@ -231,7 +240,7 @@ source ~/.qahwa-secrets/env.sh
 | **keifaldiafa.com و asoulaldiafa.com** (منافسان، Next.js + Tailwind) | نفس بالتة الذهب حرفيًا (`#c5a059/#e2c68e/#a67c37/#85642e`). أصول أرقى (أسود أعمق، لؤلؤ دافئ، Amiri). استعرنا: الإيقاع البصري، صفحة `/links`، **هيكل `/offerings`** (أقسام بعدد وسطر وزر «اطلب» وواتساب معبّأ) | `research/competitor-analysis/ANALYSIS.md` + 32 لقطة + HTML خام |
 | **هيكل keifaldiafa.com/offerings** | فتات → «التقديمات والمعدات» → H2 «ما الذي يصل إلى ضيوفك؟» → أقسام (حارة، باردة، تمور، حلويات، معجنات، سناكات، سندوتشات، فواكه، مكسرات) → معدات (47 قطعة) → توزيعات → «تصل مع طاقمها» → 4 أسئلة → تواصل. **لم ننسخ** «عروض أسعار وعقود وفواتير» ولا منتجات شركائهم | طُبّق في `MenuSec` |
 | **خرائط مواقع وأصول المنافسين** | جرد صورهم ومقاساتهم وخرائطهم | `research/asset-harvest/` |
-| **تدقيق v4 الشامل** (قبل أي تعديل) | 79 صفحة، 40 صفحة مدن بتشابه 90–97٪، QR معطّل، شعارات 11 جهة كبرى، صورة بعلامة حراج، صور بشعارات شركات، لا تتبّع، أداء 69–90، ادعاءات بلا مصدر في كل الصفحات | `qa/audit-v4/AUDIT.md` + `PER-PAGE.md` |
+| **تدقيق v4 الشامل** (قبل أي تعديل) | 79 صفحة، 40 صفحة مدن بتشابه 90–97٪، QR معطّل، شعارات 11 جهة كبرى، صورة بعلامة حراج، صور بشعارات شركات، لا تتبّع، أداء 69–90، ادعاءات بلا مصدر في كل الصفحات | `qa/archive/audit-v4/AUDIT.md` + `PER-PAGE.md` |
 | **أسماء دومين بديلة** (قراءة فقط) | qahwamalakiya.com، alqahwa-almalakiya.com، royal-qahwa.com، qahwaji-jeddah.com متاحة؛ alqahwaalmalakiya.com مأخوذ. **لم يُشترَ شيء** | ملف الاتصالات |
 | **Spaceship Hyperlift** | الـ API لا يستطيع إنشاء تطبيق (اللوحة فقط) → اخترنا Vercel | ملف الاتصالات |
 
@@ -252,6 +261,7 @@ source ~/.qahwa-secrets/env.sh
 | **دفع git فشل** | مساعد اعتماد عام في البيئة | `-c credential.helper=` قبل المساعد الخاص |
 | **Vercel BLOCKED** | مؤلف الكوميت غير MoTechSys (خطة Hobby) | `commit-tree` بمتغيرات المؤلف/الناشر |
 | **لقطة بطل فارغة على الحي** | توقيت اللقطة أثناء حركة الدخول، لا خلل | انتظر أو استخدم `reduced_motion` في اللقطات |
+| **وصف الصور من اسم الملف** | فناجيل قهوة وُصفت «سقاية زمزم»، جرار زمزم وُصفت «سوقية»، مبخرة اسمها `eq-dallah`، 6 صور مكرّرة بأسماء مختلفة | كل صورة تُوصف **بالنظر إليها** في `assets/catalog.json`؛ alt لا يأخذ سياق الصفحة |
 | **الادعاء قبل القياس** | «تم» قبل فحص الحي في جولات سابقة | لا «تم» قبل `index_audit` + `seo` + Lighthouse على الحي |
 
 ---
@@ -266,6 +276,9 @@ source ~/.qahwa-secrets/env.sh
 ---
 
 ## 10. ما ينتظر (بالترتيب)
+
+0. **نشر v4.5 → v4.7 على الإنتاج** — رمز moain2026 لا يصل إلى `MoTechSys/qahwajeen` (404). يحتاج رمز MoTechSys (القسم 4) ثم خطوات القسم 5 كما هي.
+- ✅ **مصدر الصور محسوم** — صاحب keifaldiafa.com أخو المالك؛ الصور المشتركة مسموحة (`docs/09` §6). القاعدة باقية: لا تلمس «ضيافة الكيف».
 
 1. **Search Console** — المالك ينشئ خاصية «بادئة URL» بطريقة «علامة HTML» ويعطي قيمة `content` →
    ضعها في `SEARCH.googleVerify` (`src/data.ts`) → انشر → تحقّق → أرسل `sitemap.xml`. لا يحتاج DNS.

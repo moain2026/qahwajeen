@@ -22,7 +22,7 @@ import {
 import { type JeddahPage } from './jeddah'
 import { graph, orgLd, siteLd, faqLd, crumbLd, serviceLd, eventLd, galleryLd } from './ld'
 import { Ico } from './blocks'
-import { Img } from './ui'
+import { Img, capOf } from './ui'
 import {
   OnePage,
   Hero,
@@ -55,15 +55,14 @@ const fit = (base: string, ...suffixes: string[]) => {
 export const Home = () => (
   <Layout
     path="/"
-    hero="hero-real"
+    hero="qahwajiin-team-uniform-reception-hall"
     jsonld={graph(orgLd(), siteLd(), galleryLd('/', GALLERY.slice(0, 12)), faqLd(FAQ.slice(0, 6)))}
     title="قهوجي وصبابين جدة — ضيافة مناسبات فاخرة"
     desc="قهوجي وصبابين في جدة من القهوة الملكية: طاقم رجالي ونسائي بزي رسمي، دلال مذهّبة، قهوة سعودية وتمور. عرض سعر مكتوب — اتصال وواتساب 0504968113."
   >
     <OnePage
       hero={{
-        img: 'hero-real',
-        tall: 'hero-real-tall',
+        img: 'qahwajiin-team-uniform-reception-hall',
         alt: 'فريق قهوجيين وصبابين بزي سعودي رسمي موحّد في مناسبة بجدة — القهوة الملكية',
         kick: 'JEDDAH · SAUDI ARABIA',
         h1: 'قهوجي وصبابين جدة لضيافة المناسبات',
@@ -83,14 +82,14 @@ export const Services = () => {
   return (
     <Layout
       path="/services"
-      hero="ev-team-1"
+      hero="qahwajiin-team-uniform-reception-hall"
       jsonld={graph(crumbLd([{ name: 'الخدمات', path: '/services' }]), faqLd(FAQ.slice(0, 5)))}
       title="خدمات الضيافة في جدة — قهوجيين وتقديمات"
-      desc="خدمات الضيافة في جدة من القهوة الملكية: قهوجيين ومباشرين، قهوجيات وصبابات، سقاية زمزم، تمور وحلى، بوفيه، عدّة نحاسية وسوقية ذهبية. 0504968113."
+      desc="خدمات الضيافة في جدة من القهوة الملكية: قهوجيين ومباشرين، قهوجيات وصبابات، سقيا زمزم، تمور وحلى، بوفيه، عدّة نحاسية وسوّاس ذهبي. 0504968113."
     >
       <Hero
         h={{
-          img: 'ev-team-1',
+          img: 'qahwajiin-team-uniform-reception-hall',
           alt: `طاقم ضيافة بزي موحّد — ${BRAND.name}`,
           kick: 'الخدمات',
           h1: 'خدمات الضيافة في جدة',
@@ -159,7 +158,7 @@ export const ServiceDetail = ({ s }: { s: Service }) => {
         <FocusGrid
           k="من أعمالنا الميدانية"
           t={`لقطات من ${s.title}`}
-          items={s.gal.map((g) => ({ img: g, t: s.title, d: s.short }))}
+          items={s.gal.map((g) => ({ img: g, t: capOf(g, s.title) }))}
         />
       )}
       <FaqSec items={FAQ.slice(0, 4)} />
@@ -174,14 +173,14 @@ export const Occasions = () => {
   return (
     <Layout
       path="/occasions"
-      hero="ev-vip-2"
+      hero="two-qahwajiin-embroidered-daglah-dates-tray"
       jsonld={graph(crumbLd([{ name: 'المناسبات', path: '/occasions' }]), faqLd(FAQ.slice(0, 4)))}
       title="ضيافة مناسبات جدة — أعراس وشركات وعزاء"
       desc="ضيافة لكل مناسبة في جدة مع القهوة الملكية: أعراس وملكات، مجالس عزاء، مؤتمرات ومعارض، تخرّج، استقبال مواليد، ومخيمات. 0504968113."
     >
       <Hero
         h={{
-          img: 'ev-vip-2',
+          img: 'two-qahwajiin-embroidered-daglah-dates-tray',
           alt: `ضيافة مناسبات فاخرة — ${BRAND.name}`,
           kick: 'المناسبات',
           h1: 'ضيافة مناسبات في جدة',
@@ -262,7 +261,7 @@ export const Menu = () => {
   return (
     <Layout
       path="/menu"
-      hero="sw-station"
+      hero="dessert-buffet-creme-caramel-petit-fours"
       jsonld={graph(crumbLd([{ name: 'التقديمات', path: '/menu' }]), {
         '@type': 'Menu',
         name: `قائمة الضيافة — ${BRAND.name}`,
@@ -279,7 +278,7 @@ export const Menu = () => {
     >
       <Hero
         h={{
-          img: 'sw-station',
+          img: 'dessert-buffet-creme-caramel-petit-fours',
           alt: `محطة ضيافة وحلى — ${BRAND.name}`,
           kick: 'التقديمات',
           h1: 'تقديمات ومنيو ضيافة المناسبات في جدة',
@@ -300,14 +299,14 @@ export const Gallery = () => {
   return (
     <Layout
       path="/gallery"
-      hero="ev-vip-2"
+      hero="two-qahwajiin-embroidered-daglah-dates-tray"
       jsonld={graph(galleryLd('/gallery', GALLERY), crumbLd([{ name: 'معرض الأعمال', path: '/gallery' }]))}
       title="صور أعمالنا — قهوجيين وضيافة مناسبات في جدة"
-      desc="صور أعمال القهوة الملكية في جدة: قهوجيين وصبابين بزي موحّد، سوقيات ذهبية، دلال نحاسية، ومحطات حلى وتمور من مناسبات خدمناها."
+      desc="صور أعمال القهوة الملكية في جدة: قهوجيين وصبابين بزي موحّد، سقيا زمزم وسوّاس ذهبي، دلال نحاسية، ومحطات حلى وتمور من مناسبات خدمناها."
     >
       <Hero
         h={{
-          img: 'ev-vip-2',
+          img: 'two-qahwajiin-embroidered-daglah-dates-tray',
           alt: `معرض أعمال ${BRAND.name} في جدة`,
           kick: 'معرض الأعمال',
           h1: 'صور أعمال القهوة الملكية في جدة',
@@ -328,14 +327,14 @@ export const FaqPage = () => {
   return (
     <Layout
       path="/faq"
-      hero="ev-booth-2"
+      hero="two-qahwajiin-coffee-booth-dallah-dates"
       jsonld={graph(faqLd(FAQ), crumbLd([{ name: 'أسئلة متكررة', path: '/faq' }]))}
       title="أسئلة شائعة عن حجز قهوجي في جدة"
       desc="إجابات القهوة الملكية عن حجز القهوجيين والصبابين والقهوجيات في جدة: طريقة حساب التكلفة، الطاقم النسائي، موعد الحجز، العدّة والتنظيف."
     >
       <Hero
         h={{
-          img: 'ev-booth-2',
+          img: 'two-qahwajiin-coffee-booth-dallah-dates',
           alt: `ركن ضيافة — ${BRAND.name}`,
           kick: 'الأسئلة الشائعة',
           h1: 'أسئلة شائعة عن حجز قهوجي في جدة',
@@ -353,7 +352,7 @@ export const FaqPage = () => {
 export const FastBooking = () => (
   <Layout
     path="/booking"
-    hero="ev-vip-2"
+    hero="two-qahwajiin-embroidered-daglah-dates-tray"
     bare
     jsonld={graph(crumbLd([{ name: 'الحجز', path: '/booking' }]))}
     title="احجز قهوجي وصبابين في جدة — طلب سريع"
@@ -406,14 +405,13 @@ export const NotFound = () => (
   <Layout
     path="/404"
     noindex
-    hero="hero-real"
+    hero="qahwajiin-team-uniform-reception-hall"
     title="الصفحة غير موجودة"
     desc="الصفحة التي تبحث عنها غير متاحة — تفضّل بالعودة إلى الصفحة الرئيسية للقهوة الملكية."
   >
     <Hero
       h={{
-        img: 'hero-real',
-        tall: 'hero-real-tall',
+        img: 'qahwajiin-team-uniform-reception-hall',
         alt: `فريق ${BRAND.name}`,
         kick: 'خطأ ٤٠٤',
         h1: 'هذه الصفحة غير متاحة',

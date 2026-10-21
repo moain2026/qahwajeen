@@ -1,0 +1,1903 @@
+[
+ {
+  "name": "qahwajiin-team-uniform-reception-hall",
+  "orig": "ev-team-1",
+  "size": [
+   900,
+   675
+  ],
+  "faces": 8,
+  "mark": [
+   363,
+   343,
+   173,
+   203
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "two-qahwajiin-coffee-booth-dallah-dates",
+  "orig": "ev-booth-2",
+  "size": [
+   768,
+   1360
+  ],
+  "faces": 2,
+  "mark": [
+   276,
+   769,
+   216,
+   256
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "qahwaji-golden-dallah-exhibition-booth",
+  "orig": "ev-booth-6",
+  "size": [
+   768,
+   1360
+  ],
+  "faces": 1,
+  "mark": [
+   276,
+   769,
+   216,
+   256
+  ],
+  "face_overlap_px": 0,
+  "blurred": [
+   [
+    30,
+    340,
+    240,
+    420
+   ]
+  ]
+ },
+ {
+  "name": "qahwaji-serving-coffee-exhibition-hall",
+  "orig": "ev-booth-7",
+  "size": [
+   768,
+   1360
+  ],
+  "faces": 4,
+  "mark": [
+   276,
+   769,
+   216,
+   256
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "qahwaji-embroidered-daglah-pouring-coffee-vip-lounge",
+  "orig": "ev-vip-1",
+  "size": [
+   768,
+   1360
+  ],
+  "faces": 1,
+  "mark": [
+   276,
+   769,
+   216,
+   256
+  ],
+  "face_overlap_px": 0,
+  "blurred": [
+   [
+    405,
+    90,
+    740,
+    640
+   ],
+   [
+    0,
+    180,
+    130,
+    600
+   ]
+  ]
+ },
+ {
+  "name": "qahwaji-holding-dallah-corporate-event",
+  "orig": "ev-booth-9",
+  "size": [
+   768,
+   1360
+  ],
+  "faces": 1,
+  "mark": [
+   276,
+   769,
+   216,
+   256
+  ],
+  "face_overlap_px": 0,
+  "blurred": [
+   [
+    0,
+    0,
+    470,
+    515
+   ]
+  ]
+ },
+ {
+  "name": "two-qahwajiin-embroidered-daglah-dates-tray",
+  "orig": "ev-vip-2",
+  "size": [
+   768,
+   1360
+  ],
+  "faces": 2,
+  "mark": [
+   276,
+   769,
+   216,
+   256
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "three-female-hostesses-white-floral-dresses",
+  "orig": "ev-women-1",
+  "size": [
+   768,
+   1360
+  ],
+  "faces": 3,
+  "mark": [
+   276,
+   769,
+   216,
+   256
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "two-female-hostesses-black-suits",
+  "orig": "ev-women-2",
+  "size": [
+   768,
+   1360
+  ],
+  "faces": 2,
+  "mark": [
+   276,
+   769,
+   216,
+   256
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "four-female-hostesses-black-uniform",
+  "orig": "ev-women-3",
+  "size": [
+   768,
+   1360
+  ],
+  "faces": 4,
+  "mark": [
+   276,
+   769,
+   216,
+   256
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "server-tray-tea-juice-glasses",
+  "orig": "ev-serve-1",
+  "size": [
+   450,
+   800
+  ],
+  "faces": 0,
+  "mark": [
+   160,
+   453,
+   129,
+   149
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "outdoor-tea-coffee-table-dallah-glass-cups",
+  "orig": "ev-table-1",
+  "size": [
+   900,
+   897
+  ],
+  "faces": 0,
+  "mark": [
+   335,
+   457,
+   229,
+   269
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "heritage-sadu-buffet-booth-night",
+  "orig": "ev-tent-1",
+  "size": [
+   900,
+   675
+  ],
+  "faces": 2,
+  "mark": [
+   363,
+   343,
+   173,
+   203
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "saudi-popular-food-khamir-bread-honey",
+  "orig": "pf-spread-1",
+  "size": [
+   480,
+   640
+  ],
+  "faces": 0,
+  "mark": [
+   171,
+   342,
+   138,
+   160
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "saudi-popular-food-pots-sadu-table",
+  "orig": "pf-spread-2",
+  "size": [
+   480,
+   640
+  ],
+  "faces": 0,
+  "mark": [
+   171,
+   342,
+   138,
+   160
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "saudi-popular-food-nuts-traditional-bread",
+  "orig": "pf-spread-3",
+  "size": [
+   480,
+   640
+  ],
+  "faces": 0,
+  "mark": [
+   171,
+   342,
+   138,
+   160
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "green-tea-glass-teapot",
+  "orig": "tea-green",
+  "size": [
+   480,
+   640
+  ],
+  "faces": 0,
+  "mark": [
+   171,
+   342,
+   138,
+   160
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "red-tea-glass-teapot",
+  "orig": "tea-red",
+  "size": [
+   480,
+   640
+  ],
+  "faces": 0,
+  "mark": [
+   171,
+   342,
+   138,
+   160
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "hibiscus-karkade-glass-teapot",
+  "orig": "tea-hibiscus",
+  "size": [
+   480,
+   640
+  ],
+  "faces": 0,
+  "mark": [
+   171,
+   342,
+   138,
+   160
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "henna-artist-hand-design-saudi-emblem",
+  "orig": "artist",
+  "size": [
+   480,
+   474
+  ],
+  "faces": 0,
+  "mark": [
+   177,
+   241,
+   125,
+   143
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "henna-artist-station-heritage-tent",
+  "orig": "artist-2",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "henna-artist-heritage-majlis-closeup",
+  "orig": "artist-3",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 1,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "mirror-photo-booth-purple-carpet",
+  "orig": "booth",
+  "size": [
+   900,
+   1600
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   906,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": [
+   [
+    230,
+    0,
+    900,
+    330
+   ]
+  ]
+ },
+ {
+  "name": "mirror-photo-booth-red-carpet-printer",
+  "orig": "booth-2",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": [
+   [
+    600,
+    30,
+    900,
+    200
+   ]
+  ]
+ },
+ {
+  "name": "mirror-photo-booth-balloons-red-carpet",
+  "orig": "booth-3",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 1,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": [
+   [
+    0,
+    250,
+    330,
+    980
+   ]
+  ]
+ },
+ {
+  "name": "pastry-buffet-tiered-wooden-stands",
+  "orig": "buffet",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 2,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "canapes-buffet-black-platters-top-view",
+  "orig": "buffet-2",
+  "size": [
+   480,
+   854
+  ],
+  "faces": 1,
+  "mark": [
+   171,
+   449,
+   138,
+   160
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "fruit-cocktail-cream-honey-glasses",
+  "orig": "cd-juice",
+  "size": [
+   1600,
+   2214
+  ],
+  "faces": 0,
+  "mark": [
+   579,
+   1195,
+   441,
+   531
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "iced-karkade-mint-glass",
+  "orig": "cd-karkade",
+  "size": [
+   900,
+   675
+  ],
+  "faces": 0,
+  "mark": [
+   363,
+   343,
+   173,
+   203
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "iced-latte-glass",
+  "orig": "cd-latte",
+  "size": [
+   480,
+   720
+  ],
+  "faces": 0,
+  "mark": [
+   171,
+   395,
+   138,
+   160
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "lemon-mint-mojito-bottle",
+  "orig": "cd-mojito",
+  "size": [
+   340,
+   509
+  ],
+  "faces": 0,
+  "mark": [
+   120,
+   279,
+   99,
+   113
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "cold-hibiscus-drink-glass-straw",
+  "orig": "cd-sobia",
+  "size": [
+   480,
+   396
+  ],
+  "faces": 0,
+  "mark": [
+   188,
+   201,
+   103,
+   119
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "erq-sous-licorice-drink-glasses",
+  "orig": "cd-sous",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 1,
+  "mark": [
+   324,
+   210,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "tamarind-drink-glasses-mint-lemon",
+  "orig": "cd-tamarind",
+  "size": [
+   480,
+   621
+  ],
+  "faces": 0,
+  "mark": [
+   171,
+   329,
+   138,
+   160
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "dates-silver-bowl",
+  "orig": "dates",
+  "size": [
+   900,
+   900
+  ],
+  "faces": 0,
+  "mark": [
+   335,
+   458,
+   229,
+   270
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "glossy-dates-silver-dish",
+  "orig": "dates-2",
+  "size": [
+   480,
+   480
+  ],
+  "faces": 0,
+  "mark": [
+   177,
+   244,
+   125,
+   144
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "decorated-dates-golden-tray",
+  "orig": "dates-khalas",
+  "size": [
+   900,
+   900
+  ],
+  "faces": 0,
+  "mark": [
+   335,
+   458,
+   229,
+   270
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "sesame-date-balls-caramel-filling",
+  "orig": "dates-khalas-2",
+  "size": [
+   900,
+   911
+  ],
+  "faces": 0,
+  "mark": [
+   335,
+   466,
+   229,
+   270
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "date-palm-tree-arrangement-gift",
+  "orig": "dates-khalas-3",
+  "size": [
+   480,
+   721
+  ],
+  "faces": 0,
+  "mark": [
+   171,
+   395,
+   138,
+   160
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "stuffed-dates-three-trays",
+  "orig": "dates-stuffed",
+  "size": [
+   478,
+   823
+  ],
+  "faces": 0,
+  "mark": [
+   170,
+   463,
+   138,
+   160
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "dates-pistachio-coconut-square-box",
+  "orig": "dates-stuffed-2",
+  "size": [
+   480,
+   480
+  ],
+  "faces": 0,
+  "mark": [
+   177,
+   244,
+   125,
+   144
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "chocolate-dates-roses-pecan-platter",
+  "orig": "dates-stuffed-3",
+  "size": [
+   480,
+   575
+  ],
+  "faces": 2,
+  "mark": [
+   177,
+   307,
+   125,
+   144
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "oval-tray-dates-pistachio-coconut",
+  "orig": "dates-stuffed-4",
+  "size": [
+   900,
+   1055
+  ],
+  "faces": 0,
+  "mark": [
+   335,
+   561,
+   229,
+   270
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "dates-pyramid-palm-centerpiece",
+  "orig": "dates-sukari",
+  "size": [
+   900,
+   1176
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   626,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "palm-centerpiece-stuffed-dates-base",
+  "orig": "dates-sukari-2",
+  "size": [
+   900,
+   900
+  ],
+  "faces": 0,
+  "mark": [
+   335,
+   458,
+   229,
+   270
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "round-platter-stuffed-dates-pistachio-sesame",
+  "orig": "dates-sukari-3",
+  "size": [
+   900,
+   778
+  ],
+  "faces": 1,
+  "mark": [
+   350,
+   397,
+   199,
+   232
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "serving-tea-glass-cups-golden-tray",
+  "orig": "eq-cup",
+  "size": [
+   900,
+   698
+  ],
+  "faces": 0,
+  "mark": [
+   361,
+   356,
+   177,
+   209
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "glass-cups-palm-motif-gold-tray",
+  "orig": "eq-cup-2",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "golden-mabkhara-heritage-sweets-table",
+  "orig": "eq-dallah",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "golden-dallah-arabic-coffee-pot",
+  "orig": "eq-dallah-2",
+  "size": [
+   480,
+   480
+  ],
+  "faces": 1,
+  "mark": [
+   177,
+   244,
+   125,
+   144
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "gold-glass-cup-stand-multi-tier",
+  "orig": "eq-stand",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "two-gold-cup-stands-table",
+  "orig": "eq-stand-2",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "gold-cup-stands-glass-tea-sets",
+  "orig": "eq-stand-3",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "tea-glass-flower-ornate-gold-tray",
+  "orig": "eq-stand-4",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "golden-dallah-dates-white-finjan",
+  "orig": "eq-teaset",
+  "size": [
+   1600,
+   1068
+  ],
+  "faces": 0,
+  "mark": [
+   666,
+   544,
+   268,
+   321
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "white-coffee-finjans-emblem-gold-tray",
+  "orig": "eq-tray",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 1,
+  "mark": [
+   450,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "gold-tea-glass-stand-hall",
+  "orig": "eq-tray-2",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "mixed-berries-red-bowl",
+  "orig": "fr-berries",
+  "size": [
+   900,
+   1215
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   652,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "fresh-figs",
+  "orig": "fr-figs",
+  "size": [
+   900,
+   599
+  ],
+  "faces": 0,
+  "mark": [
+   374,
+   305,
+   151,
+   180
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "green-red-grapes",
+  "orig": "fr-grapes",
+  "size": [
+   900,
+   1214
+  ],
+  "faces": 1,
+  "mark": [
+   324,
+   651,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "sliced-kiwi",
+  "orig": "fr-kiwi",
+  "size": [
+   900,
+   599
+  ],
+  "faces": 0,
+  "mark": [
+   374,
+   305,
+   151,
+   180
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "cubed-mango",
+  "orig": "fr-mango",
+  "size": [
+   900,
+   599
+  ],
+  "faces": 0,
+  "mark": [
+   374,
+   305,
+   151,
+   180
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "pineapple-chunks-bowl",
+  "orig": "fr-pineapple",
+  "size": [
+   900,
+   884
+  ],
+  "faces": 0,
+  "mark": [
+   337,
+   450,
+   225,
+   265
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "half-pomegranate-seeds",
+  "orig": "fr-pomegranate",
+  "size": [
+   900,
+   951
+  ],
+  "faces": 2,
+  "mark": [
+   551,
+   492,
+   229,
+   270
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "fresh-strawberries",
+  "orig": "fr-strawberry",
+  "size": [
+   900,
+   675
+  ],
+  "faces": 0,
+  "mark": [
+   363,
+   343,
+   173,
+   203
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "guest-giveaways-wrapped-sweets-table",
+  "orig": "gift-tray",
+  "size": [
+   900,
+   506
+  ],
+  "faces": 0,
+  "mark": [
+   385,
+   258,
+   129,
+   151
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "manakish-zaatar-cheese-board",
+  "orig": "ps-appetizers",
+  "size": [
+   480,
+   480
+  ],
+  "faces": 0,
+  "mark": [
+   177,
+   244,
+   125,
+   144
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "arabic-fatayer-sesame-pastries",
+  "orig": "ps-arabic",
+  "size": [
+   480,
+   600
+  ],
+  "faces": 0,
+  "mark": [
+   177,
+   323,
+   125,
+   144
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "assorted-danish-pastries-trays",
+  "orig": "ps-assorted",
+  "size": [
+   480,
+   719
+  ],
+  "faces": 0,
+  "mark": [
+   171,
+   394,
+   138,
+   160
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "puff-pastry-cream-berries",
+  "orig": "ps-pie",
+  "size": [
+   480,
+   545
+  ],
+  "faces": 0,
+  "mark": [
+   177,
+   287,
+   125,
+   144
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "fried-samosa-basket",
+  "orig": "ps-samosa",
+  "size": [
+   480,
+   480
+  ],
+  "faces": 0,
+  "mark": [
+   177,
+   244,
+   125,
+   144
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "sawas-ornate-golden-vessel-blue-beads",
+  "orig": "sawas-2",
+  "size": [
+   900,
+   1998
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   1169,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "sawas-golden-vessel-engraved",
+  "orig": "sawas-3",
+  "size": [
+   900,
+   1227
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   660,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "sawas-golden-vessel-closeup",
+  "orig": "sawas-4",
+  "size": [
+   900,
+   1227
+  ],
+  "faces": 1,
+  "mark": [
+   324,
+   660,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "chicken-sandwich-sesame-bun",
+  "orig": "sd-chicken",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "chicken-cheese-ciabatta-sandwich",
+  "orig": "sd-chicken-2",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "tuna-salad-burger-bun",
+  "orig": "sd-tuna",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "tuna-salad-sesame-roll",
+  "orig": "sd-tuna-2",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "turkey-cheese-mini-sub",
+  "orig": "sd-turkey",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "turkey-cheese-sub-sandwich",
+  "orig": "sd-turkey-2",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "turkey-cheese-tomato-focaccia",
+  "orig": "sd-turkey-3",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "bruschetta-slate-platter",
+  "orig": "sn-bruschetta",
+  "size": [
+   900,
+   900
+  ],
+  "faces": 1,
+  "mark": [
+   335,
+   458,
+   229,
+   270
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "assorted-canapes-slate-board",
+  "orig": "sn-canapes",
+  "size": [
+   900,
+   900
+  ],
+  "faces": 1,
+  "mark": [
+   335,
+   458,
+   229,
+   270
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "crispy-chicken-bites-mustard-sauce",
+  "orig": "sn-chicken",
+  "size": [
+   900,
+   900
+  ],
+  "faces": 0,
+  "mark": [
+   335,
+   458,
+   229,
+   270
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "potato-croquettes-tomato-sauce",
+  "orig": "sn-croquettes",
+  "size": [
+   900,
+   900
+  ],
+  "faces": 1,
+  "mark": [
+   335,
+   513,
+   229,
+   270
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "mozzarella-sticks-marinara",
+  "orig": "sn-mozzarella",
+  "size": [
+   900,
+   900
+  ],
+  "faces": 1,
+  "mark": [
+   335,
+   458,
+   229,
+   270
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "cheese-nachos-guacamole",
+  "orig": "sn-nachos",
+  "size": [
+   900,
+   900
+  ],
+  "faces": 2,
+  "mark": [
+   353,
+   458,
+   229,
+   270
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "mini-margherita-pizzas",
+  "orig": "sn-pizza",
+  "size": [
+   900,
+   900
+  ],
+  "faces": 0,
+  "mark": [
+   335,
+   458,
+   229,
+   270
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "mini-beef-sliders",
+  "orig": "sn-sliders",
+  "size": [
+   900,
+   900
+  ],
+  "faces": 0,
+  "mark": [
+   335,
+   458,
+   229,
+   270
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "spring-rolls-sweet-chili",
+  "orig": "sn-springroll",
+  "size": [
+   900,
+   900
+  ],
+  "faces": 0,
+  "mark": [
+   335,
+   458,
+   229,
+   270
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "potato-wedges-dip",
+  "orig": "sn-wedges",
+  "size": [
+   900,
+   900
+  ],
+  "faces": 0,
+  "mark": [
+   335,
+   458,
+   229,
+   270
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "golden-zamzam-jugs-stands-flowers",
+  "orig": "souqiya",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 2,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "golden-zamzam-jugs-cups-set",
+  "orig": "souqiya-2",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "golden-zamzam-jug-stand-marble",
+  "orig": "souqiya-3",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "brass-zamzam-jugs-collection",
+  "orig": "souqiya-4",
+  "size": [
+   280,
+   307
+  ],
+  "faces": 0,
+  "mark": [
+   100,
+   157,
+   79,
+   91
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "women-reception-zamzam-jugs-flowers",
+  "orig": "souqiya-5",
+  "size": [
+   280,
+   316
+  ],
+  "faces": 0,
+  "mark": [
+   100,
+   163,
+   79,
+   91
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "pistachio-baklava-golden-platter",
+  "orig": "sw-baklava",
+  "size": [
+   480,
+   480
+  ],
+  "faces": 0,
+  "mark": [
+   177,
+   244,
+   125,
+   144
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "wrapped-chocolates-platter",
+  "orig": "sw-chocolate",
+  "size": [
+   480,
+   480
+  ],
+  "faces": 0,
+  "mark": [
+   177,
+   244,
+   125,
+   144
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "chocolate-croissants",
+  "orig": "sw-croissant",
+  "size": [
+   480,
+   600
+  ],
+  "faces": 1,
+  "mark": [
+   177,
+   323,
+   125,
+   144
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "kunafa-pistachio-cheese",
+  "orig": "sw-kunafa",
+  "size": [
+   480,
+   718
+  ],
+  "faces": 0,
+  "mark": [
+   171,
+   393,
+   138,
+   160
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "fruit-platters-baklava-gold-stands",
+  "orig": "sw-platter",
+  "size": [
+   900,
+   600
+  ],
+  "faces": 0,
+  "mark": [
+   372,
+   305,
+   155,
+   181
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "dessert-buffet-creme-caramel-petit-fours",
+  "orig": "sw-station",
+  "size": [
+   900,
+   506
+  ],
+  "faces": 2,
+  "mark": [
+   385,
+   258,
+   129,
+   151
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "long-dessert-fruit-buffet-chalkboard",
+  "orig": "sw-station-2",
+  "size": [
+   900,
+   742
+  ],
+  "faces": 0,
+  "mark": [
+   355,
+   379,
+   190,
+   221
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "dessert-buffet-parfait-cake-slices",
+  "orig": "sw-station-3",
+  "size": [
+   900,
+   405
+  ],
+  "faces": 0,
+  "mark": [
+   398,
+   207,
+   103,
+   120
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "dessert-buffet-top-view",
+  "orig": "sw-station-5",
+  "size": [
+   900,
+   2095
+  ],
+  "faces": 0,
+  "mark": [
+   324,
+   1233,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "dessert-buffet-cups-pastries",
+  "orig": "sw-station-6",
+  "size": [
+   900,
+   675
+  ],
+  "faces": 0,
+  "mark": [
+   363,
+   343,
+   173,
+   203
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "mini-sadu-tent-coffee-station-indoor",
+  "orig": "tent",
+  "size": [
+   900,
+   675
+  ],
+  "faces": 0,
+  "mark": [
+   363,
+   343,
+   173,
+   203
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "bedouin-tent-majlis-sadu-cushions",
+  "orig": "tent-2",
+  "size": [
+   900,
+   506
+  ],
+  "faces": 0,
+  "mark": [
+   385,
+   258,
+   129,
+   151
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ },
+ {
+  "name": "host-golden-mabkhara-incense-entrance",
+  "orig": "wedding",
+  "size": [
+   900,
+   1200
+  ],
+  "faces": 1,
+  "mark": [
+   324,
+   642,
+   251,
+   299
+  ],
+  "face_overlap_px": 0,
+  "blurred": []
+ }
+]

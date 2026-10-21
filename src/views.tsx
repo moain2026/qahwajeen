@@ -16,7 +16,7 @@ export const Social = () => {
   const waMsg = `السلام عليكم، أرغب في حجز ضيافة لمناسبة في جدة مع ${BRAND.name}.`
   const channels = [
     { id: 'whatsapp', name: 'واتساب', sub: BRAND.phoneDisplay, href: wa(waMsg), icon: 'chat', ext: true, ltr: true, tint: '#25D366' },
-    { id: 'call', name: 'اتصال', sub: BRAND.phoneDisplay, href: `tel:${BRAND.phoneLocal}`, icon: 'phone', ext: false, ltr: true, tint: '#E2C68E' },
+    { id: 'call', name: 'اتصال', sub: BRAND.phoneDisplay, href: `tel:+${BRAND.phoneRaw}`, icon: 'phone', ext: false, ltr: true, tint: '#E2C68E' },
     { id: 'email', name: 'البريد الإلكتروني', sub: BRAND.email, href: `mailto:${BRAND.email}`, icon: 'send', ext: false, ltr: true, tint: '#d9b56d' },
     { id: 'booking', name: 'طلب حجز سريع', sub: 'اختر المناسبة والطاقم وعدد الضيوف', href: '/booking', icon: 'sparkle', ext: false, ltr: false, tint: '#f3d48b' },
   ] as const
@@ -24,7 +24,7 @@ export const Social = () => {
   return (
     <Layout
       path={path}
-      hero="ev-team-1"
+      hero="qahwajiin-team-uniform-reception-hall"
       bare
       jsonld={graph(
         orgLd(),

@@ -6,7 +6,7 @@ import { BRAND, SHOW, SOCIAL_LINKS, TRACKING, SEARCH } from './data'
 import { raw } from './icons'
 import { JEDDAH_PAGES } from './jeddah'
 
-const V = '29' // asset cache-bust — bump on every CSS/JS change
+const V = '31' // asset cache-bust — bump on every CSS/JS change
 export const SITE = 'https://qahwajeen.com'
 
 /**
@@ -59,7 +59,7 @@ addEventListener('load',function(){setTimeout(function(){var s=document.createEl
 </script>`
 }
 
-export const Layout = ({ title, desc, path, children, jsonld, hero = 'hero-real', bare, noindex }: Props) => {
+export const Layout = ({ title, desc, path, children, jsonld, hero = 'qahwajiin-team-uniform-reception-hall', bare, noindex }: Props) => {
   const full = `${title} | ${BRAND.name}`
   const canonUrl = `${SITE}${path}`
   const ogImg = `${SITE}${imgSrc(hero)}`
@@ -146,7 +146,7 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'hero-real'
             </nav>
 
             <div class="hdr-act">
-              <a href={`tel:${BRAND.phoneLocal}`} class="hdr-call" data-track="call" data-location="header">
+              <a href={`tel:+${BRAND.phoneRaw}`} class="hdr-call" data-track="call" data-location="header">
                 <span dangerouslySetInnerHTML={{ __html: raw('phone') }} />
                 <b class="ltr">{BRAND.phoneDisplay}</b>
               </a>
@@ -165,7 +165,7 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'hero-real'
               <img src="/static/img/logo-96.webp" alt="" width="56" height="56" loading="lazy" />
               <b>{BRAND.name}</b>
               <small>{BRAND.latin} · ضيافة المناسبات في جدة</small>
-              <a class="ftr-phone ltr" href={`tel:${BRAND.phoneLocal}`} data-track="call" data-location="footer">
+              <a class="ftr-phone ltr" href={`tel:+${BRAND.phoneRaw}`} data-track="call" data-location="footer">
                 {BRAND.phoneDisplay}
               </a>
               {SHOW.email && (
@@ -208,7 +208,7 @@ export const Layout = ({ title, desc, path, children, jsonld, hero = 'hero-real'
             <span dangerouslySetInnerHTML={{ __html: raw('chat') }} />
             واتساب
           </a>
-          <a href={`tel:${BRAND.phoneLocal}`} class="b-call" data-track="call" data-location="bottom-bar">
+          <a href={`tel:+${BRAND.phoneRaw}`} class="b-call" data-track="call" data-location="bottom-bar">
             <span dangerouslySetInnerHTML={{ __html: raw('phone') }} />
             اتصال
           </a>

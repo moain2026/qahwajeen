@@ -4,7 +4,7 @@
  */
 import { BRAND, SOCIAL_LINKS, SERVICES, SHOW, svcUrl } from './data'
 import { SITE } from './layout'
-import { imgSrc } from './ui'
+import { imgSrc, altOf, capOf } from './ui'
 import { IMG, varW } from './imgmap'
 
 /** pixel size of the variant imgSrc() returns (largest available) */
@@ -17,6 +17,29 @@ const imgDims = (n: string) => {
 }
 
 export const abs = (p: string) => (p.startsWith('http') ? p : `${SITE}${p}`)
+
+/** Complete ImageObject for one photo. license + acquireLicensePage + creator +
+ *  creditText + copyrightNotice are the fields Google needs for the
+ *  «Licensable» badge in Google Images; name/caption come from what the
+ *  photo really shows (assets/catalog.json), not from the page it sits on. */
+export const imageObj = (n: string, extra: Record<string, unknown> = {}) => ({
+  '@type': 'ImageObject',
+  url: abs(imgSrc(n)),
+  contentUrl: abs(imgSrc(n)),
+  name: `${capOf(n, BRAND.name)} — ${BRAND.name}`,
+  caption: altOf(n),
+  ...imgDims(n),
+  encodingFormat: 'image/webp',
+  contentLocation: { '@type': 'Place', name: 'جدة، المملكة العربية السعودية' },
+  creator: { '@id': `${SITE}/#business` },
+  creditText: BRAND.name,
+  copyrightHolder: { '@id': `${SITE}/#business` },
+  copyrightYear: 2026,
+  copyrightNotice: `© 2026 ${BRAND.name} — qahwajeen.com. جميع الحقوق محفوظة.`,
+  license: `${SITE}/links`,
+  acquireLicensePage: `${SITE}/links`,
+  ...extra,
+})
 
 /* ── the business itself — referenced by @id from every other node ── */
 const JEDDAH = { '@type': 'City', name: 'جدة' } as const
@@ -31,7 +54,7 @@ export const orgLd = () => ({
   url: SITE,
   telephone: `+${BRAND.phoneRaw}`,
   ...(SHOW.email ? { email: BRAND.email } : {}),
-  image: [abs(imgSrc('hero-real')), abs(imgSrc('ev-team-1')), abs(imgSrc('ev-vip-2'))],
+  image: ['qahwajiin-team-uniform-reception-hall', 'golden-zamzam-jugs-stands-flowers', 'two-qahwajiin-embroidered-daglah-dates-tray'].map((n) => imageObj(n)),
   logo: abs('/static/img/logo-512.webp'),
   address: {
     '@type': 'PostalAddress',
@@ -102,14 +125,7 @@ export const serviceLd = (
   name,
   description: desc,
   url: abs(path),
-  image: {
-    '@type': 'ImageObject',
-    url: abs(imgSrc(img)),
-    contentUrl: abs(imgSrc(img)),
-    name: `${name} — ${BRAND.name}`,
-    caption: desc,
-    representativeOfPage: true,
-  },
+  image: imageObj(img, { representativeOfPage: true }),
   serviceType: 'ضيافة ومناسبات',
   provider: { '@id': `${SITE}/#business` },
   areaServed: area ? { '@type': 'City', name: area } : JEDDAH,
@@ -121,14 +137,7 @@ export const eventLd = (name: string, desc: string, path: string, img: string) =
   name,
   description: desc,
   url: abs(path),
-  image: {
-    '@type': 'ImageObject',
-    url: abs(imgSrc(img)),
-    contentUrl: abs(imgSrc(img)),
-    name: `${name} — ${BRAND.name}`,
-    caption: desc,
-    representativeOfPage: true,
-  },
+  image: imageObj(img, { representativeOfPage: true }),
   serviceType: 'ضيافة مناسبات',
   provider: { '@id': `${SITE}/#business` },
   areaServed: JEDDAH,
@@ -139,18 +148,7 @@ export const galleryLd = (path: string, shots: readonly { img: string; cap: stri
   '@type': 'ImageGallery',
   name: `معرض أعمال ${BRAND.name} في جدة`,
   url: abs(path),
-  image: shots.map((s) => ({
-    '@type': 'ImageObject',
-    url: abs(imgSrc(s.img)),
-    contentUrl: abs(imgSrc(s.img)),
-    name: `${s.cap} — ${BRAND.name}`,
-    caption: `${s.cap} — ضيافة ${BRAND.name} في جدة`,
-    ...imgDims(s.img),
-    contentLocation: { '@type': 'Place', name: 'جدة، المملكة العربية السعودية' },
-    creator: { '@id': `${SITE}/#business` },
-    creditText: BRAND.name,
-    copyrightNotice: `© ${BRAND.name}`,
-  })),
+  image: shots.map((s) => imageObj(s.img)),
 })
 
 /** merge several nodes into one @graph (strips per-node @context) */

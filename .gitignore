@@ -37,3 +37,4 @@ raw/
 .vercel
 dist-node/
 .worktree-v2/
+__pycache__/
