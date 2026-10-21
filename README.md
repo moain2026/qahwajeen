@@ -26,7 +26,8 @@ src/
 ├── ld.ts        JSON-LD: LocalBusiness · Service · FAQPage · BreadcrumbList · ImageGallery
 ├── ui.tsx       Img / HeroPic / Faq
 └── imgmap.ts    مقاسات الصور (sm/md/lg)
-public/static/   style.css · app.js · fonts/ · img/
+public/static/   style.css · app.js · fonts/ · img/ (مولَّدة — لا تُعدَّل يدويًا)
+assets/          img-src/ (الأصول الأصلية) · catalog.json (وصف كل صورة) ← qa/tools/build_images.py
 qa/scripts/      index_audit.py · seo.py · btn.py · indexnow.py
 qa/tools/        أدوات العمل: Lighthouse، لقطات، فائض، حذف CSS الآمن
 qa/audit-v4/     تقرير التدقيق v4 وأدواته
@@ -62,6 +63,7 @@ python3 qa/scripts/btn.py      # كل زر ≥44px وبلا قصّ — 320/390/1
 ## ٤) قواعد ثابتة
 
 - الاسم «القهوة الملكية» والدومين qahwajeen.com لا يتغيّران.
+- الصور: أي تعديل عبر `assets/catalog.json` + `python3 qa/tools/build_images.py` (علامة مائية بلا تداخل مع الوجوه + حقوق EXIF/XMP).
 - قنوات التواصل الظاهرة: الاتصال، واتساب، البريد qahwajeen@gmail.com فقط.
   حسابات التواصل الاجتماعي مخفية (`SOCIAL_LINKS = []` في `data.ts`).
 - لا أسعار، لا باقات، لا تقييمات، ولا ادعاء لا يمكن إثباته (مدة وصول، نسب، فواتير، مدن أخرى).
@@ -100,6 +102,7 @@ python3 qa/scripts/btn.py      # كل زر ≥44px وبلا قصّ — 320/390/1
 | `docs/06-deployment.md` | خطوات النشر والتحقق والتراجع |
 | `docs/07-decisions.md` | سجل القرارات |
 | `docs/08-roadmap.md` | ما ينتظر المالك وما تبقّى |
+| `docs/09-images-watermark.md` | **الصور**: التحقق صورة صورة، العلامة المائية، الحقوق، الفهرسة |
 | `qa/README.md` | سكربتات الفحص ونتائجها |
 
 </div>

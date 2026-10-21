@@ -3,6 +3,8 @@ import { html } from 'hono/html'
 import { SERVICES, OCCASIONS, MENU, CONTENT_DATE, SVC_URL, OCC_URL, SEARCH } from './data'
 import { SITE } from './layout'
 import { imgSrc } from './ui'
+import { IMG_OLD } from './imgmeta'
+import { IMG } from './imgmap'
 import {
   Home,
   Services,
@@ -163,7 +165,7 @@ const pageImages = (html: string) => {
     const src = /\b(?:data-)?src="(\/static\/img\/[^"]+)"/.exec(tag)?.[1]
     if (!alt || !src || /aria-hidden="true"/.test(tag)) continue
     const m = /\/static\/img\/(.+?)-(?:sm|md|lg)\.webp$/.exec(src)
-    out.push(m ? imgSrc(m[1]) : src) // largest variant of each photo
+    out.push(m ? imgSrc(m[1]) : src) // largest variant of each photo — once per page
   }
   return [...new Set(out)]
 }
@@ -200,6 +202,17 @@ app.get(`/${SEARCH.indexNowKey}.txt`, (c) =>
 )
 
 app.get('/sitemap-images.xml', (c) => c.redirect('/sitemap.xml', 301))
+
+/* Retired photo file names (before the 2026-10 image rename) → one 301 hop to
+ * the new descriptive file. Static files are served by the platform first, so
+ * this only ever runs for URLs that no longer exist on disk. */
+app.get('/static/img/:file{.+\\.webp}', (c) => {
+  const m = /^(.+?)-(sm|md|lg)\.webp$/.exec(c.req.param('file'))
+  const to = m && IMG_OLD[m[1]]
+  if (!m || !to || !IMG[to]) return c.notFound()
+  const v = IMG[to][0].includes(m[2]) ? m[2] : IMG[to][0][IMG[to][0].length - 1]
+  return c.redirect(`/static/img/${to}-${v}.webp`, 301)
+})
 
 app.notFound((c) => page(c, <NotFound />, 404))
 

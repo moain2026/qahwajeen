@@ -8,6 +8,18 @@
  */
 import { raw } from './icons'
 import { IMG, varW } from './imgmap'
+import { IMG_META } from './imgmeta'
+
+/** Alt text = what the photo REALLY shows (assets/catalog.json, checked by eye)
+ *  + the page context. Google Images ranks on the alt; a wrong alt (cups
+ *  labelled «زمزم») teaches Google the wrong thing, so the photo truth wins. */
+export const altOf = (n: string, ctx?: string) => {
+  const truth = IMG_META[n]?.alt
+  // the photo's own description + brand/city; the page context is NOT glued on
+  // (a cups photo on the Zamzam page must never be described as Zamzam)
+  return truth ? `${truth} — القهوة الملكية جدة` : ctx || ''
+}
+export const capOf = (n: string, fallback = '') => IMG_META[n]?.cap ?? fallback
 
 const B = '/static/img'
 
@@ -42,7 +54,7 @@ export const Img = ({
       src={`${B}/${n}-${best}.webp`}
       srcset={av.map((s) => `${B}/${n}-${s}.webp ${varW(n, s)}w`).join(', ')}
       sizes={sizes}
-      alt={alt}
+      alt={alt === '' ? '' : altOf(n, alt)}
       width={w}
       height={h}
       loading={eager ? 'eager' : 'lazy'}
@@ -88,7 +100,7 @@ export const HeroPic = ({
         src={`${B}/${wide}-${w ? w[0][w[0].length - 1] : 'md'}.webp`}
         srcset={set(wide, w ? w[0] : ['sm', 'md'])}
         sizes="100vw"
-        alt={alt}
+        alt={alt === '' ? '' : altOf(wide, alt)}
         width={w ? w[1] : 1600}
         height={w ? w[2] : 893}
         loading={eager ? 'eager' : 'lazy'}
