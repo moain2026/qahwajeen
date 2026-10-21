@@ -59,42 +59,56 @@
 
 ## 2. المستودعات والفروع
 
-**مستودعان متطابقان تمامًا** (نفس الفروع ونفس الكوميتات ونفس الوسوم):
+**مستودعان متطابقان، يتزامنان تلقائيًا في الاتجاهين** (نفس الفروع والكوميتات والوسوم):
 
 | المستودع | الوصول | الدور |
 |---|---|---|
-| `github.com/MoTechSys/qahwajeen` | **خاص** | **النشر.** Vercel يراقب `main` فيه — أي دفع إلى `main` يُنشر على qahwajeen.com خلال ~30 ثانية |
-| `github.com/moain2026/royal-coffee-docs` | **عام** | **التطوير.** نسخة مطابقة للعمل والمراجعة. لا يرتبط بأي نشر. **لا ترفع إليه مفاتيح أبدًا** |
+| `github.com/MoTechSys/qahwajeen` | **خاص** | **النشر.** Vercel يراقب `main` فيه؛ أي دفع إلى `main` يُنشر على qahwajeen.com خلال ~30 ثانية |
+| `github.com/moain2026/qahwajeen` | **عام** | **نسخة مطابقة** (اسمه القديم `royal-coffee-docs`، والرابط القديم يحوّل تلقائيًا). **لا ترفع إليه مفاتيح أبدًا** |
+
+### المزامنة التلقائية (`.github/workflows/mirror.yml`، نفس الملف في المستودعين)
+
+- **أي دفع أو حذف** لفرع أو وسم في أحد المستودعين يُنسخ إلى الآخر خلال ~20 ثانية.
+- **دفعتَ إلى `main` في `moain2026/qahwajeen`؟** تصل إلى `MoTechSys/qahwajeen`، فيُنشر الموقع. **فكلاهما «زر نشر».**
+- **لا حلقة:** إن كان الطرف الآخر على نفس الكوميت يتوقف العمل.
+- **لا مسح لعمل أحد:** الدفع fast-forward فقط. إن تغيّر المستودعان في نفس الفرع قبل المزامنة يفشل العمل برسالة `DIVERGED` ولا يُكتب فوق شيء. الحل:
+  ```bash
+  git fetch prod && git fetch origin
+  git merge prod/main        # أو rebase
+  git push prod HEAD:main    # والمزامنة تنقلها للآخر
+  ```
+- **الدفع القسري** يُنسخ قسرًا فقط إن لم يتغيّر الطرف الآخر منذ آخر مزامنة.
+- **السر:** `MIRROR_TOKEN` في إعدادات Actions بكل مستودع:
+  - في `moain2026/qahwajeen`: رمز MoTechSys.
+  - في `MoTechSys/qahwajeen`: رمز moain2026.
+  - **عند تدوير أي رمز حدّث السر في المستودع الآخر**، وإلا تتوقف المزامنة (يظهر الخطأ في تبويب Actions).
+- **قاعدة Vercel:** كوميتات `main` يجب أن يكون مؤلفها `MoTechSys <256226456+MoTechSys@users.noreply.github.com>`. عمل المزامنة يطبع تحذيرًا إن لم يكن كذلك. اضبط هويتك قبل العمل:
+  ```bash
+  git config user.name MoTechSys && git config user.email 256226456+MoTechSys@users.noreply.github.com
+  ```
+- **دمج طلب (PR) من واجهة GitHub في `moain2026`** يصنع كوميت دمج مؤلفه moain2026، فيصل للإنتاج وقد يتجاهله Vercel. **ادمج بـ «Squash and merge»** واكتب المؤلف MoTechSys، أو ادمج محليًا بهوية MoTechSys.
 
 | الفرع | المحتوى |
 |---|---|
 | `main` | **الإنتاج.** كوميت واحد مضغوط لكل نشر، مؤلفه MoTechSys |
-| `audit/v4` | خط التطوير التفصيلي (كل كوميتات v4 → اليوم). اعمل هنا أو في فرع منه |
-| `genspark_ai_developer` | فرع عمل وكيل Genspark — مساوٍ لـ `main` عند كل مزامنة |
+| `genspark_ai_developer` | فرع عمل وكيل Genspark؛ مساوٍ لـ `main` بعد كل نشر |
+| `archive/dev-history-2026-10-21` | تاريخ التطوير التفصيلي لـ v4.5→v4.7 (8be05d0 … 2cdcbe9)، نفس شجرة الإنتاج |
+| `audit/v4` | خط التطوير التفصيلي لـ v4 |
 | `design/v3-editorial` | أرشيف: أول نسخة نُشرت (`8130348`) |
 | `design/v2-glass-card` | أرشيف: تصميم البطاقة الزجاجية السابق |
 | `feature/royal-merge` | أرشيف: آخر نسخة قبل التدقيق (`fc77e55`) |
 | وسم `archive/pre-v4-main` | `main` القديم في مستودع التطوير قبل التوحيد (`fc77e55`) |
 
-**الريموتات المحلية:** `prod` = MoTechSys/qahwajeen · `origin` = moain2026/royal-coffee-docs.
+**الريموتات المحلية:** `prod` = MoTechSys/qahwajeen · `origin` = moain2026/qahwajeen.
 
-### المزامنة — بعد كل نشر، ادفع نفس المراجع للمستودعين
-
+**تحقّق التطابق يدويًا:**
 ```bash
-H="store --file=$HOME/.qahwa-secrets/git-cred"          # رمز MoTechSys
-P="git -c credential.helper= -c credential.helper=$H"   # للمستودع الخاص
-REFS="release/prod:main audit/v4:audit/v4 release/prod:genspark_ai_developer"
-$P push prod $REFS                                       # 1) النشر أولًا
-git push origin $REFS --force-with-lease                 # 2) ثم التطوير (رمز moain2026 من بيئة العمل)
-git push origin --tags && $P push prod --tags
-# تحقق التطابق:
-diff <($P ls-remote prod | sort -k2) <(git ls-remote origin | grep -v refs/pull | sort -k2) && echo IDENTICAL
+diff <(git ls-remote prod | grep -v refs/pull | sort -k2) <(git ls-remote origin | grep -v refs/pull | sort -k2) && echo IDENTICAL
 ```
-لا تدفع إلى `main` في مستودع التطوير شيئًا لم يُدفع إلى الإنتاج — يبقيان متطابقين.
 
 > **ملاحظة Vercel:** كل فرع يُدفع إلى المستودع الخاص يصنع «معاينة» (Preview) على
-> `*.vercel.app` — لا تمسّ الإنتاج، وعليها `noindex`. معاينة `design/v2-glass-card`
-> تظهر **BLOCKED** لأن كوميتها القديم ليس باسم MoTechSys — متوقّع ولا يؤثر على شيء.
+> `*.vercel.app`؛ لا تمسّ الإنتاج، وعليها `noindex`. معاينة `design/v2-glass-card`
+> تظهر **BLOCKED** لأن كوميتها القديم ليس باسم MoTechSys؛ هذا متوقّع ولا يؤثر على شيء.
 
 ### تاريخ الإنتاج (`MoTechSys/qahwajeen main`)
 | الكوميت | النسخة | المحتوى |

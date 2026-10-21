@@ -7,7 +7,7 @@
 
 | العنصر | القيمة |
 |---|---|
-| المستودع | `MoTechSys/qahwajeen` (خاص، **للنشر**) — `main` = الإنتاج · نسخة مطابقة **للتطوير**: `moain2026/royal-coffee-docs` (عام) — المزامنة في `HANDOFF.md` §2 |
+| المستودع | `MoTechSys/qahwajeen` (خاص، **للنشر**) — `main` = الإنتاج · نسخة مطابقة **للتطوير**: `moain2026/qahwajeen` (عام) — المزامنة في `HANDOFF.md` §2 |
 | Vercel | مشروع `qahwajeen` في `motechsys-projects` · `buildCommand: npm run build:vercel` · `installCommand: npm ci` |
 | الدومين | Spaceship · NS `launch1/launch2.spaceship.net` |
 | DNS | `A @ 216.198.79.1` · `A @ 64.29.17.1` · `CNAME www → *.vercel-dns-017.com` |
