@@ -37,5 +37,5 @@ async def main():
                 print(vn,name,"ok",flush=True)
             await ctx.close()
         await b.close()
-    open("/home/user/qa/report.json","w").write(json.dumps(rep,ensure_ascii=False,indent=1))
+    open("/tmp/qa-report.json","w").write(json.dumps(rep,ensure_ascii=False,indent=1))
 asyncio.run(main())

@@ -36,6 +36,7 @@ npm run build:vercel                                      # تأكد أن بنا
    python3 qa/scripts/index_audit.py      # issues: 0
    python3 qa/scripts/seo.py              # issues: 0
    python3 qa/scripts/btn.py              # clipped: 0 · under-44px: 0
+   python3 qa/scripts/e2e.py              # اضغط كل شيء — failures: 0
    ```
 2. **الكوميت باسم المالك فقط:**
    `MoTechSys <256226456+MoTechSys@users.noreply.github.com>`

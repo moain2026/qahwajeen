@@ -77,10 +77,10 @@ export const Hero = ({ h }: { h: HeroSpec }) => {
         {/* Animated Crossfading Background Frames (Cinematic Ken-Burns) */}
         {/* ambient slides: fetched by app.js only after load (data-src) */}
         <div class="hero-slide s2" aria-hidden="true">
-          <img data-src={imgSrc('ev-vip-2')} data-srcset={imgSet('ev-vip-2')} sizes="100vw" alt="" width="1600" height="900" decoding="async" />
+          <img data-src={imgSrc('two-qahwajiin-embroidered-daglah-dates-tray')} data-srcset={imgSet('two-qahwajiin-embroidered-daglah-dates-tray')} sizes="100vw" alt="" width="1600" height="900" decoding="async" />
         </div>
         <div class="hero-slide s3" aria-hidden="true">
-          <img data-src={imgSrc('ev-booth-7')} data-srcset={imgSet('ev-booth-7')} sizes="100vw" alt="" width="1600" height="900" decoding="async" />
+          <img data-src={imgSrc('qahwaji-serving-coffee-exhibition-hall')} data-srcset={imgSet('qahwaji-serving-coffee-exhibition-hall')} sizes="100vw" alt="" width="1600" height="900" decoding="async" />
         </div>
       </div>
 
@@ -133,7 +133,7 @@ export const Hero = ({ h }: { h: HeroSpec }) => {
         <div class="hero-cta">
           <a
             class="btn btn-gold btn-lg"
-            href={`tel:${BRAND.phoneLocal}`}
+            href={`tel:+${BRAND.phoneRaw}`}
             data-track="call"
             data-location="hero"
           >
@@ -380,7 +380,7 @@ export const WorksSec = ({ expandAll = false }: { expandAll?: boolean }) => (
         <div class="works-filters" id="worksFilters" role="group" aria-label="تصفية معرض الأعمال">
           <button type="button" class="w-pill on" data-wcat="all" aria-pressed="true">الكل ({GALLERY.length})</button>
           <button type="button" class="w-pill" data-wcat="فريق" aria-pressed="false">الطاقم والزيّ</button>
-          <button type="button" class="w-pill" data-wcat="ملكية" aria-pressed="false">الضيافة الملكية</button>
+          <button type="button" class="w-pill" data-wcat="ملكية" aria-pressed="false">سقيا زمزم والسوّاس</button>
           <button type="button" class="w-pill" data-wcat="عدّة" aria-pressed="false">الدلال والعدّة</button>
           <button type="button" class="w-pill" data-wcat="تقديمات" aria-pressed="false">التقديمات والحلى</button>
           <button type="button" class="w-pill" data-wcat="إضافات" aria-pressed="false">الخيام والإضافات</button>
@@ -829,7 +829,7 @@ export const EndCta = ({ msg }: { msg: string }) => (
   <>
     <section class="endx" id="contact">
       <div class="endx-bg">
-        <Img n="ev-vip-2" alt="" sizes="100vw" />
+        <Img n="two-qahwajiin-embroidered-daglah-dates-tray" alt="" sizes="100vw" />
       </div>
       <div class="endx-in wrap rv">
         <div class="endx-card">
@@ -841,7 +841,7 @@ export const EndCta = ({ msg }: { msg: string }) => (
           <div class="hx-cta">
             <a
               class="btn btn-gold btn-lg"
-              href={`tel:${BRAND.phoneLocal}`}
+              href={`tel:+${BRAND.phoneRaw}`}
               data-track="call"
               data-location="footer-cta"
             >
