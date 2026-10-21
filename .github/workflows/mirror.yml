@@ -7,7 +7,9 @@
 #                   main في الأصل لا يتغيّر إلا بدمج طلب. أي دفع مباشر لـ main في النسخة
 #                   لا يُنقل، ويُعاد main النسخة إلى main الأصل.
 #
-# نفس الملف في المستودعين. السر MIRROR_TOKEN = رمز له push على المستودع الآخر.
+# نفس الملف في المستودعين. الربط بـ «مفتاح نشر» (Deploy Key) رسمي من GitHub، خاص بالمستودع:
+#   السر MIRROR_KEY = مفتاح SSH خاص، ومفتاحه العام مضاف كـ Deploy Key (كتابة) في المستودع الآخر.
+#   لا يعتمد على أي رمز شخصي (توكن) — حذف التوكنات لا يؤثر.
 name: mirror
 
 on:
@@ -30,7 +32,7 @@ jobs:
     steps:
       - name: Mirror
         env:
-          TOKEN: ${{ secrets.MIRROR_TOKEN }}
+          KEY: ${{ secrets.MIRROR_KEY }}
           SRC_TOKEN: ${{ github.token }}
           SRC: ${{ github.repository }}
           EVENT: ${{ github.event_name }}
@@ -49,8 +51,12 @@ jobs:
             "$COPY")     TARGET=$UPSTREAM; ROLE=copy ;;
             *) echo "::notice::not a mirrored repo ($SRC)"; exit 0 ;;
           esac
-          [ -n "${TOKEN:-}" ] || { echo "::error::secret MIRROR_TOKEN is missing in $SRC"; exit 1; }
-          DST="https://x-access-token:${TOKEN}@github.com/${TARGET}.git"
+          [ -n "${KEY:-}" ] || { echo "::error::secret MIRROR_KEY is missing in $SRC"; exit 1; }
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "$KEY" > ~/.ssh/mirror && chmod 600 ~/.ssh/mirror
+          ssh-keyscan -t ed25519 github.com 2>/dev/null > ~/.ssh/known_hosts
+          export GIT_SSH_COMMAND="ssh -i ~/.ssh/mirror -o IdentitiesOnly=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts"
+          DST="git@github.com:${TARGET}.git"
           ORIGIN="https://x-access-token:${SRC_TOKEN}@github.com/${SRC}.git"
           git init -q m && cd m
 
