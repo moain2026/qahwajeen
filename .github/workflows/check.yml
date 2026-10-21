@@ -1,0 +1,35 @@
+# فحص تلقائي لكل طلب دمج (PR) إلى main في الأصل MoTechSys/qahwajeen.
+# يجب أن ينجح قبل الدمج: TypeScript + بناء Vercel + بناء Cloudflare + بناء Node
+# + فحص أن الكود لا يحوي رموزًا سرية.
+name: check
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    if: github.repository == 'MoTechSys/qahwajeen'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: TypeScript
+        run: npx -y -p typescript@5 tsc --noEmit -p .
+      - name: Build (Vercel · Cloudflare · Node)
+        run: npm run build:vercel && npm run build && npm run build:node
+      - name: No secrets in the change
+        run: |
+          git fetch -q origin "${{ github.base_ref }}"
+          if git diff "origin/${{ github.base_ref }}...HEAD" | grep -E '^\+' | grep -E 'gh[pousr]_[A-Za-z0-9]{30,}|AKIA[0-9A-Z]{16}|-----BEGIN [A-Z ]*PRIVATE KEY'; then
+            echo "::error::a token or private key is in this pull request — remove it"; exit 1
+          fi
+          echo "no secrets found"

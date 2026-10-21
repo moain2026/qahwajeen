@@ -1,15 +1,13 @@
-# مزامنة تلقائية في الاتجاهين بين:
-#   MoTechSys/qahwajeen   (الإنتاج — Vercel ينشر main إلى qahwajeen.com)
-#   moain2026/qahwajeen   (نسخة مطابقة للتطوير)
-# نفس الملف في المستودعين. كل دفع/حذف لفرع أو وسم في أحدهما يُنسخ إلى الآخر.
+# نموذج «الأصل والنسخة»:
+#   MoTechSys/qahwajeen  = الأصل (الإنتاج — Vercel ينشر main إلى qahwajeen.com)
+#   moain2026/qahwajeen  = نسخة المطوّر (مثل fork)
 #
-# الأمان:
-#  - لا حلقة: إن كان الطرف الآخر على نفس الكوميت يتوقف فورًا.
-#  - لا كتابة فوق عمل الآخر: الدفع fast-forward فقط. إن تغيّر الطرفان معًا
-#    يفشل العمل برسالة «diverged» ولا يُمسح شيء (الحل في HANDOFF.md §2).
-#  - الدفع القسري (force) يُنسخ قسرًا فقط إن لم يتغيّر الطرف الآخر منذ آخر مزامنة.
-# السر المطلوب في كل مستودع: MIRROR_TOKEN = رمز له push على المستودع الآخر
-#   (في moain2026/qahwajeen: رمز MoTechSys · في MoTechSys/qahwajeen: رمز moain2026)
+# الأصل ← النسخة : كل شيء (main وكل الفروع والوسوم والحذف) — النسخة تتبع الأصل دائمًا.
+# النسخة ← الأصل : فروع العمل فقط (ليس main) — حتى تفتح منها طلب دمج (PR) في الأصل.
+#                   main في الأصل لا يتغيّر إلا بدمج طلب. أي دفع مباشر لـ main في النسخة
+#                   لا يُنقل، ويُعاد main النسخة إلى main الأصل.
+#
+# نفس الملف في المستودعين. السر MIRROR_TOKEN = رمز له push على المستودع الآخر.
 name: mirror
 
 on:
@@ -23,14 +21,14 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: read
+  contents: write   # only to reset a direct push to main in the copy
 
 jobs:
   mirror:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Mirror ref to the twin repository
+      - name: Mirror
         env:
           TOKEN: ${{ secrets.MIRROR_TOKEN }}
           SRC_TOKEN: ${{ github.token }}
@@ -43,44 +41,58 @@ jobs:
           DEL_NAME: ${{ github.event.ref }}
         run: |
           set -euo pipefail
+          UPSTREAM=MoTechSys/qahwajeen
+          COPY=moain2026/qahwajeen
           case "$SRC" in
-            MoTechSys/qahwajeen) TARGET=moain2026/qahwajeen ;;
-            moain2026/qahwajeen) TARGET=MoTechSys/qahwajeen ;;
+            "$UPSTREAM") TARGET=$COPY;     ROLE=upstream ;;
+            "$COPY")     TARGET=$UPSTREAM; ROLE=copy ;;
             *) echo "::notice::not a mirrored repo ($SRC)"; exit 0 ;;
           esac
           [ -n "${TOKEN:-}" ] || { echo "::error::secret MIRROR_TOKEN is missing in $SRC"; exit 1; }
           DST="https://x-access-token:${TOKEN}@github.com/${TARGET}.git"
           ORIGIN="https://x-access-token:${SRC_TOKEN}@github.com/${SRC}.git"
           git init -q m && cd m
-          git config user.name mirror-bot && git config user.email mirror@invalid
 
           if [ "$EVENT" = delete ]; then
             [ "$DEL_TYPE" = tag ] && REF="refs/tags/$DEL_NAME" || REF="refs/heads/$DEL_NAME"
-            if [ -z "$(git ls-remote "$DST" "$REF")" ]; then echo "already absent: $REF"; exit 0; fi
-            git push "$DST" ":$REF"
-            echo "deleted $REF in $TARGET"; exit 0
+          else
+            REF="$PUSH_REF"
           fi
 
-          REF="$PUSH_REF"
+          # ── the copy never writes main or tags in the original
+          if [ "$ROLE" = copy ] && { [ "$REF" = refs/heads/main ] || [ "${REF#refs/tags/}" != "$REF" ]; }; then
+            if [ "$REF" = refs/heads/main ] && [ "$EVENT" = push ]; then
+              UP=$(git ls-remote "$DST" refs/heads/main | awk '{print $1}')
+              NOW=$(git ls-remote "$ORIGIN" refs/heads/main | awk '{print $1}')
+              if [ -n "$UP" ] && [ "$UP" != "$NOW" ]; then
+                echo "::warning::Direct push to main in $COPY is not sent to $UPSTREAM. Open a pull request in $UPSTREAM instead. Resetting $COPY main to $UPSTREAM main (${UP:0:7}); your commit stays reachable at refs/heads/rescued/main-${NOW:0:7}."
+                git fetch -q "$ORIGIN" "refs/heads/main:refs/r/now"
+                git fetch -q "$DST" "refs/heads/main:refs/r/up"
+                git push -q "$ORIGIN" "refs/r/now:refs/heads/rescued/main-${NOW:0:7}" || true
+                git push -f "$ORIGIN" "refs/r/up:refs/heads/main"
+              fi
+            fi
+            echo "copy → original: $REF is not mirrored (pull requests only)"; exit 0
+          fi
+
+          if [ "$EVENT" = delete ]; then
+            if [ -z "$(git ls-remote "$DST" "$REF")" ]; then echo "already absent: $REF"; exit 0; fi
+            git push "$DST" ":$REF"; echo "deleted $REF in $TARGET"; exit 0
+          fi
+
           NEW=$(git ls-remote "$ORIGIN" "$REF" | awk '{print $1}' | head -1)
           [ -n "$NEW" ] || { echo "ref $REF no longer exists in $SRC"; exit 0; }
           OLD=$(git ls-remote "$DST" "$REF" | awk '{print $1}' | head -1)
           if [ "$NEW" = "$OLD" ]; then echo "in sync: $REF @ ${NEW:0:7}"; exit 0; fi
-
           git fetch -q "$ORIGIN" "+$REF:refs/mirror/src"
-          SHA=$(git rev-parse refs/mirror/src^{commit} 2>/dev/null || git rev-parse refs/mirror/src)
 
-          # production is deployed by Vercel only for commits it accepts — warn early
-          if [ "$TARGET" = MoTechSys/qahwajeen ] && [ "$REF" = refs/heads/main ]; then
-            RANGE="$SHA"; [ -n "$OLD" ] && git fetch -q "$DST" "$REF:refs/mirror/dst" && RANGE="refs/mirror/dst..$SHA"
-            BAD=$(git log --format='%h %ae' $RANGE | grep -v '256226456+MoTechSys@users.noreply.github.com' || true)
-            [ -z "$BAD" ] || echo "::warning::commits not authored by MoTechSys reach production main (Vercel may skip the deploy): $BAD"
-          fi
-
-          if [ -n "$OLD" ] && [ "$FORCED" = true ] && [ "$OLD" = "$BEFORE" ]; then
+          if [ "$ROLE" = upstream ] && [ "$REF" = refs/heads/main ]; then
+            # the original is the truth for main: the copy always follows it
+            git push -f "$DST" "refs/mirror/src:$REF"
+          elif [ -n "$OLD" ] && [ "$FORCED" = true ] && [ "$OLD" = "$BEFORE" ]; then
             git push --force-with-lease="$REF:$OLD" "$DST" "refs/mirror/src:$REF"
           elif ! git push "$DST" "refs/mirror/src:$REF"; then
-            echo "::error::DIVERGED on $REF — both repositories changed. Nothing was overwritten. Merge one into the other (HANDOFF.md §2) and push again."
+            echo "::error::DIVERGED on $REF — the branch changed in both repositories. Nothing was overwritten. Rebase on the other copy and push again (HANDOFF.md §2)."
             exit 1
           fi
           echo "mirrored $REF ${OLD:0:7} → ${NEW:0:7}  ($SRC → $TARGET)"
