@@ -1,0 +1,4 @@
+live / [91, 100, 100, 100, 100] LCP 2.3 s TBT 300 ms CLS 0
+live /services/zamzam [94, 100, 100, 100, 100] LCP 2.5 s TBT 190 ms CLS 0
+live /gallery [92, 100, 100, 100, 100] LCP 2.3 s TBT 270 ms CLS 0
+live /menu [97, 100, 100, 100, 100] LCP 2.4 s TBT 90 ms CLS 0
