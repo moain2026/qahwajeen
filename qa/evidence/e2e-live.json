@@ -1,0 +1,15 @@
+{
+ "base": "https://qahwajeen.com",
+ "stats": {
+  "pages": 23,
+  "views": 69,
+  "images_loaded": 1089,
+  "links_checked": 23,
+  "lightbox_opened": 41,
+  "filters": 6,
+  "tel": 336,
+  "wa": 345,
+  "mail": 72
+ },
+ "failures": []
+}
