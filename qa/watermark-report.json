@@ -7,11 +7,14 @@
    675
   ],
   "faces": 8,
+  "bg_lum": 0.706,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.561,
   "mark": [
-   363,
-   343,
-   173,
-   203
+   370,
+   360,
+   160,
+   169
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -24,11 +27,14 @@
    1360
   ],
   "faces": 2,
+  "bg_lum": 0.636,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.49,
   "mark": [
-   276,
-   769,
-   216,
-   256
+   283,
+   792,
+   201,
+   211
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -41,11 +47,14 @@
    1360
   ],
   "faces": 1,
+  "bg_lum": 0.671,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.525,
   "mark": [
-   276,
-   769,
-   216,
-   256
+   283,
+   792,
+   201,
+   211
   ],
   "face_overlap_px": 0,
   "blurred": [
@@ -65,11 +74,14 @@
    1360
   ],
   "faces": 4,
+  "bg_lum": 0.692,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.546,
   "mark": [
-   276,
-   769,
-   216,
-   256
+   283,
+   792,
+   201,
+   211
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -82,11 +94,14 @@
    1360
   ],
   "faces": 1,
+  "bg_lum": 0.358,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.593,
   "mark": [
-   276,
-   769,
-   216,
-   256
+   283,
+   792,
+   201,
+   211
   ],
   "face_overlap_px": 0,
   "blurred": [
@@ -112,11 +127,14 @@
    1360
   ],
   "faces": 1,
+  "bg_lum": 0.647,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.501,
   "mark": [
-   276,
-   769,
-   216,
-   256
+   283,
+   792,
+   201,
+   211
   ],
   "face_overlap_px": 0,
   "blurred": [
@@ -136,11 +154,14 @@
    1360
   ],
   "faces": 2,
+  "bg_lum": 0.396,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.554,
   "mark": [
-   276,
-   769,
-   216,
-   256
+   283,
+   792,
+   201,
+   211
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -153,11 +174,14 @@
    1360
   ],
   "faces": 3,
+  "bg_lum": 0.617,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.472,
   "mark": [
-   276,
-   769,
-   216,
-   256
+   283,
+   792,
+   201,
+   211
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -170,11 +194,14 @@
    1360
   ],
   "faces": 2,
+  "bg_lum": 0.432,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.518,
   "mark": [
-   276,
-   769,
-   216,
-   256
+   283,
+   792,
+   201,
+   211
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -187,11 +214,14 @@
    1360
   ],
   "faces": 4,
+  "bg_lum": 0.244,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.706,
   "mark": [
-   276,
-   769,
-   216,
-   256
+   283,
+   792,
+   201,
+   211
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -204,11 +234,14 @@
    800
   ],
   "faces": 0,
+  "bg_lum": 0.607,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.461,
   "mark": [
-   160,
-   453,
-   129,
-   149
+   167,
+   466,
+   115,
+   122
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -221,11 +254,14 @@
    897
   ],
   "faces": 0,
+  "bg_lum": 0.532,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.387,
   "mark": [
-   335,
-   457,
-   229,
-   269
+   344,
+   481,
+   212,
+   221
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -238,11 +274,14 @@
    675
   ],
   "faces": 2,
+  "bg_lum": 0.436,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.514,
   "mark": [
-   363,
-   343,
-   173,
-   203
+   370,
+   360,
+   160,
+   169
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -255,11 +294,14 @@
    640
   ],
   "faces": 0,
+  "bg_lum": 0.332,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.618,
   "mark": [
-   171,
-   342,
-   138,
-   160
+   178,
+   356,
+   124,
+   132
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -272,11 +314,14 @@
    640
   ],
   "faces": 0,
+  "bg_lum": 0.538,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.393,
   "mark": [
-   171,
-   342,
-   138,
-   160
+   178,
+   356,
+   124,
+   132
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -289,11 +334,14 @@
    640
   ],
   "faces": 0,
+  "bg_lum": 0.452,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.498,
   "mark": [
-   171,
-   342,
-   138,
-   160
+   178,
+   356,
+   124,
+   132
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -306,11 +354,14 @@
    640
   ],
   "faces": 0,
+  "bg_lum": 0.376,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.574,
   "mark": [
-   171,
-   342,
-   138,
-   160
+   178,
+   356,
+   124,
+   132
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -323,11 +374,14 @@
    640
   ],
   "faces": 0,
+  "bg_lum": 0.053,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.897,
   "mark": [
-   171,
-   342,
-   138,
-   160
+   178,
+   356,
+   124,
+   132
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -340,11 +394,14 @@
    640
   ],
   "faces": 0,
+  "bg_lum": 0.204,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.746,
   "mark": [
-   171,
-   342,
-   138,
-   160
+   178,
+   356,
+   124,
+   132
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -357,11 +414,14 @@
    474
   ],
   "faces": 0,
+  "bg_lum": 0.396,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.555,
   "mark": [
-   177,
-   241,
-   125,
-   143
+   185,
+   253,
+   109,
+   118
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -374,11 +434,14 @@
    1200
   ],
   "faces": 0,
+  "bg_lum": 0.312,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.638,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -391,11 +454,14 @@
    1200
   ],
   "faces": 1,
+  "bg_lum": 0.291,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.659,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -408,11 +474,14 @@
    1600
   ],
   "faces": 0,
+  "bg_lum": 0.468,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.482,
   "mark": [
-   324,
-   906,
-   251,
-   299
+   333,
+   932,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": [
@@ -432,11 +501,14 @@
    1200
   ],
   "faces": 0,
+  "bg_lum": 0.251,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.699,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": [
@@ -456,11 +528,14 @@
    1200
   ],
   "faces": 1,
+  "bg_lum": 0.45,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.5,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": [
@@ -480,11 +555,14 @@
    1200
   ],
   "faces": 2,
+  "bg_lum": 0.48,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.47,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -497,11 +575,14 @@
    854
   ],
   "faces": 1,
+  "bg_lum": 0.402,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.548,
   "mark": [
-   171,
-   449,
-   138,
-   160
+   178,
+   480,
+   124,
+   132
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -514,11 +595,14 @@
    2214
   ],
   "faces": 0,
+  "bg_lum": 0.418,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.532,
   "mark": [
-   579,
-   1195,
-   441,
-   531
+   591,
+   1240,
+   417,
+   441
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -531,11 +615,14 @@
    675
   ],
   "faces": 0,
+  "bg_lum": 0.238,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.712,
   "mark": [
-   363,
-   343,
-   173,
-   203
+   370,
+   360,
+   160,
+   169
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -548,11 +635,14 @@
    720
   ],
   "faces": 0,
+  "bg_lum": 0.565,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.419,
   "mark": [
-   171,
-   395,
-   138,
-   160
+   178,
+   409,
+   124,
+   132
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -565,11 +655,14 @@
    509
   ],
   "faces": 0,
+  "bg_lum": 0.532,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.387,
   "mark": [
-   120,
-   279,
-   99,
-   113
+   123,
+   288,
+   93,
+   95
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -582,11 +675,14 @@
    396
   ],
   "faces": 0,
+  "bg_lum": 0.14,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.81,
   "mark": [
-   188,
-   201,
-   103,
-   119
+   192,
+   209,
+   95,
+   103
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -599,11 +695,14 @@
    1200
   ],
   "faces": 1,
+  "bg_lum": 0.905,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.76,
   "mark": [
-   324,
-   210,
-   251,
-   299
+   333,
+   260,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -616,11 +715,14 @@
    621
   ],
   "faces": 0,
+  "bg_lum": 0.325,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.625,
   "mark": [
-   171,
-   329,
-   138,
-   160
+   178,
+   343,
+   124,
+   132
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -633,11 +735,14 @@
    900
   ],
   "faces": 0,
+  "bg_lum": 0.644,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.499,
   "mark": [
-   335,
-   458,
-   229,
-   270
+   344,
+   483,
+   212,
+   221
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -650,11 +755,14 @@
    480
   ],
   "faces": 0,
+  "bg_lum": 0.243,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.707,
   "mark": [
-   177,
-   244,
-   125,
-   144
+   183,
+   256,
+   113,
+   120
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -667,11 +775,14 @@
    900
   ],
   "faces": 0,
+  "bg_lum": 0.616,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.471,
   "mark": [
-   335,
-   458,
-   229,
-   270
+   344,
+   483,
+   212,
+   221
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -684,11 +795,14 @@
    911
   ],
   "faces": 0,
+  "bg_lum": 0.405,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.545,
   "mark": [
-   335,
-   466,
-   229,
-   270
+   344,
+   490,
+   212,
+   221
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -701,11 +815,14 @@
    721
   ],
   "faces": 0,
+  "bg_lum": 0.466,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.484,
   "mark": [
-   171,
-   395,
-   138,
-   160
+   178,
+   409,
+   124,
+   132
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -718,11 +835,14 @@
    823
   ],
   "faces": 0,
+  "bg_lum": 0.524,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.379,
   "mark": [
-   170,
-   463,
-   138,
-   160
+   177,
+   477,
+   124,
+   132
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -735,11 +855,14 @@
    480
   ],
   "faces": 0,
+  "bg_lum": 0.749,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.604,
   "mark": [
-   177,
-   244,
-   125,
-   144
+   183,
+   256,
+   113,
+   120
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -752,11 +875,14 @@
    575
   ],
   "faces": 2,
+  "bg_lum": 0.33,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.62,
   "mark": [
-   177,
-   307,
-   125,
-   144
+   183,
+   319,
+   113,
+   120
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -769,11 +895,14 @@
    1055
   ],
   "faces": 0,
+  "bg_lum": 0.528,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.382,
   "mark": [
-   335,
-   561,
-   229,
-   270
+   344,
+   585,
+   212,
+   221
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -786,11 +915,14 @@
    1176
   ],
   "faces": 0,
+  "bg_lum": 0.421,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.529,
   "mark": [
-   324,
-   626,
-   251,
-   299
+   333,
+   653,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -803,11 +935,14 @@
    900
   ],
   "faces": 0,
+  "bg_lum": 0.563,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.418,
   "mark": [
-   335,
-   458,
-   229,
-   270
+   344,
+   483,
+   212,
+   221
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -820,11 +955,14 @@
    778
   ],
   "faces": 1,
+  "bg_lum": 0.494,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.456,
   "mark": [
-   350,
-   397,
-   199,
-   232
+   357,
+   415,
+   186,
+   195
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -837,11 +975,14 @@
    698
   ],
   "faces": 0,
+  "bg_lum": 0.334,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.616,
   "mark": [
-   361,
-   356,
-   177,
-   209
+   367,
+   373,
+   165,
+   175
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -854,11 +995,14 @@
    1200
   ],
   "faces": 0,
+  "bg_lum": 0.639,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.493,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -871,11 +1015,14 @@
    1200
   ],
   "faces": 0,
+  "bg_lum": 0.479,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.471,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -888,11 +1035,14 @@
    480
   ],
   "faces": 1,
+  "bg_lum": 0.542,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.396,
   "mark": [
-   177,
-   244,
-   125,
-   144
+   183,
+   256,
+   113,
+   120
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -905,11 +1055,14 @@
    1200
   ],
   "faces": 0,
+  "bg_lum": 0.478,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.472,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -922,11 +1075,14 @@
    1200
   ],
   "faces": 0,
+  "bg_lum": 0.421,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.529,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -939,11 +1095,14 @@
    1200
   ],
   "faces": 0,
+  "bg_lum": 0.553,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.408,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -956,11 +1115,14 @@
    1200
   ],
   "faces": 0,
+  "bg_lum": 0.202,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.748,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -973,11 +1135,14 @@
    1068
   ],
   "faces": 0,
+  "bg_lum": 0.374,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.576,
   "mark": [
-   666,
-   544,
-   268,
-   321
+   674,
+   570,
+   252,
+   268
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -990,11 +1155,14 @@
    1200
   ],
   "faces": 1,
+  "bg_lum": 0.708,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.563,
   "mark": [
-   450,
-   642,
-   251,
-   299
+   459,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1007,11 +1175,14 @@
    1200
   ],
   "faces": 0,
+  "bg_lum": 0.536,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.391,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1024,11 +1195,14 @@
    1215
   ],
   "faces": 0,
+  "bg_lum": 0.239,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.711,
   "mark": [
-   324,
-   652,
-   251,
-   299
+   333,
+   678,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1041,11 +1215,14 @@
    599
   ],
   "faces": 0,
+  "bg_lum": 0.264,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.686,
   "mark": [
-   374,
-   305,
-   151,
-   180
+   379,
+   321,
+   141,
+   147
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1058,11 +1235,14 @@
    1214
   ],
   "faces": 1,
+  "bg_lum": 0.299,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.651,
   "mark": [
-   324,
-   651,
-   251,
-   299
+   333,
+   678,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1075,11 +1255,14 @@
    599
   ],
   "faces": 0,
+  "bg_lum": 0.481,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.469,
   "mark": [
-   374,
-   305,
-   151,
-   180
+   379,
+   321,
+   141,
+   147
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1092,11 +1275,14 @@
    599
   ],
   "faces": 0,
+  "bg_lum": 0.694,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.548,
   "mark": [
-   374,
-   305,
-   151,
-   180
+   379,
+   321,
+   141,
+   147
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1109,11 +1295,14 @@
    884
   ],
   "faces": 0,
+  "bg_lum": 0.488,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.462,
   "mark": [
-   337,
-   450,
-   225,
-   265
+   344,
+   473,
+   212,
+   219
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1126,11 +1315,14 @@
    951
   ],
   "faces": 2,
+  "bg_lum": 0.511,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.366,
   "mark": [
-   551,
-   492,
-   229,
-   270
+   542,
+   517,
+   212,
+   221
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1143,11 +1335,14 @@
    675
   ],
   "faces": 0,
+  "bg_lum": 0.179,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.772,
   "mark": [
-   363,
-   343,
-   173,
-   203
+   370,
+   360,
+   160,
+   169
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1160,11 +1355,14 @@
    506
   ],
   "faces": 0,
+  "bg_lum": 0.699,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.553,
   "mark": [
-   385,
-   258,
-   129,
-   151
+   390,
+   270,
+   120,
+   126
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1177,11 +1375,14 @@
    480
   ],
   "faces": 0,
+  "bg_lum": 0.434,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.517,
   "mark": [
-   177,
-   244,
-   125,
-   144
+   183,
+   256,
+   113,
+   120
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1194,11 +1395,14 @@
    600
   ],
   "faces": 0,
+  "bg_lum": 0.388,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.562,
   "mark": [
-   177,
-   323,
-   125,
-   144
+   183,
+   335,
+   113,
+   120
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1211,11 +1415,14 @@
    719
   ],
   "faces": 0,
+  "bg_lum": 0.586,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.441,
   "mark": [
-   171,
-   394,
-   138,
-   160
+   178,
+   408,
+   124,
+   132
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1228,11 +1435,14 @@
    545
   ],
   "faces": 0,
+  "bg_lum": 0.609,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.463,
   "mark": [
-   177,
-   287,
-   125,
-   144
+   183,
+   299,
+   113,
+   120
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1245,11 +1455,14 @@
    480
   ],
   "faces": 0,
+  "bg_lum": 0.37,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.58,
   "mark": [
-   177,
-   244,
-   125,
-   144
+   183,
+   256,
+   113,
+   120
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1262,11 +1475,14 @@
    1998
   ],
   "faces": 0,
+  "bg_lum": 0.553,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.408,
   "mark": [
-   324,
-   1169,
-   251,
-   299
+   333,
+   1195,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1279,11 +1495,14 @@
    1227
   ],
   "faces": 0,
+  "bg_lum": 0.415,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.535,
   "mark": [
-   324,
-   660,
-   251,
-   299
+   333,
+   686,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1296,11 +1515,14 @@
    1227
   ],
   "faces": 1,
+  "bg_lum": 0.405,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.545,
   "mark": [
-   324,
-   660,
-   251,
-   299
+   333,
+   686,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1313,11 +1535,14 @@
    1200
   ],
   "faces": 0,
+  "bg_lum": 0.612,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.467,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1330,11 +1555,14 @@
    1200
   ],
   "faces": 0,
+  "bg_lum": 0.684,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.539,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1347,11 +1575,14 @@
    1200
   ],
   "faces": 0,
+  "bg_lum": 0.554,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.408,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1364,11 +1595,14 @@
    1200
   ],
   "faces": 0,
+  "bg_lum": 0.681,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.536,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1381,11 +1615,14 @@
    1200
   ],
   "faces": 0,
+  "bg_lum": 0.72,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.574,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1398,11 +1635,14 @@
    1200
   ],
   "faces": 0,
+  "bg_lum": 0.718,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.572,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1415,11 +1655,14 @@
    1200
   ],
   "faces": 0,
+  "bg_lum": 0.671,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.526,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1432,11 +1675,14 @@
    900
   ],
   "faces": 1,
+  "bg_lum": 0.29,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.66,
   "mark": [
-   335,
-   458,
-   229,
-   270
+   344,
+   483,
+   212,
+   221
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1449,11 +1695,14 @@
    900
   ],
   "faces": 1,
+  "bg_lum": 0.219,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.731,
   "mark": [
-   335,
-   458,
-   229,
-   270
+   344,
+   483,
+   212,
+   221
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1466,11 +1715,14 @@
    900
   ],
   "faces": 0,
+  "bg_lum": 0.362,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.588,
   "mark": [
-   335,
-   458,
-   229,
-   270
+   344,
+   483,
+   212,
+   221
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1483,11 +1735,14 @@
    900
   ],
   "faces": 1,
+  "bg_lum": 0.364,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.586,
   "mark": [
-   335,
-   513,
-   229,
-   270
+   344,
+   519,
+   212,
+   221
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1500,11 +1755,14 @@
    900
   ],
   "faces": 1,
+  "bg_lum": 0.335,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.615,
   "mark": [
-   335,
-   458,
-   229,
-   270
+   344,
+   483,
+   212,
+   221
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1517,11 +1775,14 @@
    900
   ],
   "faces": 2,
+  "bg_lum": 0.425,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.525,
   "mark": [
-   353,
-   458,
-   229,
-   270
+   344,
+   483,
+   212,
+   221
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1534,11 +1795,14 @@
    900
   ],
   "faces": 0,
+  "bg_lum": 0.461,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.489,
   "mark": [
-   335,
-   458,
-   229,
-   270
+   344,
+   483,
+   212,
+   221
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1551,11 +1815,14 @@
    900
   ],
   "faces": 0,
+  "bg_lum": 0.193,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.757,
   "mark": [
-   335,
-   458,
-   229,
-   270
+   344,
+   483,
+   212,
+   221
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1568,11 +1835,14 @@
    900
   ],
   "faces": 0,
+  "bg_lum": 0.424,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.527,
   "mark": [
-   335,
-   458,
-   229,
-   270
+   344,
+   483,
+   212,
+   221
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1585,11 +1855,14 @@
    900
   ],
   "faces": 0,
+  "bg_lum": 0.22,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.73,
   "mark": [
-   335,
-   458,
-   229,
-   270
+   344,
+   483,
+   212,
+   221
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1602,11 +1875,14 @@
    1200
   ],
   "faces": 2,
+  "bg_lum": 0.208,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.742,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1619,11 +1895,14 @@
    1200
   ],
   "faces": 0,
+  "bg_lum": 0.654,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.509,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1636,11 +1915,14 @@
    1200
   ],
   "faces": 0,
+  "bg_lum": 0.464,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.486,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1653,11 +1935,14 @@
    307
   ],
   "faces": 0,
+  "bg_lum": 0.743,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.598,
   "mark": [
-   100,
-   157,
-   79,
-   91
+   94,
+   163,
+   91,
+   79
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1670,11 +1955,14 @@
    316
   ],
   "faces": 0,
+  "bg_lum": 0.578,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.433,
   "mark": [
-   100,
-   163,
-   79,
-   91
+   94,
+   169,
+   91,
+   79
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1687,11 +1975,14 @@
    480
   ],
   "faces": 0,
+  "bg_lum": 0.489,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.461,
   "mark": [
-   177,
-   244,
-   125,
-   144
+   183,
+   256,
+   113,
+   120
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1704,11 +1995,14 @@
    480
   ],
   "faces": 0,
+  "bg_lum": 0.717,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.572,
   "mark": [
-   177,
-   244,
-   125,
-   144
+   183,
+   256,
+   113,
+   120
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1721,11 +2015,14 @@
    600
   ],
   "faces": 1,
+  "bg_lum": 0.332,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.618,
   "mark": [
-   177,
-   323,
-   125,
-   144
+   183,
+   335,
+   113,
+   120
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1738,11 +2035,14 @@
    718
   ],
   "faces": 0,
+  "bg_lum": 0.322,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.628,
   "mark": [
-   171,
-   393,
-   138,
-   160
+   178,
+   407,
+   124,
+   132
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1755,11 +2055,14 @@
    600
   ],
   "faces": 0,
+  "bg_lum": 0.541,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.396,
   "mark": [
-   372,
-   305,
-   155,
-   181
+   379,
+   321,
+   141,
+   148
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1772,11 +2075,14 @@
    506
   ],
   "faces": 2,
+  "bg_lum": 0.532,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.387,
   "mark": [
-   385,
-   258,
-   129,
-   151
+   390,
+   270,
+   120,
+   126
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1789,11 +2095,14 @@
    742
   ],
   "faces": 0,
+  "bg_lum": 0.505,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.359,
   "mark": [
-   355,
-   379,
-   190,
-   221
+   362,
+   397,
+   175,
+   185
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1806,11 +2115,14 @@
    405
   ],
   "faces": 0,
+  "bg_lum": 0.615,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.469,
   "mark": [
-   398,
-   207,
-   103,
-   120
+   402,
+   215,
+   95,
+   103
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1823,11 +2135,14 @@
    2095
   ],
   "faces": 0,
+  "bg_lum": 0.283,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.667,
   "mark": [
-   324,
-   1233,
-   251,
-   299
+   333,
+   1259,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1840,11 +2155,14 @@
    675
   ],
   "faces": 0,
+  "bg_lum": 0.501,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.356,
   "mark": [
-   363,
-   343,
-   173,
-   203
+   370,
+   360,
+   160,
+   169
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1857,11 +2175,14 @@
    675
   ],
   "faces": 0,
+  "bg_lum": 0.194,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.756,
   "mark": [
-   363,
-   343,
-   173,
-   203
+   370,
+   360,
+   160,
+   169
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1874,11 +2195,14 @@
    506
   ],
   "faces": 0,
+  "bg_lum": 0.449,
+  "theme": "dark-bg",
+  "text_bg_contrast": 0.501,
   "mark": [
-   385,
-   258,
-   129,
-   151
+   390,
+   270,
+   120,
+   126
   ],
   "face_overlap_px": 0,
   "blurred": []
@@ -1891,11 +2215,14 @@
    1200
   ],
   "faces": 1,
+  "bg_lum": 0.531,
+  "theme": "light-bg",
+  "text_bg_contrast": 0.385,
   "mark": [
-   324,
-   642,
-   251,
-   299
+   333,
+   668,
+   233,
+   246
   ],
   "face_overlap_px": 0,
   "blurred": []

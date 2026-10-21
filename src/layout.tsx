@@ -6,7 +6,7 @@ import { BRAND, SHOW, SOCIAL_LINKS, TRACKING, SEARCH } from './data'
 import { raw } from './icons'
 import { JEDDAH_PAGES } from './jeddah'
 
-const V = '30' // asset cache-bust — bump on every CSS/JS change
+const V = '31' // asset cache-bust — bump on every CSS/JS change
 export const SITE = 'https://qahwajeen.com'
 
 /**

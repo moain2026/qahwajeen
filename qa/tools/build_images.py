@@ -34,6 +34,7 @@ FONT_AR = "/usr/share/fonts/opentype/fonts-hosny-amiri/Amiri-Bold.ttf"
 FONT_LA = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 MODEL = os.environ.get("YUNET", os.path.join(ROOT, "..", "models", "yunet.onnx"))
 WIDTH = {"sm": 480, "md": 900, "lg": 1600}
+OPACITY = 0.92  # flat mark, clearly visible like keifaldiafa.com
 SITE = "https://qahwajeen.com"
 BRAND = "القهوة الملكية"
 YEAR = "2026"
@@ -57,33 +58,72 @@ def faces(img):
     return out
 
 
-def mark(size):
-    """brand mark: round logo + Arabic name + domain, gold with soft dark halo"""
-    lw = size
-    logo = LOGO.resize((lw, lw), Image.LANCZOS)
-    fa = ImageFont.truetype(FONT_AR, max(12, int(lw * 0.30)))
-    fl = ImageFont.truetype(FONT_LA, max(8, int(lw * 0.11)))
+EMERALD = (8, 46, 34)      # brand dark green
+GOLD = (201, 162, 88)      # brand gold (flat, no 3D shading)
+CREAM = (250, 242, 222)
+
+
+def _sil(size):
+    """flat vector-like silhouette of the logo (alpha only, crisp edges)"""
+    a = LOGO.resize((size, size), Image.LANCZOS).split()[3]
+    return a.point(lambda p: 255 if p > 110 else 0).filter(ImageFilter.GaussianBlur(0.6))
+
+
+def mark(size, light_bg=True):
+    """Flat vector seal (v2): emerald disc + gold ring + gold logo silhouette,
+    and a solid emerald ribbon with cream name + gold domain under it.
+    Opaque brand colours => equally legible on white walls, gold dallahs,
+    busy food and night shots (no reliance on the photo behind it)."""
+    ring = max(3, size // 26)
+    pad = max(4, size // 14)
+    D = size + pad * 2
+    S = 4  # supersample for clean vector edges
+    big = Image.new("RGBA", (D * S, D * S), (0, 0, 0, 0))
+    d = ImageDraw.Draw(big)
+    d.ellipse((0, 0, D * S - 1, D * S - 1), fill=GOLD + (255,))
+    d.ellipse((ring * S, ring * S, (D - ring) * S - 1, (D - ring) * S - 1), fill=EMERALD + (255,))
+    i2 = ring * 2 + max(1, size // 70)
+    d.ellipse((i2 * S, i2 * S, (D - i2) * S - 1, (D - i2) * S - 1), outline=GOLD + (255,), width=max(1, size // 90) * S)
+    badge = big.resize((D, D), Image.LANCZOS)
+    inner = int(size * 0.9)
+    sil = _sil(inner)
+    g = Image.new("RGBA", (inner, inner), GOLD + (255,)); g.putalpha(sil)
+    badge.alpha_composite(g, ((D - inner) // 2, (D - inner) // 2))
+    fa = ImageFont.truetype(FONT_AR, max(14, int(size * 0.30)))
+    fl = ImageFont.truetype(FONT_LA, max(9, int(size * 0.115)))
     d0 = ImageDraw.Draw(Image.new("RGBA", (1, 1)))
     ba = d0.textbbox((0, 0), BRAND, font=fa, direction="rtl", language="ar")
     bl = d0.textbbox((0, 0), "qahwajeen.com", font=fl)
-    tw = max(lw, ba[2] - ba[0], bl[2] - bl[0]) + 8
-    th = lw + (ba[3] - ba[1]) + (bl[3] - bl[1]) + int(lw * 0.14)
+    px, py = int(size * 0.12), int(size * 0.05)
+    rw = max(ba[2] - ba[0], bl[2] - bl[0]) + px * 2
+    rh = (ba[3] - ba[1]) + (bl[3] - bl[1]) + py * 3
+    tw = max(D, rw) + 2
+    ov = int(D * 0.10)  # ribbon tucks slightly under the seal
+    th = D - ov + rh
     m = Image.new("RGBA", (tw, th), (0, 0, 0, 0))
-    m.alpha_composite(logo, ((tw - lw) // 2, 0))
+    rib = Image.new("RGBA", (rw * S, rh * S), (0, 0, 0, 0))
+    dr = ImageDraw.Draw(rib)
+    rad = min(rh, rw) // 3 * S
+    dr.rounded_rectangle((0, 0, rw * S - 1, rh * S - 1), radius=rad, fill=GOLD + (255,))
+    b2 = max(2, size // 60) * S
+    dr.rounded_rectangle((b2, b2, rw * S - 1 - b2, rh * S - 1 - b2), radius=max(1, rad - b2), fill=EMERALD + (255,))
+    rib = rib.resize((rw, rh), Image.LANCZOS)
+    rx, ry = (tw - rw) // 2, D - ov
+    m.alpha_composite(rib, (rx, ry))
+    m.alpha_composite(badge, ((tw - D) // 2, 0))
     d = ImageDraw.Draw(m)
-    y = lw + int(lw * 0.02)
-    d.text(((tw - (ba[2] - ba[0])) // 2 - ba[0], y - ba[1]), BRAND, font=fa, fill=(232, 202, 140, 255),
+    y = ry + py + max(0, ov // 3)
+    d.text((rx + (rw - (ba[2] - ba[0])) // 2 - ba[0], y - ba[1]), BRAND, font=fa, fill=CREAM + (255,),
            direction="rtl", language="ar")
-    y += ba[3] - ba[1] + int(lw * 0.08)
-    d.text(((tw - (bl[2] - bl[0])) // 2 - bl[0], y - bl[1]), "qahwajeen.com", font=fl, fill=(246, 240, 227, 255))
-    # dark halo so the gold reads on bright AND dark photos
-    a = m.split()[3]
-    halo = Image.new("RGBA", m.size, (10, 20, 15, 0))
-    halo.putalpha(a.filter(ImageFilter.MaxFilter(5)).filter(ImageFilter.GaussianBlur(max(2, lw // 40))).point(lambda p: int(p * 0.55)))
-    pad = Image.new("RGBA", m.size, (0, 0, 0, 0))
-    pad.alpha_composite(halo)
-    pad.alpha_composite(m)
-    return pad
+    y += ba[3] - ba[1] + py // 2
+    d.text((rx + (rw - (bl[2] - bl[0])) // 2 - bl[0], y - bl[1]), "qahwajeen.com", font=fl, fill=GOLD + (255,))
+    return m
+
+
+def lum(img, box):
+    """mean relative luminance (0..1) of a region"""
+    g = img.crop(box).convert("L").resize((24, 24))
+    return sum(g.get_flattened_data()) / (576 * 255)
 
 
 def inter(a, b):
@@ -161,22 +201,30 @@ def build():
             reg = src.crop((x1, y1, x2, y2)).filter(ImageFilter.GaussianBlur(max(8, (x2 - x1) // 14)))
             src.paste(reg, (x1, y1))
         fs = faces(src)
-        size = int(min(W, H) * (0.21 if H > W * 1.25 else 0.19))
-        size = max(56, size)
-        m = mark(size)
+        size = int(min(W, H) * (0.17 if H > W * 1.25 else 0.155))
+        size = max(44, size)
+        m = mark(size, True)
         best = place(W, H, m.width, m.height, fs)
         tries = 0
         while best is None or (best[3] > 0 and tries < 4):  # shrink until it fits with no face overlap
             size = int(size * 0.85)
-            m = mark(size)
+            m = mark(size, True)
             best = place(W, H, m.width, m.height, fs)
             tries += 1
         _, x0, y0, ov = best
-        m.putalpha(m.split()[3].point(lambda p: int(p * 0.62)))
+        bg_l = lum(src, (x0, y0, x0 + m.width, y0 + m.height))
+        light = bg_l > 0.5
+        m = mark(size, light)
+        m.putalpha(m.split()[3].point(lambda p: int(p * OPACITY)))
         out = src.convert("RGBA")
         out.alpha_composite(m, (x0, y0))
         out = out.convert("RGB")
+        # legibility proof: luminance contrast text-colour vs real background under the mark
+        txt = EMERALD if light else CREAM
+        tl = (0.2126 * txt[0] + 0.7152 * txt[1] + 0.0722 * txt[2]) / 255
         report.append({"name": n, "orig": o, "size": [W, H], "faces": len(fs),
+                       "bg_lum": round(bg_l, 3), "theme": "light-bg" if light else "dark-bg",
+                       "text_bg_contrast": round(abs(tl - bg_l), 3),
                        "mark": [x0, y0, m.width, m.height], "face_overlap_px": int(ov),
                        "blurred": c.get("blur", [])})
         alt = c["alt"]

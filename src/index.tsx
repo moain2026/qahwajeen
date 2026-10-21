@@ -202,6 +202,7 @@ app.get(`/${SEARCH.indexNowKey}.txt`, (c) =>
 )
 
 app.get('/sitemap-images.xml', (c) => c.redirect('/sitemap.xml', 301))
+app.get('/favicon.ico', (c) => c.redirect('/static/img/favicon.png', 301))
 
 /* Retired photo file names (before the 2026-10 image rename) → one 301 hop to
  * the new descriptive file. Static files are served by the platform first, so
