@@ -591,47 +591,56 @@ export const FAQ = [
 /* ── Gallery — captions come from assets/catalog.json (what each photo really shows) ── */
 export type Shot = { img: string; cap: string; tall?: boolean; cat: string }
 
+/**
+ * ترتيب المعرض = ترتيب الأولوية (مقصود، لا تُرتّب أبجديًا).
+ * أول 12 تظهر في شريط الرئيسية وتُحمَّل أولًا، والباقي في «المعرض الكامل».
+ * عدّلها هنا فقط؛ الصفحات و JSON-LD تقرأ من هذه المصفوفة.
+ */
 export const GALLERY: Shot[] = [
+  /* ── أولوية 1 — الواجهة (أول 12 = شريط الرئيسية، أقوى صور حقيقية ومتنوّعة) ── */
   { img: 'qahwajiin-team-uniform-reception-hall', cap: capOf('qahwajiin-team-uniform-reception-hall'), cat: 'فريق' },
   { img: 'two-qahwajiin-embroidered-daglah-dates-tray', cap: capOf('two-qahwajiin-embroidered-daglah-dates-tray'), tall: true, cat: 'فريق' },
-  { img: 'two-qahwajiin-coffee-booth-dallah-dates', cap: capOf('two-qahwajiin-coffee-booth-dallah-dates'), tall: true, cat: 'فريق' },
-  { img: 'four-female-hostesses-black-uniform', cap: capOf('four-female-hostesses-black-uniform'), tall: true, cat: 'فريق' },
   { img: 'golden-zamzam-jugs-stands-flowers', cap: capOf('golden-zamzam-jugs-stands-flowers'), cat: 'ملكية' },
+  { img: 'four-female-hostesses-black-uniform', cap: capOf('four-female-hostesses-black-uniform'), tall: true, cat: 'فريق' },
   { img: 'outdoor-tea-coffee-table-dallah-glass-cups', cap: capOf('outdoor-tea-coffee-table-dallah-glass-cups'), cat: 'عدّة' },
   { img: 'sawas-ornate-golden-vessel-blue-beads', cap: capOf('sawas-ornate-golden-vessel-blue-beads'), tall: true, cat: 'ملكية' },
+  { img: 'two-qahwajiin-coffee-booth-dallah-dates', cap: capOf('two-qahwajiin-coffee-booth-dallah-dates'), tall: true, cat: 'فريق' },
   { img: 'host-golden-mabkhara-incense-entrance', cap: capOf('host-golden-mabkhara-incense-entrance'), tall: true, cat: 'فريق' },
-  { img: 'saudi-popular-food-khamir-bread-honey', cap: capOf('saudi-popular-food-khamir-bread-honey'), tall: true, cat: 'تقديمات' },
   { img: 'qahwaji-embroidered-daglah-pouring-coffee-vip-lounge', cap: capOf('qahwaji-embroidered-daglah-pouring-coffee-vip-lounge'), tall: true, cat: 'فريق' },
-  { img: 'dessert-buffet-creme-caramel-petit-fours', cap: capOf('dessert-buffet-creme-caramel-petit-fours'), cat: 'تقديمات' },
   { img: 'golden-dallah-arabic-coffee-pot', cap: capOf('golden-dallah-arabic-coffee-pot'), cat: 'عدّة' },
+  { img: 'three-female-hostesses-white-floral-dresses', cap: capOf('three-female-hostesses-white-floral-dresses'), tall: true, cat: 'فريق' },
+  { img: 'dessert-buffet-creme-caramel-petit-fours', cap: capOf('dessert-buffet-creme-caramel-petit-fours'), cat: 'تقديمات' },
+  /* ── أولوية 2 — الخدمات الأساسية (طاقم، زمزم، عدّة) ── */
   { img: 'golden-zamzam-jugs-cups-set', cap: capOf('golden-zamzam-jugs-cups-set'), cat: 'ملكية' },
-  { img: 'women-reception-zamzam-jugs-flowers', cap: capOf('women-reception-zamzam-jugs-flowers'), cat: 'ملكية' },
   { img: 'two-female-hostesses-black-suits', cap: capOf('two-female-hostesses-black-suits'), tall: true, cat: 'فريق' },
-  { img: 'pastry-buffet-tiered-wooden-stands', cap: capOf('pastry-buffet-tiered-wooden-stands'), cat: 'تقديمات' },
+  { img: 'women-reception-zamzam-jugs-flowers', cap: capOf('women-reception-zamzam-jugs-flowers'), cat: 'ملكية' },
+  { img: 'qahwaji-serving-coffee-exhibition-hall', cap: capOf('qahwaji-serving-coffee-exhibition-hall'), tall: true, cat: 'فريق' },
   { img: 'white-coffee-finjans-emblem-gold-tray', cap: capOf('white-coffee-finjans-emblem-gold-tray'), cat: 'عدّة' },
-  { img: 'mini-sadu-tent-coffee-station-indoor', cap: capOf('mini-sadu-tent-coffee-station-indoor'), cat: 'إضافات' },
-  { img: 'stuffed-dates-three-trays', cap: capOf('stuffed-dates-three-trays'), cat: 'تقديمات' },
+  { img: 'golden-zamzam-jug-stand-marble', cap: capOf('golden-zamzam-jug-stand-marble'), tall: true, cat: 'ملكية' },
+  { img: 'serving-tea-glass-cups-golden-tray', cap: capOf('serving-tea-glass-cups-golden-tray'), cat: 'عدّة' },
+  { img: 'server-tray-tea-juice-glasses', cap: capOf('server-tray-tea-juice-glasses'), cat: 'فريق' },
+  { img: 'golden-dallah-dates-white-finjan', cap: capOf('golden-dallah-dates-white-finjan'), cat: 'عدّة' },
   { img: 'sawas-golden-vessel-engraved', cap: capOf('sawas-golden-vessel-engraved'), tall: true, cat: 'ملكية' },
   { img: 'gold-glass-cup-stand-multi-tier', cap: capOf('gold-glass-cup-stand-multi-tier'), cat: 'عدّة' },
-  { img: 'serving-tea-glass-cups-golden-tray', cap: capOf('serving-tea-glass-cups-golden-tray'), cat: 'عدّة' },
-  { img: 'canapes-buffet-black-platters-top-view', cap: capOf('canapes-buffet-black-platters-top-view'), cat: 'تقديمات' },
-  { img: 'bedouin-tent-majlis-sadu-cushions', cap: capOf('bedouin-tent-majlis-sadu-cushions'), cat: 'إضافات' },
-  { img: 'golden-zamzam-jug-stand-marble', cap: capOf('golden-zamzam-jug-stand-marble'), tall: true, cat: 'ملكية' },
-  { img: 'mirror-photo-booth-red-carpet-printer', cap: capOf('mirror-photo-booth-red-carpet-printer'), cat: 'إضافات' },
-  { img: 'guest-giveaways-wrapped-sweets-table', cap: capOf('guest-giveaways-wrapped-sweets-table'), cat: 'تقديمات' },
-  { img: 'golden-dallah-dates-white-finjan', cap: capOf('golden-dallah-dates-white-finjan'), cat: 'عدّة' },
-  { img: 'heritage-sadu-buffet-booth-night', cap: capOf('heritage-sadu-buffet-booth-night'), cat: 'إضافات' },
   { img: 'brass-zamzam-jugs-collection', cap: capOf('brass-zamzam-jugs-collection'), cat: 'ملكية' },
-  { img: 'henna-artist-hand-design-saudi-emblem', cap: capOf('henna-artist-hand-design-saudi-emblem'), cat: 'إضافات' },
-  { img: 'qahwaji-serving-coffee-exhibition-hall', cap: capOf('qahwaji-serving-coffee-exhibition-hall'), tall: true, cat: 'فريق' },
+  /* ── أولوية 3 — التقديمات والحلى ── */
+  { img: 'stuffed-dates-three-trays', cap: capOf('stuffed-dates-three-trays'), cat: 'تقديمات' },
+  { img: 'pastry-buffet-tiered-wooden-stands', cap: capOf('pastry-buffet-tiered-wooden-stands'), cat: 'تقديمات' },
+  { img: 'saudi-popular-food-khamir-bread-honey', cap: capOf('saudi-popular-food-khamir-bread-honey'), tall: true, cat: 'تقديمات' },
+  { img: 'canapes-buffet-black-platters-top-view', cap: capOf('canapes-buffet-black-platters-top-view'), cat: 'تقديمات' },
   { img: 'fruit-platters-baklava-gold-stands', cap: capOf('fruit-platters-baklava-gold-stands'), cat: 'تقديمات' },
-  { img: 'three-female-hostesses-white-floral-dresses', cap: capOf('three-female-hostesses-white-floral-dresses'), tall: true, cat: 'فريق' },
-  { img: 'golden-mabkhara-heritage-sweets-table', cap: capOf('golden-mabkhara-heritage-sweets-table'), cat: 'عدّة' },
-  { img: 'mirror-photo-booth-purple-carpet', cap: capOf('mirror-photo-booth-purple-carpet'), tall: true, cat: 'إضافات' },
-  { img: 'henna-artist-station-heritage-tent', cap: capOf('henna-artist-station-heritage-tent'), cat: 'إضافات' },
   { img: 'pistachio-baklava-golden-platter', cap: capOf('pistachio-baklava-golden-platter'), cat: 'تقديمات' },
-  { img: 'server-tray-tea-juice-glasses', cap: capOf('server-tray-tea-juice-glasses'), cat: 'فريق' },
   { img: 'long-dessert-fruit-buffet-chalkboard', cap: capOf('long-dessert-fruit-buffet-chalkboard'), cat: 'تقديمات' },
+  { img: 'guest-giveaways-wrapped-sweets-table', cap: capOf('guest-giveaways-wrapped-sweets-table'), cat: 'تقديمات' },
+  { img: 'golden-mabkhara-heritage-sweets-table', cap: capOf('golden-mabkhara-heritage-sweets-table'), cat: 'عدّة' },
+  /* ── أولوية 4 — الإضافات (خيام، سدو، حنّاء، مرآة تصوير) + لقطات مكرّرة الموضوع ── */
+  { img: 'mini-sadu-tent-coffee-station-indoor', cap: capOf('mini-sadu-tent-coffee-station-indoor'), cat: 'إضافات' },
+  { img: 'bedouin-tent-majlis-sadu-cushions', cap: capOf('bedouin-tent-majlis-sadu-cushions'), cat: 'إضافات' },
+  { img: 'heritage-sadu-buffet-booth-night', cap: capOf('heritage-sadu-buffet-booth-night'), cat: 'إضافات' },
+  { img: 'henna-artist-hand-design-saudi-emblem', cap: capOf('henna-artist-hand-design-saudi-emblem'), cat: 'إضافات' },
+  { img: 'henna-artist-station-heritage-tent', cap: capOf('henna-artist-station-heritage-tent'), cat: 'إضافات' },
+  { img: 'mirror-photo-booth-red-carpet-printer', cap: capOf('mirror-photo-booth-red-carpet-printer'), cat: 'إضافات' },
+  { img: 'mirror-photo-booth-purple-carpet', cap: capOf('mirror-photo-booth-purple-carpet'), tall: true, cat: 'إضافات' },
   { img: 'sawas-golden-vessel-closeup', cap: capOf('sawas-golden-vessel-closeup'), cat: 'ملكية' },
 ]
 

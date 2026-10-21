@@ -25,12 +25,14 @@ src/
 ├── jeddah.ts    صفحات كلمات جدة (قهوجيات، مباشرين، زواجات، كوفي بريك، عزاء)
 ├── ld.ts        JSON-LD: LocalBusiness · Service · FAQPage · BreadcrumbList · ImageGallery
 ├── ui.tsx       Img / HeroPic / Faq
-└── imgmap.ts    مقاسات الصور (sm/md/lg)
+├── imgmap.ts    مقاسات الصور (sm/md/lg) — مولَّد
+└── imgmeta.ts   وصف كل صورة + خريطة الأسماء القديمة (301) — مولَّد
 public/static/   style.css · app.js · fonts/ · img/ (مولَّدة — لا تُعدَّل يدويًا)
 assets/          img-src/ (الأصول الأصلية) · catalog.json (وصف كل صورة) ← qa/tools/build_images.py
-qa/scripts/      index_audit.py · seo.py · btn.py · indexnow.py
-qa/tools/        أدوات العمل: Lighthouse، لقطات، فائض، حذف CSS الآمن
-qa/audit-v4/     تقرير التدقيق v4 وأدواته
+qa/scripts/      الفحوص الرسمية: e2e.py · index_audit.py · seo.py · btn.py · indexnow.py
+qa/tools/        build_images.py (بناء الصور والختم) + أدوات العمل: Lighthouse، لقطات، حذف CSS الآمن
+qa/evidence/     أدلّة كل إصدار (v4.5-images · v4.6-watermark · e2e-latest.json · lighthouse-latest.txt)
+qa/archive/      أرشيف قديم للقراءة فقط (audit-v4 · screenshots-v3 · report-v3.json)
 ```
 
 ## ٢) خريطة الصفحات — رابط واحد لكل نيّة بحث (٢٣ صفحة مفهرسة)
@@ -47,7 +49,7 @@ qa/audit-v4/     تقرير التدقيق v4 وأدواته
 التحويلات 301 كاملة في `docs/04-seo.md` القسم 2 (منها `/menu/{قسم}` → `/menu#{قسم}`).
 
 **الفهرسة:** `sitemap.xml` تُبنى من HTML المرسوم نفسه — كل صورة لها نص بديل
-تُدرَج تلقائيًا تحت صفحتها (٦٤ صورة). التفاصيل وخطوات Search Console في `docs/04-seo.md`.
+تُدرَج تلقائيًا تحت صفحتها (٥٦ صورة فريدة، ١٩٤ ربط صفحة–صورة). التفاصيل وخطوات Search Console في `docs/04-seo.md`.
 
 ## ٣) التشغيل
 
@@ -58,6 +60,7 @@ npm run build:vercel                                                    # بنا
 python3 qa/scripts/index_audit.py  # الفهرسة: صفحات، صور، تحويلات، روابط داخلية، JSON-LD
 python3 qa/scripts/seo.py      # عناوين ≤60، وصف، canonical، H1، JSON-LD، sitemap
 python3 qa/scripts/btn.py      # كل زر ≥44px وبلا قصّ — 320/390/1440
+python3 qa/scripts/e2e.py      # اضغط كل شيء: 23 صفحة × 3 مقاسات، كل صورة، كل رابط، القائمة، المعرض، الحجز، بلا JS
 ```
 
 ## ٤) قواعد ثابتة
@@ -103,6 +106,7 @@ python3 qa/scripts/btn.py      # كل زر ≥44px وبلا قصّ — 320/390/1
 | `docs/07-decisions.md` | سجل القرارات |
 | `docs/08-roadmap.md` | ما ينتظر المالك وما تبقّى |
 | `docs/09-images-watermark.md` | **الصور**: التحقق صورة صورة، العلامة المائية، الحقوق، الفهرسة |
+| `docs/10-session-2026-10-21.md` | سجل جلسة v4.5→v4.7: الطلبات، التنفيذ، ترتيب الصور، القياسات |
 | `qa/README.md` | سكربتات الفحص ونتائجها |
 
 </div>
